@@ -28,6 +28,8 @@ import {
 } from './initialData';
 
 import {
+  auth,
+  ensureAnonymousAuth,
   rtdb,
   dbRefs,
   snapshotToArray,
@@ -40,6 +42,7 @@ import {
   syncNotificationsToFirebase,
   initializeFirebaseDataIfEmpty
 } from './lib/firebase';
+import { onAuthStateChanged, User } from 'firebase/auth';
 import { onValue } from 'firebase/database';
 
 // Component imports
@@ -116,129 +119,148 @@ export default function App() {
 
   // Flag to avoid loop reflections during initial remote hydrate
   const isRemoteUpdate = useRef(false);
+  const [currentUser, setCurrentUser] = useState<User | null>(null);
 
-  // Initialize and listen to Firebase Realtime Database
+  // Initialize Anonymous Auth and listen to Firebase Realtime Database
   useEffect(() => {
-    // Check initial seed
-    initializeFirebaseDataIfEmpty();
+    let unsubs: (() => void)[] = [];
 
-    // Connection status listener
-    const unsubConnected = onValue(dbRefs.connected, (snap) => {
-      setIsFirebaseConnected(Boolean(snap.val()));
-    });
+    // Trigger anonymous authentication immediately
+    ensureAnonymousAuth();
 
-    // Realtime Global State listener (dados-globais)
-    const unsubGlobal = onValue(dbRefs.globalData, (snap) => {
-      if (snap.exists()) {
-        const data = snap.val();
-        if (data) {
-          isRemoteUpdate.current = true;
-          if (data.occurrences) {
-            setOccurrences(snapshotToArray<Occurrence>(data.occurrences));
+    // Listen for auth state changes to attach listeners with authenticated context
+    const unsubAuth = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setCurrentUser(user);
+        setIsFirebaseConnected(true);
+
+        // Check initial seed after auth is established
+        initializeFirebaseDataIfEmpty();
+
+        // Connection status listener
+        const unsubConnected = onValue(dbRefs.connected, (snap) => {
+          setIsFirebaseConnected(Boolean(snap.val()));
+        });
+        unsubs.push(unsubConnected);
+
+        // Realtime Global State listener (dados-globais)
+        const unsubGlobal = onValue(dbRefs.globalData, (snap) => {
+          if (snap.exists()) {
+            const data = snap.val();
+            if (data) {
+              isRemoteUpdate.current = true;
+              if (data.occurrences) {
+                setOccurrences(snapshotToArray<Occurrence>(data.occurrences));
+              }
+              if (data.leaders && Array.isArray(data.leaders) && data.leaders.length > 0) {
+                setLeaders(data.leaders);
+              }
+              if (data.employees) {
+                setEmployees(snapshotToArray<Employee>(data.employees));
+              }
+              if (data.employeeLogs) {
+                setEmployeeLogs(snapshotToArray<EmployeeLog>(data.employeeLogs));
+              }
+              if (data.reminders) {
+                setReminders(snapshotToArray<Reminder>(data.reminders));
+              }
+              if (data.chatMessages) {
+                setChatMessages(snapshotToArray<ChatMessage>(data.chatMessages));
+              }
+              if (data.notifications) {
+                setNotifications(snapshotToArray<Notification>(data.notifications));
+              }
+            }
           }
-          if (data.leaders && Array.isArray(data.leaders) && data.leaders.length > 0) {
-            setLeaders(data.leaders);
+        });
+        unsubs.push(unsubGlobal);
+
+        // Realtime Leaders listener
+        const unsubLeaders = onValue(dbRefs.leaders, (snap) => {
+          if (snap.exists()) {
+            const remoteLeaders = snapshotToArray<Leader>(snap.val());
+            if (remoteLeaders.length > 0) {
+              isRemoteUpdate.current = true;
+              setLeaders(remoteLeaders);
+              setSelectedLeaderId(prev => {
+                if (remoteLeaders.some(l => l.id === prev)) return prev;
+                return remoteLeaders[0]?.id || '';
+              });
+            }
           }
-          if (data.employees) {
-            setEmployees(snapshotToArray<Employee>(data.employees));
+        });
+        unsubs.push(unsubLeaders);
+
+        // Realtime Occurrences listener
+        const unsubOccurrences = onValue(dbRefs.occurrences, (snap) => {
+          if (snap.exists()) {
+            const remoteOccurrences = snapshotToArray<Occurrence>(snap.val());
+            isRemoteUpdate.current = true;
+            setOccurrences(remoteOccurrences);
           }
-          if (data.employeeLogs) {
-            setEmployeeLogs(snapshotToArray<EmployeeLog>(data.employeeLogs));
+        });
+        unsubs.push(unsubOccurrences);
+
+        // Realtime Employees listener
+        const unsubEmployees = onValue(dbRefs.employees, (snap) => {
+          if (snap.exists()) {
+            const remoteEmployees = snapshotToArray<Employee>(snap.val());
+            isRemoteUpdate.current = true;
+            setEmployees(remoteEmployees);
           }
-          if (data.reminders) {
-            setReminders(snapshotToArray<Reminder>(data.reminders));
+        });
+        unsubs.push(unsubEmployees);
+
+        // Realtime EmployeeLogs listener
+        const unsubEmployeeLogs = onValue(dbRefs.employeeLogs, (snap) => {
+          if (snap.exists()) {
+            const remoteLogs = snapshotToArray<EmployeeLog>(snap.val());
+            isRemoteUpdate.current = true;
+            setEmployeeLogs(remoteLogs);
           }
-          if (data.chatMessages) {
-            setChatMessages(snapshotToArray<ChatMessage>(data.chatMessages));
+        });
+        unsubs.push(unsubEmployeeLogs);
+
+        // Realtime Reminders listener
+        const unsubReminders = onValue(dbRefs.reminders, (snap) => {
+          if (snap.exists()) {
+            const remoteReminders = snapshotToArray<Reminder>(snap.val());
+            isRemoteUpdate.current = true;
+            setReminders(remoteReminders);
           }
-          if (data.notifications) {
-            setNotifications(snapshotToArray<Notification>(data.notifications));
+        });
+        unsubs.push(unsubReminders);
+
+        // Realtime Chat listener
+        const unsubChat = onValue(dbRefs.chatMessages, (snap) => {
+          if (snap.exists()) {
+            const remoteChat = snapshotToArray<ChatMessage>(snap.val());
+            isRemoteUpdate.current = true;
+            setChatMessages(remoteChat);
           }
-        }
-      }
-    });
+        });
+        unsubs.push(unsubChat);
 
-    // Realtime Leaders listener
-    const unsubLeaders = onValue(dbRefs.leaders, (snap) => {
-      if (snap.exists()) {
-        const remoteLeaders = snapshotToArray<Leader>(snap.val());
-        if (remoteLeaders.length > 0) {
-          isRemoteUpdate.current = true;
-          setLeaders(remoteLeaders);
-          setSelectedLeaderId(prev => {
-            if (remoteLeaders.some(l => l.id === prev)) return prev;
-            return remoteLeaders[0]?.id || '';
-          });
-        }
-      }
-    });
-
-    // Realtime Occurrences listener
-    const unsubOccurrences = onValue(dbRefs.occurrences, (snap) => {
-      if (snap.exists()) {
-        const remoteOccurrences = snapshotToArray<Occurrence>(snap.val());
-        isRemoteUpdate.current = true;
-        setOccurrences(remoteOccurrences);
-      }
-    });
-
-    // Realtime Employees listener
-    const unsubEmployees = onValue(dbRefs.employees, (snap) => {
-      if (snap.exists()) {
-        const remoteEmployees = snapshotToArray<Employee>(snap.val());
-        isRemoteUpdate.current = true;
-        setEmployees(remoteEmployees);
-      }
-    });
-
-    // Realtime EmployeeLogs listener
-    const unsubEmployeeLogs = onValue(dbRefs.employeeLogs, (snap) => {
-      if (snap.exists()) {
-        const remoteLogs = snapshotToArray<EmployeeLog>(snap.val());
-        isRemoteUpdate.current = true;
-        setEmployeeLogs(remoteLogs);
-      }
-    });
-
-    // Realtime Reminders listener
-    const unsubReminders = onValue(dbRefs.reminders, (snap) => {
-      if (snap.exists()) {
-        const remoteReminders = snapshotToArray<Reminder>(snap.val());
-        isRemoteUpdate.current = true;
-        setReminders(remoteReminders);
-      }
-    });
-
-    // Realtime Chat listener
-    const unsubChat = onValue(dbRefs.chatMessages, (snap) => {
-      if (snap.exists()) {
-        const remoteChat = snapshotToArray<ChatMessage>(snap.val());
-        isRemoteUpdate.current = true;
-        setChatMessages(remoteChat);
-      }
-    });
-
-    // Realtime Notifications listener
-    const unsubNotifications = onValue(dbRefs.notifications, (snap) => {
-      if (snap.exists()) {
-        const remoteNotifs = snapshotToArray<Notification>(snap.val());
-        if (remoteNotifs.length > 0) {
-          isRemoteUpdate.current = true;
-          setNotifications(remoteNotifs);
-        }
+        // Realtime Notifications listener
+        const unsubNotifications = onValue(dbRefs.notifications, (snap) => {
+          if (snap.exists()) {
+            const remoteNotifs = snapshotToArray<Notification>(snap.val());
+            if (remoteNotifs.length > 0) {
+              isRemoteUpdate.current = true;
+              setNotifications(remoteNotifs);
+            }
+          }
+        });
+        unsubs.push(unsubNotifications);
+      } else {
+        // If not logged in, trigger anonymous login
+        ensureAnonymousAuth();
       }
     });
 
     return () => {
-      unsubConnected();
-      unsubGlobal();
-      unsubLeaders();
-      unsubOccurrences();
-      unsubEmployees();
-      unsubEmployeeLogs();
-      unsubReminders();
-      unsubChat();
-      unsubNotifications();
+      unsubAuth();
+      unsubs.forEach(unsub => unsub());
     };
   }, []);
 
