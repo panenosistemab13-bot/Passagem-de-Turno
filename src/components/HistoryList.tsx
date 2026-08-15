@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Occurrence, OccurrenceStatus, Leader } from '../types';
-import { Search, Filter, Trash2, Calendar, AlertTriangle, Eye, RefreshCw } from 'lucide-react';
-import ThreeDIcon from './ThreeDIcon';
+import { Search, Filter, Trash2, Calendar, AlertTriangle, Eye, RefreshCw, Edit, Check, X } from 'lucide-react';
 
 interface HistoryListProps {
   occurrences: Occurrence[];
@@ -9,6 +8,7 @@ interface HistoryListProps {
   isAdmin: boolean;
   onUpdateStatus: (id: string, status: OccurrenceStatus) => void;
   onDeleteOccurrence: (id: string) => void;
+  onEditOccurrence: (updated: Occurrence) => void;
 }
 
 export default function HistoryList({
@@ -16,7 +16,8 @@ export default function HistoryList({
   leaders,
   isAdmin,
   onUpdateStatus,
-  onDeleteOccurrence
+  onDeleteOccurrence,
+  onEditOccurrence
 }: HistoryListProps) {
   
   // Filtering and Searching states
@@ -25,6 +26,15 @@ export default function HistoryList({
   const [selectedStatusFilter, setSelectedStatusFilter] = useState('');
   const [selectedRiskFilter, setSelectedRiskFilter] = useState('');
   const [selectedDateFilter, setSelectedDateFilter] = useState('');
+
+  // Editing states
+  const [editingId, setEditingId] = useState<string | null>(null);
+  const [editTitle, setEditTitle] = useState('');
+  const [editDesc, setEditDesc] = useState('');
+  const [editRisk, setEditRisk] = useState<'Baixo' | 'Médio' | 'Alto' | 'Crítico'>('Baixo');
+  const [editCategory, setEditCategory] = useState<'Segurança' | 'Operação' | 'Logística' | 'Qualidade' | 'Manutenção' | 'Outros'>('Outros');
+  const [editShiftDate, setEditShiftDate] = useState('');
+  const [editLeaderId, setEditLeaderId] = useState('');
 
   // Dropdown options of active shift dates
   const uniqueShiftDates = Array.from(new Set(occurrences.map(o => o.shiftDate)));
@@ -55,6 +65,42 @@ export default function HistoryList({
     setSelectedDateFilter('');
   };
 
+  const startEditing = (occ: Occurrence) => {
+    setEditingId(occ.id);
+    setEditTitle(occ.title);
+    setEditDesc(occ.description);
+    setEditRisk(occ.riskLevel);
+    setEditCategory(occ.category);
+    setEditShiftDate(occ.shiftDate);
+    
+    const leaderObj = leaders.find(l => l.name.toLowerCase() === occ.leaderName.toLowerCase());
+    setEditLeaderId(leaderObj ? leaderObj.id : (leaders[0]?.id || ''));
+  };
+
+  const cancelEditing = () => {
+    setEditingId(null);
+  };
+
+  const saveEdit = (occ: Occurrence) => {
+    if (!editTitle.trim() || !editDesc.trim() || !editShiftDate.trim()) {
+      alert('Por favor, preencha todos os campos obrigatórios.');
+      return;
+    }
+    const selectedLeader = leaders.find(l => l.id === editLeaderId) || leaders[0];
+    const updated: Occurrence = {
+      ...occ,
+      title: editTitle,
+      description: editDesc,
+      riskLevel: editRisk,
+      category: editCategory,
+      shiftDate: editShiftDate,
+      leaderId: editLeaderId,
+      leaderName: selectedLeader ? selectedLeader.name : occ.leaderName
+    };
+    onEditOccurrence(updated);
+    setEditingId(null);
+  };
+
   return (
     <div className="space-y-6">
       
@@ -70,7 +116,7 @@ export default function HistoryList({
           {/* Quick Clear */}
           <button
             onClick={handleClearFilters}
-            className="text-xs font-bold text-[#C8102E] hover:underline flex items-center gap-1 cursor-pointer"
+            className="text-xs font-bold text-[#C8102E] hover:underline flex items-center gap-1 cursor-pointer bg-transparent border-none"
           >
             <RefreshCw className="w-3.5 h-3.5" /> Limpar Filtros
           </button>
@@ -100,7 +146,9 @@ export default function HistoryList({
             >
               <option value="">Líder: Todos</option>
               {leaders.map(l => (
-                <option key={l.id} value={l.name}>{l.name}</option>
+                <option key={l.id} value={l.name}>
+                  {l.name} {l.shift ? `(${l.shift})` : ''}
+                </option>
               ))}
             </select>
             <Filter className="absolute right-3 top-2.5 w-3 h-3 text-[#8C7B70] pointer-events-none" />
@@ -153,7 +201,6 @@ export default function HistoryList({
           </div>
 
         </div>
-
       </div>
 
       {/* Main List Layout */}
@@ -163,99 +210,231 @@ export default function HistoryList({
             Nenhuma ocorrência encontrada correspondente aos filtros selecionados.
           </div>
         ) : (
-          filteredOccurrences.map((occ) => (
-            <div 
-              key={occ.id} 
-              className="bg-white rounded-lg border border-[#E0D8D0] hover:border-[#C8102E]/60 shadow-sm overflow-hidden transition-all duration-150"
-            >
-              {/* Card Header */}
-              <div className="bg-[#FAF9F7] px-4 py-2.5 border-b border-[#E0D8D0] flex flex-wrap items-center justify-between gap-2">
-                <div className="flex items-center gap-2">
-                  <span className="font-black text-[10px] text-[#2C1810] bg-[#E0D8D0]/50 px-2.5 py-0.5 rounded">
-                    {occ.shiftDate}
-                  </span>
-                  
-                  <div className="w-1 h-1 rounded-full bg-[#E0D8D0]" />
-                  
-                  <span className="text-xs text-[#8C7B70] font-bold flex items-center gap-1">
-                    Líder: <span className="text-[#2C1810] font-extrabold">{occ.leaderName}</span>
-                  </span>
-                </div>
+          filteredOccurrences.map((occ) => {
+            const isEditing = editingId === occ.id;
+            
+            return (
+              <div 
+                key={occ.id} 
+                className={`bg-white rounded-lg border ${isEditing ? 'border-[#C8102E] ring-1 ring-[#C8102E]/20' : 'border-[#E0D8D0] hover:border-[#C8102E]/60'} shadow-sm overflow-hidden transition-all duration-150`}
+              >
+                {/* Card Header (When Not Editing) */}
+                {!isEditing ? (
+                  <div className="bg-[#FAF9F7] px-4 py-2.5 border-b border-[#E0D8D0] flex flex-wrap items-center justify-between gap-2">
+                    <div className="flex items-center gap-2">
+                      <span className="font-black text-[10px] text-[#2C1810] bg-[#E0D8D0]/50 px-2.5 py-0.5 rounded">
+                        {occ.shiftDate}
+                      </span>
+                      
+                      <div className="w-1.5 h-1.5 rounded-full bg-[#E0D8D0]" />
+                      
+                      <span className="text-xs text-[#8C7B70] font-bold flex items-center gap-1">
+                        Líder: <span className="text-[#2C1810] font-extrabold">{occ.leaderName}</span>
+                      </span>
+                    </div>
 
-                <div className="flex items-center gap-2">
-                  {/* Category Chip */}
-                  <span className="text-[10px] font-bold uppercase text-[#8C7B70] tracking-wider">
-                    {occ.category}
-                  </span>
+                    <div className="flex items-center gap-2">
+                      {/* Category Chip */}
+                      <span className="text-[10px] font-bold uppercase text-[#8C7B70] tracking-wider">
+                        {occ.category}
+                      </span>
 
-                  {/* Risk Chip */}
-                  <span className={`px-2 py-0.5 rounded-full font-black text-[9px] uppercase border ${
-                    occ.riskLevel === 'Crítico' ? 'bg-red-50 text-red-700 border-red-200' :
-                    occ.riskLevel === 'Alto' ? 'bg-orange-50 text-orange-700 border-orange-200' :
-                    occ.riskLevel === 'Médio' ? 'bg-amber-50 text-amber-700 border-amber-200' :
-                    'bg-emerald-50 text-emerald-700 border-emerald-200'
-                  }`}>
-                    {occ.riskLevel}
-                  </span>
-                </div>
-              </div>
-
-              {/* Card Content */}
-              <div className="p-4 space-y-3">
-                
-                <div className="space-y-1">
-                  <h3 className="text-xs font-black text-[#2C1810]">{occ.title}</h3>
-                  <p className="text-xs text-[#5D4037] leading-relaxed whitespace-pre-wrap">{occ.description}</p>
-                </div>
-
-                {/* Card Controls Footer: Dropdown & Admin controls */}
-                <div className="pt-3 border-t border-[#F4F1EE] flex flex-wrap items-center justify-between gap-2 text-xs">
-                  
-                  {/* Custom status selector dropdown with immediate team notification trigger */}
-                  <div className="flex items-center gap-2 bg-[#F4F1EE] px-2.5 py-1 rounded border border-[#E0D8D0]">
-                    <span className="text-[#8C7B70] font-bold text-[10px]">Status:</span>
-                    <select
-                      value={occ.status}
-                      onChange={(e) => handleStatusChange(occ.id, e.target.value as OccurrenceStatus)}
-                      className="bg-white border border-[#E0D8D0] rounded px-1.5 py-0.5 text-[10px] font-black text-[#2C1810] focus:outline-none cursor-pointer"
-                    >
-                      <option value="acompanhar">Acompanhar</option>
-                      <option value="resolvido">Resolvido</option>
-                      <option value="para conhecimento">Para Conhecimento</option>
-                    </select>
-                    
-                    <span className={`w-1.5 h-1.5 rounded-full animate-pulse ${
-                      occ.status === 'resolvido' ? 'bg-emerald-500' :
-                      occ.status === 'acompanhar' ? 'bg-amber-500' : 'bg-blue-500'
-                    }`} />
+                      {/* Risk Chip */}
+                      <span className={`px-2 py-0.5 rounded-full font-black text-[9px] uppercase border ${
+                        occ.riskLevel === 'Crítico' ? 'bg-red-50 text-red-700 border-red-200' :
+                        occ.riskLevel === 'Alto' ? 'bg-orange-50 text-orange-700 border-orange-200' :
+                        occ.riskLevel === 'Médio' ? 'bg-amber-50 text-amber-700 border-amber-200' :
+                        'bg-emerald-50 text-emerald-700 border-emerald-200'
+                      }`}>
+                        {occ.riskLevel}
+                      </span>
+                    </div>
                   </div>
-
-                  <div className="flex items-center gap-2">
-                    <span className="text-[10px] text-[#8C7B70]">
-                      Registrado às {new Date(occ.createdAt).toLocaleTimeString('pt-BR', {hour: '2-digit', minute:'2-digit'})}
-                    </span>
-
-                    {/* Admin Delete trigger */}
-                    {isAdmin && (
-                      <button
-                        onClick={() => {
-                          if (confirm('Tem certeza que deseja apagar permanentemente esta ocorrência do histórico?')) {
-                            onDeleteOccurrence(occ.id);
-                          }
-                        }}
-                        className="p-1 text-red-600 hover:bg-red-50 rounded transition-colors"
-                        title="Excluir Ocorrência (Permissão de Admin)"
+                ) : (
+                  // Card Header (When Editing)
+                  <div className="bg-[#FAF9F7] px-4 py-2.5 border-b border-[#E0D8D0] flex flex-wrap items-center justify-between gap-2">
+                    <span className="text-xs font-black text-[#C8102E] uppercase">Editando Ocorrência</span>
+                    <div className="flex gap-2">
+                      <button 
+                        onClick={() => saveEdit(occ)}
+                        className="flex items-center gap-1 text-[10px] font-bold text-white bg-emerald-600 hover:bg-emerald-700 px-2.5 py-1 rounded cursor-pointer"
+                        title="Salvar Alterações"
                       >
-                        <Trash2 className="w-3.5 h-3.5" />
+                        <Check className="w-3.5 h-3.5" /> Salvar
                       </button>
-                    )}
+                      <button 
+                        onClick={cancelEditing}
+                        className="flex items-center gap-1 text-[10px] font-bold text-[#2C1810] bg-[#E0D8D0]/50 hover:bg-[#E0D8D0] px-2.5 py-1 rounded cursor-pointer"
+                        title="Cancelar Edição"
+                      >
+                        <X className="w-3.5 h-3.5" /> Cancelar
+                      </button>
+                    </div>
                   </div>
+                )}
 
+                {/* Card Content (Standard View vs Editing View) */}
+                <div className="p-4 space-y-3">
+                  {!isEditing ? (
+                    <>
+                      <div className="space-y-1">
+                        <h3 className="text-xs font-black text-[#2C1810] uppercase tracking-wide">{occ.title}</h3>
+                        <p className="text-xs text-[#5D4037] leading-relaxed whitespace-pre-wrap">{occ.description}</p>
+                      </div>
+
+                      {/* Card Controls Footer */}
+                      <div className="pt-3 border-t border-[#F4F1EE] flex flex-wrap items-center justify-between gap-2 text-xs">
+                        
+                        {/* Custom status selector dropdown */}
+                        <div className="flex items-center gap-2 bg-[#F4F1EE] px-2.5 py-1 rounded border border-[#E0D8D0]">
+                          <span className="text-[#8C7B70] font-bold text-[10px]">Status:</span>
+                          <select
+                            value={occ.status}
+                            onChange={(e) => handleStatusChange(occ.id, e.target.value as OccurrenceStatus)}
+                            className="bg-white border border-[#E0D8D0] rounded px-1.5 py-0.5 text-[10px] font-black text-[#2C1810] focus:outline-none cursor-pointer"
+                          >
+                            <option value="acompanhar">Acompanhar</option>
+                            <option value="resolvido">Resolvido</option>
+                            <option value="para conhecimento">Para Conhecimento</option>
+                          </select>
+                          
+                          <span className={`w-1.5 h-1.5 rounded-full animate-pulse ${
+                            occ.status === 'resolvido' ? 'bg-emerald-500' :
+                            occ.status === 'acompanhar' ? 'bg-amber-500' : 'bg-blue-500'
+                          }`} />
+                        </div>
+
+                        <div className="flex items-center gap-2">
+                          <span className="text-[10px] text-[#8C7B70]">
+                            Registrado às {new Date(occ.createdAt).toLocaleTimeString('pt-BR', {hour: '2-digit', minute:'2-digit'})}
+                          </span>
+
+                          <div className="h-4 w-[1px] bg-[#E0D8D0]" />
+
+                          {/* Edit button */}
+                          <button
+                            onClick={() => startEditing(occ)}
+                            className="p-1 text-slate-500 hover:text-[#2C1810] hover:bg-slate-100 rounded transition-colors cursor-pointer"
+                            title="Editar Ocorrência"
+                          >
+                            <Edit className="w-3.5 h-3.5" />
+                          </button>
+
+                          {/* Delete button (Accessible for managing records easily) */}
+                          <button
+                            onClick={() => {
+                              if (confirm(`Tem certeza que deseja apagar permanentemente a ocorrência "${occ.title}" do histórico?`)) {
+                                onDeleteOccurrence(occ.id);
+                              }
+                            }}
+                            className="p-1 text-red-600 hover:bg-red-50 rounded transition-colors cursor-pointer"
+                            title="Excluir Ocorrência"
+                          >
+                            <Trash2 className="w-3.5 h-3.5" />
+                          </button>
+                        </div>
+                      </div>
+                    </>
+                  ) : (
+                    // EDITING MODE FORM INLINE
+                    <div className="space-y-3">
+                      
+                      {/* Grid settings */}
+                      <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+                        {/* Title input */}
+                        <div className="md:col-span-2 space-y-1">
+                          <label className="block text-[9px] font-black uppercase text-[#2C1810]">Título da Ocorrência</label>
+                          <input
+                            type="text"
+                            value={editTitle}
+                            onChange={(e) => setEditTitle(e.target.value)}
+                            className="w-full bg-[#F4F1EE] border border-[#E0D8D0] rounded p-1.5 text-xs text-[#2C1810] font-bold focus:outline-none focus:ring-1 focus:ring-[#C8102E]"
+                            placeholder="Ex: Monitoramento de Trecho"
+                          />
+                        </div>
+
+                        {/* Shift Date input */}
+                        <div className="space-y-1">
+                          <label className="block text-[9px] font-black uppercase text-[#2C1810]">Plantão / Data</label>
+                          <input
+                            type="text"
+                            value={editShiftDate}
+                            onChange={(e) => setEditShiftDate(e.target.value)}
+                            className="w-full bg-[#F4F1EE] border border-[#E0D8D0] rounded p-1.5 text-xs text-[#2C1810] font-bold focus:outline-none focus:ring-1 focus:ring-[#C8102E]"
+                            placeholder="Ex: Plantão 15/08/2026"
+                          />
+                        </div>
+                      </div>
+
+                      {/* Dropdown settings row */}
+                      <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+                        {/* Leader selector */}
+                        <div className="space-y-1">
+                          <label className="block text-[9px] font-black uppercase text-[#2C1810]">Líder Registrante</label>
+                          <select
+                            value={editLeaderId}
+                            onChange={(e) => setEditLeaderId(e.target.value)}
+                            className="w-full bg-[#F4F1EE] border border-[#E0D8D0] rounded p-1.5 text-xs text-[#2C1810] font-bold focus:outline-none"
+                          >
+                            {leaders.map(l => (
+                              <option key={l.id} value={l.id}>
+                                {l.name} ({l.role}{l.shift ? ` - ${l.shift}` : ''})
+                              </option>
+                            ))}
+                          </select>
+                        </div>
+
+                        {/* Risk Level Selector */}
+                        <div className="space-y-1">
+                          <label className="block text-[9px] font-black uppercase text-[#2C1810]">Nível de Risco</label>
+                          <select
+                            value={editRisk}
+                            onChange={(e) => setEditRisk(e.target.value as any)}
+                            className="w-full bg-[#F4F1EE] border border-[#E0D8D0] rounded p-1.5 text-xs text-[#2C1810] font-bold focus:outline-none"
+                          >
+                            <option value="Baixo">Baixo</option>
+                            <option value="Médio">Médio</option>
+                            <option value="Alto">Alto</option>
+                            <option value="Crítico">Crítico</option>
+                          </select>
+                        </div>
+
+                        {/* Category Selector */}
+                        <div className="space-y-1">
+                          <label className="block text-[9px] font-black uppercase text-[#2C1810]">Categoria</label>
+                          <select
+                            value={editCategory}
+                            onChange={(e) => setEditCategory(e.target.value as any)}
+                            className="w-full bg-[#F4F1EE] border border-[#E0D8D0] rounded p-1.5 text-xs text-[#2C1810] font-bold focus:outline-none"
+                          >
+                            <option value="Segurança">Segurança</option>
+                            <option value="Operação">Operação</option>
+                            <option value="Logística">Logística</option>
+                            <option value="Qualidade">Qualidade</option>
+                            <option value="Manutenção">Manutenção</option>
+                            <option value="Outros">Outros</option>
+                          </select>
+                        </div>
+                      </div>
+
+                      {/* Description textarea */}
+                      <div className="space-y-1">
+                        <label className="block text-[9px] font-black uppercase text-[#2C1810]">Descrição Detalhada do Incidente</label>
+                        <textarea
+                          value={editDesc}
+                          onChange={(e) => setEditDesc(e.target.value)}
+                          className="w-full bg-[#F4F1EE] border border-[#E0D8D0] rounded p-2 text-xs text-[#2C1810] focus:outline-none focus:ring-1 focus:ring-[#C8102E] leading-relaxed font-medium"
+                          rows={4}
+                          placeholder="Detalhes completos sobre o veículo, lacre, placas e valores de nota fiscal..."
+                        />
+                      </div>
+
+                    </div>
+                  )}
                 </div>
-
               </div>
-            </div>
-          ))
+            );
+          })
         )}
       </div>
 

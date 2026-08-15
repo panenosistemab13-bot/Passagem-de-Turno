@@ -64,6 +64,7 @@ export default function LeaderFolders({
                   key={leader.id}
                   name={leader.name}
                   role={leader.role}
+                  shift={leader.shift}
                   occurrencesCount={leaderOccs}
                   employeesCount={leaderLogs}
                   onClick={() => setSelectedLeaderId(leader.id)}
@@ -108,7 +109,14 @@ export default function LeaderFolders({
               {currentLeader?.name.charAt(0)}
             </div>
             <div>
-              <span className="text-[9px] tracking-widest text-[#E0D8D0] font-black uppercase">Ficha Individual do Líder</span>
+              <div className="flex items-center gap-2">
+                <span className="text-[9px] tracking-widest text-[#E0D8D0] font-black uppercase">Ficha Individual do Líder</span>
+                {currentLeader?.shift && (
+                  <span className="text-[9px] font-black uppercase px-2 py-0.5 rounded bg-amber-500/20 text-amber-200 border border-amber-400/30">
+                    {currentLeader.shift}
+                  </span>
+                )}
+              </div>
               <h3 className="text-base font-black text-white">{currentLeader?.name}</h3>
               <p className="text-[10px] text-slate-300 mt-0.5">{currentLeader?.role} • Cadastrado em {currentLeader?.createdAt}</p>
             </div>

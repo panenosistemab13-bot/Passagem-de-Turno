@@ -88,6 +88,7 @@ interface LeaderFolderProps {
   key?: React.Key;
   name: string;
   role: string;
+  shift?: string;
   occurrencesCount: number;
   employeesCount: number;
   onClick: () => void;
@@ -97,6 +98,7 @@ interface LeaderFolderProps {
 export function LeaderFolder({
   name,
   role,
+  shift,
   occurrencesCount,
   employeesCount,
   onClick,
@@ -176,6 +178,11 @@ export function LeaderFolder({
             <div className="max-w-[70%]">
               <h4 className="text-white font-bold text-base leading-tight truncate tracking-wide">{name}</h4>
               <p className="text-white/70 text-xs mt-0.5 truncate font-medium">{role}</p>
+              {shift && (
+                <span className="inline-block mt-1 text-[9px] font-black uppercase tracking-wider px-1.5 py-0.2 rounded bg-white/20 text-white border border-white/30">
+                  {shift}
+                </span>
+              )}
             </div>
             {/* Coffee bean outline or logo watermark */}
             <div className="w-9 h-9 rounded-lg bg-white/10 flex items-center justify-center border border-white/15 shadow-sm">

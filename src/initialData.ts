@@ -1,10 +1,11 @@
 import { Leader, Occurrence, Employee, EmployeeLog, Reminder, ChatMessage } from './types';
 
 export const INITIAL_LEADERS: Leader[] = [
-  { id: '1', name: 'Paulo de Oliveira Ramos', role: 'Líder Turno A', createdAt: '2026-08-10' },
-  { id: '2', name: 'Wendel Polozzi Reis Maia', role: 'Líder Turno B', createdAt: '2026-08-11' },
-  { id: '3', name: 'Paulo Pereira de Sousa', role: 'Líder Turno C', createdAt: '2026-08-12' },
-  { id: '4', name: 'Jonatas Silva Matias', role: 'Supervisor de Gerenciamento de Riscos', createdAt: '2026-08-12' },
+  { id: '1', name: 'Cristiane Fialho', role: 'Líder diurna', shift: 'Plantões A e B', createdAt: '2026-08-15' },
+  { id: '2', name: 'Luzia Freitas', role: 'Noturno', shift: 'Plantão A', createdAt: '2026-08-15' },
+  { id: '3', name: 'Gabriele Freire', role: 'Noturno', shift: 'Plantão B', createdAt: '2026-08-15' },
+  { id: '4', name: 'Lucas', role: 'Interinos diurnos', shift: 'Plantão A', createdAt: '2026-08-15' },
+  { id: '5', name: 'Airton', role: 'Interinos diurnos', shift: 'Plantão B', createdAt: '2026-08-15' },
 ];
 
 export const INITIAL_OCCURRENCES: Occurrence[] = [];

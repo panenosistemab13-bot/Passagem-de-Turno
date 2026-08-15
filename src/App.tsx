@@ -38,14 +38,16 @@ import ChatComponent from './components/ChatComponent';
 
 export default function App() {
   
-  // A one-time migration to force-clear previous mock data in localStorage
-  if (typeof window !== 'undefined' && !localStorage.getItem('3c_clean_slate_v4')) {
+  // A migration to ensure the real leader roster and empty state are populated
+  if (typeof window !== 'undefined' && !localStorage.getItem('3c_clean_slate_v5_new_leaders')) {
+    localStorage.removeItem('3c_leaders');
+    localStorage.removeItem('3c_selected_leader');
     localStorage.removeItem('3c_occurrences');
     localStorage.removeItem('3c_employees');
     localStorage.removeItem('3c_employee_logs');
     localStorage.removeItem('3c_reminders');
     localStorage.removeItem('3c_chat_messages');
-    localStorage.setItem('3c_clean_slate_v4', 'true');
+    localStorage.setItem('3c_clean_slate_v5_new_leaders', 'true');
   }
 
   // Tab/Navigation State
@@ -145,33 +147,43 @@ export default function App() {
   }, [isAdmin]);
 
   // Handler helpers
-  const handleAddLeader = (name: string, role: string) => {
+  const handleAddLeader = (name: string, role: string, shift?: string) => {
     const newLeader: Leader = {
       id: `leader-${Date.now()}`,
       name,
       role,
+      shift: shift || 'Plantão Geral',
       createdAt: new Date().toLocaleDateString('pt-BR')
     };
     setLeaders(prev => [...prev, newLeader]);
     setSelectedLeaderId(newLeader.id);
     handleAddNotification(
       'Novo Líder Cadastrado',
-      `O líder de plantão ${name} foi integrado com sucesso ao menu suspenso.`,
+      `O líder ${name} (${role} - ${newLeader.shift}) foi integrado com sucesso ao menu suspenso.`,
       'success'
     );
   };
 
   const handleDeleteLeader = (id: string) => {
-    setLeaders(prev => prev.filter(l => l.id !== id));
-    if (selectedLeaderId === id) {
-      const remaining = leaders.filter(l => l.id !== id);
-      if (remaining.length > 0) {
-        setSelectedLeaderId(remaining[0].id);
+    setLeaders(prev => {
+      const updated = prev.filter(l => l.id !== id);
+      if (selectedLeaderId === id && updated.length > 0) {
+        setSelectedLeaderId(updated[0].id);
       }
-    }
+      return updated;
+    });
     handleAddNotification(
       'Líder Removido',
       'Um líder foi deletado do diretório pelo administrador.',
+      'info'
+    );
+  };
+
+  const handleUpdateLeader = (id: string, name: string, role: string, shift?: string) => {
+    setLeaders(prev => prev.map(l => l.id === id ? { ...l, name, role, ...(shift ? { shift } : {}) } : l));
+    handleAddNotification(
+      'Líder Atualizado',
+      `Informações de ${name} foram atualizadas com sucesso.`,
       'info'
     );
   };
@@ -219,6 +231,15 @@ export default function App() {
     handleAddNotification(
       'Registro Excluído',
       'Uma ocorrência foi apagada do histórico operacional.',
+      'info'
+    );
+  };
+
+  const handleEditOccurrence = (updated: Occurrence) => {
+    setOccurrences(prev => prev.map(o => o.id === updated.id ? updated : o));
+    handleAddNotification(
+      'Registro Editado',
+      `Ocorrência "${updated.title}" foi editada com sucesso.`,
       'info'
     );
   };
@@ -381,6 +402,7 @@ export default function App() {
             isAdmin={isAdmin}
             onUpdateStatus={handleUpdateOccurrenceStatus}
             onDeleteOccurrence={handleDeleteOccurrence}
+            onEditOccurrence={handleEditOccurrence}
           />
         );
       case 'pastas':
@@ -460,6 +482,8 @@ export default function App() {
         notifications={notifications}
         onMarkNotificationsAsRead={handleMarkNotificationsAsRead}
         onAddLeader={handleAddLeader}
+        onDeleteLeader={handleDeleteLeader}
+        onUpdateLeader={handleUpdateLeader}
       />
 
       <div className="flex-1 flex flex-col md:flex-row relative">

@@ -5,6 +5,7 @@ export interface Leader {
   name: string;
   avatar?: string;
   role: string;
+  shift?: string; // Plantão adicionado separadamente (ex: "Plantões A e B", "Plantão A", "Plantão B")
   createdAt: string;
 }
 

@@ -162,7 +162,9 @@ export default function OccurrenceForm({
                   className="w-full bg-[#F4F1EE] border border-[#E0D8D0] rounded-lg pl-8 pr-3 py-2 text-xs text-[#2C1810] focus:outline-none focus:ring-1 focus:ring-[#C8102E] focus:border-[#C8102E] appearance-none font-semibold"
                 >
                   {leaders.map(l => (
-                    <option key={l.id} value={l.id}>{l.name}</option>
+                    <option key={l.id} value={l.id}>
+                      {l.name} ({l.role}{l.shift ? ` - ${l.shift}` : ''})
+                    </option>
                   ))}
                 </select>
                 <User className="absolute left-2.5 top-2.5 w-3.5 h-3.5 text-[#8C7B70]" />
