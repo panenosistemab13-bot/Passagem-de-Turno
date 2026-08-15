@@ -34,20 +34,44 @@ export const firebaseConfig = {
 
 // Safe initialization
 export const app = !getApps().length ? initializeApp(firebaseConfig) : getApp();
-export const auth = getAuth(app);
 export const rtdb = getDatabase(app);
 
-// Anonymous Auth helper
+// Safe lazy initialization for Firebase Auth
+let authInstance: ReturnType<typeof getAuth> | null = null;
+export const getFirebaseAuth = () => {
+  if (!authInstance) {
+    try {
+      authInstance = getAuth(app);
+    } catch (err) {
+      console.warn("Firebase Auth component initialization warning:", err);
+      return null;
+    }
+  }
+  return authInstance;
+};
+
+export const auth = getFirebaseAuth();
+
+// Anonymous Auth helper with graceful error handling
 export const ensureAnonymousAuth = async (): Promise<User | null> => {
   try {
-    if (auth.currentUser) {
-      return auth.currentUser;
+    const currentAuth = getFirebaseAuth();
+    if (!currentAuth) return null;
+    
+    if (currentAuth.currentUser) {
+      return currentAuth.currentUser;
     }
-    const credential = await signInAnonymously(auth);
+    const credential = await signInAnonymously(currentAuth);
     console.log("Firebase Anonymous Auth successful, UID:", credential.user.uid);
     return credential.user;
-  } catch (error) {
-    console.error("Firebase Anonymous Auth error:", error);
+  } catch (error: any) {
+    if (error?.code === 'auth/configuration-not-found' || error?.code === 'auth/operation-not-allowed') {
+      console.info(
+        "Aviso Firebase Auth: O provedor Anônimo precisa ser ativado no Firebase Console (Authentication > Sign-in method > Anonymous). Operando normalmente com o banco de dados."
+      );
+    } else {
+      console.warn("Firebase Anonymous Auth warning:", error?.message || error);
+    }
     return null;
   }
 };
@@ -64,11 +88,12 @@ export const snapshotToArray = <T>(val: any): T[] => {
   return [];
 };
 
-// Database references
+// Database references matching the existing Realtime Database schema
 export const dbRefs = {
   globalData: ref(rtdb, 'dados-globais'),
+  occurrences: ref(rtdb, 'dados-globais/ocorrencias'),
+  legacyOccurrences: ref(rtdb, 'occurrences'),
   leaders: ref(rtdb, 'leaders'),
-  occurrences: ref(rtdb, 'occurrences'),
   employees: ref(rtdb, 'employees'),
   employeeLogs: ref(rtdb, 'employeeLogs'),
   reminders: ref(rtdb, 'reminders'),
@@ -103,8 +128,15 @@ export const syncLeadersToFirebase = async (leaders: Leader[]) => {
 export const syncOccurrencesToFirebase = async (occurrences: Occurrence[]) => {
   try {
     await ensureAnonymousAuth();
+    // Save to primary path 'dados-globais/ocorrencias'
+    await set(ref(rtdb, 'dados-globais/ocorrencias'), occurrences);
+    // Maintain mirror at 'occurrences' and 'dados-globais' for backwards compatibility
     await set(ref(rtdb, 'occurrences'), occurrences);
-    await update(ref(rtdb, 'dados-globais'), { occurrences, lastUpdated: new Date().toISOString() });
+    await update(ref(rtdb, 'dados-globais'), { 
+      ocorrencias: occurrences,
+      occurrences, 
+      lastUpdated: new Date().toISOString() 
+    });
   } catch (error) {
     console.error("Firebase sync error (occurrences):", error);
   }
