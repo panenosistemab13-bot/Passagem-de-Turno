@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { onValue, ref } from 'firebase/database';
+import { rtdb } from '../lib/firebase';
 import { Occurrence, OccurrenceStatus, Leader } from '../types';
 import { 
   Search, 
@@ -30,14 +32,21 @@ interface HistoryListProps {
 }
 
 export default function HistoryList({
-  occurrences,
+  occurrences: initialOccurrences,
   leaders,
   isAdmin,
   onUpdateStatus,
   onDeleteOccurrence,
   onEditOccurrence
 }: HistoryListProps) {
-  
+  const [occurrences, setOccurrences] = useState<Occurrence[]>(initialOccurrences || []);
+
+  useEffect(() => {
+    const unsub = onValue(ref(rtdb, 'dados-globais/ocorrencias'), (snapshot) => {
+      setOccurrences(snapshot.exists() ? Object.values(snapshot.val()) : []);
+    });
+    return () => unsub();
+  }, []);
   // Filtering and Searching states
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedLeaderFilter, setSelectedLeaderFilter] = useState('');
