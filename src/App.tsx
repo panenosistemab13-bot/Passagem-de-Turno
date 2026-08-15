@@ -622,7 +622,7 @@ export default function App() {
   ];
 
   return (
-    <div className="min-h-screen bg-[#F4F1EE] flex flex-col font-sans text-[#2C1810]">
+    <div className="min-h-screen bg-[#F1F5F9] flex flex-col font-sans text-[#0F172A]">
       
       {/* Dynamic Global Header */}
       <Header
@@ -641,31 +641,31 @@ export default function App() {
 
       <div className="flex-1 flex flex-col md:flex-row relative">
         
-        {/* Navigation Sidebar (High Density Corporate Coffee & Cherry Red) */}
-        <aside className="hidden md:flex flex-col w-64 bg-[#2C1810] text-white border-r border-[#3D261C] shrink-0 p-4 space-y-4">
+        {/* Navigation Sidebar (High Density Corporate Navy Blue & Slate Grays) */}
+        <aside className="hidden md:flex flex-col w-64 bg-[#0F172A] text-white border-r border-[#1E293B] shrink-0 p-4 space-y-4 shadow-xl">
           
-          {/* Brand block (From High Density template) */}
-          <div className="p-3 bg-[#C8102E] flex items-center gap-3 rounded-lg shadow-md">
+          {/* Brand block */}
+          <div className="p-3 bg-gradient-to-r from-[#1E40AF] to-[#2563EB] flex items-center gap-3 rounded-xl shadow-md border border-blue-400/20">
             <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center shadow-lg shrink-0">
-              <div className="w-4 h-4 bg-[#C8102E] rotate-45"></div>
+              <div className="w-4 h-4 bg-[#1E40AF] rotate-45"></div>
             </div>
             <span className="font-extrabold text-xs tracking-tight uppercase italic text-white">Três Corações</span>
           </div>
 
           {/* Quick status box */}
-          <div className="bg-[#3D261C] border border-[#4D362C] rounded-lg p-3 space-y-2.5 shadow-inner">
+          <div className="bg-[#1E293B] border border-[#334155] rounded-xl p-3 space-y-2.5 shadow-inner">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-1.5">
-                <span className={`w-2 h-2 rounded-full ${isFirebaseConnected ? 'bg-green-500 animate-pulse' : 'bg-amber-400'} shadow-sm`} />
-                <span className="text-[9px] font-black uppercase text-[#A6897E]">Firebase Realtime</span>
+                <span className={`w-2 h-2 rounded-full ${isFirebaseConnected ? 'bg-emerald-400 animate-pulse' : 'bg-amber-400'} shadow-sm`} />
+                <span className="text-[9px] font-black uppercase text-[#94A3B8]">Firebase Realtime</span>
               </div>
-              <span className="text-[8px] font-bold text-emerald-400 bg-emerald-950/60 px-1 py-0.2 rounded border border-emerald-800/40">
+              <span className="text-[8px] font-bold text-emerald-400 bg-emerald-950/60 px-1.5 py-0.5 rounded border border-emerald-800/40">
                 passagem-de-turno
               </span>
             </div>
             
             <div className="space-y-0.5">
-              <span className="text-[9px] font-bold text-[#A6897E] block uppercase">Líder em Exercício</span>
+              <span className="text-[9px] font-bold text-[#94A3B8] block uppercase">Líder em Exercício</span>
               <p className="text-xs font-black text-white truncate">
                 {leaders.find(l => l.id === selectedLeaderId)?.name || 'Nenhum'}
               </p>
@@ -674,7 +674,7 @@ export default function App() {
 
           {/* Navigation Links */}
           <nav className="flex-1 space-y-1">
-            <span className="text-[9px] font-bold uppercase text-[#A6897E] tracking-widest block px-2.5 mb-1.5">Aplicações</span>
+            <span className="text-[9px] font-bold uppercase text-[#64748B] tracking-widest block px-2.5 mb-1.5">Aplicações</span>
             {sidebarItems.map((item) => {
               const Icon = item.icon;
               const isSelected = activeTab === item.id;
@@ -685,8 +685,8 @@ export default function App() {
                   onClick={() => setActiveTab(item.id)}
                   className={`w-full flex items-center gap-2.5 px-3 py-2 rounded-lg text-xs font-bold uppercase transition-all duration-150 cursor-pointer text-left ${
                     isSelected 
-                      ? 'bg-[#C8102E] text-white font-black shadow-md' 
-                      : 'text-[#A6897E] hover:bg-[#3D261C] hover:text-white'
+                      ? 'bg-[#2563EB] text-white font-black shadow-md shadow-blue-900/30' 
+                      : 'text-[#94A3B8] hover:bg-[#1E293B] hover:text-white'
                   }`}
                 >
                   <Icon className="w-4 h-4 shrink-0" />
@@ -697,11 +697,11 @@ export default function App() {
           </nav>
 
           {/* Footer of the sidebar */}
-          <div className="pt-2.5 border-t border-[#3D261C] text-center">
-            <div className="text-[9px] text-[#A6897E] font-bold">
+          <div className="pt-2.5 border-t border-[#1E293B] text-center">
+            <div className="text-[9px] text-[#94A3B8] font-bold">
               Três Corações Alimentos © 2026
             </div>
-            <div className="text-[8px] text-[#8C7B70] font-medium mt-0.5">
+            <div className="text-[8px] text-[#64748B] font-medium mt-0.5">
               v2.1.4 Build Prod
             </div>
           </div>
@@ -709,16 +709,16 @@ export default function App() {
         </aside>
 
         {/* Mobile menu navigation trigger bar */}
-        <div className="md:hidden bg-[#2C1810] border-b border-[#3D261C] p-3 flex items-center justify-between text-white">
+        <div className="md:hidden bg-[#0F172A] border-b border-[#1E293B] p-3 flex items-center justify-between text-white">
           <div className="flex items-center gap-2">
-            <div className="w-5 h-5 bg-[#C8102E] rounded-full flex items-center justify-center">
+            <div className="w-5 h-5 bg-[#2563EB] rounded-full flex items-center justify-center">
               <div className="w-2.5 h-2.5 bg-white rotate-45"></div>
             </div>
             <span className="text-xs font-black uppercase tracking-wider text-white">Três Corações</span>
           </div>
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="p-1.5 bg-[#3D261C] border border-[#4D362C] rounded-lg text-white"
+            className="p-1.5 bg-[#1E293B] border border-[#334155] rounded-lg text-white"
           >
             {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5 animate-pulse" />}
           </button>
@@ -731,7 +731,7 @@ export default function App() {
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
-              className="absolute inset-x-0 bg-[#2C1810] text-white p-4 border-b border-[#3D261C] z-40 space-y-3 md:hidden shadow-2xl"
+              className="absolute inset-x-0 bg-[#0F172A] text-white p-4 border-b border-[#1E293B] z-40 space-y-3 md:hidden shadow-2xl"
             >
               <div className="space-y-1">
                 {sidebarItems.map((item) => {
@@ -746,7 +746,7 @@ export default function App() {
                         setMobileMenuOpen(false);
                       }}
                       className={`w-full flex items-center gap-2.5 px-3.5 py-2 rounded-lg text-xs font-bold uppercase text-left ${
-                        isSelected ? 'bg-[#C8102E] text-white' : 'text-[#A6897E] hover:bg-[#3D261C]'
+                        isSelected ? 'bg-[#2563EB] text-white' : 'text-[#94A3B8] hover:bg-[#1E293B]'
                       }`}
                     >
                       <Icon className="w-4 h-4" />

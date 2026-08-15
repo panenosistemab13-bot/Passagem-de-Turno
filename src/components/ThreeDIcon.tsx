@@ -47,10 +47,10 @@ export default function ThreeDIcon({
       border: 'border-purple-400/30'
     },
     coffee: {
-      bg: 'from-[#78350f] to-[#3b1307]',
-      shadow: 'shadow-amber-990/50',
-      light: 'bg-[#a16207]/20 text-[#f59e0b]',
-      border: 'border-[#78350f]/30'
+      bg: 'from-[#2563eb] to-[#0f172a]',
+      shadow: 'shadow-blue-950/50',
+      light: 'bg-blue-500/20 text-blue-300',
+      border: 'border-blue-400/30'
     }
   };
 
@@ -116,11 +116,11 @@ export function LeaderFolder({
       badge: 'bg-blue-500/20 text-blue-200'
     },
     coffee: {
-      tab: 'bg-[#78350f]',
-      front: 'bg-gradient-to-br from-[#78350f] to-[#3b1307]',
-      shadow: 'shadow-orange-950/40',
-      accent: 'border-amber-600/20',
-      badge: 'bg-amber-500/20 text-amber-200'
+      tab: 'bg-[#1e3a8a]',
+      front: 'bg-gradient-to-br from-[#1d4ed8] to-[#0f172a]',
+      shadow: 'shadow-blue-950/40',
+      accent: 'border-blue-400/20',
+      badge: 'bg-blue-500/20 text-blue-200'
     },
     amber: {
       tab: 'bg-[#b45309]',

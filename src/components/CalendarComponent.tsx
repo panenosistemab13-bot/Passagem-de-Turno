@@ -109,9 +109,11 @@ export default function CalendarComponent({
     <div className="space-y-6">
       
       {/* Calendar header intro */}
-      <div className="bg-[#2C1810] text-white p-4 rounded-lg shadow-sm flex items-center justify-between">
+      <div className="bg-gradient-to-r from-[#0F172A] to-[#1E293B] text-white p-4 rounded-xl shadow-lg border border-[#334155] flex items-center justify-between">
         <div>
-          <h2 className="text-sm font-black uppercase text-[#C8102E] tracking-wider">Calendário e Lembretes</h2>
+          <h2 className="text-sm font-black uppercase text-[#2563EB] bg-white px-2 py-0.5 rounded shadow-sm inline-block tracking-wider mb-1">
+            Calendário e Lembretes
+          </h2>
           <p className="text-xs text-slate-300">Agende reuniões de passagem de turno, manutenções preventivas de frotas e auditorias.</p>
         </div>
         <ThreeDIcon icon={CalendarDays} color="coffee" size="md" />
@@ -120,25 +122,25 @@ export default function CalendarComponent({
       <div className="grid grid-cols-1 lg:grid-cols-5 gap-5">
         
         {/* Left Side: Calendar Board Grid */}
-        <div className="lg:col-span-3 bg-white rounded-lg border border-[#E0D8D0] p-4 shadow-sm space-y-3">
+        <div className="lg:col-span-3 bg-white rounded-xl border border-[#E2E8F0] p-4 shadow-sm space-y-3">
           
           {/* Navigation Month Control */}
-          <div className="flex items-center justify-between border-b border-[#F4F1EE] pb-2.5">
-            <h3 className="font-black text-xs text-[#2C1810] uppercase tracking-wider flex items-center gap-1.5">
-              <Calendar className="w-4 h-4 text-[#C8102E]" />
+          <div className="flex items-center justify-between border-b border-[#F1F5F9] pb-2.5">
+            <h3 className="font-black text-xs text-[#0F172A] uppercase tracking-wider flex items-center gap-1.5">
+              <Calendar className="w-4 h-4 text-[#2563EB]" />
               {monthNames[month]} {year}
             </h3>
 
             <div className="flex items-center gap-1">
               <button 
                 onClick={handlePrevMonth}
-                className="px-2 py-1 rounded border border-[#E0D8D0] bg-white hover:bg-[#F4F1EE] text-[10px] font-black text-[#2C1810] cursor-pointer"
+                className="px-2 py-1 rounded border border-[#E2E8F0] bg-white hover:bg-[#F1F5F9] text-[10px] font-black text-[#0F172A] cursor-pointer"
               >
                 Anterior
               </button>
               <button 
                 onClick={handleNextMonth}
-                className="px-2 py-1 rounded border border-[#E0D8D0] bg-white hover:bg-[#F4F1EE] text-[10px] font-black text-[#2C1810] cursor-pointer"
+                className="px-2 py-1 rounded border border-[#E2E8F0] bg-white hover:bg-[#F1F5F9] text-[10px] font-black text-[#0F172A] cursor-pointer"
               >
                 Próximo
               </button>
@@ -146,7 +148,7 @@ export default function CalendarComponent({
           </div>
 
           {/* Weekday Labels */}
-          <div className="grid grid-cols-7 gap-1 text-center font-bold text-[9px] text-[#8C7B70] uppercase tracking-wider pb-1">
+          <div className="grid grid-cols-7 gap-1 text-center font-bold text-[9px] text-[#64748B] uppercase tracking-wider pb-1">
             <span>Dom</span>
             <span>Seg</span>
             <span>Ter</span>
@@ -160,7 +162,7 @@ export default function CalendarComponent({
           <div className="grid grid-cols-7 gap-1">
             {daysArray.map((day, index) => {
               if (day === null) {
-                return <div key={`empty-${index}`} className="h-12 bg-[#FAF9F7]/50 rounded-lg border border-transparent" />;
+                return <div key={`empty-${index}`} className="h-12 bg-[#F8FAFC]/50 rounded-lg border border-transparent" />;
               }
 
               const formattedDay = String(day).padStart(2, '0');
@@ -175,8 +177,8 @@ export default function CalendarComponent({
                   onClick={() => handleDaySelect(day)}
                   className={`h-12 rounded-lg border flex flex-col justify-between p-1 transition-all focus:outline-none relative ${
                     isSelected 
-                      ? 'bg-[#C8102E] border-[#a80c24] text-white font-black shadow-sm scale-[1.02] z-10' 
-                      : 'bg-white border-[#E0D8D0] text-[#2C1810] hover:bg-[#F4F1EE] font-semibold'
+                      ? 'bg-[#2563EB] border-[#1D4ED8] text-white font-black shadow-sm scale-[1.02] z-10' 
+                      : 'bg-white border-[#E2E8F0] text-[#0F172A] hover:bg-[#F1F5F9] font-semibold'
                   }`}
                 >
                   <span className="text-[10px]">{day}</span>
@@ -196,7 +198,7 @@ export default function CalendarComponent({
                         />
                       ))}
                       {dayReminders.length > 3 && (
-                        <span className={`text-[8px] leading-none ${isSelected ? 'text-white' : 'text-[#8C7B70]'}`}>+</span>
+                        <span className={`text-[8px] leading-none ${isSelected ? 'text-white' : 'text-[#64748B]'}`}>+</span>
                       )}
                     </div>
                   )}
@@ -211,16 +213,16 @@ export default function CalendarComponent({
         <div className="lg:col-span-2 space-y-4">
           
           {/* Day List Agenda */}
-          <div className="bg-white rounded-lg border border-[#E0D8D0] p-4 shadow-sm space-y-3">
-            <div className="border-b border-[#F4F1EE] pb-2 flex items-center justify-between">
+          <div className="bg-white rounded-xl border border-[#E2E8F0] p-4 shadow-sm space-y-3">
+            <div className="border-b border-[#F1F5F9] pb-2 flex items-center justify-between">
               <div>
-                <span className="text-[9px] text-[#C8102E] font-black uppercase">Compromissos</span>
-                <h4 className="text-[10px] font-black text-[#2C1810] uppercase tracking-wider flex items-center gap-1">
-                  <ClipboardList className="w-3.5 h-3.5 text-[#C8102E]" /> 
+                <span className="text-[9px] text-[#2563EB] font-black uppercase">Compromissos</span>
+                <h4 className="text-[10px] font-black text-[#0F172A] uppercase tracking-wider flex items-center gap-1">
+                  <ClipboardList className="w-3.5 h-3.5 text-[#2563EB]" /> 
                   Agenda: {selectedDayStr.split('-').reverse().join('/')}
                 </h4>
               </div>
-              <span className="text-[9px] font-black bg-[#F4F1EE] text-[#2C1810] px-2 py-0.5 rounded">
+              <span className="text-[9px] font-black bg-[#F1F5F9] text-[#0F172A] px-2 py-0.5 rounded">
                 {activeReminders.length} Eventos
               </span>
             </div>
@@ -228,12 +230,12 @@ export default function CalendarComponent({
             {/* Event list */}
             <div className="space-y-2 max-h-56 overflow-y-auto pr-1">
               {activeReminders.length === 0 ? (
-                <div className="text-center text-[#8C7B70] text-[11px] py-6">
+                <div className="text-center text-[#64748B] text-[11px] py-6">
                   Nenhum compromisso agendado para esta data.
                 </div>
               ) : (
                 activeReminders.map((rem) => (
-                  <div key={rem.id} className="bg-[#FAF9F7] border border-[#E0D8D0] rounded p-2.5 space-y-1">
+                  <div key={rem.id} className="bg-[#F8FAFC] border border-[#E2E8F0] rounded-lg p-2.5 space-y-1">
                     <div className="flex items-start justify-between gap-2">
                       <span className={`text-[9px] font-black uppercase px-1.5 py-0.5 rounded ${getTypeBadgeStyle(rem.type)}`}>
                         {rem.type}
@@ -251,12 +253,12 @@ export default function CalendarComponent({
                       )}
                     </div>
 
-                    <h5 className="font-extrabold text-[11px] text-[#2C1810] leading-tight">{rem.title}</h5>
-                    {rem.description && <p className="text-[10px] text-[#5D4037] leading-normal">{rem.description}</p>}
+                    <h5 className="font-extrabold text-[11px] text-[#0F172A] leading-tight">{rem.title}</h5>
+                    {rem.description && <p className="text-[10px] text-[#334155] leading-normal">{rem.description}</p>}
                     
-                    <div className="text-[9px] text-[#8C7B70] pt-1 border-t border-[#E0D8D0]/50 flex items-center gap-1">
+                    <div className="text-[9px] text-[#64748B] pt-1 border-t border-[#E2E8F0] flex items-center gap-1">
                       <Clock className="w-3 h-3" />
-                      <span>Agendado por: <span className="font-bold text-[#5D4037]">{rem.leaderName}</span></span>
+                      <span>Agendado por: <span className="font-bold text-[#334155]">{rem.leaderName}</span></span>
                     </div>
                   </div>
                 ))
@@ -265,32 +267,32 @@ export default function CalendarComponent({
           </div>
 
           {/* Quick Schedule input form */}
-          <div className="bg-white rounded-lg border border-[#E0D8D0] p-4 shadow-sm space-y-3">
-            <div className="pb-1.5 border-b border-[#F4F1EE] flex items-center gap-1.5">
-              <Plus className="w-4 h-4 text-[#C8102E]" />
-              <h4 className="text-[10px] font-black text-[#2C1810] uppercase tracking-wider">Agendar no Calendário</h4>
+          <div className="bg-white rounded-xl border border-[#E2E8F0] p-4 shadow-sm space-y-3">
+            <div className="pb-1.5 border-b border-[#F1F5F9] flex items-center gap-1.5">
+              <Plus className="w-4 h-4 text-[#2563EB]" />
+              <h4 className="text-[10px] font-black text-[#0F172A] uppercase tracking-wider">Agendar no Calendário</h4>
             </div>
 
             <form onSubmit={handleCreateReminder} className="space-y-3">
               <div>
-                <label className="block text-[9px] font-black uppercase text-[#2C1810] mb-0.5">Título do Evento</label>
+                <label className="block text-[9px] font-black uppercase text-[#0F172A] mb-0.5">Título do Evento</label>
                 <input
                   type="text"
                   value={remTitle}
                   onChange={(e) => setRemTitle(e.target.value)}
                   placeholder="Ex: Auditoria do Rodotrem SAS2D02"
-                  className="w-full bg-[#F4F1EE] border border-[#E0D8D0] rounded px-2.5 py-1.5 text-xs text-[#2C1810] focus:outline-none"
+                  className="w-full bg-[#F8FAFC] border border-[#E2E8F0] rounded px-2.5 py-1.5 text-xs text-[#0F172A] focus:outline-none focus:ring-1 focus:ring-[#2563EB]"
                   required
                 />
               </div>
 
               <div className="grid grid-cols-2 gap-2">
                 <div>
-                  <label className="block text-[9px] font-black uppercase text-[#2C1810] mb-0.5">Categoria</label>
+                  <label className="block text-[9px] font-black uppercase text-[#0F172A] mb-0.5">Categoria</label>
                   <select
                     value={remType}
                     onChange={(e) => setRemType(e.target.value as any)}
-                    className="w-full bg-[#F4F1EE] border border-[#E0D8D0] rounded px-2 py-1.5 text-xs text-[#2C1810] font-bold focus:outline-none"
+                    className="w-full bg-[#F8FAFC] border border-[#E2E8F0] rounded px-2 py-1.5 text-xs text-[#0F172A] font-bold focus:outline-none focus:ring-1 focus:ring-[#2563EB]"
                   >
                     <option value="lembrete">Lembrete</option>
                     <option value="reuniao">Reunião</option>
@@ -299,30 +301,30 @@ export default function CalendarComponent({
                   </select>
                 </div>
                 <div>
-                  <label className="block text-[9px] font-black uppercase text-[#2C1810] mb-0.5">Data</label>
+                  <label className="block text-[9px] font-black uppercase text-[#0F172A] mb-0.5">Data</label>
                   <input
                     type="text"
                     value={selectedDayStr.split('-').reverse().join('/')}
                     disabled
-                    className="w-full bg-[#F4F1EE] border border-[#E0D8D0] rounded px-2 py-1.5 text-xs text-[#8C7B70] font-bold cursor-not-allowed"
+                    className="w-full bg-[#F8FAFC] border border-[#E2E8F0] rounded px-2 py-1.5 text-xs text-[#64748B] font-bold cursor-not-allowed"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block text-[9px] font-black uppercase text-[#2C1810] mb-0.5">Descrição</label>
+                <label className="block text-[9px] font-black uppercase text-[#0F172A] mb-0.5">Descrição</label>
                 <textarea
                   value={remDesc}
                   onChange={(e) => setRemDesc(e.target.value)}
                   placeholder="Insira detalhes..."
                   rows={2}
-                  className="w-full bg-[#F4F1EE] border border-[#E0D8D0] rounded p-2 text-xs focus:outline-none text-[#2C1810]"
+                  className="w-full bg-[#F8FAFC] border border-[#E2E8F0] rounded p-2 text-xs focus:outline-none focus:ring-1 focus:ring-[#2563EB] text-[#0F172A]"
                 />
               </div>
 
               <button
                 type="submit"
-                className="w-full bg-[#C8102E] hover:bg-[#a80c24] text-white font-black text-xs uppercase py-2 rounded shadow transition-all cursor-pointer"
+                className="w-full bg-[#2563EB] hover:bg-[#1D4ED8] text-white font-black text-xs uppercase py-2 rounded shadow transition-all cursor-pointer"
               >
                 Agendar Evento
               </button>
