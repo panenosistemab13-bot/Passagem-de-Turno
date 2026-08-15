@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { 
   LayoutDashboard, 
@@ -13,7 +13,8 @@ import {
   Coffee,
   Shield,
   Bell,
-  ArrowRight
+  ArrowRight,
+  Database
 } from 'lucide-react';
 
 import { Leader, Occurrence, Employee, EmployeeLog, Reminder, ChatMessage, Notification, OccurrenceStatus } from './types';
@@ -25,6 +26,21 @@ import {
   INITIAL_REMINDERS, 
   INITIAL_CHAT_MESSAGES 
 } from './initialData';
+
+import {
+  rtdb,
+  dbRefs,
+  snapshotToArray,
+  syncLeadersToFirebase,
+  syncOccurrencesToFirebase,
+  syncEmployeesToFirebase,
+  syncEmployeeLogsToFirebase,
+  syncRemindersToFirebase,
+  syncChatMessagesToFirebase,
+  syncNotificationsToFirebase,
+  initializeFirebaseDataIfEmpty
+} from './lib/firebase';
+import { onValue } from 'firebase/database';
 
 // Component imports
 import Header from './components/Header';
@@ -38,23 +54,12 @@ import ChatComponent from './components/ChatComponent';
 
 export default function App() {
   
-  // A migration to ensure the real leader roster and empty state are populated
-  if (typeof window !== 'undefined' && !localStorage.getItem('3c_clean_slate_v5_new_leaders')) {
-    localStorage.removeItem('3c_leaders');
-    localStorage.removeItem('3c_selected_leader');
-    localStorage.removeItem('3c_occurrences');
-    localStorage.removeItem('3c_employees');
-    localStorage.removeItem('3c_employee_logs');
-    localStorage.removeItem('3c_reminders');
-    localStorage.removeItem('3c_chat_messages');
-    localStorage.setItem('3c_clean_slate_v5_new_leaders', 'true');
-  }
-
   // Tab/Navigation State
   const [activeTab, setActiveTab] = useState<string>('dashboard');
   const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false);
+  const [isFirebaseConnected, setIsFirebaseConnected] = useState<boolean>(true);
 
-  // Core App States with LocalStorage Hydration
+  // Core App States with LocalStorage Hydration as initial baseline
   const [leaders, setLeaders] = useState<Leader[]>(() => {
     const local = localStorage.getItem('3c_leaders');
     return local ? JSON.parse(local) : INITIAL_LEADERS;
@@ -95,8 +100,8 @@ export default function App() {
     return local ? JSON.parse(local) : [
       {
         id: 'notif-init',
-        title: 'Sistema Ativo',
-        message: 'Canal de Gerenciamento de Riscos e Passagem de Turno carregado com sucesso.',
+        title: 'Firebase Conectado',
+        message: 'Banco de Dados Realtime Database (passagem-de-turno-1d855) ativo e sincronizado.',
         type: 'success',
         createdAt: new Date().toISOString(),
         read: false
@@ -109,7 +114,103 @@ export default function App() {
     return local ? JSON.parse(local) : false;
   });
 
-  // LocalStorage Syncer
+  // Flag to avoid loop reflections during initial remote hydrate
+  const isRemoteUpdate = useRef(false);
+
+  // Initialize and listen to Firebase Realtime Database
+  useEffect(() => {
+    // Check initial seed
+    initializeFirebaseDataIfEmpty();
+
+    // Connection status listener
+    const unsubConnected = onValue(dbRefs.connected, (snap) => {
+      setIsFirebaseConnected(Boolean(snap.val()));
+    });
+
+    // Realtime Leaders listener
+    const unsubLeaders = onValue(dbRefs.leaders, (snap) => {
+      if (snap.exists()) {
+        const remoteLeaders = snapshotToArray<Leader>(snap.val());
+        if (remoteLeaders.length > 0) {
+          isRemoteUpdate.current = true;
+          setLeaders(remoteLeaders);
+          setSelectedLeaderId(prev => {
+            if (remoteLeaders.some(l => l.id === prev)) return prev;
+            return remoteLeaders[0]?.id || '';
+          });
+        }
+      }
+    });
+
+    // Realtime Occurrences listener
+    const unsubOccurrences = onValue(dbRefs.occurrences, (snap) => {
+      if (snap.exists()) {
+        const remoteOccurrences = snapshotToArray<Occurrence>(snap.val());
+        isRemoteUpdate.current = true;
+        setOccurrences(remoteOccurrences);
+      }
+    });
+
+    // Realtime Employees listener
+    const unsubEmployees = onValue(dbRefs.employees, (snap) => {
+      if (snap.exists()) {
+        const remoteEmployees = snapshotToArray<Employee>(snap.val());
+        isRemoteUpdate.current = true;
+        setEmployees(remoteEmployees);
+      }
+    });
+
+    // Realtime EmployeeLogs listener
+    const unsubEmployeeLogs = onValue(dbRefs.employeeLogs, (snap) => {
+      if (snap.exists()) {
+        const remoteLogs = snapshotToArray<EmployeeLog>(snap.val());
+        isRemoteUpdate.current = true;
+        setEmployeeLogs(remoteLogs);
+      }
+    });
+
+    // Realtime Reminders listener
+    const unsubReminders = onValue(dbRefs.reminders, (snap) => {
+      if (snap.exists()) {
+        const remoteReminders = snapshotToArray<Reminder>(snap.val());
+        isRemoteUpdate.current = true;
+        setReminders(remoteReminders);
+      }
+    });
+
+    // Realtime Chat listener
+    const unsubChat = onValue(dbRefs.chatMessages, (snap) => {
+      if (snap.exists()) {
+        const remoteChat = snapshotToArray<ChatMessage>(snap.val());
+        isRemoteUpdate.current = true;
+        setChatMessages(remoteChat);
+      }
+    });
+
+    // Realtime Notifications listener
+    const unsubNotifications = onValue(dbRefs.notifications, (snap) => {
+      if (snap.exists()) {
+        const remoteNotifs = snapshotToArray<Notification>(snap.val());
+        if (remoteNotifs.length > 0) {
+          isRemoteUpdate.current = true;
+          setNotifications(remoteNotifs);
+        }
+      }
+    });
+
+    return () => {
+      unsubConnected();
+      unsubLeaders();
+      unsubOccurrences();
+      unsubEmployees();
+      unsubEmployeeLogs();
+      unsubReminders();
+      unsubChat();
+      unsubNotifications();
+    };
+  }, []);
+
+  // LocalStorage Cache
   useEffect(() => {
     localStorage.setItem('3c_leaders', JSON.stringify(leaders));
   }, [leaders]);
@@ -146,32 +247,36 @@ export default function App() {
     localStorage.setItem('3c_is_admin', JSON.stringify(isAdmin));
   }, [isAdmin]);
 
-  // Handler helpers
-  const handleAddLeader = (name: string, role: string, shift?: string) => {
+  // Handler helpers with Firebase Sync
+  const handleAddLeader = (name: string, role: string, shift?: string, avatar?: string) => {
     const newLeader: Leader = {
       id: `leader-${Date.now()}`,
       name,
       role,
       shift: shift || 'Plantão Geral',
+      avatar,
       createdAt: new Date().toLocaleDateString('pt-BR')
     };
-    setLeaders(prev => [...prev, newLeader]);
+    const updated = [...leaders, newLeader];
+    setLeaders(updated);
     setSelectedLeaderId(newLeader.id);
+    syncLeadersToFirebase(updated);
+
     handleAddNotification(
       'Novo Líder Cadastrado',
-      `O líder ${name} (${role} - ${newLeader.shift}) foi integrado com sucesso ao menu suspenso.`,
+      `O líder ${name} (${role} - ${newLeader.shift}) foi salvo no Firebase Realtime Database.`,
       'success'
     );
   };
 
   const handleDeleteLeader = (id: string) => {
-    setLeaders(prev => {
-      const updated = prev.filter(l => l.id !== id);
-      if (selectedLeaderId === id && updated.length > 0) {
-        setSelectedLeaderId(updated[0].id);
-      }
-      return updated;
-    });
+    const updated = leaders.filter(l => l.id !== id);
+    setLeaders(updated);
+    if (selectedLeaderId === id && updated.length > 0) {
+      setSelectedLeaderId(updated[0].id);
+    }
+    syncLeadersToFirebase(updated);
+
     handleAddNotification(
       'Líder Removido',
       'Um líder foi deletado do diretório pelo administrador.',
@@ -179,11 +284,20 @@ export default function App() {
     );
   };
 
-  const handleUpdateLeader = (id: string, name: string, role: string, shift?: string) => {
-    setLeaders(prev => prev.map(l => l.id === id ? { ...l, name, role, ...(shift ? { shift } : {}) } : l));
+  const handleUpdateLeader = (id: string, name: string, role: string, shift?: string, avatar?: string) => {
+    const updated = leaders.map(l => l.id === id ? { 
+      ...l, 
+      name, 
+      role, 
+      ...(shift ? { shift } : {}),
+      avatar: avatar !== undefined ? avatar : l.avatar
+    } : l);
+    setLeaders(updated);
+    syncLeadersToFirebase(updated);
+
     handleAddNotification(
       'Líder Atualizado',
-      `Informações de ${name} foram atualizadas com sucesso.`,
+      `Informações de ${name} foram sincronizadas no Firebase.`,
       'info'
     );
   };
@@ -194,14 +308,18 @@ export default function App() {
       id: `occ-${Date.now()}`,
       createdAt: new Date().toISOString()
     };
-    setOccurrences(prev => [completedOcc, ...prev]);
+    const updated = [completedOcc, ...occurrences];
+    setOccurrences(updated);
+    syncOccurrencesToFirebase(updated);
   };
 
   const handleUpdateOccurrenceStatus = (id: string, newStatus: OccurrenceStatus) => {
     const target = occurrences.find(o => o.id === id);
     if (!target) return;
 
-    setOccurrences(prev => prev.map(o => o.id === id ? { ...o, status: newStatus } : o));
+    const updated = occurrences.map(o => o.id === id ? { ...o, status: newStatus } : o);
+    setOccurrences(updated);
+    syncOccurrencesToFirebase(updated);
     
     // Trigger notification to other users as requested
     const leaderText = leaders.find(l => l.id === selectedLeaderId)?.name || 'Líder';
@@ -221,13 +339,16 @@ export default function App() {
 
     handleAddNotification(
       `Status Atualizado: ${target.title}`,
-      `O líder ${leaderText} alterou a ação para [${statusLabel}]. Todos os demais foram notificados.`,
+      `O líder ${leaderText} alterou a ação para [${statusLabel}]. Todos os demais foram notificados em tempo real.`,
       type
     );
   };
 
   const handleDeleteOccurrence = (id: string) => {
-    setOccurrences(prev => prev.filter(o => o.id !== id));
+    const updated = occurrences.filter(o => o.id !== id);
+    setOccurrences(updated);
+    syncOccurrencesToFirebase(updated);
+
     handleAddNotification(
       'Registro Excluído',
       'Uma ocorrência foi apagada do histórico operacional.',
@@ -235,11 +356,14 @@ export default function App() {
     );
   };
 
-  const handleEditOccurrence = (updated: Occurrence) => {
-    setOccurrences(prev => prev.map(o => o.id === updated.id ? updated : o));
+  const handleEditOccurrence = (updatedOcc: Occurrence) => {
+    const updated = occurrences.map(o => o.id === updatedOcc.id ? updatedOcc : o);
+    setOccurrences(updated);
+    syncOccurrencesToFirebase(updated);
+
     handleAddNotification(
       'Registro Editado',
-      `Ocorrência "${updated.title}" foi editada com sucesso.`,
+      `Ocorrência "${updatedOcc.title}" foi sincronizada com sucesso.`,
       'info'
     );
   };
@@ -253,12 +377,18 @@ export default function App() {
       positives: 0,
       negatives: 0
     };
-    setEmployees(prev => [...prev, newEmp]);
+    const updated = [...employees, newEmp];
+    setEmployees(updated);
+    syncEmployeesToFirebase(updated);
   };
 
   const handleDeleteEmployee = (id: string) => {
-    setEmployees(prev => prev.filter(e => e.id !== id));
-    setEmployeeLogs(prev => prev.filter(l => l.employeeId !== id));
+    const updatedEmps = employees.filter(e => e.id !== id);
+    const updatedLogs = employeeLogs.filter(l => l.employeeId !== id);
+    setEmployees(updatedEmps);
+    setEmployeeLogs(updatedLogs);
+    syncEmployeesToFirebase(updatedEmps);
+    syncEmployeeLogsToFirebase(updatedLogs);
   };
 
   const handleAddEmployeeLog = (newLog: Omit<EmployeeLog, 'id' | 'createdAt'>) => {
@@ -267,10 +397,12 @@ export default function App() {
       id: `log-${Date.now()}`,
       createdAt: new Date().toISOString()
     };
-    setEmployeeLogs(prev => [log, ...prev]);
+    const updatedLogs = [log, ...employeeLogs];
+    setEmployeeLogs(updatedLogs);
+    syncEmployeeLogsToFirebase(updatedLogs);
 
     // Adjust positive/negative counters on the employee record dynamically
-    setEmployees(prev => prev.map(emp => {
+    const updatedEmps = employees.map(emp => {
       if (emp.id === newLog.employeeId) {
         if (newLog.type === 'ponto_positivo') {
           return { ...emp, positives: emp.positives + 1 };
@@ -285,7 +417,9 @@ export default function App() {
         }
       }
       return emp;
-    }));
+    });
+    setEmployees(updatedEmps);
+    syncEmployeesToFirebase(updatedEmps);
 
     handleAddNotification(
       'Ficha de Colaborador Atualizada',
@@ -299,7 +433,7 @@ export default function App() {
     if (!target) return;
 
     // Revert employee score changes
-    setEmployees(prev => prev.map(emp => {
+    const updatedEmps = employees.map(emp => {
       if (emp.id === target.employeeId) {
         if (target.type === 'ponto_positivo') {
           return { ...emp, positives: Math.max(0, emp.positives - 1) };
@@ -314,9 +448,13 @@ export default function App() {
         }
       }
       return emp;
-    }));
+    });
+    setEmployees(updatedEmps);
+    syncEmployeesToFirebase(updatedEmps);
 
-    setEmployeeLogs(prev => prev.filter(l => l.id !== id));
+    const updatedLogs = employeeLogs.filter(l => l.id !== id);
+    setEmployeeLogs(updatedLogs);
+    syncEmployeeLogsToFirebase(updatedLogs);
   };
 
   const handleAddReminder = (newRem: Omit<Reminder, 'id'>) => {
@@ -324,16 +462,21 @@ export default function App() {
       ...newRem,
       id: `rem-${Date.now()}`
     };
-    setReminders(prev => [...prev, rem]);
+    const updated = [...reminders, rem];
+    setReminders(updated);
+    syncRemindersToFirebase(updated);
+
     handleAddNotification(
       'Compromisso Agendado',
-      `Evento [${newRem.title}] adicionado ao calendário.`,
+      `Evento [${newRem.title}] salvo no Firebase.`,
       'info'
     );
   };
 
   const handleDeleteReminder = (id: string) => {
-    setReminders(prev => prev.filter(r => r.id !== id));
+    const updated = reminders.filter(r => r.id !== id);
+    setReminders(updated);
+    syncRemindersToFirebase(updated);
   };
 
   const handleSendMessage = (messageText: string) => {
@@ -345,7 +488,9 @@ export default function App() {
       message: messageText,
       timestamp: new Date().toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' })
     };
-    setChatMessages(prev => [...prev, newMsg]);
+    const updated = [...chatMessages, newMsg];
+    setChatMessages(updated);
+    syncChatMessagesToFirebase(updated);
   };
 
   const handleSimulateReply = (senderName: string, senderRole: string, messageText: string) => {
@@ -356,11 +501,14 @@ export default function App() {
       message: messageText,
       timestamp: new Date().toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' })
     };
-    setChatMessages(prev => [...prev, newMsg]);
+    const updated = [...chatMessages, newMsg];
+    setChatMessages(updated);
+    syncChatMessagesToFirebase(updated);
   };
 
   const handleClearChat = () => {
     setChatMessages([]);
+    syncChatMessagesToFirebase([]);
   };
 
   const handleAddNotification = (title: string, message: string, type: 'info' | 'warning' | 'success') => {
@@ -372,11 +520,15 @@ export default function App() {
       createdAt: new Date().toISOString(),
       read: false
     };
-    setNotifications(prev => [newNotif, ...prev]);
+    const updated = [newNotif, ...notifications];
+    setNotifications(updated);
+    syncNotificationsToFirebase(updated);
   };
 
   const handleMarkNotificationsAsRead = () => {
-    setNotifications(prev => prev.map(n => ({ ...n, read: true })));
+    const updated = notifications.map(n => ({ ...n, read: true }));
+    setNotifications(updated);
+    syncNotificationsToFirebase(updated);
   };
 
   // Render correct Active Tab/View
@@ -484,6 +636,7 @@ export default function App() {
         onAddLeader={handleAddLeader}
         onDeleteLeader={handleDeleteLeader}
         onUpdateLeader={handleUpdateLeader}
+        isFirebaseConnected={isFirebaseConnected}
       />
 
       <div className="flex-1 flex flex-col md:flex-row relative">
@@ -501,9 +654,14 @@ export default function App() {
 
           {/* Quick status box */}
           <div className="bg-[#3D261C] border border-[#4D362C] rounded-lg p-3 space-y-2.5 shadow-inner">
-            <div className="flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse shadow-sm" />
-              <span className="text-[9px] font-black uppercase text-[#A6897E]">Painel Conectado</span>
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-1.5">
+                <span className={`w-2 h-2 rounded-full ${isFirebaseConnected ? 'bg-green-500 animate-pulse' : 'bg-amber-400'} shadow-sm`} />
+                <span className="text-[9px] font-black uppercase text-[#A6897E]">Firebase Realtime</span>
+              </div>
+              <span className="text-[8px] font-bold text-emerald-400 bg-emerald-950/60 px-1 py-0.2 rounded border border-emerald-800/40">
+                passagem-de-turno
+              </span>
             </div>
             
             <div className="space-y-0.5">

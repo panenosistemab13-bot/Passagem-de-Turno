@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { Leader, Notification } from '../types';
 import { 
   Bell, 
@@ -13,7 +13,10 @@ import {
   UserCheck,
   Trash2,
   Edit,
-  X
+  X,
+  Camera,
+  Upload,
+  Database
 } from 'lucide-react';
 
 interface HeaderProps {
@@ -24,10 +27,51 @@ interface HeaderProps {
   setIsAdmin: (admin: boolean) => void;
   notifications: Notification[];
   onMarkNotificationsAsRead: () => void;
-  onAddLeader: (name: string, role: string, shift?: string) => void;
+  onAddLeader: (name: string, role: string, shift?: string, avatar?: string) => void;
   onDeleteLeader: (id: string) => void;
-  onUpdateLeader: (id: string, name: string, role: string, shift?: string) => void;
+  onUpdateLeader: (id: string, name: string, role: string, shift?: string, avatar?: string) => void;
+  isFirebaseConnected?: boolean;
 }
+
+// Client-side helper to compress and convert uploaded image into lightweight Data URL
+const processImageFile = (file: File): Promise<string> => {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      const img = new Image();
+      img.onload = () => {
+        const canvas = document.createElement('canvas');
+        const MAX_SIZE = 240; // optimized for avatars and snappy storage
+        let width = img.width;
+        let height = img.height;
+        if (width > height) {
+          if (width > MAX_SIZE) {
+            height = Math.round((height * MAX_SIZE) / width);
+            width = MAX_SIZE;
+          }
+        } else {
+          if (height > MAX_SIZE) {
+            width = Math.round((width * MAX_SIZE) / height);
+            height = MAX_SIZE;
+          }
+        }
+        canvas.width = width;
+        canvas.height = height;
+        const ctx = canvas.getContext('2d');
+        if (ctx) {
+          ctx.drawImage(img, 0, 0, width, height);
+          resolve(canvas.toDataURL('image/jpeg', 0.85));
+        } else {
+          resolve(e.target?.result as string);
+        }
+      };
+      img.onerror = () => resolve(e.target?.result as string);
+      img.src = e.target?.result as string;
+    };
+    reader.onerror = reject;
+    reader.readAsDataURL(file);
+  });
+};
 
 export default function Header({
   leaders,
@@ -44,15 +88,23 @@ export default function Header({
   const [showNotificationDropdown, setShowNotificationDropdown] = useState(false);
   const [showLeaderDropdown, setShowLeaderDropdown] = useState(false);
   const [showAddLeaderForm, setShowAddLeaderForm] = useState(false);
+  
+  // New Leader State
   const [newLeaderName, setNewLeaderName] = useState('');
   const [newLeaderRole, setNewLeaderRole] = useState('Líder diurna');
   const [newLeaderShift, setNewLeaderShift] = useState('Plantões A e B');
+  const [newLeaderAvatar, setNewLeaderAvatar] = useState<string | undefined>(undefined);
+  const [isDraggingNew, setIsDraggingNew] = useState(false);
+  const newFileInputRef = useRef<HTMLInputElement | null>(null);
 
   // Inline Leader Editing State
   const [editingLeaderId, setEditingLeaderId] = useState<string | null>(null);
   const [editLeaderName, setEditLeaderName] = useState('');
   const [editLeaderRole, setEditLeaderRole] = useState('');
   const [editLeaderShift, setEditLeaderShift] = useState('');
+  const [editLeaderAvatar, setEditLeaderAvatar] = useState<string | undefined>(undefined);
+  const [isDraggingEdit, setIsDraggingEdit] = useState(false);
+  const editFileInputRef = useRef<HTMLInputElement | null>(null);
 
   const selectedLeader = leaders.find(l => l.id === selectedLeaderId);
   const unreadCount = notifications.filter(n => !n.read).length;
@@ -60,10 +112,11 @@ export default function Header({
   const handleCreateLeaderSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (newLeaderName.trim()) {
-      onAddLeader(newLeaderName.trim(), newLeaderRole.trim(), newLeaderShift.trim());
+      onAddLeader(newLeaderName.trim(), newLeaderRole.trim(), newLeaderShift.trim(), newLeaderAvatar);
       setNewLeaderName('');
       setNewLeaderRole('Líder diurna');
       setNewLeaderShift('Plantões A e B');
+      setNewLeaderAvatar(undefined);
       setShowAddLeaderForm(false);
     }
   };
@@ -78,16 +131,55 @@ export default function Header({
     setEditLeaderName(leader.name);
     setEditLeaderRole(leader.role);
     setEditLeaderShift(leader.shift || 'Plantão A');
+    setEditLeaderAvatar(leader.avatar);
   };
 
   const cancelEditingLeader = () => {
     setEditingLeaderId(null);
+    setEditLeaderAvatar(undefined);
   };
 
   const handleSaveLeaderEdit = (id: string) => {
     if (editLeaderName.trim()) {
-      onUpdateLeader(id, editLeaderName.trim(), editLeaderRole.trim(), editLeaderShift.trim());
+      onUpdateLeader(id, editLeaderName.trim(), editLeaderRole.trim(), editLeaderShift.trim(), editLeaderAvatar);
       setEditingLeaderId(null);
+      setEditLeaderAvatar(undefined);
+    }
+  };
+
+  const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>, isEdit: boolean) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      try {
+        const base64 = await processImageFile(file);
+        if (isEdit) {
+          setEditLeaderAvatar(base64);
+        } else {
+          setNewLeaderAvatar(base64);
+        }
+      } catch (err) {
+        console.error('Erro ao processar imagem:', err);
+      }
+    }
+  };
+
+  const handleDrop = async (e: React.DragEvent<HTMLDivElement>, isEdit: boolean) => {
+    e.preventDefault();
+    if (isEdit) setIsDraggingEdit(false);
+    else setIsDraggingNew(false);
+
+    const file = e.dataTransfer.files?.[0];
+    if (file && file.type.startsWith('image/')) {
+      try {
+        const base64 = await processImageFile(file);
+        if (isEdit) {
+          setEditLeaderAvatar(base64);
+        } else {
+          setNewLeaderAvatar(base64);
+        }
+      } catch (err) {
+        console.error('Erro ao processar imagem:', err);
+      }
     }
   };
 
@@ -133,6 +225,19 @@ export default function Header({
       {/* Control Actions / Menus */}
       <div className="flex items-center gap-3 mt-3 sm:mt-0">
         
+        {/* Firebase Realtime Database Live Indicator */}
+        <div 
+          className="hidden md:flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-[10px] font-bold border border-[#E0D8D0] bg-[#FAF9F7] text-[#5D4037]"
+          title="Conectado ao Firebase Realtime Database (passagem-de-turno-1d855)"
+        >
+          <Database className="w-3 h-3 text-[#C8102E]" />
+          <span className="font-extrabold text-[#2C1810]">Firebase RTDB</span>
+          <span className="flex items-center gap-1 text-[9px] font-semibold text-emerald-700 bg-emerald-50 px-1.5 py-0.2 rounded border border-emerald-200">
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+            Online
+          </span>
+        </div>
+
         {/* Administrator Mode Toggle */}
         <button
           onClick={() => setIsAdmin(!isAdmin)}
@@ -165,7 +270,18 @@ export default function Header({
             }}
             className="flex items-center gap-2 bg-[#F4F1EE] hover:bg-white px-3 py-1.5 border border-[#E0D8D0] rounded-lg text-xs font-bold text-[#2C1810] cursor-pointer transition-all duration-150 shadow-sm"
           >
-            <User className="w-3.5 h-3.5 text-[#C8102E]" />
+            {selectedLeader?.avatar ? (
+              <img 
+                src={selectedLeader.avatar} 
+                alt={selectedLeader.name} 
+                referrerPolicy="no-referrer"
+                className="w-5 h-5 rounded-full object-cover border border-[#C8102E]/50 shadow-2xs"
+              />
+            ) : (
+              <div className="w-5 h-5 rounded-full bg-[#C8102E]/10 text-[#C8102E] flex items-center justify-center text-[10px] font-black border border-[#C8102E]/20">
+                {selectedLeader ? selectedLeader.name.charAt(0) : <User className="w-3.5 h-3.5" />}
+              </div>
+            )}
             <div className="flex items-center gap-1.5 max-w-[200px] truncate">
               <span className="truncate">{selectedLeader ? selectedLeader.name : 'Selecionar Líder'}</span>
               {selectedLeader?.shift && (
@@ -182,10 +298,13 @@ export default function Header({
               <div className="px-3 py-2 border-b border-[#F4F1EE] flex items-center justify-between bg-[#FAF9F7]">
                 <div>
                   <span className="text-[10px] font-black uppercase tracking-wider text-[#2C1810] block">Líderes Ativos</span>
-                  <span className="text-[9px] text-[#8C7B70]">Gerencie líderes, funções e plantões operacionais</span>
+                  <span className="text-[9px] text-[#8C7B70]">Gerencie líderes, fotos e plantões operacionais</span>
                 </div>
                 <button 
-                  onClick={() => setShowAddLeaderForm(!showAddLeaderForm)}
+                  onClick={() => {
+                    setShowAddLeaderForm(!showAddLeaderForm);
+                    setEditingLeaderId(null);
+                  }}
                   className="bg-[#C8102E] text-white hover:bg-[#a80c24] px-2.5 py-1 rounded flex items-center gap-1 text-[10px] font-bold shadow-xs cursor-pointer"
                 >
                   <Plus className="w-3 h-3" /> Adicionar
@@ -194,8 +313,74 @@ export default function Header({
 
               {/* Add New Leader Form */}
               {showAddLeaderForm && (
-                <form onSubmit={handleCreateLeaderSubmit} className="p-3 bg-[#F4F1EE] border-b border-[#E0D8D0] space-y-2">
-                  <div className="text-[10px] font-black uppercase text-[#C8102E]">Novo Líder de Plantão</div>
+                <form onSubmit={handleCreateLeaderSubmit} className="p-3 bg-[#F4F1EE] border-b border-[#E0D8D0] space-y-2.5">
+                  <div className="flex items-center justify-between">
+                    <span className="text-[10px] font-black uppercase text-[#C8102E]">Novo Cadastro de Líder</span>
+                    <button 
+                      type="button" 
+                      onClick={() => setShowAddLeaderForm(false)}
+                      className="text-[#8C7B70] hover:text-[#2C1810]"
+                    >
+                      <X className="w-3.5 h-3.5" />
+                    </button>
+                  </div>
+
+                  {/* Photo Upload Area */}
+                  <div>
+                    <label className="text-[9px] text-[#8C7B70] block font-bold mb-1 uppercase">Foto do Líder (Importar do Dispositivo)</label>
+                    <input 
+                      type="file" 
+                      ref={newFileInputRef}
+                      onChange={(e) => handleFileChange(e, false)}
+                      accept="image/*"
+                      className="hidden"
+                    />
+                    
+                    <div 
+                      onDragOver={(e) => { e.preventDefault(); setIsDraggingNew(true); }}
+                      onDragLeave={() => setIsDraggingNew(false)}
+                      onDrop={(e) => handleDrop(e, false)}
+                      onClick={() => newFileInputRef.current?.click()}
+                      className={`border-2 border-dashed rounded-lg p-2.5 flex items-center gap-3 cursor-pointer transition-all ${
+                        isDraggingNew ? 'border-[#C8102E] bg-[#C8102E]/10' : 'border-[#D4C8BE] bg-white hover:border-[#C8102E]/60'
+                      }`}
+                    >
+                      {newLeaderAvatar ? (
+                        <div className="relative group">
+                          <img 
+                            src={newLeaderAvatar} 
+                            alt="Preview" 
+                            referrerPolicy="no-referrer"
+                            className="w-12 h-12 rounded-full object-cover border border-[#C8102E]"
+                          />
+                          <button
+                            type="button"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              setNewLeaderAvatar(undefined);
+                            }}
+                            className="absolute -top-1 -right-1 bg-red-600 text-white rounded-full p-0.5 shadow hover:bg-red-700"
+                            title="Remover foto"
+                          >
+                            <X className="w-3 h-3" />
+                          </button>
+                        </div>
+                      ) : (
+                        <div className="w-12 h-12 rounded-full bg-[#F4F1EE] border border-[#E0D8D0] flex items-center justify-center text-[#8C7B70]">
+                          <Camera className="w-5 h-5 text-[#8C7B70]" />
+                        </div>
+                      )}
+
+                      <div className="flex-1 text-left min-w-0">
+                        <div className="text-xs font-bold text-[#2C1810] flex items-center gap-1">
+                          <Upload className="w-3 h-3 text-[#C8102E]" />
+                          <span>{newLeaderAvatar ? 'Alterar foto selecionada' : 'Importar foto do celular/PC'}</span>
+                        </div>
+                        <p className="text-[9px] text-[#8C7B70] mt-0.5">Clique para buscar na galeria ou arraste aqui</p>
+                      </div>
+                    </div>
+                  </div>
+
                   <div>
                     <label className="text-[9px] text-[#8C7B70] block font-bold mb-0.5 uppercase">Nome Completo <span className="text-[#C8102E]">*</span></label>
                     <input 
@@ -203,10 +388,11 @@ export default function Header({
                       value={newLeaderName}
                       onChange={(e) => setNewLeaderName(e.target.value)}
                       placeholder="Ex: Cristiane Fialho"
-                      className="w-full bg-white border border-[#E0D8D0] rounded px-2 py-1 text-xs text-[#2C1810] font-semibold focus:outline-none focus:border-[#C8102E]"
+                      className="w-full bg-white border border-[#E0D8D0] rounded px-2.5 py-1.5 text-xs text-[#2C1810] font-semibold focus:outline-none focus:border-[#C8102E]"
                       required
                     />
                   </div>
+
                   <div className="grid grid-cols-2 gap-2">
                     <div>
                       <label className="text-[9px] text-[#8C7B70] block font-bold mb-0.5 uppercase">Função / Cargo</label>
@@ -215,7 +401,7 @@ export default function Header({
                         value={newLeaderRole}
                         onChange={(e) => setNewLeaderRole(e.target.value)}
                         placeholder="Ex: Líder diurna"
-                        className="w-full bg-white border border-[#E0D8D0] rounded px-2 py-1 text-xs text-[#2C1810] font-semibold focus:outline-none focus:border-[#C8102E]"
+                        className="w-full bg-white border border-[#E0D8D0] rounded px-2.5 py-1.5 text-xs text-[#2C1810] font-semibold focus:outline-none focus:border-[#C8102E]"
                       />
                     </div>
                     <div>
@@ -223,7 +409,7 @@ export default function Header({
                       <select
                         value={newLeaderShift}
                         onChange={(e) => setNewLeaderShift(e.target.value)}
-                        className="w-full bg-white border border-[#E0D8D0] rounded px-2 py-1 text-xs text-[#2C1810] font-semibold focus:outline-none focus:border-[#C8102E]"
+                        className="w-full bg-white border border-[#E0D8D0] rounded px-2.5 py-1.5 text-xs text-[#2C1810] font-semibold focus:outline-none focus:border-[#C8102E]"
                       >
                         <option value="Plantão A">Plantão A</option>
                         <option value="Plantão B">Plantão B</option>
@@ -233,17 +419,18 @@ export default function Header({
                       </select>
                     </div>
                   </div>
+
                   <div className="flex gap-2 pt-1">
                     <button 
                       type="submit"
-                      className="flex-1 bg-[#C8102E] hover:bg-[#a80c24] text-white rounded text-xs font-bold py-1 flex items-center justify-center gap-1 cursor-pointer"
+                      className="flex-1 bg-[#C8102E] hover:bg-[#a80c24] text-white rounded text-xs font-bold py-1.5 flex items-center justify-center gap-1 cursor-pointer"
                     >
-                      <Check className="w-3 h-3" /> Salvar Líder
+                      <Check className="w-3.5 h-3.5" /> Salvar Líder com Foto
                     </button>
                     <button 
                       type="button"
                       onClick={() => setShowAddLeaderForm(false)}
-                      className="px-3 bg-white border border-[#E0D8D0] hover:bg-slate-50 text-[#8C7B70] rounded text-xs py-1 cursor-pointer"
+                      className="px-3 bg-white border border-[#E0D8D0] hover:bg-slate-50 text-[#8C7B70] rounded text-xs py-1.5 cursor-pointer"
                     >
                       Cancelar
                     </button>
@@ -252,14 +439,70 @@ export default function Header({
               )}
 
               {/* Leaders List */}
-              <div className="max-h-72 overflow-y-auto divide-y divide-[#F4F1EE]">
+              <div className="max-h-80 overflow-y-auto divide-y divide-[#F4F1EE]">
                 {leaders.map((leader) => {
                   const isEditing = editingLeaderId === leader.id;
 
                   if (isEditing) {
                     return (
-                      <div key={leader.id} className="p-3 bg-[#F4F1EE] border-b border-[#E0D8D0] space-y-2">
-                        <div className="text-[10px] font-black uppercase text-[#C8102E]">Editar Cadastro do Líder</div>
+                      <div key={leader.id} className="p-3 bg-[#F4F1EE] border-b border-[#E0D8D0] space-y-2.5">
+                        <div className="text-[10px] font-black uppercase text-[#C8102E]">Editar Líder e Foto</div>
+                        
+                        {/* Edit Photo Upload */}
+                        <div>
+                          <label className="text-[8px] text-[#8C7B70] font-black uppercase block mb-1">Foto / Avatar do Dispositivo</label>
+                          <input 
+                            type="file" 
+                            ref={editFileInputRef}
+                            onChange={(e) => handleFileChange(e, true)}
+                            accept="image/*"
+                            className="hidden"
+                          />
+                          <div 
+                            onDragOver={(e) => { e.preventDefault(); setIsDraggingEdit(true); }}
+                            onDragLeave={() => setIsDraggingEdit(false)}
+                            onDrop={(e) => handleDrop(e, true)}
+                            onClick={() => editFileInputRef.current?.click()}
+                            className={`border-2 border-dashed rounded-lg p-2 flex items-center gap-3 cursor-pointer bg-white transition-all ${
+                              isDraggingEdit ? 'border-[#C8102E] bg-[#C8102E]/10' : 'border-[#D4C8BE] hover:border-[#C8102E]'
+                            }`}
+                          >
+                            {editLeaderAvatar ? (
+                              <div className="relative group">
+                                <img 
+                                  src={editLeaderAvatar} 
+                                  alt="Preview" 
+                                  referrerPolicy="no-referrer"
+                                  className="w-10 h-10 rounded-full object-cover border border-[#C8102E]"
+                                />
+                                <button
+                                  type="button"
+                                  onClick={(e) => {
+                                    e.stopPropagation();
+                                    setEditLeaderAvatar(undefined);
+                                  }}
+                                  className="absolute -top-1 -right-1 bg-red-600 text-white rounded-full p-0.5 shadow hover:bg-red-700"
+                                  title="Remover foto"
+                                >
+                                  <X className="w-2.5 h-2.5" />
+                                </button>
+                              </div>
+                            ) : (
+                              <div className="w-10 h-10 rounded-full bg-[#F4F1EE] border border-[#E0D8D0] flex items-center justify-center text-[#8C7B70]">
+                                <Camera className="w-4 h-4 text-[#8C7B70]" />
+                              </div>
+                            )}
+
+                            <div className="flex-1 text-left min-w-0">
+                              <div className="text-[11px] font-bold text-[#2C1810] flex items-center gap-1">
+                                <Upload className="w-3 h-3 text-[#C8102E]" />
+                                <span>{editLeaderAvatar ? 'Trocar foto do líder' : 'Importar foto da galeria'}</span>
+                              </div>
+                              <p className="text-[8px] text-[#8C7B70]">Clique para selecionar ou arraste</p>
+                            </div>
+                          </div>
+                        </div>
+
                         <div>
                           <label className="text-[8px] text-[#8C7B70] font-black uppercase block mb-0.5">Nome</label>
                           <input 
@@ -330,29 +573,49 @@ export default function Header({
                         leader.id === selectedLeaderId ? 'bg-[#C8102E]/5 font-bold text-[#C8102E]' : 'text-[#2C1810]'
                       }`}
                     >
-                      {/* Clickable Select Action */}
+                      {/* Clickable Select Action with Avatar */}
                       <button
                         onClick={() => handleSelectLeader(leader.id)}
-                        className="flex-1 text-left min-w-0 pr-2 cursor-pointer focus:outline-none"
+                        className="flex-1 text-left min-w-0 pr-2 cursor-pointer focus:outline-none flex items-center gap-2.5"
                       >
-                        <div className="font-black flex items-center gap-1.5 text-xs text-[#2C1810]">
-                          <span className="truncate">{leader.name}</span>
-                          {leader.id === selectedLeaderId && (
-                            <span className="inline-flex items-center gap-0.5 text-[9px] font-black uppercase text-[#C8102E] bg-[#C8102E]/10 px-1.5 py-0.2 rounded shrink-0">
-                              <UserCheck className="w-3 h-3" /> Ativo
+                        {/* Leader Avatar or Initials */}
+                        {leader.avatar ? (
+                          <img 
+                            src={leader.avatar} 
+                            alt={leader.name} 
+                            referrerPolicy="no-referrer"
+                            className="w-8 h-8 rounded-full object-cover border border-[#D4C8BE] shrink-0 shadow-2xs"
+                          />
+                        ) : (
+                          <div className={`w-8 h-8 rounded-full flex items-center justify-center font-bold text-xs shrink-0 border ${
+                            leader.id === selectedLeaderId
+                              ? 'bg-[#C8102E] text-white border-[#C8102E]'
+                              : 'bg-[#F4F1EE] text-[#5D4037] border-[#E0D8D0]'
+                          }`}>
+                            {leader.name.charAt(0)}
+                          </div>
+                        )}
+
+                        <div className="min-w-0 flex-1">
+                          <div className="font-black flex items-center gap-1.5 text-xs text-[#2C1810]">
+                            <span className="truncate">{leader.name}</span>
+                            {leader.id === selectedLeaderId && (
+                              <span className="inline-flex items-center gap-0.5 text-[9px] font-black uppercase text-[#C8102E] bg-[#C8102E]/10 px-1.5 py-0.2 rounded shrink-0">
+                                <UserCheck className="w-3 h-3" /> Ativo
+                              </span>
+                            )}
+                          </div>
+                          
+                          <div className="flex items-center gap-1.5 mt-0.5">
+                            <span className="text-[10px] text-[#5D4037] font-medium truncate">
+                              {leader.role}
                             </span>
-                          )}
-                        </div>
-                        
-                        <div className="flex items-center gap-1.5 mt-0.5">
-                          <span className="text-[10px] text-[#5D4037] font-medium truncate">
-                            {leader.role}
-                          </span>
-                          {leader.shift && (
-                            <span className={`text-[9px] font-black px-1.5 py-0.2 rounded border shrink-0 ${getShiftBadgeStyle(leader.shift)}`}>
-                              {leader.shift}
-                            </span>
-                          )}
+                            {leader.shift && (
+                              <span className={`text-[9px] font-black px-1.5 py-0.2 rounded border shrink-0 ${getShiftBadgeStyle(leader.shift)}`}>
+                                {leader.shift}
+                              </span>
+                            )}
+                          </div>
                         </div>
                       </button>
 
@@ -365,7 +628,7 @@ export default function Header({
                             startEditingLeader(leader);
                           }}
                           className="p-1 text-slate-500 hover:text-[#2C1810] hover:bg-[#F4F1EE] rounded transition-colors cursor-pointer"
-                          title="Editar Líder e Plantão"
+                          title="Editar Líder, Foto e Plantão"
                         >
                           <Edit className="w-3.5 h-3.5" />
                         </button>

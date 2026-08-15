@@ -65,6 +65,7 @@ export default function LeaderFolders({
                   name={leader.name}
                   role={leader.role}
                   shift={leader.shift}
+                  avatar={leader.avatar}
                   occurrencesCount={leaderOccs}
                   employeesCount={leaderLogs}
                   onClick={() => setSelectedLeaderId(leader.id)}
@@ -105,9 +106,18 @@ export default function LeaderFolders({
 
           {/* Folder Inner profile badge */}
           <div className="bg-gradient-to-r from-[#2C1810] to-[#3D261C] rounded-lg p-5 text-white mb-5 shadow flex items-center gap-4">
-            <div className="w-12 h-12 rounded-full bg-[#C8102E]/20 text-[#C8102E] border border-[#C8102E]/30 bg-white flex items-center justify-center font-black text-xl uppercase shadow-inner">
-              {currentLeader?.name.charAt(0)}
-            </div>
+            {currentLeader?.avatar ? (
+              <img 
+                src={currentLeader.avatar} 
+                alt={currentLeader.name} 
+                referrerPolicy="no-referrer"
+                className="w-14 h-14 rounded-full object-cover border-2 border-white/40 shadow-inner"
+              />
+            ) : (
+              <div className="w-14 h-14 rounded-full bg-[#C8102E]/20 text-[#C8102E] border border-[#C8102E]/30 bg-white flex items-center justify-center font-black text-xl uppercase shadow-inner">
+                {currentLeader?.name.charAt(0)}
+              </div>
+            )}
             <div>
               <div className="flex items-center gap-2">
                 <span className="text-[9px] tracking-widest text-[#E0D8D0] font-black uppercase">Ficha Individual do Líder</span>
@@ -171,6 +181,33 @@ export default function LeaderFolders({
                       </div>
                       
                       <h5 className="font-bold text-xs text-[#2C1810] mb-0.5">{occ.title}</h5>
+                      
+                      {/* Vehicle or Instability details */}
+                      {(occ.plate || occ.carrier || occ.unit || occ.ticketNumber) && (
+                        <div className="flex flex-wrap items-center gap-1.5 my-1.5 text-[10px]">
+                          {occ.plate && (
+                            <span className="bg-[#2C1810] text-white px-1.5 py-0.2 rounded font-mono font-bold">
+                              {occ.plate}
+                            </span>
+                          )}
+                          {occ.carrier && (
+                            <span className="bg-white border border-[#E0D8D0] text-[#2C1810] px-1.5 py-0.2 rounded font-medium">
+                              {occ.carrier}
+                            </span>
+                          )}
+                          {occ.unit && (
+                            <span className="bg-white border border-[#E0D8D0] text-[#5D4037] px-1.5 py-0.2 rounded">
+                              {occ.unit}
+                            </span>
+                          )}
+                          {occ.ticketNumber && (
+                            <span className="bg-amber-100 text-amber-900 border border-amber-300 px-1.5 py-0.2 rounded font-bold">
+                              Chamado: {occ.ticketNumber}
+                            </span>
+                          )}
+                        </div>
+                      )}
+
                       <p className="text-xs text-[#5D4037] line-clamp-3 leading-relaxed">{occ.description}</p>
                       
                       <div className="mt-1.5 pt-1.5 border-t border-[#E0D8D0]/40 flex items-center gap-1">

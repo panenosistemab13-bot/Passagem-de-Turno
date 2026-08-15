@@ -19,7 +19,19 @@ export interface Occurrence {
   description: string;
   status: OccurrenceStatus;
   riskLevel: 'Baixo' | 'Médio' | 'Alto' | 'Crítico';
-  category: 'Segurança' | 'Operação' | 'Logística' | 'Qualidade' | 'Manutenção' | 'Outros';
+  category: 'Segurança' | 'Operação' | 'Logística' | 'Qualidade' | 'Manutenção' | 'Instabilidade / Tecnologia' | 'Outros';
+  
+  // Detalhes Operacionais da Viagem / Veículo
+  plate?: string;
+  carrier?: string;
+  unit?: string;
+  
+  // Registro de Instabilidade & Chamados
+  recordType?: 'padrao' | 'instabilidade';
+  instabilitySystem?: string; // Telefonia, Sascar, Trafegus, etc.
+  ticketNumber?: string; // Número do Chamado de acompanhamento
+  affectedTechnology?: string;
+
   createdAt: string;
 }
 

@@ -237,30 +237,45 @@ export default function DashboardStatus({ occurrences, onSelectTab }: DashboardS
           <table className="w-full text-left border-collapse text-xs">
             <thead>
               <tr className="bg-[#3D261C] text-white uppercase font-black tracking-wider text-[9px] border-b border-[#4D362C]">
-                <th className="py-2.5 px-4 border-r border-[#4D362C]">Data / Plantão</th>
-                <th className="py-2.5 px-4 border-r border-[#4D362C]">Líder do Registro</th>
-                <th className="py-2.5 px-4 border-r border-[#4D362C]">Ocorrência / Título</th>
-                <th className="py-2.5 px-4 border-r border-[#4D362C]">Categoria</th>
-                <th className="py-2.5 px-4 border-r border-[#4D362C]">Nível Risco</th>
-                <th className="py-2.5 px-4">Status / Ação</th>
+                <th className="py-2.5 px-3 border-r border-[#4D362C]">Data / Plantão</th>
+                <th className="py-2.5 px-3 border-r border-[#4D362C]">Líder do Registro</th>
+                <th className="py-2.5 px-3 border-r border-[#4D362C]">Placa / Transp. / Unidade</th>
+                <th className="py-2.5 px-3 border-r border-[#4D362C]">Ocorrência / Título</th>
+                <th className="py-2.5 px-3 border-r border-[#4D362C]">Nível Risco</th>
+                <th className="py-2.5 px-3">Status / Ação</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-[#E0D8D0] text-[#2C1810]">
-              {occurrences.slice(0, 5).map((occ) => (
+              {occurrences.slice(0, 6).map((occ) => (
                 <tr key={occ.id} className="hover:bg-[#F4F1EE]/50 transition-colors">
-                  <td className="py-2 px-4 font-bold text-[#2C1810] border-r border-[#E0D8D0] whitespace-nowrap bg-[#FAF9F7]">
+                  <td className="py-2 px-3 font-bold text-[#2C1810] border-r border-[#E0D8D0] whitespace-nowrap bg-[#FAF9F7]">
                     {occ.shiftDate}
                   </td>
-                  <td className="py-2 px-4 border-r border-[#E0D8D0] font-medium">
+                  <td className="py-2 px-3 border-r border-[#E0D8D0] font-medium whitespace-nowrap">
                     {occ.leaderName}
                   </td>
-                  <td className="py-2 px-4 border-r border-[#E0D8D0] font-bold max-w-xs truncate">
+                  <td className="py-2 px-3 border-r border-[#E0D8D0] whitespace-nowrap">
+                    {occ.plate ? (
+                      <div className="flex items-center gap-1.5 font-bold">
+                        <span className="font-mono text-[#C8102E] bg-red-50 border border-red-200 px-1.5 py-0.5 rounded text-[10px]">
+                          {occ.plate}
+                        </span>
+                        <span className="text-[10px] text-[#8C7B70] max-w-[120px] truncate">
+                          {occ.carrier || occ.unit || 'Frota 3C'}
+                        </span>
+                      </div>
+                    ) : occ.recordType === 'instabilidade' ? (
+                      <span className="text-[10px] font-bold text-amber-800 bg-amber-100 border border-amber-300 px-1.5 py-0.5 rounded">
+                        ⚡ {occ.instabilitySystem || 'Instabilidade'}
+                      </span>
+                    ) : (
+                      <span className="text-[10px] text-[#8C7B70]">-</span>
+                    )}
+                  </td>
+                  <td className="py-2 px-3 border-r border-[#E0D8D0] font-bold max-w-xs truncate">
                     {occ.title}
                   </td>
-                  <td className="py-2 px-4 border-r border-[#E0D8D0] font-semibold whitespace-nowrap text-[#5D4037]">
-                    {occ.category}
-                  </td>
-                  <td className="py-2 px-4 border-r border-[#E0D8D0] whitespace-nowrap">
+                  <td className="py-2 px-3 border-r border-[#E0D8D0] whitespace-nowrap">
                     <span className={`px-2 py-0.5 rounded-full font-black text-[9px] uppercase border ${
                       occ.riskLevel === 'Crítico' ? 'bg-red-50 text-red-700 border-red-200' :
                       occ.riskLevel === 'Alto' ? 'bg-orange-50 text-orange-700 border-orange-200' :
@@ -270,7 +285,7 @@ export default function DashboardStatus({ occurrences, onSelectTab }: DashboardS
                       {occ.riskLevel}
                     </span>
                   </td>
-                  <td className="py-2 px-4 whitespace-nowrap">
+                  <td className="py-2 px-3 whitespace-nowrap">
                     <span className={`px-2 py-0.5 rounded-full font-bold text-[9px] uppercase border ${
                       occ.status === 'resolvido' ? 'bg-emerald-50 text-emerald-700 border-emerald-200' :
                       occ.status === 'acompanhar' ? 'bg-amber-50 text-amber-700 border-amber-200' :

@@ -89,6 +89,7 @@ interface LeaderFolderProps {
   name: string;
   role: string;
   shift?: string;
+  avatar?: string;
   occurrencesCount: number;
   employeesCount: number;
   onClick: () => void;
@@ -99,6 +100,7 @@ export function LeaderFolder({
   name,
   role,
   shift,
+  avatar,
   occurrencesCount,
   employeesCount,
   onClick,
@@ -184,10 +186,19 @@ export function LeaderFolder({
                 </span>
               )}
             </div>
-            {/* Coffee bean outline or logo watermark */}
-            <div className="w-9 h-9 rounded-lg bg-white/10 flex items-center justify-center border border-white/15 shadow-sm">
-              <span className="text-white font-bold text-xs">3C</span>
-            </div>
+            {/* Leader photo or fallback 3C watermark */}
+            {avatar ? (
+              <img 
+                src={avatar} 
+                alt={name} 
+                referrerPolicy="no-referrer" 
+                className="w-10 h-10 rounded-full object-cover border-2 border-white/40 shadow-md shrink-0" 
+              />
+            ) : (
+              <div className="w-9 h-9 rounded-lg bg-white/10 flex items-center justify-center border border-white/15 shadow-sm shrink-0">
+                <span className="text-white font-bold text-xs">3C</span>
+              </div>
+            )}
           </div>
 
           <div className="flex items-center gap-3 pt-2 border-t border-white/10">

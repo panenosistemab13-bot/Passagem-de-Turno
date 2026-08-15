@@ -9,9 +9,29 @@ import {
   Bell, 
   CheckCircle2, 
   Eye, 
-  Sliders 
+  Sliders,
+  Truck,
+  Building2,
+  PhoneCall,
+  Radio,
+  Wifi,
+  Search,
+  Check,
+  ChevronDown,
+  Sparkles,
+  Layers,
+  HelpCircle,
+  FileSpreadsheet
 } from 'lucide-react';
 import ThreeDIcon from './ThreeDIcon';
+import { 
+  OCCURRENCE_TITLES, 
+  INSTABILITY_SYSTEMS, 
+  COMMON_UNITS, 
+  COMMON_CARRIERS, 
+  DEFAULT_TRIP_RECORDS,
+  TripReportRecord 
+} from '../tripData';
 
 interface OccurrenceFormProps {
   leaders: Leader[];
@@ -29,15 +49,33 @@ export default function OccurrenceForm({
   onSelectTab
 }: OccurrenceFormProps) {
   
-  // Local states for fields
+  // Registration Mode: Standard Vehicle/Transport Occurrence vs Instability / Systems Occurrence
+  const [recordType, setRecordType] = useState<'padrao' | 'instabilidade'>('padrao');
+
+  // Core Form fields
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [leaderId, setLeaderId] = useState(selectedLeaderId);
   const [customShiftDate, setCustomShiftDate] = useState('');
   const [status, setStatus] = useState<OccurrenceStatus>('acompanhar');
   const [riskLevel, setRiskLevel] = useState<'Baixo' | 'Médio' | 'Alto' | 'Crítico'>('Médio');
-  const [category, setCategory] = useState<'Segurança' | 'Operação' | 'Logística' | 'Qualidade' | 'Manutenção' | 'Outros'>('Logística');
+  const [category, setCategory] = useState<'Segurança' | 'Operação' | 'Logística' | 'Qualidade' | 'Manutenção' | 'Instabilidade / Tecnologia' | 'Outros'>('Logística');
   const [rawDate, setRawDate] = useState('');
+
+  // Transport & Vehicle fields (Placa, Transportadora, Unidade)
+  const [plate, setPlate] = useState('');
+  const [carrier, setCarrier] = useState('');
+  const [unit, setUnit] = useState('');
+  
+  // Instability & Tickets fields
+  const [instabilitySystem, setInstabilitySystem] = useState<string>('Telefonia');
+  const [ticketNumber, setTicketNumber] = useState('');
+  const [affectedTechnology, setAffectedTechnology] = useState('');
+
+  // Trip Report auto-lookup & modal search helper
+  const [tripSearchOpen, setTripSearchOpen] = useState(false);
+  const [tripSearchTerm, setTripSearchTerm] = useState('');
+  const [selectedTripReport, setSelectedTripReport] = useState<TripReportRecord | null>(null);
 
   // Update leader state when global selection changes
   useEffect(() => {
@@ -64,11 +102,75 @@ export default function OccurrenceForm({
     }
   };
 
+  // Switch between Standard (Placa/Transportadora/Unidade) and Instability modes
+  const handleModeChange = (mode: 'padrao' | 'instabilidade') => {
+    setRecordType(mode);
+    if (mode === 'instabilidade') {
+      setCategory('Instabilidade / Tecnologia');
+      if (!title || OCCURRENCE_TITLES.includes(title as any)) {
+        setTitle(`Instabilidade de ${instabilitySystem}`);
+      }
+    } else {
+      setCategory('Logística');
+      if (title.startsWith('Instabilidade de')) {
+        setTitle('');
+      }
+    }
+  };
+
+  // Quick title selection helper
+  const handleSelectTitle = (selected: string) => {
+    setTitle(selected);
+    // Auto-adjust risk and category intelligently based on selected title
+    if (selected.includes('Sinistro confirmado') || selected.includes('Suspeita de sinistro')) {
+      setRiskLevel('Crítico');
+      setCategory('Segurança');
+    } else if (selected.includes('Perda de sinal') || selected.includes('Acionamento sascar')) {
+      setRiskLevel('Alto');
+      setCategory('Segurança');
+    } else if (selected.includes('Problema mecânico') || selected.includes('Parada para manutenção')) {
+      setRiskLevel('Médio');
+      setCategory('Manutenção');
+    } else if (selected.includes('Transbordo') || selected.includes('Parada prolongada')) {
+      setRiskLevel('Médio');
+      setCategory('Logística');
+    }
+  };
+
+  // Select instability preset
+  const handleSelectInstabilitySystem = (sys: string) => {
+    setInstabilitySystem(sys);
+    setTitle(`Instabilidade de ${sys}`);
+    setAffectedTechnology(sys);
+  };
+
+  // Auto-fill from Trip Report
+  const handleApplyTripReport = (item: TripReportRecord) => {
+    setPlate(item.plate);
+    setCarrier(item.carrier);
+    setUnit(item.unit);
+    setSelectedTripReport(item);
+    setTripSearchOpen(false);
+
+    // If description is empty, populate with intelligent template
+    if (!description.trim()) {
+      setDescription(`Veículo: ${item.plate} | Transportadora: ${item.carrier} | Unidade: ${item.unit}${item.driver ? ` | Motorista: ${item.driver}` : ''}${item.route ? ` | Rota: ${item.route}` : ''}\n\nDescrição da Ocorrência: `);
+    }
+  };
+
+  // Filtered trips for lookup modal/dropdown
+  const filteredTrips = DEFAULT_TRIP_RECORDS.filter(t => 
+    t.plate.toLowerCase().includes(tripSearchTerm.toLowerCase()) ||
+    t.carrier.toLowerCase().includes(tripSearchTerm.toLowerCase()) ||
+    t.unit.toLowerCase().includes(tripSearchTerm.toLowerCase()) ||
+    (t.driver && t.driver.toLowerCase().includes(tripSearchTerm.toLowerCase()))
+  );
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
     if (!title.trim() || !description.trim()) {
-      alert('Por favor, preencha todos os campos obrigatórios!');
+      alert('Por favor, preencha o Título e a Descrição da ocorrência!');
       return;
     }
 
@@ -77,13 +179,20 @@ export default function OccurrenceForm({
     onAddOccurrence({
       date: rawDate,
       shiftDate: customShiftDate,
-      leaderId: currentLeader.id,
-      leaderName: currentLeader.name,
+      leaderId: currentLeader?.id || '1',
+      leaderName: currentLeader?.name || 'Líder',
       title,
       description,
       status,
       riskLevel,
-      category
+      category,
+      recordType,
+      plate: plate.trim() ? plate.toUpperCase() : undefined,
+      carrier: carrier.trim() || undefined,
+      unit: unit.trim() || undefined,
+      instabilitySystem: recordType === 'instabilidade' ? instabilitySystem : undefined,
+      ticketNumber: ticketNumber.trim() || undefined,
+      affectedTechnology: affectedTechnology.trim() || undefined
     });
 
     // Generate notification based on status
@@ -91,18 +200,22 @@ export default function OccurrenceForm({
     let notifTitle = '';
     let notifMsg = '';
 
-    if (status === 'acompanhar') {
+    if (recordType === 'instabilidade') {
+      notifType = 'warning';
+      notifTitle = `⚡ Instabilidade Registrada: ${title}`;
+      notifMsg = `Sistema: ${instabilitySystem}${ticketNumber ? ` | Chamado: ${ticketNumber}` : ''}. Registrado por ${currentLeader?.name}.`;
+    } else if (status === 'acompanhar') {
       notifType = 'warning';
       notifTitle = `Nova Ocorrência sob Acompanhamento: ${title}`;
-      notifMsg = `Registrada por ${currentLeader.name}. Risco: ${riskLevel}. Requer monitoramento ativo.`;
+      notifMsg = `${plate ? `[${plate.toUpperCase()}] ` : ''}Registrada por ${currentLeader?.name}. Risco: ${riskLevel}. Requer monitoramento ativo.`;
     } else if (status === 'resolvido') {
       notifType = 'success';
-      notifTitle = `Incidente Resolvido: ${title}`;
-      notifMsg = `Lançado diretamente como concluído pelo líder ${currentLeader.name}.`;
+      notifTitle = `Incidente Concluído: ${title}`;
+      notifMsg = `Lançado diretamente como concluído pelo líder ${currentLeader?.name}.`;
     } else {
       notifType = 'info';
       notifTitle = `Para Conhecimento: ${title}`;
-      notifMsg = `Aviso operacional registrado por ${currentLeader.name}.`;
+      notifMsg = `Aviso operacional registrado por ${currentLeader?.name}.`;
     }
 
     onAddNotification(notifTitle, notifMsg, notifType);
@@ -110,6 +223,12 @@ export default function OccurrenceForm({
     // Reset fields
     setTitle('');
     setDescription('');
+    setPlate('');
+    setCarrier('');
+    setUnit('');
+    setTicketNumber('');
+    setAffectedTechnology('');
+    setSelectedTripReport(null);
     setStatus('acompanhar');
     setRiskLevel('Médio');
     setCategory('Logística');
@@ -119,36 +238,326 @@ export default function OccurrenceForm({
   };
 
   return (
-    <div className="max-w-4xl mx-auto">
+    <div className="max-w-4xl mx-auto space-y-4">
       
-      {/* Introduction Card */}
-      <div className="bg-gradient-to-r from-[#2C1810] to-[#3D261C] rounded-lg p-4 text-white shadow-sm mb-4 flex items-center justify-between">
+      {/* Header Banner */}
+      <div className="bg-gradient-to-r from-[#2C1810] to-[#3D261C] rounded-xl p-4 text-white shadow-sm flex flex-wrap items-center justify-between gap-3">
         <div className="space-y-0.5">
-          <h2 className="text-sm font-black uppercase tracking-wider text-[#C8102E]">Registro de Ocorrências e Riscos</h2>
-          <p className="text-xs text-slate-300">Lançamento oficial no sistema de passagens de turno do Café Três Corações.</p>
+          <div className="flex items-center gap-2">
+            <span className="text-xs font-black uppercase tracking-wider text-[#C8102E] bg-[#FAF9F7] px-2 py-0.5 rounded">
+              Passagem de Turno
+            </span>
+            <span className="text-xs text-[#D4C8BE] font-bold">Café Três Corações</span>
+          </div>
+          <h2 className="text-base font-extrabold text-white">Novo Registro de Ocorrência & Passagem</h2>
+          <p className="text-xs text-[#E0D8D0]">Lançamento integrado com frotas, placas, transportadoras, unidades e instabilidades de sistemas.</p>
         </div>
         <ThreeDIcon icon={FileText} color="coffee" size="md" />
       </div>
 
-      <div className="bg-white rounded-lg border border-[#E0D8D0] p-5 shadow-sm">
-        <form onSubmit={handleSubmit} className="space-y-4">
+      {/* Record Type Mode Switcher (Veículos / Frotas vs Instabilidade de Sistemas) */}
+      <div className="bg-white rounded-xl border border-[#E0D8D0] p-1.5 shadow-sm flex gap-2">
+        <button
+          type="button"
+          onClick={() => handleModeChange('padrao')}
+          className={`flex-1 py-2.5 px-3 rounded-lg text-xs font-black uppercase transition-all flex items-center justify-center gap-2 cursor-pointer ${
+            recordType === 'padrao'
+              ? 'bg-[#2C1810] text-white shadow-sm'
+              : 'text-[#8C7B70] hover:text-[#2C1810] hover:bg-[#F4F1EE]'
+          }`}
+        >
+          <Truck className="w-4 h-4 text-[#C8102E]" />
+          <span>Ocorrência Operacional / Veículo</span>
+          <span className="text-[9px] font-bold opacity-80 hidden sm:inline">(Placa, Transportadora, Unidade)</span>
+        </button>
+
+        <button
+          type="button"
+          onClick={() => handleModeChange('instabilidade')}
+          className={`flex-1 py-2.5 px-3 rounded-lg text-xs font-black uppercase transition-all flex items-center justify-center gap-2 cursor-pointer ${
+            recordType === 'instabilidade'
+              ? 'bg-[#C8102E] text-white shadow-sm'
+              : 'text-[#8C7B70] hover:text-[#2C1810] hover:bg-[#F4F1EE]'
+          }`}
+        >
+          <Wifi className="w-4 h-4 text-white" />
+          <span>Instabilidade & Chamados</span>
+          <span className="text-[9px] font-bold opacity-80 hidden sm:inline">(Telefonia, Sascar, Trafegus)</span>
+        </button>
+      </div>
+
+      {/* Main Form Box */}
+      <div className="bg-white rounded-xl border border-[#E0D8D0] p-5 shadow-sm">
+        <form onSubmit={handleSubmit} className="space-y-5">
           
-          {/* Main Title Section */}
+          {/* SECTION A: PRESET TITLES SELECTOR */}
           <div>
-            <label className="block text-xs font-black uppercase text-[#2C1810] mb-1">
-              Título da Ocorrência <span className="text-[#C8102E]">*</span>
-            </label>
+            <div className="flex items-center justify-between mb-1.5">
+              <label className="block text-xs font-black uppercase text-[#2C1810]">
+                {recordType === 'padrao' ? 'Selecione ou Digite o Título da Ocorrência' : 'Selecione a Instabilidade do Sistema'} <span className="text-[#C8102E]">*</span>
+              </label>
+              <span className="text-[10px] text-[#8C7B70] font-bold flex items-center gap-1">
+                <Sparkles className="w-3 h-3 text-[#C8102E]" /> Clique nos atalhos para preencher
+              </span>
+            </div>
+
+            {/* Quick preset chips based on mode */}
+            {recordType === 'padrao' ? (
+              <div className="mb-2 flex flex-wrap gap-1.5 max-h-32 overflow-y-auto p-2 bg-[#FAF9F7] rounded-lg border border-[#E0D8D0]">
+                {OCCURRENCE_TITLES.map((t, idx) => (
+                  <button
+                    key={idx}
+                    type="button"
+                    onClick={() => handleSelectTitle(t)}
+                    className={`text-[10.5px] px-2.5 py-1 rounded-md font-bold transition-all border text-left cursor-pointer flex items-center gap-1 ${
+                      title === t
+                        ? 'bg-[#C8102E] text-white border-[#C8102E] shadow-sm'
+                        : 'bg-white text-[#5D4037] border-[#E0D8D0] hover:border-[#C8102E] hover:text-[#2C1810]'
+                    }`}
+                  >
+                    {t}
+                  </button>
+                ))}
+              </div>
+            ) : (
+              <div className="mb-2 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-2 p-2 bg-amber-50/60 rounded-lg border border-amber-200">
+                {INSTABILITY_SYSTEMS.map((sys, idx) => (
+                  <button
+                    key={idx}
+                    type="button"
+                    onClick={() => handleSelectInstabilitySystem(sys)}
+                    className={`py-2 px-2.5 rounded-lg text-xs font-extrabold border transition-all text-center cursor-pointer flex flex-col items-center gap-1 ${
+                      instabilitySystem === sys
+                        ? 'bg-[#2C1810] text-white border-[#2C1810] shadow-sm'
+                        : 'bg-white text-[#2C1810] border-amber-200 hover:border-[#C8102E]'
+                    }`}
+                  >
+                    {sys === 'Telefonia' && <PhoneCall className="w-4 h-4 text-[#C8102E]" />}
+                    {sys === 'Sascar' && <Radio className="w-4 h-4 text-emerald-600" />}
+                    {sys === 'Trafegus' && <Layers className="w-4 h-4 text-blue-600" />}
+                    {sys.includes('Central') && <Building2 className="w-4 h-4 text-purple-600" />}
+                    {sys.includes('Espelhamento') && <Wifi className="w-4 h-4 text-amber-600" />}
+                    <span>{sys}</span>
+                  </button>
+                ))}
+              </div>
+            )}
+
+            {/* Title Text Input */}
             <input
               type="text"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
-              placeholder="Ex: Escolta de rodotrem atrasada ou Inconsistência de lacre"
-              className="w-full bg-[#F4F1EE] border border-[#E0D8D0] rounded-lg px-3 py-2 text-xs text-[#2C1810] focus:outline-none focus:ring-1 focus:ring-[#C8102E] focus:border-[#C8102E] transition-all font-semibold"
+              placeholder={recordType === 'padrao' ? "Ex: Problema mecânico ou elétrico / Perda de sinal / Sinistro" : "Ex: Instabilidade de Telefonia / Queda Sascar"}
+              className="w-full bg-[#F4F1EE] border border-[#E0D8D0] rounded-lg px-3 py-2 text-xs text-[#2C1810] focus:outline-none focus:ring-1 focus:ring-[#C8102E] focus:border-[#C8102E] transition-all font-bold"
               required
             />
           </div>
 
-          {/* Core Row 1: Leader, Date and Plantao */}
+          {/* SECTION B: PLACA, TRANSPORTADORA, UNIDADE + RELATÓRIO DE VIAGENS (When Mode is Padrão) */}
+          {recordType === 'padrao' && (
+            <div className="bg-[#FAF9F7] rounded-xl border border-[#E0D8D0] p-3.5 space-y-3">
+              
+              {/* Trip Report Pull Helper Bar */}
+              <div className="flex flex-wrap items-center justify-between gap-2 pb-2 border-b border-[#E0D8D0]">
+                <div className="flex items-center gap-2">
+                  <Truck className="w-4 h-4 text-[#C8102E]" />
+                  <span className="text-xs font-black uppercase text-[#2C1810]">
+                    Dados do Veículo e Transporte
+                  </span>
+                  <span className="text-[10px] font-bold text-[#8C7B70] bg-[#E0D8D0]/60 px-2 py-0.5 rounded">
+                    Placa, Transportadora e Unidade
+                  </span>
+                </div>
+
+                {/* Open Relatório de Viagens Modal/Button */}
+                <button
+                  type="button"
+                  onClick={() => setTripSearchOpen(!tripSearchOpen)}
+                  className="px-3 py-1 bg-[#2C1810] text-white hover:bg-[#3D261C] rounded-lg text-[11px] font-bold flex items-center gap-1.5 transition-colors cursor-pointer shadow-sm"
+                >
+                  <FileSpreadsheet className="w-3.5 h-3.5 text-[#C8102E]" />
+                  <span>{tripSearchOpen ? 'Fechar Relatório' : 'Puxar do Relatório de Viagens'}</span>
+                </button>
+              </div>
+
+              {/* Collapsible/Interactive Relatório de Viagens Quick Selector */}
+              {tripSearchOpen && (
+                <div className="bg-white rounded-lg border border-[#C8102E]/30 p-3 space-y-2.5 animate-fadeIn">
+                  <div className="flex items-center justify-between gap-2">
+                    <div className="flex items-center gap-1.5 text-xs font-extrabold text-[#2C1810]">
+                      <Search className="w-3.5 h-3.5 text-[#C8102E]" />
+                      <span>Selecione a viagem para autopreencher Placa, Transportadora e Unidade:</span>
+                    </div>
+                    <span className="text-[10px] text-[#8C7B70] font-bold">{filteredTrips.length} viagens disponíveis</span>
+                  </div>
+
+                  <div className="relative">
+                    <input
+                      type="text"
+                      value={tripSearchTerm}
+                      onChange={(e) => setTripSearchTerm(e.target.value)}
+                      placeholder="Pesquisar por Placa, Transportadora, Unidade ou Motorista..."
+                      className="w-full bg-[#F4F1EE] border border-[#E0D8D0] rounded-lg pl-8 pr-3 py-1.5 text-xs text-[#2C1810] focus:outline-none focus:ring-1 focus:ring-[#C8102E] font-medium"
+                    />
+                    <Search className="w-3.5 h-3.5 text-[#8C7B70] absolute left-2.5 top-2" />
+                  </div>
+
+                  <div className="max-h-48 overflow-y-auto divide-y divide-[#F4F1EE] border border-[#E0D8D0] rounded-lg">
+                    {filteredTrips.map((item) => (
+                      <div
+                        key={item.id}
+                        onClick={() => handleApplyTripReport(item)}
+                        className="p-2 hover:bg-red-50/50 cursor-pointer flex items-center justify-between text-xs transition-colors"
+                      >
+                        <div className="flex items-center gap-3">
+                          <span className="font-mono font-black text-xs text-[#C8102E] bg-[#F4F1EE] px-2 py-0.5 rounded border border-[#E0D8D0]">
+                            {item.plate}
+                          </span>
+                          <div>
+                            <div className="font-bold text-[#2C1810]">{item.carrier}</div>
+                            <div className="text-[10px] text-[#8C7B70]">{item.unit} {item.driver ? `• Mot: ${item.driver}` : ''} {item.route ? `(${item.route})` : ''}</div>
+                          </div>
+                        </div>
+                        <button
+                          type="button"
+                          className="text-[10px] font-bold text-white bg-[#C8102E] px-2.5 py-1 rounded hover:bg-[#a80c24]"
+                        >
+                          Usar dados
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Grid with Placa, Transportadora, Unidade fields */}
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+                
+                {/* 1. Placa */}
+                <div>
+                  <label className="block text-[11px] font-black uppercase text-[#2C1810] mb-1">
+                    Placa do Veículo / Rodotrem
+                  </label>
+                  <div className="relative">
+                    <input
+                      type="text"
+                      value={plate}
+                      onChange={(e) => setPlate(e.target.value.toUpperCase())}
+                      placeholder="Ex: ABC-1D23"
+                      className="w-full uppercase font-mono font-bold bg-white border border-[#E0D8D0] rounded-lg pl-8 pr-3 py-2 text-xs text-[#2C1810] focus:outline-none focus:ring-1 focus:ring-[#C8102E] focus:border-[#C8102E]"
+                    />
+                    <Truck className="absolute left-2.5 top-2.5 w-3.5 h-3.5 text-[#8C7B70]" />
+                  </div>
+                </div>
+
+                {/* 2. Transportadora */}
+                <div>
+                  <label className="block text-[11px] font-black uppercase text-[#2C1810] mb-1">
+                    Transportadora
+                  </label>
+                  <div className="relative">
+                    <input
+                      type="text"
+                      list="carrier-suggestions"
+                      value={carrier}
+                      onChange={(e) => setCarrier(e.target.value)}
+                      placeholder="Ex: JSL Logística, Patrus..."
+                      className="w-full bg-white border border-[#E0D8D0] rounded-lg pl-8 pr-3 py-2 text-xs text-[#2C1810] focus:outline-none focus:ring-1 focus:ring-[#C8102E] focus:border-[#C8102E] font-semibold"
+                    />
+                    <Building2 className="absolute left-2.5 top-2.5 w-3.5 h-3.5 text-[#8C7B70]" />
+                    <datalist id="carrier-suggestions">
+                      {COMMON_CARRIERS.map((c, i) => (
+                        <option key={i} value={c} />
+                      ))}
+                    </datalist>
+                  </div>
+                </div>
+
+                {/* 3. Unidade */}
+                <div>
+                  <label className="block text-[11px] font-black uppercase text-[#2C1810] mb-1">
+                    Unidade Grupo 3 Corações
+                  </label>
+                  <div className="relative">
+                    <input
+                      type="text"
+                      list="unit-suggestions"
+                      value={unit}
+                      onChange={(e) => setUnit(e.target.value)}
+                      placeholder="Ex: CD Varginha, Fábrica Natal..."
+                      className="w-full bg-white border border-[#E0D8D0] rounded-lg pl-8 pr-3 py-2 text-xs text-[#2C1810] focus:outline-none focus:ring-1 focus:ring-[#C8102E] focus:border-[#C8102E] font-semibold"
+                    />
+                    <Tag className="absolute left-2.5 top-2.5 w-3.5 h-3.5 text-[#8C7B70]" />
+                    <datalist id="unit-suggestions">
+                      {COMMON_UNITS.map((u, i) => (
+                        <option key={i} value={u} />
+                      ))}
+                    </datalist>
+                  </div>
+                </div>
+
+              </div>
+
+            </div>
+          )}
+
+          {/* SECTION C: INSTABILITY & TICKETS (When Mode is Instabilidade) */}
+          {recordType === 'instabilidade' && (
+            <div className="bg-amber-50/60 rounded-xl border border-amber-200 p-3.5 space-y-3">
+              <div className="flex items-center gap-2 pb-2 border-b border-amber-200">
+                <Wifi className="w-4 h-4 text-[#C8102E]" />
+                <span className="text-xs font-black uppercase text-[#2C1810]">
+                  Acompanhamento de Tecnologia & Estrutura da Central
+                </span>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+                <div>
+                  <label className="block text-[11px] font-black uppercase text-[#2C1810] mb-1">
+                    Sistema Afetado <span className="text-[#C8102E]">*</span>
+                  </label>
+                  <select
+                    value={instabilitySystem}
+                    onChange={(e) => handleSelectInstabilitySystem(e.target.value)}
+                    className="w-full bg-white border border-amber-200 rounded-lg px-3 py-2 text-xs text-[#2C1810] font-bold focus:outline-none focus:ring-1 focus:ring-[#C8102E]"
+                  >
+                    {INSTABILITY_SYSTEMS.map((s, i) => (
+                      <option key={i} value={s}>{s}</option>
+                    ))}
+                  </select>
+                </div>
+
+                <div>
+                  <label className="block text-[11px] font-black uppercase text-[#2C1810] mb-1">
+                    Nº do Chamado / Ticket de Suporte
+                  </label>
+                  <input
+                    type="text"
+                    value={ticketNumber}
+                    onChange={(e) => setTicketNumber(e.target.value)}
+                    placeholder="Ex: INC-98421 / TKT-4412"
+                    className="w-full bg-white border border-amber-200 rounded-lg px-3 py-2 text-xs text-[#2C1810] font-bold focus:outline-none focus:ring-1 focus:ring-[#C8102E]"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-[11px] font-black uppercase text-[#2C1810] mb-1">
+                    Operadora / Tecnologia
+                  </label>
+                  <input
+                    type="text"
+                    value={affectedTechnology}
+                    onChange={(e) => setAffectedTechnology(e.target.value)}
+                    placeholder="Ex: Vivo / Sascar / Links Dedicados"
+                    className="w-full bg-white border border-amber-200 rounded-lg px-3 py-2 text-xs text-[#2C1810] font-bold focus:outline-none focus:ring-1 focus:ring-[#C8102E]"
+                  />
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* SECTION D: LEADER, DATE AND SHIFT */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             
             <div>
@@ -195,7 +604,7 @@ export default function OccurrenceForm({
                 type="text"
                 value={customShiftDate}
                 onChange={(e) => setCustomShiftDate(e.target.value)}
-                placeholder="Ex: Plantão 14/08/2026"
+                placeholder="Ex: Plantão 15/08/2026"
                 className="w-full bg-[#F4F1EE] border border-[#E0D8D0] rounded-lg px-3 py-2 text-xs text-[#8C7B70] focus:outline-none cursor-not-allowed font-bold"
                 readOnly
               />
@@ -203,10 +612,9 @@ export default function OccurrenceForm({
 
           </div>
 
-          {/* Core Row 2: Status Menu, Risk, Category */}
+          {/* SECTION E: STATUS, RISK, CATEGORY */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             
-            {/* User-requested custom Status Menu */}
             <div>
               <label className="block text-xs font-black uppercase text-[#2C1810] mb-1">
                 Ação / Status do Registro <span className="text-[#C8102E]">*</span>
@@ -223,9 +631,6 @@ export default function OccurrenceForm({
                 </select>
                 <Sliders className="absolute left-2.5 top-2.5 w-3.5 h-3.5 text-[#8C7B70]" />
               </div>
-              <p className="text-[9px] text-[#8C7B70] mt-0.5">
-                Opção dispara um alerta automático instantâneo para a equipe.
-              </p>
             </div>
 
             <div>
@@ -262,6 +667,7 @@ export default function OccurrenceForm({
                   <option value="Operação">Operação Geral</option>
                   <option value="Qualidade">Qualidade de Carga</option>
                   <option value="Manutenção">Manutenção de Frota</option>
+                  <option value="Instabilidade / Tecnologia">Instabilidade / Tecnologia</option>
                   <option value="Outros">Outros Incidentes</option>
                 </select>
                 <Tag className="absolute left-2.5 top-2.5 w-3.5 h-3.5 text-[#8C7B70]" />
@@ -270,33 +676,33 @@ export default function OccurrenceForm({
 
           </div>
 
-          {/* Description manual */}
+          {/* SECTION F: DETAILED DESCRIPTION */}
           <div>
             <label className="block text-xs font-black uppercase text-[#2C1810] mb-1">
-              Descrição Detalhada (Preenchimento Manual) <span className="text-[#C8102E]">*</span>
+              Descrição Detalhada da Ocorrência <span className="text-[#C8102E]">*</span>
             </label>
             <textarea
               value={description}
               onChange={(e) => setDescription(e.target.value)}
-              placeholder="Digite com detalhes o ocorrido, as placas dos veículos rodotrens envolvidos, o valor de Nota Fiscal, os números dos baús lacrados e as rotas afetadas..."
+              placeholder="Digite com detalhes o ocorrido, motorista envolvido, localidade/quilômetro da rodovia, providências adotadas pelo plantão, chamado aberto e próximos passos na passagem de turno..."
               rows={4}
               className="w-full bg-[#F4F1EE] border border-[#E0D8D0] rounded-lg p-3 text-xs text-[#2C1810] focus:outline-none focus:ring-1 focus:ring-[#C8102E] focus:border-[#C8102E] transition-all leading-relaxed"
               required
             />
           </div>
 
-          {/* Actions bottom */}
+          {/* SECTION G: FORM ACTIONS */}
           <div className="pt-3 border-t border-[#E0D8D0] flex items-center justify-end gap-3">
             <button
               type="button"
               onClick={() => onSelectTab('dashboard')}
-              className="px-4 py-1.5 rounded-lg text-xs font-bold uppercase text-[#8C7B70] hover:bg-[#F4F1EE] transition-colors"
+              className="px-4 py-2 rounded-lg text-xs font-bold uppercase text-[#8C7B70] hover:bg-[#F4F1EE] transition-colors cursor-pointer"
             >
               Cancelar
             </button>
             <button
               type="submit"
-              className="px-5 py-2 rounded-lg text-xs font-black uppercase text-white bg-[#C8102E] hover:bg-[#a80c24] transition-all shadow-sm flex items-center gap-1.5 cursor-pointer"
+              className="px-6 py-2.5 rounded-lg text-xs font-black uppercase text-white bg-[#C8102E] hover:bg-[#a80c24] transition-all shadow-md flex items-center gap-2 cursor-pointer active:scale-95"
             >
               <Bell className="w-3.5 h-3.5" /> Registrar e Notificar Equipe
             </button>
