@@ -1,0 +1,6 @@
+{
+  "name": "Passagem de Turno e Gerenciamento de Riscos",
+  "description": "Sistema de passagem de turno e gerenciamento de riscos para o Café Três Corações, incluindo registro de ocorrências, painel de status, histórico, chat, controle de líderes e funcionários.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
