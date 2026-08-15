@@ -127,6 +127,37 @@ export default function App() {
       setIsFirebaseConnected(Boolean(snap.val()));
     });
 
+    // Realtime Global State listener (dados-globais)
+    const unsubGlobal = onValue(dbRefs.globalData, (snap) => {
+      if (snap.exists()) {
+        const data = snap.val();
+        if (data) {
+          isRemoteUpdate.current = true;
+          if (data.occurrences) {
+            setOccurrences(snapshotToArray<Occurrence>(data.occurrences));
+          }
+          if (data.leaders && Array.isArray(data.leaders) && data.leaders.length > 0) {
+            setLeaders(data.leaders);
+          }
+          if (data.employees) {
+            setEmployees(snapshotToArray<Employee>(data.employees));
+          }
+          if (data.employeeLogs) {
+            setEmployeeLogs(snapshotToArray<EmployeeLog>(data.employeeLogs));
+          }
+          if (data.reminders) {
+            setReminders(snapshotToArray<Reminder>(data.reminders));
+          }
+          if (data.chatMessages) {
+            setChatMessages(snapshotToArray<ChatMessage>(data.chatMessages));
+          }
+          if (data.notifications) {
+            setNotifications(snapshotToArray<Notification>(data.notifications));
+          }
+        }
+      }
+    });
+
     // Realtime Leaders listener
     const unsubLeaders = onValue(dbRefs.leaders, (snap) => {
       if (snap.exists()) {
@@ -200,6 +231,7 @@ export default function App() {
 
     return () => {
       unsubConnected();
+      unsubGlobal();
       unsubLeaders();
       unsubOccurrences();
       unsubEmployees();
