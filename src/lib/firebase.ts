@@ -7,6 +7,7 @@ import {
   set, 
   get, 
   update, 
+  push,
   remove,
   DatabaseReference
 } from "firebase/database";
@@ -62,7 +63,6 @@ export const ensureAnonymousAuth = async (): Promise<User | null> => {
       return currentAuth.currentUser;
     }
     const credential = await signInAnonymously(currentAuth);
-    console.log("Firebase Anonymous Auth successful, UID:", credential.user.uid);
     return credential.user;
   } catch (error: any) {
     if (error?.code === 'auth/configuration-not-found' || error?.code === 'auth/operation-not-allowed') {
@@ -83,12 +83,20 @@ export const snapshotToArray = <T>(val: any): T[] => {
     return val.filter(Boolean);
   }
   if (typeof val === 'object') {
-    return Object.values(val);
+    return Object.entries(val).map(([key, item]: [string, any]) => {
+      if (typeof item === 'object' && item !== null) {
+        return {
+          id: item.id || key,
+          ...item
+        };
+      }
+      return item;
+    });
   }
   return [];
 };
 
-// Database references matching the existing Realtime Database schema
+// Database references matching the exact Realtime Database paths
 export const dbRefs = {
   globalData: ref(rtdb, 'dados-globais'),
   occurrences: ref(rtdb, 'dados-globais/ocorrencias'),
@@ -102,7 +110,87 @@ export const dbRefs = {
   connected: ref(rtdb, '.info/connected')
 };
 
-// Sync functions to write directly to Firebase Realtime Database
+// Push individual occurrence atomically with unique Firebase ID
+export const pushOccurrenceToFirebase = async (
+  occurrenceData: Omit<Occurrence, 'id'> | Occurrence
+): Promise<Occurrence | null> => {
+  try {
+    await ensureAnonymousAuth();
+    const newRef = push(ref(rtdb, 'dados-globais/ocorrencias'));
+    const occWithId: Occurrence = {
+      ...occurrenceData,
+      id: newRef.key || (occurrenceData as any).id || `occ-${Date.now()}`,
+      createdAt: (occurrenceData as Occurrence).createdAt || new Date().toISOString()
+    };
+    await set(newRef, occWithId);
+    return occWithId;
+  } catch (error) {
+    console.error("Firebase push error (occurrences):", error);
+    return null;
+  }
+};
+
+// Update individual occurrence at its specific path
+export const updateOccurrenceInFirebase = async (occurrence: Occurrence) => {
+  try {
+    await ensureAnonymousAuth();
+    if (occurrence.id) {
+      await set(ref(rtdb, `dados-globais/ocorrencias/${occurrence.id}`), occurrence);
+    }
+  } catch (error) {
+    console.error("Firebase update error (occurrence):", error);
+  }
+};
+
+// Remove individual occurrence from Firebase
+export const deleteOccurrenceFromFirebase = async (id: string) => {
+  try {
+    await ensureAnonymousAuth();
+    await remove(ref(rtdb, `dados-globais/ocorrencias/${id}`));
+  } catch (error) {
+    console.error("Firebase delete error (occurrence):", error);
+  }
+};
+
+// Push chat message atomically with unique Firebase ID
+export const pushChatMessageToFirebase = async (
+  msg: Omit<ChatMessage, 'id'>
+): Promise<ChatMessage | null> => {
+  try {
+    await ensureAnonymousAuth();
+    const newRef = push(ref(rtdb, 'chatMessages'));
+    const messageWithId: ChatMessage = {
+      ...msg,
+      id: newRef.key || `msg-${Date.now()}`
+    };
+    await set(newRef, messageWithId);
+    return messageWithId;
+  } catch (error) {
+    console.error("Firebase push error (chatMessages):", error);
+    return null;
+  }
+};
+
+// Push notification atomically with unique Firebase ID
+export const pushNotificationToFirebase = async (
+  notif: Omit<Notification, 'id'>
+): Promise<Notification | null> => {
+  try {
+    await ensureAnonymousAuth();
+    const newRef = push(ref(rtdb, 'notifications'));
+    const notifWithId: Notification = {
+      ...notif,
+      id: newRef.key || `notif-${Date.now()}`
+    };
+    await set(newRef, notifWithId);
+    return notifWithId;
+  } catch (error) {
+    console.error("Firebase push error (notifications):", error);
+    return null;
+  }
+};
+
+// Sync whole collections when bulk changes happen
 export const syncGlobalDataToFirebase = async (data: Record<string, any>) => {
   try {
     await ensureAnonymousAuth();
@@ -128,15 +216,13 @@ export const syncLeadersToFirebase = async (leaders: Leader[]) => {
 export const syncOccurrencesToFirebase = async (occurrences: Occurrence[]) => {
   try {
     await ensureAnonymousAuth();
-    // Save to primary path 'dados-globais/ocorrencias'
-    await set(ref(rtdb, 'dados-globais/ocorrencias'), occurrences);
-    // Maintain mirror at 'occurrences' and 'dados-globais' for backwards compatibility
-    await set(ref(rtdb, 'occurrences'), occurrences);
-    await update(ref(rtdb, 'dados-globais'), { 
-      ocorrencias: occurrences,
-      occurrences, 
-      lastUpdated: new Date().toISOString() 
+    // Convert array to dictionary keyed by occurrence id so child paths remain consistent
+    const occurrencesMap: Record<string, Occurrence> = {};
+    occurrences.forEach((occ, idx) => {
+      const key = occ.id || `occ-${idx}-${Date.now()}`;
+      occurrencesMap[key] = { ...occ, id: key };
     });
+    await set(ref(rtdb, 'dados-globais/ocorrencias'), occurrencesMap);
   } catch (error) {
     console.error("Firebase sync error (occurrences):", error);
   }
@@ -204,3 +290,4 @@ export const initializeFirebaseDataIfEmpty = async () => {
     console.warn("Firebase initialization check warning:", error);
   }
 };
+

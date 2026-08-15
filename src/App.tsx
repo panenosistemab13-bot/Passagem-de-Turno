@@ -33,6 +33,11 @@ import {
   rtdb,
   dbRefs,
   snapshotToArray,
+  pushOccurrenceToFirebase,
+  updateOccurrenceInFirebase,
+  deleteOccurrenceFromFirebase,
+  pushChatMessageToFirebase,
+  pushNotificationToFirebase,
   syncLeadersToFirebase,
   syncOccurrencesToFirebase,
   syncEmployeesToFirebase,
@@ -188,6 +193,12 @@ export default function App() {
       if (snap.exists()) {
         const remoteOccurrences = snapshotToArray<Occurrence>(snap.val());
         isRemoteUpdate.current = true;
+        // Sort newest first
+        remoteOccurrences.sort((a, b) => {
+          const timeA = a.createdAt ? new Date(a.createdAt).getTime() : 0;
+          const timeB = b.createdAt ? new Date(b.createdAt).getTime() : 0;
+          return timeB - timeA;
+        });
         setOccurrences(remoteOccurrences);
       }
     });
@@ -360,24 +371,25 @@ export default function App() {
     );
   };
 
-  const handleAddOccurrence = (newOcc: Omit<Occurrence, 'id' | 'createdAt'>) => {
-    const completedOcc: Occurrence = {
+  const handleAddOccurrence = async (newOcc: Omit<Occurrence, 'id' | 'createdAt'>) => {
+    const savedOcc = await pushOccurrenceToFirebase({
       ...newOcc,
-      id: `occ-${Date.now()}`,
       createdAt: new Date().toISOString()
-    };
-    const updated = [completedOcc, ...occurrences];
-    setOccurrences(updated);
-    syncOccurrencesToFirebase(updated);
+    });
+
+    if (savedOcc) {
+      setOccurrences(prev => [savedOcc, ...prev.filter(o => o.id !== savedOcc.id)]);
+    }
   };
 
-  const handleUpdateOccurrenceStatus = (id: string, newStatus: OccurrenceStatus) => {
+  const handleUpdateOccurrenceStatus = async (id: string, newStatus: OccurrenceStatus) => {
     const target = occurrences.find(o => o.id === id);
     if (!target) return;
 
-    const updated = occurrences.map(o => o.id === id ? { ...o, status: newStatus } : o);
+    const updatedOcc = { ...target, status: newStatus };
+    const updated = occurrences.map(o => o.id === id ? updatedOcc : o);
     setOccurrences(updated);
-    syncOccurrencesToFirebase(updated);
+    await updateOccurrenceInFirebase(updatedOcc);
     
     // Trigger notification to other users as requested
     const leaderText = leaders.find(l => l.id === selectedLeaderId)?.name || 'Líder';
@@ -402,10 +414,10 @@ export default function App() {
     );
   };
 
-  const handleDeleteOccurrence = (id: string) => {
+  const handleDeleteOccurrence = async (id: string) => {
     const updated = occurrences.filter(o => o.id !== id);
     setOccurrences(updated);
-    syncOccurrencesToFirebase(updated);
+    await deleteOccurrenceFromFirebase(id);
 
     handleAddNotification(
       'Registro Excluído',
@@ -414,10 +426,10 @@ export default function App() {
     );
   };
 
-  const handleEditOccurrence = (updatedOcc: Occurrence) => {
+  const handleEditOccurrence = async (updatedOcc: Occurrence) => {
     const updated = occurrences.map(o => o.id === updatedOcc.id ? updatedOcc : o);
     setOccurrences(updated);
-    syncOccurrencesToFirebase(updated);
+    await updateOccurrenceInFirebase(updatedOcc);
 
     handleAddNotification(
       'Registro Editado',
@@ -537,31 +549,31 @@ export default function App() {
     syncRemindersToFirebase(updated);
   };
 
-  const handleSendMessage = (messageText: string) => {
+  const handleSendMessage = async (messageText: string) => {
     const activeLeader = leaders.find(l => l.id === selectedLeaderId) || leaders[0];
-    const newMsg: ChatMessage = {
-      id: `msg-${Date.now()}`,
+    const newMsg = {
       senderName: activeLeader.name,
       senderRole: activeLeader.role,
       message: messageText,
       timestamp: new Date().toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' })
     };
-    const updated = [...chatMessages, newMsg];
-    setChatMessages(updated);
-    syncChatMessagesToFirebase(updated);
+    const savedMsg = await pushChatMessageToFirebase(newMsg);
+    if (savedMsg) {
+      setChatMessages(prev => [...prev.filter(m => m.id !== savedMsg.id), savedMsg]);
+    }
   };
 
-  const handleSimulateReply = (senderName: string, senderRole: string, messageText: string) => {
-    const newMsg: ChatMessage = {
-      id: `msg-${Date.now()}`,
+  const handleSimulateReply = async (senderName: string, senderRole: string, messageText: string) => {
+    const newMsg = {
       senderName,
       senderRole,
       message: messageText,
       timestamp: new Date().toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' })
     };
-    const updated = [...chatMessages, newMsg];
-    setChatMessages(updated);
-    syncChatMessagesToFirebase(updated);
+    const savedMsg = await pushChatMessageToFirebase(newMsg);
+    if (savedMsg) {
+      setChatMessages(prev => [...prev.filter(m => m.id !== savedMsg.id), savedMsg]);
+    }
   };
 
   const handleClearChat = () => {
@@ -569,18 +581,18 @@ export default function App() {
     syncChatMessagesToFirebase([]);
   };
 
-  const handleAddNotification = (title: string, message: string, type: 'info' | 'warning' | 'success') => {
-    const newNotif: Notification = {
-      id: `notif-${Date.now()}`,
+  const handleAddNotification = async (title: string, message: string, type: 'info' | 'warning' | 'success') => {
+    const newNotif = {
       title,
       message,
       type,
       createdAt: new Date().toISOString(),
       read: false
     };
-    const updated = [newNotif, ...notifications];
-    setNotifications(updated);
-    syncNotificationsToFirebase(updated);
+    const savedNotif = await pushNotificationToFirebase(newNotif);
+    if (savedNotif) {
+      setNotifications(prev => [savedNotif, ...prev.filter(n => n.id !== savedNotif.id)]);
+    }
   };
 
   const handleMarkNotificationsAsRead = () => {
