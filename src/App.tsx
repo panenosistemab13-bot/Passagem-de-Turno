@@ -14,10 +14,11 @@ import {
   Shield,
   Bell,
   ArrowRight,
-  Database
+  Database,
+  Truck
 } from 'lucide-react';
 
-import { Leader, Occurrence, Employee, EmployeeLog, Reminder, ChatMessage, Notification, OccurrenceStatus } from './types';
+import { Leader, Occurrence, Employee, EmployeeLog, Reminder, ChatMessage, Notification, OccurrenceStatus, VehicleRecord } from './types';
 import { 
   INITIAL_LEADERS, 
   INITIAL_OCCURRENCES, 
@@ -36,6 +37,9 @@ import {
   pushOccurrenceToFirebase,
   updateOccurrenceInFirebase,
   deleteOccurrenceFromFirebase,
+  pushVehicleRecordToFirebase,
+  updateVehicleRecordInFirebase,
+  deleteVehicleRecordFromFirebase,
   pushChatMessageToFirebase,
   pushNotificationToFirebase,
   syncLeadersToFirebase,
@@ -59,6 +63,7 @@ import LeaderFolders from './components/LeaderFolders';
 import EmployeeList from './components/EmployeeList';
 import CalendarComponent from './components/CalendarComponent';
 import ChatComponent from './components/ChatComponent';
+import VehicleManager from './components/VehicleManager';
 
 export default function App() {
   
@@ -101,6 +106,11 @@ export default function App() {
   const [chatMessages, setChatMessages] = useState<ChatMessage[]>(() => {
     const local = localStorage.getItem('3c_chat_messages');
     return local ? JSON.parse(local) : INITIAL_CHAT_MESSAGES;
+  });
+
+  const [vehicles, setVehicles] = useState<VehicleRecord[]>(() => {
+    const local = localStorage.getItem('3c_vehicles');
+    return local ? JSON.parse(local) : [];
   });
 
   const [notifications, setNotifications] = useState<Notification[]>(() => {
@@ -249,6 +259,17 @@ export default function App() {
       }
     });
 
+    // Realtime Vehicles listener
+    const unsubVehicles = onValue(dbRefs.vehicles, (snap) => {
+      if (snap.exists()) {
+        const remoteVehicles = snapshotToArray<VehicleRecord>(snap.val());
+        isRemoteUpdate.current = true;
+        setVehicles(remoteVehicles);
+      } else {
+        setVehicles([]);
+      }
+    });
+
     // Safe auth state listener
     let unsubAuth: (() => void) | null = null;
     const currentAuth = auth;
@@ -275,6 +296,7 @@ export default function App() {
       unsubReminders();
       unsubChat();
       unsubNotifications();
+      unsubVehicles();
     };
   }, []);
 
@@ -306,6 +328,10 @@ export default function App() {
   useEffect(() => {
     localStorage.setItem('3c_chat_messages', JSON.stringify(chatMessages));
   }, [chatMessages]);
+
+  useEffect(() => {
+    localStorage.setItem('3c_vehicles', JSON.stringify(vehicles));
+  }, [vehicles]);
 
   useEffect(() => {
     localStorage.setItem('3c_notifications', JSON.stringify(notifications));
@@ -442,6 +468,42 @@ export default function App() {
     handleAddNotification(
       'Registro Editado',
       `Ocorrência "${updatedOcc.title}" foi sincronizada com sucesso.`,
+      'info'
+    );
+  };
+
+  const handleAddVehicle = async (record: Omit<VehicleRecord, 'id' | 'createdAt'>) => {
+    const saved = await pushVehicleRecordToFirebase({
+      ...record,
+      createdAt: new Date().toISOString()
+    });
+    if (saved) {
+      setVehicles(prev => [saved, ...prev.filter(v => v.id !== saved.id)]);
+      handleAddNotification(
+        'Veículo Cadastrado',
+        `Cavalo ${saved.cavaloPlate} (${saved.carrier}) foi adicionado com sucesso.`,
+        'success'
+      );
+    }
+  };
+
+  const handleUpdateVehicle = async (record: VehicleRecord) => {
+    setVehicles(prev => prev.map(v => v.id === record.id ? record : v));
+    await updateVehicleRecordInFirebase(record);
+    handleAddNotification(
+      'Veículo Atualizado',
+      `Os dados do cavalo ${record.cavaloPlate} foram atualizados.`,
+      'info'
+    );
+  };
+
+  const handleDeleteVehicle = async (id: string) => {
+    const target = vehicles.find(v => v.id === id);
+    setVehicles(prev => prev.filter(v => v.id !== id));
+    await deleteVehicleRecordFromFirebase(id);
+    handleAddNotification(
+      'Veículo Removido',
+      `O registro do veículo ${target?.cavaloPlate || ''} foi excluído.`,
       'info'
     );
   };
@@ -622,6 +684,7 @@ export default function App() {
             onAddOccurrence={handleAddOccurrence}
             onAddNotification={handleAddNotification}
             onSelectTab={setActiveTab}
+            vehicles={vehicles}
           />
         );
       case 'historico':
@@ -683,6 +746,16 @@ export default function App() {
             onSimulateReply={handleSimulateReply}
           />
         );
+      case 'veiculos':
+        return (
+          <VehicleManager
+            vehicles={vehicles}
+            onAddVehicle={handleAddVehicle}
+            onUpdateVehicle={handleUpdateVehicle}
+            onDeleteVehicle={handleDeleteVehicle}
+            isAdmin={isAdmin}
+          />
+        );
       default:
         return <DashboardStatus occurrences={occurrences} onSelectTab={setActiveTab} />;
     }
@@ -693,6 +766,7 @@ export default function App() {
     { id: 'dashboard', label: 'Painel de Status', icon: LayoutDashboard },
     { id: 'registrar', label: 'Novo Registro', icon: PlusCircle },
     { id: 'historico', label: 'Histórico Operacional', icon: History },
+    { id: 'veiculos', label: 'Placas de Veículos', icon: Truck },
     { id: 'pastas', label: 'Pastas dos Líderes', icon: Folder },
     { id: 'funcionarios', label: 'Acompanhamento de Staff', icon: Users },
     { id: 'calendario', label: 'Agenda & Lembretes', icon: Calendar },

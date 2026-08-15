@@ -1,3 +1,13 @@
+export interface VehicleRecord {
+  id: string;
+  cavaloPlate: string;
+  carretaPlates: string;
+  carrier: string;
+  driverName?: string;
+  notes?: string;
+  createdAt: string;
+}
+
 export type OccurrenceStatus = 'acompanhar' | 'resolvido' | 'para conhecimento';
 
 export interface Leader {

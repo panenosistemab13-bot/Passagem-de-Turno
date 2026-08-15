@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Leader, OccurrenceStatus, Occurrence } from '../types';
+import { Leader, OccurrenceStatus, Occurrence, VehicleRecord } from '../types';
 import { 
   FileText, 
   User, 
@@ -32,7 +32,8 @@ import {
   DEFAULT_TRIP_RECORDS,
   TripReportRecord 
 } from '../tripData';
-import { pushOccurrenceToFirebase } from '../lib/firebase';
+import { pushOccurrenceToFirebase, rtdb, snapshotToArray } from '../lib/firebase';
+import { onValue, ref } from 'firebase/database';
 
 interface OccurrenceFormProps {
   leaders: Leader[];
@@ -40,6 +41,7 @@ interface OccurrenceFormProps {
   onAddOccurrence: (occurrence: Omit<Occurrence, 'id' | 'createdAt'>) => void;
   onAddNotification: (title: string, message: string, type: 'info' | 'warning' | 'success') => void;
   onSelectTab: (tab: string) => void;
+  vehicles?: VehicleRecord[];
 }
 
 export default function OccurrenceForm({
@@ -47,8 +49,24 @@ export default function OccurrenceForm({
   selectedLeaderId,
   onAddOccurrence,
   onAddNotification,
-  onSelectTab
+  onSelectTab,
+  vehicles: initialVehicles
 }: OccurrenceFormProps) {
+  const [vehiclesList, setVehiclesList] = useState<VehicleRecord[]>(initialVehicles || []);
+
+  // Realtime listener for vehicles
+  useEffect(() => {
+    const unsub = onValue(ref(rtdb, 'dados-globais/veiculos'), (snapshot) => {
+      if (snapshot.exists()) {
+        const val = snapshot.val();
+        const list = snapshotToArray<VehicleRecord>(val);
+        setVehiclesList(list);
+      } else {
+        setVehiclesList([]);
+      }
+    });
+    return () => unsub();
+  }, []);
   
   // Registration Mode: Standard Vehicle/Transport Occurrence vs Instability / Systems Occurrence
   const [recordType, setRecordType] = useState<'padrao' | 'instabilidade'>('padrao');
@@ -156,6 +174,18 @@ export default function OccurrenceForm({
     // If description is empty, populate with intelligent template
     if (!description.trim()) {
       setDescription(`Veículo: ${item.plate} | Transportadora: ${item.carrier} | Unidade: ${item.unit}${item.driver ? ` | Motorista: ${item.driver}` : ''}${item.route ? ` | Rota: ${item.route}` : ''}\n\nDescrição da Ocorrência: `);
+    }
+  };
+
+  // Auto-fill from registered Vehicles page
+  const handleApplyVehicleRecord = (veh: VehicleRecord) => {
+    const combinedPlates = veh.carretaPlates 
+      ? `${veh.cavaloPlate} / Carretas: ${veh.carretaPlates}` 
+      : veh.cavaloPlate;
+    setPlate(combinedPlates);
+    setCarrier(veh.carrier);
+    if (!description.trim()) {
+      setDescription(`Veículo (Cavalo): ${veh.cavaloPlate}${veh.carretaPlates ? ` | Carretas: ${veh.carretaPlates}` : ''} | Transportadora: ${veh.carrier}${veh.driverName ? ` | Motorista: ${veh.driverName}` : ''}${veh.notes ? ` | Obs: ${veh.notes}` : ''}\n\nDescrição da Ocorrência: `);
     }
   };
 
@@ -448,6 +478,34 @@ export default function OccurrenceForm({
               )}
 
               {/* Grid with Placa, Transportadora, Unidade fields */}
+              <div className="space-y-3">
+                {/* Registered Vehicles Quick Dropdown (Puxar da página Placas de Veículos) */}
+                {vehiclesList.length > 0 && (
+                  <div className="bg-blue-50/70 border border-blue-200 rounded-lg p-2.5 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                    <div className="flex items-center gap-2">
+                      <Truck className="w-4 h-4 text-blue-600 shrink-0" />
+                      <span className="text-xs font-bold text-slate-800">
+                        Puxar veículo cadastrado ({vehiclesList.length}):
+                      </span>
+                    </div>
+                    <select
+                      onChange={(e) => {
+                        const found = vehiclesList.find(v => v.id === e.target.value);
+                        if (found) handleApplyVehicleRecord(found);
+                      }}
+                      defaultValue=""
+                      className="bg-white border border-blue-300 rounded-lg px-3 py-1.5 text-xs font-medium text-slate-800 focus:outline-none focus:ring-1 focus:ring-blue-500 cursor-pointer shadow-xs"
+                    >
+                      <option value="" disabled>-- Selecionar veículo da lista --</option>
+                      {vehiclesList.map((v) => (
+                        <option key={v.id} value={v.id}>
+                          🚛 {v.cavaloPlate} {v.carretaPlates ? `(Carretas: ${v.carretaPlates})` : ''} - {v.carrier} {v.driverName ? `[${v.driverName}]` : ''}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                )}
+
               <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
                 
                 {/* 1. Placa */}
@@ -516,6 +574,7 @@ export default function OccurrenceForm({
               </div>
 
             </div>
+          </div>
           )}
 
           {/* SECTION C: INSTABILITY & TICKETS (When Mode is Instabilidade) */}

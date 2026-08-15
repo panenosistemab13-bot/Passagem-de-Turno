@@ -18,7 +18,8 @@ import {
   EmployeeLog, 
   Reminder, 
   ChatMessage, 
-  Notification 
+  Notification,
+  VehicleRecord 
 } from "../types";
 import { INITIAL_LEADERS } from "../initialData";
 
@@ -129,6 +130,7 @@ export const dbRefs = {
   reminders: ref(rtdb, 'reminders'),
   chatMessages: ref(rtdb, 'chatMessages'),
   notifications: ref(rtdb, 'notifications'),
+  vehicles: ref(rtdb, 'dados-globais/veiculos'),
   connected: ref(rtdb, '.info/connected')
 };
 
@@ -321,6 +323,56 @@ export const syncNotificationsToFirebase = async (notifications: Notification[])
     await update(ref(rtdb, 'dados-globais'), { notifications: sanitized, lastUpdated: new Date().toISOString() });
   } catch (error) {
     console.error("Firebase sync error (notifications):", error);
+  }
+};
+
+export const pushVehicleRecordToFirebase = async (
+  recordData: Omit<VehicleRecord, 'id'> | VehicleRecord
+): Promise<VehicleRecord | null> => {
+  try {
+    await ensureAnonymousAuth();
+    const newRef = push(ref(rtdb, 'dados-globais/veiculos'));
+    const payload: any = {
+      ...recordData,
+      id: newRef.key || (recordData as any).id || `veh-${Date.now()}`,
+      createdAt: (recordData as VehicleRecord).createdAt || new Date().toISOString()
+    };
+    Object.keys(payload).forEach(key => {
+      if (payload[key] === undefined) {
+        payload[key] = '';
+      }
+    });
+    await set(newRef, payload);
+    return payload as VehicleRecord;
+  } catch (error) {
+    console.error("Firebase push error (vehicles):", error);
+    return null;
+  }
+};
+
+export const updateVehicleRecordInFirebase = async (record: VehicleRecord): Promise<void> => {
+  try {
+    await ensureAnonymousAuth();
+    if (record.id) {
+      const payload: any = { ...record };
+      Object.keys(payload).forEach(key => {
+        if (payload[key] === undefined) {
+          payload[key] = '';
+        }
+      });
+      await set(ref(rtdb, `dados-globais/veiculos/${record.id}`), payload);
+    }
+  } catch (error) {
+    console.error("Firebase update error (vehicle):", error);
+  }
+};
+
+export const deleteVehicleRecordFromFirebase = async (id: string): Promise<void> => {
+  try {
+    await ensureAnonymousAuth();
+    await remove(ref(rtdb, `dados-globais/veiculos/${id}`));
+  } catch (error) {
+    console.error("Firebase delete error (vehicle):", error);
   }
 };
 
