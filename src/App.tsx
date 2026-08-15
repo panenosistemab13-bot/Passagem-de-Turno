@@ -141,16 +141,12 @@ export default function App() {
       setIsFirebaseConnected(Boolean(snap.val()));
     });
 
-    // Realtime Global State listener (dados-globais)
+    // Realtime Global State listener (dados-globais) for auxiliary metadata
     const unsubGlobal = onValue(dbRefs.globalData, (snap) => {
       if (snap.exists()) {
         const data = snap.val();
         if (data) {
           isRemoteUpdate.current = true;
-          const occData = data.ocorrencias || data.occurrences;
-          if (occData) {
-            setOccurrences(snapshotToArray<Occurrence>(occData));
-          }
           if (data.leaders && Array.isArray(data.leaders) && data.leaders.length > 0) {
             setLeaders(data.leaders);
           }
@@ -188,10 +184,11 @@ export default function App() {
       }
     });
 
-    // Realtime Occurrences listener
+    // Authoritative Realtime Occurrences listener directly from 'dados-globais/ocorrencias'
     const unsubOccurrences = onValue(dbRefs.occurrences, (snap) => {
       if (snap.exists()) {
-        const remoteOccurrences = snapshotToArray<Occurrence>(snap.val());
+        const val = snap.val();
+        const remoteOccurrences = snapshotToArray<Occurrence>(val);
         isRemoteUpdate.current = true;
         // Sort newest first
         remoteOccurrences.sort((a, b) => {
@@ -200,6 +197,8 @@ export default function App() {
           return timeB - timeA;
         });
         setOccurrences(remoteOccurrences);
+      } else {
+        setOccurrences([]);
       }
     });
 
@@ -372,10 +371,19 @@ export default function App() {
   };
 
   const handleAddOccurrence = async (newOcc: Omit<Occurrence, 'id' | 'createdAt'>) => {
-    const savedOcc = await pushOccurrenceToFirebase({
+    const payload: any = {
       ...newOcc,
       createdAt: new Date().toISOString()
+    };
+
+    // Guarantee no undefined properties are sent
+    Object.keys(payload).forEach(key => {
+      if (payload[key] === undefined) {
+        payload[key] = '';
+      }
     });
+
+    const savedOcc = await pushOccurrenceToFirebase(payload);
 
     if (savedOcc) {
       setOccurrences(prev => [savedOcc, ...prev.filter(o => o.id !== savedOcc.id)]);

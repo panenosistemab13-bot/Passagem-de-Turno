@@ -96,6 +96,28 @@ export const snapshotToArray = <T>(val: any): T[] => {
   return [];
 };
 
+// Clean payload to guarantee NO undefined values reach Firebase Realtime Database
+export const cleanFirebasePayload = (payload: any): any => {
+  if (payload === null || payload === undefined) {
+    return '';
+  }
+  if (Array.isArray(payload)) {
+    return payload.map(item => cleanFirebasePayload(item));
+  }
+  if (typeof payload === 'object') {
+    const cleaned: Record<string, any> = { ...payload };
+    Object.keys(cleaned).forEach(key => {
+      if (cleaned[key] === undefined) {
+        cleaned[key] = '';
+      } else if (typeof cleaned[key] === 'object' && cleaned[key] !== null) {
+        cleaned[key] = cleanFirebasePayload(cleaned[key]);
+      }
+    });
+    return cleaned;
+  }
+  return payload;
+};
+
 // Database references matching the exact Realtime Database paths
 export const dbRefs = {
   globalData: ref(rtdb, 'dados-globais'),
@@ -117,13 +139,21 @@ export const pushOccurrenceToFirebase = async (
   try {
     await ensureAnonymousAuth();
     const newRef = push(ref(rtdb, 'dados-globais/ocorrencias'));
-    const occWithId: Occurrence = {
+    const payload: any = {
       ...occurrenceData,
       id: newRef.key || (occurrenceData as any).id || `occ-${Date.now()}`,
       createdAt: (occurrenceData as Occurrence).createdAt || new Date().toISOString()
     };
-    await set(newRef, occWithId);
-    return occWithId;
+
+    // Clean payload: guarantee no undefined properties are sent to Firebase
+    Object.keys(payload).forEach(key => {
+      if (payload[key] === undefined) {
+        payload[key] = '';
+      }
+    });
+
+    await set(newRef, payload);
+    return payload as Occurrence;
   } catch (error) {
     console.error("Firebase push error (occurrences):", error);
     return null;
@@ -135,7 +165,13 @@ export const updateOccurrenceInFirebase = async (occurrence: Occurrence) => {
   try {
     await ensureAnonymousAuth();
     if (occurrence.id) {
-      await set(ref(rtdb, `dados-globais/ocorrencias/${occurrence.id}`), occurrence);
+      const payload: any = { ...occurrence };
+      Object.keys(payload).forEach(key => {
+        if (payload[key] === undefined) {
+          payload[key] = '';
+        }
+      });
+      await set(ref(rtdb, `dados-globais/ocorrencias/${occurrence.id}`), payload);
     }
   } catch (error) {
     console.error("Firebase update error (occurrence):", error);
@@ -163,7 +199,8 @@ export const pushChatMessageToFirebase = async (
       ...msg,
       id: newRef.key || `msg-${Date.now()}`
     };
-    await set(newRef, messageWithId);
+    const sanitized = cleanFirebasePayload(messageWithId);
+    await set(newRef, sanitized);
     return messageWithId;
   } catch (error) {
     console.error("Firebase push error (chatMessages):", error);
@@ -182,7 +219,8 @@ export const pushNotificationToFirebase = async (
       ...notif,
       id: newRef.key || `notif-${Date.now()}`
     };
-    await set(newRef, notifWithId);
+    const sanitized = cleanFirebasePayload(notifWithId);
+    await set(newRef, sanitized);
     return notifWithId;
   } catch (error) {
     console.error("Firebase push error (notifications):", error);
@@ -194,8 +232,9 @@ export const pushNotificationToFirebase = async (
 export const syncGlobalDataToFirebase = async (data: Record<string, any>) => {
   try {
     await ensureAnonymousAuth();
+    const sanitized = cleanFirebasePayload(data);
     await update(ref(rtdb, 'dados-globais'), {
-      ...data,
+      ...sanitized,
       lastUpdated: new Date().toISOString()
     });
   } catch (error) {
@@ -206,8 +245,9 @@ export const syncGlobalDataToFirebase = async (data: Record<string, any>) => {
 export const syncLeadersToFirebase = async (leaders: Leader[]) => {
   try {
     await ensureAnonymousAuth();
-    await set(ref(rtdb, 'leaders'), leaders);
-    await update(ref(rtdb, 'dados-globais'), { leaders, lastUpdated: new Date().toISOString() });
+    const sanitized = cleanFirebasePayload(leaders);
+    await set(ref(rtdb, 'leaders'), sanitized);
+    await update(ref(rtdb, 'dados-globais'), { leaders: sanitized, lastUpdated: new Date().toISOString() });
   } catch (error) {
     console.error("Firebase sync error (leaders):", error);
   }
@@ -222,7 +262,8 @@ export const syncOccurrencesToFirebase = async (occurrences: Occurrence[]) => {
       const key = occ.id || `occ-${idx}-${Date.now()}`;
       occurrencesMap[key] = { ...occ, id: key };
     });
-    await set(ref(rtdb, 'dados-globais/ocorrencias'), occurrencesMap);
+    const sanitized = cleanFirebasePayload(occurrencesMap);
+    await set(ref(rtdb, 'dados-globais/ocorrencias'), sanitized);
   } catch (error) {
     console.error("Firebase sync error (occurrences):", error);
   }
@@ -231,8 +272,9 @@ export const syncOccurrencesToFirebase = async (occurrences: Occurrence[]) => {
 export const syncEmployeesToFirebase = async (employees: Employee[]) => {
   try {
     await ensureAnonymousAuth();
-    await set(ref(rtdb, 'employees'), employees);
-    await update(ref(rtdb, 'dados-globais'), { employees, lastUpdated: new Date().toISOString() });
+    const sanitized = cleanFirebasePayload(employees);
+    await set(ref(rtdb, 'employees'), sanitized);
+    await update(ref(rtdb, 'dados-globais'), { employees: sanitized, lastUpdated: new Date().toISOString() });
   } catch (error) {
     console.error("Firebase sync error (employees):", error);
   }
@@ -241,8 +283,9 @@ export const syncEmployeesToFirebase = async (employees: Employee[]) => {
 export const syncEmployeeLogsToFirebase = async (logs: EmployeeLog[]) => {
   try {
     await ensureAnonymousAuth();
-    await set(ref(rtdb, 'employeeLogs'), logs);
-    await update(ref(rtdb, 'dados-globais'), { employeeLogs: logs, lastUpdated: new Date().toISOString() });
+    const sanitized = cleanFirebasePayload(logs);
+    await set(ref(rtdb, 'employeeLogs'), sanitized);
+    await update(ref(rtdb, 'dados-globais'), { employeeLogs: sanitized, lastUpdated: new Date().toISOString() });
   } catch (error) {
     console.error("Firebase sync error (employeeLogs):", error);
   }
@@ -251,8 +294,9 @@ export const syncEmployeeLogsToFirebase = async (logs: EmployeeLog[]) => {
 export const syncRemindersToFirebase = async (reminders: Reminder[]) => {
   try {
     await ensureAnonymousAuth();
-    await set(ref(rtdb, 'reminders'), reminders);
-    await update(ref(rtdb, 'dados-globais'), { reminders, lastUpdated: new Date().toISOString() });
+    const sanitized = cleanFirebasePayload(reminders);
+    await set(ref(rtdb, 'reminders'), sanitized);
+    await update(ref(rtdb, 'dados-globais'), { reminders: sanitized, lastUpdated: new Date().toISOString() });
   } catch (error) {
     console.error("Firebase sync error (reminders):", error);
   }
@@ -261,8 +305,9 @@ export const syncRemindersToFirebase = async (reminders: Reminder[]) => {
 export const syncChatMessagesToFirebase = async (messages: ChatMessage[]) => {
   try {
     await ensureAnonymousAuth();
-    await set(ref(rtdb, 'chatMessages'), messages);
-    await update(ref(rtdb, 'dados-globais'), { chatMessages: messages, lastUpdated: new Date().toISOString() });
+    const sanitized = cleanFirebasePayload(messages);
+    await set(ref(rtdb, 'chatMessages'), sanitized);
+    await update(ref(rtdb, 'dados-globais'), { chatMessages: sanitized, lastUpdated: new Date().toISOString() });
   } catch (error) {
     console.error("Firebase sync error (chatMessages):", error);
   }
@@ -271,8 +316,9 @@ export const syncChatMessagesToFirebase = async (messages: ChatMessage[]) => {
 export const syncNotificationsToFirebase = async (notifications: Notification[]) => {
   try {
     await ensureAnonymousAuth();
-    await set(ref(rtdb, 'notifications'), notifications);
-    await update(ref(rtdb, 'dados-globais'), { notifications, lastUpdated: new Date().toISOString() });
+    const sanitized = cleanFirebasePayload(notifications);
+    await set(ref(rtdb, 'notifications'), sanitized);
+    await update(ref(rtdb, 'dados-globais'), { notifications: sanitized, lastUpdated: new Date().toISOString() });
   } catch (error) {
     console.error("Firebase sync error (notifications):", error);
   }

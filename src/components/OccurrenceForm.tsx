@@ -177,25 +177,32 @@ export default function OccurrenceForm({
 
     const currentLeader = leaders.find(l => l.id === leaderId) || leaders[0];
 
-    const newRecord = {
-      date: rawDate,
-      shiftDate: customShiftDate,
+    const newRecord: any = {
+      date: rawDate || '',
+      shiftDate: customShiftDate || '',
       leaderId: currentLeader?.id || '1',
       leaderName: currentLeader?.name || 'Líder',
-      title,
-      description,
-      status,
-      riskLevel,
-      category,
-      recordType,
-      plate: plate.trim() ? plate.toUpperCase() : undefined,
-      carrier: carrier.trim() || undefined,
-      unit: unit.trim() || undefined,
-      instabilitySystem: recordType === 'instabilidade' ? instabilitySystem : undefined,
-      ticketNumber: ticketNumber.trim() || undefined,
-      affectedTechnology: affectedTechnology.trim() || undefined,
+      title: title.trim(),
+      description: description.trim(),
+      status: status || 'acompanhar',
+      riskLevel: riskLevel || 'Médio',
+      category: category || 'Geral',
+      recordType: recordType || 'padrao',
+      plate: plate.trim() ? plate.toUpperCase() : '',
+      carrier: carrier.trim() || '',
+      unit: unit.trim() || '',
+      instabilitySystem: recordType === 'instabilidade' ? (instabilitySystem || '') : '',
+      ticketNumber: ticketNumber.trim() || '',
+      affectedTechnology: affectedTechnology.trim() || '',
       createdAt: new Date().toISOString()
     };
+
+    // Guarantee no undefined fields exist in payload before sending to Firebase
+    Object.keys(newRecord).forEach(key => {
+      if (newRecord[key] === undefined) {
+        newRecord[key] = '';
+      }
+    });
 
     // Save directly to Firebase Realtime Database
     if (onAddOccurrence) {
