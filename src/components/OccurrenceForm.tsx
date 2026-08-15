@@ -59,7 +59,7 @@ export default function OccurrenceForm({
   const [customShiftDate, setCustomShiftDate] = useState('');
   const [status, setStatus] = useState<OccurrenceStatus>('acompanhar');
   const [riskLevel, setRiskLevel] = useState<'Baixo' | 'Médio' | 'Alto' | 'Crítico'>('Médio');
-  const [category, setCategory] = useState<'Segurança' | 'Operação' | 'Logística' | 'Qualidade' | 'Manutenção' | 'Instabilidade / Tecnologia' | 'Outros'>('Logística');
+  const [category, setCategory] = useState<'Segurança' | 'Operação' | 'Logística' | 'Rastreamento' | 'Qualidade' | 'Manutenção' | 'Instabilidade / Tecnologia' | 'Outros'>('Logística');
   const [rawDate, setRawDate] = useState('');
 
   // Transport & Vehicle fields (Placa, Transportadora, Unidade)
@@ -125,9 +125,9 @@ export default function OccurrenceForm({
     if (selected.includes('Sinistro confirmado') || selected.includes('Suspeita de sinistro')) {
       setRiskLevel('Crítico');
       setCategory('Segurança');
-    } else if (selected.includes('Perda de sinal') || selected.includes('Acionamento sascar')) {
+    } else if (selected.includes('Perda de sinal') || selected.includes('Acionamento sascar') || selected.includes('Espelhamento retirado') || selected.includes('Problema de sensores') || selected.includes('Problema de atuadores')) {
       setRiskLevel('Alto');
-      setCategory('Segurança');
+      setCategory('Rastreamento');
     } else if (selected.includes('Problema mecânico') || selected.includes('Parada para manutenção')) {
       setRiskLevel('Médio');
       setCategory('Manutenção');
@@ -663,6 +663,7 @@ export default function OccurrenceForm({
                   className="w-full bg-[#F4F1EE] border border-[#E0D8D0] rounded-lg pl-8 pr-3 py-2 text-xs text-[#2C1810] focus:outline-none focus:ring-1 focus:ring-[#C8102E] focus:border-[#C8102E] appearance-none font-semibold"
                 >
                   <option value="Logística">Logística (Frotas/Rotas)</option>
+                  <option value="Rastreamento">Rastreamento</option>
                   <option value="Segurança">Segurança (Monitoramento)</option>
                   <option value="Operação">Operação Geral</option>
                   <option value="Qualidade">Qualidade de Carga</option>

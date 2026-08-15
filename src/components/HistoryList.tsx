@@ -51,7 +51,7 @@ export default function HistoryList({
   const [editTitle, setEditTitle] = useState('');
   const [editDesc, setEditDesc] = useState('');
   const [editRisk, setEditRisk] = useState<'Baixo' | 'Médio' | 'Alto' | 'Crítico'>('Baixo');
-  const [editCategory, setEditCategory] = useState<'Segurança' | 'Operação' | 'Logística' | 'Qualidade' | 'Manutenção' | 'Instabilidade / Tecnologia' | 'Outros'>('Outros');
+  const [editCategory, setEditCategory] = useState<'Segurança' | 'Operação' | 'Logística' | 'Rastreamento' | 'Qualidade' | 'Manutenção' | 'Instabilidade / Tecnologia' | 'Outros'>('Outros');
   const [editShiftDate, setEditShiftDate] = useState('');
   const [editLeaderId, setEditLeaderId] = useState('');
   
@@ -564,6 +564,7 @@ export default function HistoryList({
                             className="w-full bg-[#F4F1EE] border border-[#E0D8D0] rounded p-1.5 text-xs text-[#2C1810] font-bold focus:outline-none"
                           >
                             <option value="Logística">Logística</option>
+                            <option value="Rastreamento">Rastreamento</option>
                             <option value="Segurança">Segurança</option>
                             <option value="Operação">Operação</option>
                             <option value="Qualidade">Qualidade</option>

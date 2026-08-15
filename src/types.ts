@@ -19,7 +19,7 @@ export interface Occurrence {
   description: string;
   status: OccurrenceStatus;
   riskLevel: 'Baixo' | 'Médio' | 'Alto' | 'Crítico';
-  category: 'Segurança' | 'Operação' | 'Logística' | 'Qualidade' | 'Manutenção' | 'Instabilidade / Tecnologia' | 'Outros';
+  category: 'Segurança' | 'Operação' | 'Logística' | 'Rastreamento' | 'Qualidade' | 'Manutenção' | 'Instabilidade / Tecnologia' | 'Outros';
   
   // Detalhes Operacionais da Viagem / Veículo
   plate?: string;
