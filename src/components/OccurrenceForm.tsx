@@ -32,6 +32,7 @@ import {
   DEFAULT_TRIP_RECORDS,
   TripReportRecord 
 } from '../tripData';
+import { pushOccurrenceToFirebase } from '../lib/firebase';
 
 interface OccurrenceFormProps {
   leaders: Leader[];
@@ -166,7 +167,7 @@ export default function OccurrenceForm({
     (t.driver && t.driver.toLowerCase().includes(tripSearchTerm.toLowerCase()))
   );
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     if (!title.trim() || !description.trim()) {
@@ -176,7 +177,7 @@ export default function OccurrenceForm({
 
     const currentLeader = leaders.find(l => l.id === leaderId) || leaders[0];
 
-    onAddOccurrence({
+    const newRecord = {
       date: rawDate,
       shiftDate: customShiftDate,
       leaderId: currentLeader?.id || '1',
@@ -192,8 +193,16 @@ export default function OccurrenceForm({
       unit: unit.trim() || undefined,
       instabilitySystem: recordType === 'instabilidade' ? instabilitySystem : undefined,
       ticketNumber: ticketNumber.trim() || undefined,
-      affectedTechnology: affectedTechnology.trim() || undefined
-    });
+      affectedTechnology: affectedTechnology.trim() || undefined,
+      createdAt: new Date().toISOString()
+    };
+
+    // Save directly to Firebase Realtime Database
+    if (onAddOccurrence) {
+      await onAddOccurrence(newRecord);
+    } else {
+      await pushOccurrenceToFirebase(newRecord);
+    }
 
     // Generate notification based on status
     let notifType: 'info' | 'warning' | 'success' = 'info';
