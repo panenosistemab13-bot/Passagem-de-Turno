@@ -100,6 +100,7 @@ export default function OccurrenceForm({
   // Trip Report auto-lookup & modal search helper
   const [tripSearchOpen, setTripSearchOpen] = useState(false);
   const [tripSearchTerm, setTripSearchTerm] = useState('');
+  const [vehicleSearchTerm, setVehicleSearchTerm] = useState('');
   const [selectedTripReport, setSelectedTripReport] = useState<TripReportRecord | null>(null);
 
   // Update leader state when global selection changes
@@ -558,24 +559,50 @@ export default function OccurrenceForm({
                     <div className="flex items-center gap-2">
                       <Truck className="w-4 h-4 text-blue-600 shrink-0" />
                       <span className="text-xs font-bold text-slate-800">
-                        Puxar veículo cadastrado ({vehiclesList.length}):
+                        Puxar veículo cadastrado:
                       </span>
                     </div>
-                    <select
-                      onChange={(e) => {
-                        const found = vehiclesList.find(v => v.id === e.target.value);
-                        if (found) handleApplyVehicleRecord(found);
-                      }}
-                      defaultValue=""
-                      className="bg-white border border-blue-300 rounded-lg px-3 py-1.5 text-xs font-medium text-slate-800 focus:outline-none focus:ring-1 focus:ring-blue-500 cursor-pointer shadow-xs"
-                    >
-                      <option value="" disabled>-- Selecionar veículo da lista --</option>
-                      {vehiclesList.map((v) => (
-                        <option key={v.id} value={v.id}>
-                          🚛 {v.cavaloPlate} {v.carretaPlates ? `(Carretas: ${v.carretaPlates})` : ''} - {v.carrier} {v.driverName ? `[${v.driverName}]` : ''}
-                        </option>
-                      ))}
-                    </select>
+                    <div className="flex flex-col sm:flex-row items-center gap-2 flex-1 justify-end">
+                      <div className="relative w-full sm:w-auto">
+                        <input
+                          type="text"
+                          placeholder="Filtrar placas..."
+                          value={vehicleSearchTerm}
+                          onChange={(e) => setVehicleSearchTerm(e.target.value)}
+                          className="w-full sm:w-40 bg-white border border-blue-300 rounded-lg pl-8 pr-3 py-1.5 text-[11px] font-bold text-[#0F172A] focus:outline-none focus:ring-1 focus:ring-blue-500 placeholder:text-blue-300 transition-all focus:sm:w-56"
+                        />
+                        <Search className="w-3.5 h-3.5 text-blue-400 absolute left-2.5 top-2" />
+                      </div>
+                      <select
+                        onChange={(e) => {
+                          const found = vehiclesList.find(v => v.id === e.target.value);
+                          if (found) handleApplyVehicleRecord(found);
+                        }}
+                        defaultValue=""
+                        className="w-full sm:w-64 bg-white border border-blue-300 rounded-lg px-3 py-1.5 text-[11px] font-black text-slate-800 focus:outline-none focus:ring-1 focus:ring-blue-500 cursor-pointer shadow-xs"
+                      >
+                        <option value="" disabled>-- Selecionar veículo ({
+                          vehiclesList.filter(v => 
+                            v.cavaloPlate.toLowerCase().includes(vehicleSearchTerm.toLowerCase()) ||
+                            (v.carretaPlates && v.carretaPlates.toLowerCase().includes(vehicleSearchTerm.toLowerCase())) ||
+                            v.carrier.toLowerCase().includes(vehicleSearchTerm.toLowerCase()) ||
+                            (v.driverName && v.driverName.toLowerCase().includes(vehicleSearchTerm.toLowerCase()))
+                          ).length
+                        }) --</option>
+                        {vehiclesList
+                          .filter(v => 
+                            v.cavaloPlate.toLowerCase().includes(vehicleSearchTerm.toLowerCase()) ||
+                            (v.carretaPlates && v.carretaPlates.toLowerCase().includes(vehicleSearchTerm.toLowerCase())) ||
+                            v.carrier.toLowerCase().includes(vehicleSearchTerm.toLowerCase()) ||
+                            (v.driverName && v.driverName.toLowerCase().includes(vehicleSearchTerm.toLowerCase()))
+                          )
+                          .map((v) => (
+                            <option key={v.id} value={v.id}>
+                              🚛 {v.cavaloPlate} {v.carretaPlates ? `(${v.carretaPlates})` : ''} - {v.carrier}
+                            </option>
+                          ))}
+                      </select>
+                    </div>
                   </div>
                 )}
 
