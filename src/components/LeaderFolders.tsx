@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Leader, Occurrence, EmployeeLog } from '../types';
-import { Folder, ArrowLeft, Shield, Calendar, Trash2, Tag, BadgeInfo } from 'lucide-react';
-import { LeaderFolder } from './ThreeDIcon';
+import { Folder, ArrowLeft, Shield, Calendar, Trash2, Tag, BadgeInfo, Building2, Users } from 'lucide-react';
 
 interface LeaderFoldersProps {
   leaders: Leader[];
@@ -21,248 +20,152 @@ export default function LeaderFolders({
   onUpdateOccurrenceStatus
 }: LeaderFoldersProps) {
   const [selectedLeaderId, setSelectedLeaderId] = useState<string | null>(null);
+  const [filter, setFilter] = useState<'Todos' | 'Ativos' | 'Em atenção' | 'Críticos'>('Todos');
 
-  const handleBack = () => {
-    setSelectedLeaderId(null);
-  };
+  const handleBack = () => setSelectedLeaderId(null);
 
   const currentLeader = leaders.find(l => l.id === selectedLeaderId);
 
-  // Filter occurrences and logs by leader
-  const filteredOccurrences = occurrences.filter(
-    o => o.leaderName.toLowerCase() === currentLeader?.name.toLowerCase() || o.leaderId === currentLeader?.id
-  );
-  
-  const filteredLogs = employeeLogs.filter(
-    l => l.leaderName.toLowerCase() === currentLeader?.name.toLowerCase()
-  );
+  // Compute stats and status for each leader
+  const getLeaderStats = (leader: Leader) => {
+    const occs = occurrences.filter(o => o.leaderId === leader.id || o.leaderName === leader.name);
+    const criticalOccs = occs.filter(o => o.riskLevel === 'Crítico');
+    const logs = employeeLogs.filter(l => l.leaderName === leader.name);
+    
+    let status: 'Ativo' | 'Em atenção' | 'Crítico' = 'Ativo';
+    if (criticalOccs.length > 2) status = 'Crítico';
+    else if (occs.length > 5 || criticalOccs.length > 0) status = 'Em atenção';
 
-  const colors: Array<'blue' | 'coffee' | 'amber' | 'green' | 'purple'> = ['blue', 'coffee', 'amber', 'green', 'purple'];
+    return { occurrencesCount: occs.length, employeesCount: logs.length, status };
+  };
+
+  const filteredLeaders = leaders.filter(l => {
+    if (filter === 'Todos') return true;
+    const { status } = getLeaderStats(l);
+    if (filter === 'Ativos') return status === 'Ativo';
+    if (filter === 'Em atenção') return status === 'Em atenção';
+    if (filter === 'Críticos') return status === 'Crítico';
+    return true;
+  });
+
+  if (selectedLeaderId && currentLeader) {
+    const leaderOccs = occurrences.filter(o => o.leaderName === currentLeader.name || o.leaderId === currentLeader.id);
+    return (
+      <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-6">
+        <div className="flex flex-wrap items-center justify-between gap-4 border-b border-slate-100 pb-6 mb-6">
+          <button
+            onClick={handleBack}
+            className="flex items-center gap-2 text-sm font-bold text-slate-500 hover:text-[#1E40AF] transition-colors"
+          >
+            <ArrowLeft className="w-4 h-4" /> Voltar ao Diretório
+          </button>
+        </div>
+
+        <div className="flex items-start gap-6 mb-8">
+          <img src={currentLeader.avatar || `https://ui-avatars.com/api/?name=${encodeURIComponent(currentLeader.name)}&background=0F172A&color=fff`} className="w-20 h-20 rounded-full border-4 border-white shadow-md object-cover" alt="" />
+          <div>
+            <h2 className="text-2xl font-black text-[#0F172A] mb-1">{currentLeader.name}</h2>
+            <div className="flex items-center gap-4 text-sm font-medium text-slate-500">
+              <span className="flex items-center gap-1.5"><BadgeInfo className="w-4 h-4" /> {currentLeader.role}</span>
+              <span className="flex items-center gap-1.5"><Building2 className="w-4 h-4" /> Matriz Fortaleza</span>
+              <span className="flex items-center gap-1.5"><Users className="w-4 h-4" /> {currentLeader.shift || 'Integral'}</span>
+            </div>
+          </div>
+        </div>
+
+        <h3 className="text-lg font-bold text-[#0F172A] mb-4">Ocorrências Registradas</h3>
+        <div className="space-y-4">
+          {leaderOccs.length === 0 ? (
+            <p className="text-sm text-slate-500">Nenhuma ocorrência registrada por este líder.</p>
+          ) : (
+            leaderOccs.map(occ => (
+              <div key={occ.id} className="p-4 border border-slate-100 rounded-xl bg-slate-50 flex gap-4">
+                <div className="flex-1">
+                  <p className="font-bold text-slate-800 text-sm mb-1">{occ.category} - {occ.subcategory}</p>
+                  <p className="text-xs text-slate-600 line-clamp-2">{occ.description}</p>
+                </div>
+                <div className="text-right">
+                  <span className={`text-[10px] font-bold px-2 py-1 rounded-full ${
+                    occ.riskLevel === 'Crítico' ? 'bg-red-100 text-red-700' :
+                    occ.riskLevel === 'Alto' ? 'bg-orange-100 text-orange-700' :
+                    occ.riskLevel === 'Moderado' ? 'bg-amber-100 text-amber-700' :
+                    'bg-emerald-100 text-emerald-700'
+                  }`}>
+                    {occ.riskLevel}
+                  </span>
+                </div>
+              </div>
+            ))
+          )}
+        </div>
+      </div>
+    );
+  }
 
   return (
-    <div className="space-y-6">
-      {!selectedLeaderId ? (
-        // Grid View of All Folders
+    <div className="space-y-6 max-w-7xl mx-auto">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
-          <div className="mb-4">
-            <h2 className="text-sm font-black uppercase text-[#0F172A] tracking-wider">Diretório de Líderes (Pastas 3D)</h2>
-            <p className="text-xs text-[#64748B]">Clique na pasta de um líder para visualizar todas as suas atividades e ocorrências individuais.</p>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
-            {leaders.map((leader, index) => {
-              const leaderOccs = occurrences.filter(
-                o => o.leaderName.toLowerCase() === leader.name.toLowerCase() || o.leaderId === leader.id
-              ).length;
-              
-              const leaderLogs = employeeLogs.filter(
-                l => l.leaderName.toLowerCase() === leader.name.toLowerCase()
-              ).length;
-
-              return (
-                <LeaderFolder
-                  key={leader.id}
-                  name={leader.name}
-                  role={leader.role}
-                  shift={leader.shift}
-                  avatar={leader.avatar}
-                  occurrencesCount={leaderOccs}
-                  employeesCount={leaderLogs}
-                  onClick={() => setSelectedLeaderId(leader.id)}
-                  color={colors[index % colors.length] as 'blue' | 'coffee' | 'amber' | 'green' | 'purple'}
-                />
-              );
-            })}
-          </div>
+          <h2 className="text-xl font-black text-[#0F172A]">Pastas dos Líderes</h2>
+          <p className="text-sm text-slate-500">Gerenciamento de equipes e status operacional por liderança.</p>
         </div>
-      ) : (
-        // Detailed Folder Interior view
-        <div className="bg-white rounded-xl border border-[#E2E8F0] shadow-sm p-5">
-          {/* Detailed View Header */}
-          <div className="flex flex-wrap items-center justify-between gap-3 border-b border-[#F1F5F9] pb-4 mb-4">
+        
+        <div className="flex bg-white rounded-xl border border-slate-200 p-1 shadow-sm w-fit">
+          {['Todos', 'Ativos', 'Em atenção', 'Críticos'].map(f => (
             <button
-              onClick={handleBack}
-              className="flex items-center gap-1 text-xs font-bold uppercase text-[#64748B] hover:text-[#0F172A] transition-colors cursor-pointer"
+              key={f}
+              onClick={() => setFilter(f as any)}
+              className={`px-4 py-2 rounded-lg text-xs font-bold transition-all ${
+                filter === f 
+                  ? 'bg-slate-100 text-[#0F172A] shadow-sm' 
+                  : 'text-slate-500 hover:text-slate-700 hover:bg-slate-50'
+              }`}
             >
-              <ArrowLeft className="w-3.5 h-3.5" /> Voltar ao Diretório
+              {f}
             </button>
-
-            <div className="flex items-center gap-2">
-              {isAdmin && (
-                <button
-                  onClick={() => {
-                    if (confirm(`Tem certeza que deseja remover o líder ${currentLeader?.name}?`)) {
-                      onDeleteLeader(currentLeader!.id);
-                      setSelectedLeaderId(null);
-                    }
-                  }}
-                  className="px-3 py-1.5 rounded-lg border border-red-200 bg-red-50 text-red-600 hover:bg-red-100 transition-colors text-xs font-bold flex items-center gap-1 cursor-pointer"
-                >
-                  <Trash2 className="w-3.5 h-3.5" /> Excluir Pasta de Líder
-                </button>
-              )}
-            </div>
-          </div>
-
-          {/* Folder Inner profile badge */}
-          <div className="bg-gradient-to-r from-[#0F172A] to-[#1E293B] rounded-xl p-5 text-white mb-5 shadow-lg border border-[#334155] flex items-center gap-4">
-            {currentLeader?.avatar ? (
-              <img 
-                src={currentLeader.avatar} 
-                alt={currentLeader.name} 
-                referrerPolicy="no-referrer"
-                className="w-14 h-14 rounded-full object-cover border-2 border-blue-400/40 shadow-inner"
-              />
-            ) : (
-              <div className="w-14 h-14 rounded-full bg-blue-600/30 text-blue-300 border border-blue-400/30 flex items-center justify-center font-black text-xl uppercase shadow-inner">
-                {currentLeader?.name.charAt(0)}
-              </div>
-            )}
-            <div>
-              <div className="flex items-center gap-2">
-                <span className="text-[9px] tracking-widest text-[#94A3B8] font-black uppercase">Ficha Individual do Líder</span>
-                {currentLeader?.shift && (
-                  <span className="text-[9px] font-black uppercase px-2 py-0.5 rounded bg-blue-500/20 text-blue-200 border border-blue-400/30">
-                    {currentLeader.shift}
-                  </span>
-                )}
-              </div>
-              <h3 className="text-base font-black text-white">{currentLeader?.name}</h3>
-              <p className="text-[10px] text-slate-400 mt-0.5">{currentLeader?.role} • Cadastrado em {currentLeader?.createdAt}</p>
-            </div>
-          </div>
-
-          {/* Folder Activity Breakdown */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-            
-            {/* Occurrences registered */}
-            <div className="space-y-3">
-              <div className="flex items-center justify-between border-b border-[#F1F5F9] pb-1.5">
-                <h4 className="text-xs font-black uppercase text-[#0F172A] flex items-center gap-1">
-                  <Folder className="w-4 h-4 text-[#2563EB]" /> Ocorrências Registradas ({filteredOccurrences.length})
-                </h4>
-              </div>
-
-              {filteredOccurrences.length === 0 ? (
-                <div className="p-6 text-center text-[#64748B] text-xs bg-[#F8FAFC] rounded-lg border border-dashed border-[#E2E8F0]">
-                  Nenhuma ocorrência registrada por este líder.
-                </div>
-              ) : (
-                <div className="space-y-2.5 max-h-80 overflow-y-auto pr-1">
-                  {filteredOccurrences.map(occ => (
-                    <div key={occ.id} className="bg-[#F8FAFC] border border-[#E2E8F0] rounded-xl p-3 hover:border-[#2563EB]/40 transition-all">
-                      <div className="flex items-start justify-between gap-2 mb-1.5">
-                        <span className="text-[10px] text-[#64748B] font-bold flex items-center gap-0.5">
-                          <Calendar className="w-3.5 h-3.5 text-[#2563EB]" />
-                          {occ.shiftDate}
-                        </span>
-                        
-                        {/* Custom status selector */}
-                        <div className="flex items-center gap-1.5">
-                          <select
-                            value={occ.status}
-                            onChange={(e) => onUpdateOccurrenceStatus(occ.id, e.target.value as any)}
-                            className="text-[9px] font-bold bg-white border border-[#E2E8F0] rounded px-1 py-0.5 focus:outline-none"
-                          >
-                            <option value="acompanhar">Acompanhar</option>
-                            <option value="resolvido">Resolvido</option>
-                            <option value="para conhecimento">Cientificado</option>
-                          </select>
-                          
-                          <span className={`px-1.5 py-0.5 rounded text-[9px] font-black uppercase ${
-                            occ.riskLevel === 'Crítico' ? 'bg-red-50 text-red-700' :
-                            occ.riskLevel === 'Alto' ? 'bg-orange-50 text-orange-700' :
-                            occ.riskLevel === 'Médio' ? 'bg-amber-50 text-amber-700' :
-                            'bg-emerald-50 text-emerald-700'
-                          }`}>
-                            {occ.riskLevel}
-                          </span>
-                        </div>
-                      </div>
-                      
-                      <h5 className="font-bold text-xs text-[#0F172A] mb-0.5">{occ.title}</h5>
-                      
-                      {/* Vehicle or Instability details */}
-                      {(occ.plate || occ.carrier || occ.unit || occ.ticketNumber) && (
-                        <div className="flex flex-wrap items-center gap-1.5 my-1.5 text-[10px]">
-                          {occ.plate && (
-                            <span className="bg-[#0F172A] text-white px-1.5 py-0.2 rounded font-mono font-bold">
-                              {occ.plate}
-                            </span>
-                          )}
-                          {occ.carrier && (
-                            <span className="bg-white border border-[#E2E8F0] text-[#0F172A] px-1.5 py-0.2 rounded font-medium">
-                              {occ.carrier}
-                            </span>
-                          )}
-                          {occ.unit && (
-                            <span className="bg-white border border-[#E2E8F0] text-[#334155] px-1.5 py-0.2 rounded">
-                              {occ.unit}
-                            </span>
-                          )}
-                          {occ.ticketNumber && (
-                            <span className="bg-blue-50 text-blue-800 border border-blue-200 px-1.5 py-0.2 rounded font-bold">
-                              Chamado: {occ.ticketNumber}
-                            </span>
-                          )}
-                        </div>
-                      )}
-
-                      <p className="text-xs text-[#334155] line-clamp-3 leading-relaxed">{occ.description}</p>
-                      
-                      <div className="mt-1.5 pt-1.5 border-t border-[#E2E8F0]/50 flex items-center gap-1">
-                        <Tag className="w-3 h-3 text-[#64748B]" />
-                        <span className="text-[9px] text-[#64748B] font-medium">Categoria: {occ.category}</span>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              )}
-            </div>
-
-            {/* Employee notes and updates */}
-            <div className="space-y-3">
-              <div className="flex items-center justify-between border-b border-[#F1F5F9] pb-1.5">
-                <h4 className="text-xs font-black uppercase text-[#0F172A] flex items-center gap-1">
-                  <BadgeInfo className="w-4 h-4 text-[#2563EB]" /> Histórico de Colaboradores Avaliados ({filteredLogs.length})
-                </h4>
-              </div>
-
-              {filteredLogs.length === 0 ? (
-                <div className="p-6 text-center text-[#64748B] text-xs bg-[#F8FAFC] rounded-lg border border-dashed border-[#E2E8F0]">
-                  Nenhum colaborador avaliado por este líder.
-                </div>
-              ) : (
-                <div className="space-y-2.5 max-h-80 overflow-y-auto pr-1">
-                  {filteredLogs.map(log => (
-                    <div key={log.id} className="bg-[#F8FAFC] border border-[#E2E8F0] rounded-xl p-3">
-                      <div className="flex items-center justify-between gap-2 mb-1">
-                        <span className="font-bold text-xs text-[#0F172A]">{log.employeeName}</span>
-                        <span className={`px-1.5 py-0.5 rounded text-[9px] font-black uppercase ${
-                          log.type === 'otimo_desempenho' || log.type === 'ponto_positivo' ? 'bg-emerald-50 text-emerald-700 border border-emerald-200' :
-                          log.type === 'atestado' ? 'bg-blue-50 text-blue-700 border border-blue-200' :
-                          'bg-red-50 text-red-700 border border-red-200'
-                        }`}>
-                          {log.type.replace('_', ' ')}
-                        </span>
-                      </div>
-                      
-                      <p className="text-xs text-[#334155] leading-normal">{log.description}</p>
-                      
-                      <div className="text-[9px] text-[#64748B] mt-1.5 flex items-center justify-between">
-                        <span>Data: {log.date}</span>
-                        <span>Líder: {log.leaderName}</span>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              )}
-            </div>
-
-          </div>
-
+          ))}
         </div>
-      )}
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        {filteredLeaders.map(leader => {
+          const stats = getLeaderStats(leader);
+          return (
+            <button
+              key={leader.id}
+              onClick={() => setSelectedLeaderId(leader.id)}
+              className="bg-white rounded-2xl p-6 text-left border border-slate-200 shadow-sm hover:shadow-md transition-all group flex flex-col items-center"
+            >
+              <div className="relative mb-4">
+                <img 
+                  src={leader.avatar || `https://ui-avatars.com/api/?name=${encodeURIComponent(leader.name)}&background=0F172A&color=fff`} 
+                  alt={leader.name}
+                  className="w-20 h-20 rounded-full object-cover border-4 border-slate-50 shadow-sm group-hover:scale-105 transition-transform"
+                />
+                <span className={`absolute bottom-0 right-0 w-5 h-5 rounded-full border-2 border-white ${
+                  stats.status === 'Crítico' ? 'bg-red-500' :
+                  stats.status === 'Em atenção' ? 'bg-amber-500' :
+                  'bg-emerald-500'
+                }`}></span>
+              </div>
+              
+              <h3 className="text-[15px] font-black text-[#0F172A] mb-1">{leader.name}</h3>
+              <p className="text-[11px] font-bold text-[#1E40AF] uppercase tracking-wider mb-4">{leader.role}</p>
+
+              <div className="w-full grid grid-cols-2 gap-2 text-center border-t border-slate-100 pt-4">
+                <div>
+                  <p className="text-lg font-black text-slate-700">{stats.occurrencesCount}</p>
+                  <p className="text-[9px] font-bold text-slate-400 uppercase">Ocorrências</p>
+                </div>
+                <div>
+                  <p className="text-lg font-black text-slate-700">{stats.employeesCount}</p>
+                  <p className="text-[9px] font-bold text-slate-400 uppercase">Membros</p>
+                </div>
+              </div>
+            </button>
+          );
+        })}
+      </div>
     </div>
   );
 }

@@ -368,7 +368,7 @@ export default function OccurrenceForm({
     <div className="max-w-4xl mx-auto space-y-4">
       
       {/* Header Banner */}
-      <div className="bg-gradient-to-r from-[#0F172A] to-[#1E293B] rounded-xl p-4 text-white shadow-lg border border-[#334155] flex flex-wrap items-center justify-between gap-3">
+      <div className="bg-[#0F172A] rounded-xl p-4 text-white shadow-lg border border-[#334155] flex flex-wrap items-center justify-between gap-3">
         <div className="space-y-0.5">
           <div className="flex items-center gap-2">
             <span className="text-xs font-black uppercase tracking-wider text-[#2563EB] bg-white px-2 py-0.5 rounded shadow-sm">
@@ -379,7 +379,7 @@ export default function OccurrenceForm({
           <h2 className="text-base font-extrabold text-white">Novo Registro de Ocorrência & Passagem</h2>
           <p className="text-xs text-slate-300">Lançamento integrado com frotas, placas, transportadoras, unidades e instabilidades de sistemas.</p>
         </div>
-        <ThreeDIcon icon={FileText} color="coffee" size="md" />
+        <ThreeDIcon icon={FileText} color="blue" size="md" />
       </div>
 
       {/* Record Type Mode Switcher (Veículos / Frotas vs Instabilidade de Sistemas) */}
@@ -417,7 +417,7 @@ export default function OccurrenceForm({
       <div className="bg-white rounded-xl border border-[#E2E8F0] p-5 shadow-sm">
         <form onSubmit={handleSubmit} className="space-y-5">
           
-          {/* SECTION A: PRESET TITLES SELECTOR */}
+          <div className="flex items-center gap-3 border-b border-slate-200 pb-3 mt-8 mb-6"><div className="w-8 h-8 rounded-lg bg-[#1E40AF] text-white flex items-center justify-center text-sm font-black shadow-sm">01</div><h3 className="text-lg font-black uppercase tracking-wider text-[#0F172A]">Tipo da Ocorrência</h3></div>
           <div>
             <div className="flex items-center justify-between mb-1.5">
               <label className="block text-xs font-black uppercase text-[#0F172A]">
@@ -481,7 +481,7 @@ export default function OccurrenceForm({
             />
           </div>
 
-          {/* SECTION B: PLACA, TRANSPORTADORA, UNIDADE + RELATÓRIO DE VIAGENS (When Mode is Padrão) */}
+          <div className="flex items-center gap-3 border-b border-slate-200 pb-3 mt-8 mb-6"><div className="w-8 h-8 rounded-lg bg-[#1E40AF] text-white flex items-center justify-center text-sm font-black shadow-sm">02</div><h3 className="text-lg font-black uppercase tracking-wider text-[#0F172A]">Veículo e Transporte</h3></div>
           {recordType === 'padrao' && (
             <div className="bg-[#F8FAFC] rounded-xl border border-[#E2E8F0] p-3.5 space-y-3">
               
@@ -724,7 +724,7 @@ export default function OccurrenceForm({
             </div>
           )}
 
-          {/* SECTION D: LEADER, DATE AND SHIFT */}
+          <div className="flex items-center gap-3 border-b border-slate-200 pb-3 mt-8 mb-6"><div className="w-8 h-8 rounded-lg bg-[#1E40AF] text-white flex items-center justify-center text-sm font-black shadow-sm">03</div><h3 className="text-lg font-black uppercase tracking-wider text-[#0F172A]">Líder Responsável</h3></div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             
             <div>
@@ -779,7 +779,7 @@ export default function OccurrenceForm({
 
           </div>
 
-          {/* SECTION E: STATUS, RISK, CATEGORY */}
+          <div className="flex items-center gap-3 border-b border-slate-200 pb-3 mt-8 mb-6"><div className="w-8 h-8 rounded-lg bg-[#1E40AF] text-white flex items-center justify-center text-sm font-black shadow-sm">04</div><h3 className="text-lg font-black uppercase tracking-wider text-[#0F172A]">Classificação e Risco</h3></div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             
             <div>
@@ -844,7 +844,7 @@ export default function OccurrenceForm({
 
           </div>
 
-          {/* SECTION F: DETAILED DESCRIPTION */}
+          <div className="flex items-center gap-3 border-b border-slate-200 pb-3 mt-8 mb-6"><div className="w-8 h-8 rounded-lg bg-[#1E40AF] text-white flex items-center justify-center text-sm font-black shadow-sm">05</div><h3 className="text-lg font-black uppercase tracking-wider text-[#0F172A]">Descrição do Evento</h3></div>
           <div>
             <label className="block text-xs font-black uppercase text-[#0F172A] mb-1">
               Descrição Detalhada da Ocorrência <span className="text-[#2563EB]">*</span>
@@ -859,7 +859,7 @@ export default function OccurrenceForm({
             />
           </div>
 
-          {/* SECTION G: FORM ACTIONS */}
+          <div className="flex items-center gap-3 border-b border-slate-200 pb-3 mt-8 mb-6"><div className="w-8 h-8 rounded-lg bg-[#1E40AF] text-white flex items-center justify-center text-sm font-black shadow-sm">06</div><h3 className="text-lg font-black uppercase tracking-wider text-[#0F172A]">Revisão e Envio</h3></div>
           <div className="pt-3 border-t border-[#E2E8F0] flex items-center justify-end gap-3">
             <button
               type="button"
