@@ -160,7 +160,7 @@ export default function HistoryList({
         <div className="flex flex-col md:flex-row items-center justify-between gap-3 border-b border-[#F1F5F9] pb-3 mb-3">
           <div>
             <h2 className="text-sm font-black uppercase text-[#0F172A] tracking-wider flex items-center gap-2">
-              <span>Histórico Operacional & Passagem de Turno</span>
+              <span>Histórico Operacional & Passagem de Plantão</span>
               <span className="text-[10px] bg-[#0F172A] text-white px-2 py-0.5 rounded font-mono">
                 {filteredOccurrences.length} registros
               </span>

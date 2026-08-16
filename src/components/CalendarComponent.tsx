@@ -114,7 +114,7 @@ export default function CalendarComponent({
           <h2 className="text-sm font-black uppercase text-[#2563EB] bg-white px-2 py-0.5 rounded shadow-sm inline-block tracking-wider mb-1">
             Calendário e Lembretes
           </h2>
-          <p className="text-xs text-slate-300">Agende reuniões de passagem de turno, manutenções preventivas de frotas e auditorias.</p>
+          <p className="text-xs text-slate-300">Agende reuniões de passagem de plantão, manutenções preventivas de frotas e auditorias.</p>
         </div>
         <ThreeDIcon icon={CalendarDays} color="coffee" size="md" />
       </div>

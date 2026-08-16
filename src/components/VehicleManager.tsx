@@ -242,79 +242,71 @@ export default function VehicleManager({
           </button>
         </div>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-          {filteredVehicles.map((v) => (
-            <div
-              key={v.id}
-              className="bg-white rounded-2xl border border-slate-100 shadow-sm hover:shadow-md transition-all p-5 flex flex-col justify-between relative group"
-            >
-              <div>
-                {/* Header card */}
-                <div className="flex justify-between items-start mb-3">
-                  <div className="flex items-center gap-2">
-                    <span className="px-2.5 py-1 bg-blue-50 text-blue-700 font-mono font-bold text-sm rounded-lg border border-blue-100">
-                      🚛 {v.cavaloPlate}
-                    </span>
-                  </div>
-                  <div className="flex items-center gap-1 opacity-80 group-hover:opacity-100 transition-opacity">
-                    <button
-                      onClick={() => handleOpenEdit(v)}
-                      className="p-1.5 text-slate-400 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors cursor-pointer"
-                      title="Editar"
-                    >
-                      <Edit className="w-4 h-4" />
-                    </button>
-                    <button
-                      onClick={() => {
-                        if (window.confirm(`Deseja excluir o registro do veículo ${v.cavaloPlate}?`)) {
-                          onDeleteVehicle(v.id);
-                        }
-                      }}
-                      className="p-1.5 text-slate-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors cursor-pointer"
-                      title="Excluir"
-                    >
-                      <Trash2 className="w-4 h-4" />
-                    </button>
-                  </div>
-                </div>
-
-                {/* Details */}
-                <div className="space-y-2 mb-4">
-                  <div className="flex items-start gap-2 text-sm">
-                    <span className="text-slate-400 font-medium min-w-[90px]">Carretas:</span>
-                    <span className="text-slate-800 font-mono font-medium">{v.carretaPlates || 'Nenhuma informada'}</span>
-                  </div>
-                  <div className="flex items-start gap-2 text-sm">
-                    <Building2 className="w-4 h-4 text-slate-400 mt-0.5 shrink-0" />
-                    <div>
-                      <span className="text-slate-400 text-xs block">Transportadora</span>
-                      <span className="text-slate-800 font-medium">{v.carrier}</span>
-                    </div>
-                  </div>
-                  {v.driverName && (
-                    <div className="flex items-start gap-2 text-sm">
-                      <span className="text-slate-400 font-medium min-w-[90px]">Motorista:</span>
-                      <span className="text-slate-700">{v.driverName}</span>
-                    </div>
-                  )}
-                  {v.notes && (
-                    <p className="text-xs text-slate-500 bg-slate-50 p-2.5 rounded-xl mt-2 border border-slate-100 italic">
-                      "{v.notes}"
-                    </p>
-                  )}
-                </div>
-              </div>
-
-              {/* Footer Timestamp */}
-              <div className="pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-400">
-                <div className="flex items-center gap-1.5">
-                  <Clock className="w-3.5 h-3.5" />
-                  <span>Cadastrado em:</span>
-                </div>
-                <span className="font-medium text-slate-600">{formatDate(v.createdAt)}</span>
-              </div>
-            </div>
-          ))}
+        <div className="bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-sm">
+          <div className="overflow-x-auto">
+            <table className="w-full text-sm text-left">
+              <thead className="bg-slate-50 border-b border-slate-200 text-slate-500 font-medium">
+                <tr>
+                  <th className="px-5 py-4 uppercase tracking-wider text-xs">Placa Cavalo</th>
+                  <th className="px-5 py-4 uppercase tracking-wider text-xs">Placa(s) Carreta</th>
+                  <th className="px-5 py-4 uppercase tracking-wider text-xs">Transportadora</th>
+                  <th className="px-5 py-4 uppercase tracking-wider text-xs">Motorista</th>
+                  <th className="px-5 py-4 uppercase tracking-wider text-xs hidden md:table-cell">Data de Cadastro</th>
+                  <th className="px-5 py-4 uppercase tracking-wider text-xs text-right">Ações</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-slate-100">
+                {filteredVehicles.map((v) => (
+                  <tr key={v.id} className="hover:bg-slate-50/80 transition-colors group">
+                    <td className="px-5 py-3.5 whitespace-nowrap">
+                      <div className="flex items-center gap-2">
+                        <span className="px-2 py-1 bg-blue-50 text-blue-700 font-mono font-bold text-xs rounded-lg border border-blue-100">
+                          🚛 {v.cavaloPlate}
+                        </span>
+                      </div>
+                    </td>
+                    <td className="px-5 py-3.5">
+                      <span className="text-slate-600 font-mono text-xs">{v.carretaPlates || '-'}</span>
+                    </td>
+                    <td className="px-5 py-3.5">
+                      <div className="flex items-center gap-2">
+                        <Building2 className="w-4 h-4 text-slate-400 shrink-0" />
+                        <span className="text-slate-700 font-medium">{v.carrier}</span>
+                      </div>
+                    </td>
+                    <td className="px-5 py-3.5">
+                      <span className="text-slate-600">{v.driverName || '-'}</span>
+                    </td>
+                    <td className="px-5 py-3.5 text-slate-500 hidden md:table-cell whitespace-nowrap text-xs">
+                      {formatDate(v.createdAt)}
+                    </td>
+                    <td className="px-5 py-3.5 text-right whitespace-nowrap">
+                      <div className="flex items-center justify-end gap-1 opacity-60 group-hover:opacity-100 transition-opacity">
+                        <button
+                          onClick={() => handleOpenEdit(v)}
+                          className="p-1.5 text-slate-400 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors cursor-pointer"
+                          title="Editar"
+                        >
+                          <Edit className="w-4 h-4" />
+                        </button>
+                        <button
+                          onClick={() => {
+                            if (window.confirm(`Deseja excluir o registro do veículo ${v.cavaloPlate}?`)) {
+                              onDeleteVehicle(v.id);
+                            }
+                          }}
+                          className="p-1.5 text-slate-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors cursor-pointer"
+                          title="Excluir"
+                        >
+                          <Trash2 className="w-4 h-4" />
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
       )}
 

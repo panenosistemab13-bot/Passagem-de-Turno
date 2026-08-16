@@ -40,7 +40,7 @@ export const OCCURRENCE_TITLES = [
   "Transbordo"
 ] as const;
 
-// Categorias e Tipos de Instabilidade solicitadas para passagem de turno
+// Categorias e Tipos de Instabilidade solicitadas para passagem de plantão
 export const INSTABILITY_SYSTEMS = [
   "Telefonia",
   "Sascar",

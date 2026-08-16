@@ -372,7 +372,7 @@ export default function OccurrenceForm({
         <div className="space-y-0.5">
           <div className="flex items-center gap-2">
             <span className="text-xs font-black uppercase tracking-wider text-[#2563EB] bg-white px-2 py-0.5 rounded shadow-sm">
-              Passagem de Turno
+              Passagem de Plantão
             </span>
             <span className="text-xs text-slate-300 font-bold">Café Três Corações</span>
           </div>
@@ -852,7 +852,7 @@ export default function OccurrenceForm({
             <textarea
               value={description}
               onChange={(e) => setDescription(e.target.value)}
-              placeholder="Digite com detalhes o ocorrido, motorista envolvido, localidade/quilômetro da rodovia, providências adotadas pelo plantão, chamado aberto e próximos passos na passagem de turno..."
+              placeholder="Digite com detalhes o ocorrido, motorista envolvido, localidade/quilômetro da rodovia, providências adotadas pelo plantão, chamado aberto e próximos passos na passagem de plantão..."
               rows={4}
               className="w-full bg-[#F8FAFC] border border-[#E2E8F0] rounded-lg p-3 text-xs text-[#0F172A] focus:outline-none focus:ring-1 focus:ring-[#2563EB] focus:border-[#2563EB] transition-all leading-relaxed"
               required
