@@ -49,8 +49,8 @@ export const INSTABILITY_SYSTEMS = [
   "Sistema de Espelhamento"
 ] as const;
 
-// Unidades frequentes de operação do Grupo 3C
-export const COMMON_UNITS = [
+// Unidades frequentes de operação do Grupo 3C iniciais
+export const INITIAL_UNITS = [
   "CD Varginha / MG",
   "Fábrica Natal / RN",
   "Fábrica Eusébio / CE",
@@ -64,6 +64,8 @@ export const COMMON_UNITS = [
   "CD Rio de Janeiro / RJ",
   "CD Curitiba / PR"
 ];
+
+export const COMMON_UNITS = INITIAL_UNITS;
 
 // Transportadoras parceiras
 export const COMMON_CARRIERS = [

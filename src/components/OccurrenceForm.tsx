@@ -21,7 +21,13 @@ import {
   Sparkles,
   Layers,
   HelpCircle,
-  FileSpreadsheet
+  FileSpreadsheet,
+  Plus,
+  Trash2,
+  Edit3,
+  X,
+  Settings,
+  MapPin
 } from 'lucide-react';
 import ThreeDIcon from './ThreeDIcon';
 import { 
@@ -33,7 +39,7 @@ import {
   TripReportRecord 
 } from '../tripData';
 import { pushOccurrenceToFirebase, rtdb, snapshotToArray } from '../lib/firebase';
-import { onValue, ref } from 'firebase/database';
+import { onValue, ref, set } from 'firebase/database';
 
 interface OccurrenceFormProps {
   leaders: Leader[];
@@ -186,6 +192,81 @@ export default function OccurrenceForm({
     setCarrier(veh.carrier);
     if (!description.trim()) {
       setDescription(`Veículo (Cavalo): ${veh.cavaloPlate}${veh.carretaPlates ? ` | Carretas: ${veh.carretaPlates}` : ''} | Transportadora: ${veh.carrier}${veh.driverName ? ` | Motorista: ${veh.driverName}` : ''}${veh.notes ? ` | Obs: ${veh.notes}` : ''}\n\nDescrição da Ocorrência: `);
+    }
+  };
+
+  // Unidades / Lugares Grupo 3 Corações state & management
+  const [unitsList, setUnitsList] = useState<string[]>(() => {
+    const saved = localStorage.getItem('grupo3c_units');
+    if (saved) {
+      try { return JSON.parse(saved); } catch(e) {}
+    }
+    return [...COMMON_UNITS];
+  });
+  const [showUnitManagerModal, setShowUnitManagerModal] = useState(false);
+  const [newUnitName, setNewUnitName] = useState('');
+  const [editingUnitIndex, setEditingUnitIndex] = useState<number | null>(null);
+  const [editingUnitName, setEditingUnitName] = useState('');
+
+  // Realtime listener for units from Firebase
+  useEffect(() => {
+    const unsub = onValue(ref(rtdb, 'dados-globais/unidades'), (snapshot) => {
+      if (snapshot.exists()) {
+        const val = snapshot.val();
+        if (Array.isArray(val)) {
+          setUnitsList(val);
+          localStorage.setItem('grupo3c_units', JSON.stringify(val));
+        }
+      } else {
+        set(ref(rtdb, 'dados-globais/unidades'), [...COMMON_UNITS]);
+      }
+    });
+    return () => unsub();
+  }, []);
+
+  const saveUnitsToFirebase = async (updated: string[]) => {
+    setUnitsList(updated);
+    localStorage.setItem('grupo3c_units', JSON.stringify(updated));
+    try {
+      await set(ref(rtdb, 'dados-globais/unidades'), updated);
+    } catch (err) {
+      console.error("Error saving units:", err);
+    }
+  };
+
+  const handleAddUnit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!newUnitName.trim()) return;
+    if (unitsList.includes(newUnitName.trim())) {
+      onAddNotification("Aviso", "Esta unidade/lugar já está cadastrada.", "warning");
+      return;
+    }
+    const updated = [...unitsList, newUnitName.trim()];
+    saveUnitsToFirebase(updated);
+    setNewUnitName('');
+    onAddNotification("Sucesso", "Unidade adicionada com sucesso!", "success");
+  };
+
+  const handleUpdateUnit = (index: number) => {
+    if (!editingUnitName.trim()) return;
+    const updated = [...unitsList];
+    updated[index] = editingUnitName.trim();
+    saveUnitsToFirebase(updated);
+    setEditingUnitIndex(null);
+    setEditingUnitName('');
+    onAddNotification("Sucesso", "Unidade atualizada com sucesso!", "success");
+  };
+
+  const handleDeleteUnit = (index: number) => {
+    if (unitsList.length <= 1) {
+      onAddNotification("Aviso", "Deve haver pelo menos uma unidade cadastrada.", "warning");
+      return;
+    }
+    const unitToDelete = unitsList[index];
+    if (window.confirm(`Deseja realmente apagar a unidade/lugar "${unitToDelete}"?`)) {
+      const updated = unitsList.filter((_, i) => i !== index);
+      saveUnitsToFirebase(updated);
+      onAddNotification("Sucesso", "Unidade removida com sucesso!", "success");
     }
   };
 
@@ -550,9 +631,20 @@ export default function OccurrenceForm({
 
                 {/* 3. Unidade */}
                 <div>
-                  <label className="block text-[11px] font-black uppercase text-[#0F172A] mb-1">
-                    Unidade Grupo 3 Corações
-                  </label>
+                  <div className="flex items-center justify-between mb-1">
+                    <label className="block text-[11px] font-black uppercase text-[#0F172A]">
+                      Unidade Grupo 3 Corações
+                    </label>
+                    <button
+                      type="button"
+                      onClick={() => setShowUnitManagerModal(true)}
+                      className="text-[10px] font-bold text-blue-600 hover:text-blue-800 flex items-center gap-1 bg-blue-50 px-2 py-0.5 rounded border border-blue-200 transition-colors cursor-pointer"
+                      title="Adicionar, Editar ou Apagar Lugares / Unidades"
+                    >
+                      <Settings className="w-3 h-3" />
+                      Gerenciar Lugares ({unitsList.length})
+                    </button>
+                  </div>
                   <div className="relative">
                     <input
                       type="text"
@@ -564,7 +656,7 @@ export default function OccurrenceForm({
                     />
                     <Tag className="absolute left-2.5 top-2.5 w-3.5 h-3.5 text-[#64748B]" />
                     <datalist id="unit-suggestions">
-                      {COMMON_UNITS.map((u, i) => (
+                      {unitsList.map((u, i) => (
                         <option key={i} value={u} />
                       ))}
                     </datalist>
@@ -786,6 +878,117 @@ export default function OccurrenceForm({
 
         </form>
       </div>
+
+      {/* Unit Manager Modal */}
+      {showUnitManagerModal && (
+        <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-center justify-center p-4">
+          <div className="bg-white rounded-2xl shadow-2xl max-w-lg w-full border border-slate-200 overflow-hidden animate-in fade-in zoom-in-95 duration-200">
+            <div className="bg-slate-900 text-white px-6 py-4 flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <Building2 className="w-5 h-5 text-blue-400" />
+                <h3 className="text-sm font-black uppercase tracking-wider">Gerenciar Lugares e Unidades</h3>
+              </div>
+              <button
+                onClick={() => setShowUnitManagerModal(false)}
+                className="text-slate-400 hover:text-white p-1 rounded-lg transition-colors cursor-pointer"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+
+            <div className="p-6 space-y-4">
+              {/* Add New Unit Form */}
+              <form onSubmit={handleAddUnit} className="flex gap-2">
+                <input
+                  type="text"
+                  value={newUnitName}
+                  onChange={(e) => setNewUnitName(e.target.value)}
+                  placeholder="Nome do novo lugar / unidade (Ex: CD Campinas / SP)"
+                  className="flex-1 bg-slate-50 border border-slate-300 rounded-lg px-3 py-2 text-xs font-semibold text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-600"
+                />
+                <button
+                  type="submit"
+                  className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-xs font-bold uppercase flex items-center gap-1.5 transition-colors cursor-pointer shrink-0"
+                >
+                  <Plus className="w-4 h-4" /> Adicionar
+                </button>
+              </form>
+
+              <div className="border-t border-slate-200 pt-3">
+                <p className="text-[11px] font-bold uppercase text-slate-500 mb-2">
+                  Unidades Cadastradas ({unitsList.length})
+                </p>
+                <div className="max-h-64 overflow-y-auto space-y-2 pr-1">
+                  {unitsList.map((unitItem, index) => (
+                    <div key={index} className="flex items-center justify-between bg-slate-50 border border-slate-200 rounded-lg p-2.5">
+                      {editingUnitIndex === index ? (
+                        <div className="flex items-center gap-2 flex-1 mr-2">
+                          <input
+                            type="text"
+                            value={editingUnitName}
+                            onChange={(e) => setEditingUnitName(e.target.value)}
+                            className="flex-1 bg-white border border-blue-400 rounded px-2 py-1 text-xs font-semibold text-slate-800 focus:outline-none"
+                            autoFocus
+                          />
+                          <button
+                            type="button"
+                            onClick={() => handleUpdateUnit(index)}
+                            className="bg-emerald-600 hover:bg-emerald-700 text-white px-2.5 py-1 rounded text-xs font-bold transition-colors cursor-pointer"
+                          >
+                            Salvar
+                          </button>
+                          <button
+                            type="button"
+                            onClick={() => { setEditingUnitIndex(null); setEditingUnitName(''); }}
+                            className="bg-slate-300 hover:bg-slate-400 text-slate-700 px-2 py-1 rounded text-xs transition-colors cursor-pointer"
+                          >
+                            Cancelar
+                          </button>
+                        </div>
+                      ) : (
+                        <>
+                          <div className="flex items-center gap-2">
+                            <MapPin className="w-4 h-4 text-blue-600 shrink-0" />
+                            <span className="text-xs font-bold text-slate-800">{unitItem}</span>
+                          </div>
+                          <div className="flex items-center gap-1">
+                            <button
+                              type="button"
+                              onClick={() => { setEditingUnitIndex(index); setEditingUnitName(unitItem); }}
+                              className="p-1.5 text-slate-600 hover:text-blue-600 hover:bg-blue-50 rounded transition-colors cursor-pointer"
+                              title="Editar unidade"
+                            >
+                              <Edit3 className="w-3.5 h-3.5" />
+                            </button>
+                            <button
+                              type="button"
+                              onClick={() => handleDeleteUnit(index)}
+                              className="p-1.5 text-slate-600 hover:text-red-600 hover:bg-red-50 rounded transition-colors cursor-pointer"
+                              title="Apagar unidade"
+                            >
+                              <Trash2 className="w-3.5 h-3.5" />
+                            </button>
+                          </div>
+                        </>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div className="pt-2 border-t border-slate-200 flex justify-end">
+                <button
+                  type="button"
+                  onClick={() => setShowUnitManagerModal(false)}
+                  className="bg-slate-900 hover:bg-slate-800 text-white px-5 py-2 rounded-lg text-xs font-bold uppercase transition-colors cursor-pointer"
+                >
+                  Concluir / Fechar
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
 
     </div>
   );

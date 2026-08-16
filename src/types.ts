@@ -41,7 +41,6 @@ export interface Occurrence {
   instabilitySystem?: string; // Telefonia, Sascar, Trafegus, etc.
   ticketNumber?: string; // Número do Chamado de acompanhamento
   affectedTechnology?: string;
-
   createdAt: string;
 }
 
@@ -99,4 +98,16 @@ export interface Notification {
   type: 'info' | 'warning' | 'success';
   createdAt: string;
   read: boolean;
+}
+
+export type AttendanceStatus = 'trabalhou' | 'faltou' | 'atestado' | 'folga' | 'pendente';
+
+export interface AttendanceRecord {
+  matricula: string;
+  status: AttendanceStatus;
+}
+
+export interface DailyAttendance {
+  date: string; // YYYY-MM-DD
+  records: Record<string, AttendanceRecord>; // Map de matricula para AttendanceRecord
 }

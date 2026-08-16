@@ -131,6 +131,7 @@ export const dbRefs = {
   chatMessages: ref(rtdb, 'chatMessages'),
   notifications: ref(rtdb, 'notifications'),
   vehicles: ref(rtdb, 'dados-globais/veiculos'),
+  attendance: ref(rtdb, 'dados-globais/presenca'),
   connected: ref(rtdb, '.info/connected')
 };
 

@@ -15,7 +15,8 @@ import {
   Bell,
   ArrowRight,
   Database,
-  Truck
+  Truck,
+  ClipboardCheck
 } from 'lucide-react';
 
 import { Leader, Occurrence, Employee, EmployeeLog, Reminder, ChatMessage, Notification, OccurrenceStatus, VehicleRecord } from './types';
@@ -64,6 +65,7 @@ import EmployeeList from './components/EmployeeList';
 import CalendarComponent from './components/CalendarComponent';
 import ChatComponent from './components/ChatComponent';
 import VehicleManager from './components/VehicleManager';
+import AttendanceList from './components/AttendanceList';
 
 export default function App() {
   
@@ -756,6 +758,8 @@ export default function App() {
             isAdmin={isAdmin}
           />
         );
+      case 'presenca':
+        return <AttendanceList isAdmin={isAdmin} />;
       default:
         return <DashboardStatus occurrences={occurrences} onSelectTab={setActiveTab} />;
     }
@@ -766,6 +770,7 @@ export default function App() {
     { id: 'dashboard', label: 'Painel de Status', icon: LayoutDashboard },
     { id: 'registrar', label: 'Novo Registro', icon: PlusCircle },
     { id: 'historico', label: 'Histórico Operacional', icon: History },
+    { id: 'presenca', label: 'Lista de Presença', icon: ClipboardCheck },
     { id: 'veiculos', label: 'Placas de Veículos', icon: Truck },
     { id: 'pastas', label: 'Pastas dos Líderes', icon: Folder },
     { id: 'funcionarios', label: 'Acompanhamento de Staff', icon: Users },
