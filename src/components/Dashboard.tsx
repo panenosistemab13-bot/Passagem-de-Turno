@@ -144,7 +144,7 @@ export default function Dashboard({
                       <Folder className="w-4 h-4" />
                     </div>
                     <div className="flex-1 min-w-0">
-                      <p className="text-xs font-bold text-[#0F172A] truncate">Registro na região de {o.location}</p>
+                      <p className="text-xs font-bold text-[#0F172A] truncate">Registro na unidade {o.unit || 'Matriz'}</p>
                       <p className="text-[10px] text-slate-500 truncate">{o.description}</p>
                     </div>
                     <span className="text-[10px] font-medium text-slate-400 whitespace-nowrap">

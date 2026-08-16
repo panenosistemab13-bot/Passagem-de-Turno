@@ -377,7 +377,7 @@ export default function OccurrenceForm({
             <span className="text-xs text-slate-300 font-bold">Café Três Corações</span>
           </div>
           <h2 className="text-base font-extrabold text-white">Novo Registro de Ocorrência & Passagem</h2>
-          <p className="text-xs text-slate-300">Lançamento integrado com frotas, placas, transportadoras, unidades e instabilidades de sistemas.</p>
+
         </div>
         <ThreeDIcon icon={FileText} color="blue" size="md" />
       </div>
@@ -497,15 +497,7 @@ export default function OccurrenceForm({
                   </span>
                 </div>
 
-                {/* Open Relatório de Viagens Modal/Button */}
-                <button
-                  type="button"
-                  onClick={() => setTripSearchOpen(!tripSearchOpen)}
-                  className="px-3 py-1 bg-[#0F172A] text-white hover:bg-[#1E293B] rounded-lg text-[11px] font-bold flex items-center gap-1.5 transition-colors cursor-pointer shadow-sm"
-                >
-                  <FileSpreadsheet className="w-3.5 h-3.5 text-[#2563EB]" />
-                  <span>{tripSearchOpen ? 'Fechar Relatório' : 'Puxar do Relatório de Viagens'}</span>
-                </button>
+
               </div>
 
               {/* Collapsible/Interactive Relatório de Viagens Quick Selector */}
@@ -635,15 +627,6 @@ export default function OccurrenceForm({
                     <label className="block text-[11px] font-black uppercase text-[#0F172A]">
                       Unidade Grupo 3 Corações
                     </label>
-                    <button
-                      type="button"
-                      onClick={() => setShowUnitManagerModal(true)}
-                      className="text-[10px] font-bold text-blue-600 hover:text-blue-800 flex items-center gap-1 bg-blue-50 px-2 py-0.5 rounded border border-blue-200 transition-colors cursor-pointer"
-                      title="Adicionar, Editar ou Apagar Lugares / Unidades"
-                    >
-                      <Settings className="w-3 h-3" />
-                      Gerenciar Lugares ({unitsList.length})
-                    </button>
                   </div>
                   <div className="relative">
                     <input
@@ -651,7 +634,7 @@ export default function OccurrenceForm({
                       list="unit-suggestions"
                       value={unit}
                       onChange={(e) => setUnit(e.target.value)}
-                      placeholder="Ex: CD Varginha, Fábrica Natal..."
+                      placeholder="Digite a unidade..."
                       className="w-full bg-white border border-[#E2E8F0] rounded-lg pl-8 pr-3 py-2 text-xs text-[#0F172A] focus:outline-none focus:ring-1 focus:ring-[#2563EB] focus:border-[#2563EB] font-semibold"
                     />
                     <Tag className="absolute left-2.5 top-2.5 w-3.5 h-3.5 text-[#64748B]" />

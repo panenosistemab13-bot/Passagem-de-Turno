@@ -82,10 +82,7 @@ export default function App() {
 
   useEffect(() => {
     ensureAnonymousAuth();
-    initializeFirebaseDataIfEmpty(
-      INITIAL_LEADERS, INITIAL_OCCURRENCES, INITIAL_EMPLOYEES, 
-      INITIAL_EMPLOYEE_LOGS, INITIAL_REMINDERS, INITIAL_CHAT_MESSAGES
-    );
+    initializeFirebaseDataIfEmpty();
   }, []);
 
   useEffect(() => {
@@ -215,7 +212,15 @@ export default function App() {
     await updateOccurrenceInFirebase(updatedOcc);
   };
 
-  const handleAddNotification = async (notif: Notification) => {
+  const handleAddNotification = async (title: string, message: string, type: 'info' | 'warning' | 'success') => {
+    const notif: Notification = {
+      id: crypto.randomUUID(),
+      title,
+      message,
+      type,
+      createdAt: new Date().toISOString(),
+      read: false
+    };
     const updated = [notif, ...notifications];
     setNotifications(updated);
     await pushNotificationToFirebase(notif);
@@ -251,7 +256,7 @@ export default function App() {
         title: 'Nova mensagem no Chat',
         message: 'A Central de Apoio respondeu no canal da equipe.',
         type: 'info',
-        timestamp: new Date().toISOString(),
+        createdAt: new Date().toISOString(),
         read: false
       };
       setNotifications(prev => [notif, ...prev]);

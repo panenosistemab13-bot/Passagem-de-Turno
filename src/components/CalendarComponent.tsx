@@ -47,10 +47,10 @@ export default function CalendarComponent({ reminders }: { reminders: Reminder[]
                   </div>
                   <div className="flex flex-col items-end justify-between">
                     <span className={`px-2 py-0.5 rounded text-[9px] font-bold uppercase tracking-wider ${
-                      r.type === 'meeting' ? 'bg-blue-100 text-blue-700' :
-                      r.type === 'maintenance' ? 'bg-amber-100 text-amber-700' : 'bg-emerald-100 text-emerald-700'
+                      r.type === 'reuniao' ? 'bg-blue-100 text-blue-700' :
+                      r.type === 'manutencao' ? 'bg-amber-100 text-amber-700' : 'bg-emerald-100 text-emerald-700'
                     }`}>
-                      {r.type === 'meeting' ? 'Reunião' : r.type === 'maintenance' ? 'Manutenção' : 'Checklist'}
+                      {r.type === 'reuniao' ? 'Reunião' : r.type === 'manutencao' ? 'Manutenção' : 'Checklist'}
                     </span>
                     <div className="opacity-0 group-hover:opacity-100 transition-opacity">
                       <button className="text-slate-400 hover:text-red-600 p-1"><Trash2 className="w-3.5 h-3.5" /></button>

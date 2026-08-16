@@ -81,14 +81,14 @@ export default function LeaderFolders({
             leaderOccs.map(occ => (
               <div key={occ.id} className="p-4 border border-slate-100 rounded-xl bg-slate-50 flex gap-4">
                 <div className="flex-1">
-                  <p className="font-bold text-slate-800 text-sm mb-1">{occ.category} - {occ.subcategory}</p>
+                  <p className="font-bold text-slate-800 text-sm mb-1">{occ.category} - {occ.title}</p>
                   <p className="text-xs text-slate-600 line-clamp-2">{occ.description}</p>
                 </div>
                 <div className="text-right">
                   <span className={`text-[10px] font-bold px-2 py-1 rounded-full ${
                     occ.riskLevel === 'Crítico' ? 'bg-red-100 text-red-700' :
                     occ.riskLevel === 'Alto' ? 'bg-orange-100 text-orange-700' :
-                    occ.riskLevel === 'Moderado' ? 'bg-amber-100 text-amber-700' :
+                    occ.riskLevel === 'Médio' ? 'bg-amber-100 text-amber-700' :
                     'bg-emerald-100 text-emerald-700'
                   }`}>
                     {occ.riskLevel}

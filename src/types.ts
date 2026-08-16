@@ -84,10 +84,12 @@ export interface Reminder {
 
 export interface ChatMessage {
   id: string;
+  senderId: string;
   senderName: string;
-  senderRole: string;
-  message: string;
+  senderRole?: string;
+  content: string;
   timestamp: string;
+  isSystem?: boolean;
   isAdmin?: boolean;
 }
 

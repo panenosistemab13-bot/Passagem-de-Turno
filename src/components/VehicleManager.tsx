@@ -23,7 +23,7 @@ export default function VehicleManager() {
     <div className="space-y-6 max-w-7xl mx-auto">
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
-          <h2 className="text-xl font-black text-[#0F172A]">Controle de Frotas</h2>
+          <div className="flex items-center gap-3"><h2 className="text-xl font-black text-[#0F172A]">Controle de Frotas</h2><span className="bg-[#1E40AF] text-white text-[10px] font-black px-2.5 py-1 rounded-full uppercase tracking-wider">{filtered.length} veículos</span></div>
           <p className="text-sm text-slate-500">Cadastro e consulta rápida de cavalos, carretas e motoristas.</p>
         </div>
         <button className="bg-[#1E40AF] hover:bg-blue-800 text-white px-5 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider flex items-center gap-2 transition-colors shadow-sm">
