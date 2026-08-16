@@ -1,0 +1,3334 @@
+{
+  "9e7a7c40-825b-4bc7-9f1f-9cdc4cb3d114": {
+    "id": "9e7a7c40-825b-4bc7-9f1f-9cdc4cb3d114",
+    "cavaloPlate": "SBN5A55",
+    "carretaPlates": "",
+    "carrier": "3C BARBALHA",
+    "createdAt": "2026-08-16T02:25:39.455Z"
+  },
+  "cf87a147-134e-4405-a235-718e32db0eca": {
+    "id": "cf87a147-134e-4405-a235-718e32db0eca",
+    "cavaloPlate": "OSJ1457",
+    "carretaPlates": "",
+    "carrier": "3C BARBALHA",
+    "createdAt": "2026-08-16T02:25:39.456Z"
+  },
+  "1f40f972-d896-48c4-b858-006e5bba3bf5": {
+    "id": "1f40f972-d896-48c4-b858-006e5bba3bf5",
+    "cavaloPlate": "SBF7F12",
+    "carretaPlates": "",
+    "carrier": "3C BARBALHA",
+    "createdAt": "2026-08-16T02:25:39.456Z"
+  },
+  "e6cec943-bf16-450a-96c4-1e5520fd7d03": {
+    "id": "e6cec943-bf16-450a-96c4-1e5520fd7d03",
+    "cavaloPlate": "PNH3093",
+    "carretaPlates": "",
+    "carrier": "3C BARBALHA",
+    "createdAt": "2026-08-16T02:25:39.456Z"
+  },
+  "c56c97d0-3afa-4c83-941a-3db40d24655b": {
+    "id": "c56c97d0-3afa-4c83-941a-3db40d24655b",
+    "cavaloPlate": "OSI9697",
+    "carretaPlates": "",
+    "carrier": "3C BARBALHA",
+    "createdAt": "2026-08-16T02:25:39.456Z"
+  },
+  "e1a63d6e-7e5f-4a51-8ba1-f63f533b0d48": {
+    "id": "e1a63d6e-7e5f-4a51-8ba1-f63f533b0d48",
+    "cavaloPlate": "PMV8796",
+    "carretaPlates": "",
+    "carrier": "3C BARBALHA",
+    "createdAt": "2026-08-16T02:25:39.456Z"
+  },
+  "c630a782-f631-4906-aed1-6af38770ba81": {
+    "id": "c630a782-f631-4906-aed1-6af38770ba81",
+    "cavaloPlate": "RIG3C92",
+    "carretaPlates": "",
+    "carrier": "3C BARBALHA",
+    "createdAt": "2026-08-16T02:25:39.456Z"
+  },
+  "34eb392e-e622-46c8-9fdd-883faefb82ab": {
+    "id": "34eb392e-e622-46c8-9fdd-883faefb82ab",
+    "cavaloPlate": "RII9E82",
+    "carretaPlates": "",
+    "carrier": "3C BARBALHA",
+    "createdAt": "2026-08-16T02:25:39.456Z"
+  },
+  "351c12ee-1162-43f2-bf78-09d9b5d1e344": {
+    "id": "351c12ee-1162-43f2-bf78-09d9b5d1e344",
+    "cavaloPlate": "SBT6B65",
+    "carretaPlates": "",
+    "carrier": "3C BARBALHA",
+    "createdAt": "2026-08-16T02:25:39.456Z"
+  },
+  "19fc9015-413f-4b7f-bace-72c58fb56258": {
+    "id": "19fc9015-413f-4b7f-bace-72c58fb56258",
+    "cavaloPlate": "PNU0C53",
+    "carretaPlates": "",
+    "carrier": "3C BARREIRAS",
+    "createdAt": "2026-08-16T02:25:39.456Z"
+  },
+  "555860b0-c50f-4ba8-bd03-5567fb938a01": {
+    "id": "555860b0-c50f-4ba8-bd03-5567fb938a01",
+    "cavaloPlate": "SBN3H95",
+    "carretaPlates": "",
+    "carrier": "3C BELEM",
+    "createdAt": "2026-08-16T02:25:39.456Z"
+  },
+  "6a8c9c14-0888-49a2-9608-f4c932f122ef": {
+    "id": "6a8c9c14-0888-49a2-9608-f4c932f122ef",
+    "cavaloPlate": "PNB1253",
+    "carretaPlates": "",
+    "carrier": "3C BELEM",
+    "createdAt": "2026-08-16T02:25:39.456Z"
+  },
+  "78f64ddc-6f38-4071-ac9a-35afa4889d88": {
+    "id": "78f64ddc-6f38-4071-ac9a-35afa4889d88",
+    "cavaloPlate": "SBC3F73",
+    "carretaPlates": "",
+    "carrier": "3C BELEM",
+    "createdAt": "2026-08-16T02:25:39.456Z"
+  },
+  "570a2bc5-5459-46f2-9237-3757c90c74b8": {
+    "id": "570a2bc5-5459-46f2-9237-3757c90c74b8",
+    "cavaloPlate": "SBR6C75",
+    "carretaPlates": "",
+    "carrier": "3C BELEM",
+    "createdAt": "2026-08-16T02:25:39.456Z"
+  },
+  "42487804-09d8-4a1d-84b9-5ad155552ad0": {
+    "id": "42487804-09d8-4a1d-84b9-5ad155552ad0",
+    "cavaloPlate": "SBF3E01",
+    "carretaPlates": "",
+    "carrier": "3C BELEM",
+    "createdAt": "2026-08-16T02:25:39.456Z"
+  },
+  "c9bf6f38-2012-4cb7-aa7e-1a7d57dc1273": {
+    "id": "c9bf6f38-2012-4cb7-aa7e-1a7d57dc1273",
+    "cavaloPlate": "SBN6E13",
+    "carretaPlates": "",
+    "carrier": "3C BELEM",
+    "createdAt": "2026-08-16T02:25:39.456Z"
+  },
+  "761796fb-de81-45a8-8e49-8ac0e725999f": {
+    "id": "761796fb-de81-45a8-8e49-8ac0e725999f",
+    "cavaloPlate": "SAR0A65",
+    "carretaPlates": "",
+    "carrier": "3C BELEM",
+    "createdAt": "2026-08-16T02:25:39.456Z"
+  },
+  "28d87ec8-d745-46b3-991d-38f800e762b4": {
+    "id": "28d87ec8-d745-46b3-991d-38f800e762b4",
+    "cavaloPlate": "SAN7E73",
+    "carretaPlates": "",
+    "carrier": "3C BELEM",
+    "createdAt": "2026-08-16T02:25:39.456Z"
+  },
+  "adb71c89-f210-4872-99b2-4094c59e74fe": {
+    "id": "adb71c89-f210-4872-99b2-4094c59e74fe",
+    "cavaloPlate": "PNT4674",
+    "carretaPlates": "",
+    "carrier": "3C BELEM",
+    "createdAt": "2026-08-16T02:25:39.456Z"
+  },
+  "190e4b3e-56ba-4974-9c30-23403c1db060": {
+    "id": "190e4b3e-56ba-4974-9c30-23403c1db060",
+    "cavaloPlate": "SBU2C73",
+    "carretaPlates": "",
+    "carrier": "3C BELEM",
+    "createdAt": "2026-08-16T02:25:39.456Z"
+  },
+  "769ec832-5732-4f1c-908f-c6383de43c4d": {
+    "id": "769ec832-5732-4f1c-908f-c6383de43c4d",
+    "cavaloPlate": "SBN5C55",
+    "carretaPlates": "",
+    "carrier": "3C BELEM",
+    "createdAt": "2026-08-16T02:25:39.456Z"
+  },
+  "35e1f2df-3b56-4453-83e8-97299dc023e7": {
+    "id": "35e1f2df-3b56-4453-83e8-97299dc023e7",
+    "cavaloPlate": "SBP9I51",
+    "carretaPlates": "",
+    "carrier": "3C BELEM",
+    "createdAt": "2026-08-16T02:25:39.456Z"
+  },
+  "e7f24939-f331-48f0-8f8f-d4f40b7e66c4": {
+    "id": "e7f24939-f331-48f0-8f8f-d4f40b7e66c4",
+    "cavaloPlate": "PNP2155",
+    "carretaPlates": "",
+    "carrier": "3C BELEM",
+    "createdAt": "2026-08-16T02:25:39.456Z"
+  },
+  "f7cdab85-0c24-48b4-b212-54a1ca113581": {
+    "id": "f7cdab85-0c24-48b4-b212-54a1ca113581",
+    "cavaloPlate": "SAO0C92",
+    "carretaPlates": "",
+    "carrier": "3C BELEM",
+    "createdAt": "2026-08-16T02:25:39.456Z"
+  },
+  "3f8c9642-dd66-44a5-8739-eee2cb6882a7": {
+    "id": "3f8c9642-dd66-44a5-8739-eee2cb6882a7",
+    "cavaloPlate": "PMR8347",
+    "carretaPlates": "",
+    "carrier": "3C BELEM",
+    "createdAt": "2026-08-16T02:25:39.456Z"
+  },
+  "6e1e1f48-e030-4201-93e1-32c7f7186421": {
+    "id": "6e1e1f48-e030-4201-93e1-32c7f7186421",
+    "cavaloPlate": "SAP0G65",
+    "carretaPlates": "",
+    "carrier": "3C BELEM",
+    "createdAt": "2026-08-16T02:25:39.456Z"
+  },
+  "0d7fed1d-76d5-4bf0-a110-963d415035d8": {
+    "id": "0d7fed1d-76d5-4bf0-a110-963d415035d8",
+    "cavaloPlate": "SBV1G95",
+    "carretaPlates": "",
+    "carrier": "3C BELEM",
+    "createdAt": "2026-08-16T02:25:39.456Z"
+  },
+  "14a6806e-a68e-47a6-a680-00d6186c71f0": {
+    "id": "14a6806e-a68e-47a6-a680-00d6186c71f0",
+    "cavaloPlate": "PON1H23",
+    "carretaPlates": "",
+    "carrier": "3C BELEM",
+    "createdAt": "2026-08-16T02:25:39.456Z"
+  },
+  "9430bbe7-7681-4d7b-bc6d-4866436e1116": {
+    "id": "9430bbe7-7681-4d7b-bc6d-4866436e1116",
+    "cavaloPlate": "SBK6C35",
+    "carretaPlates": "",
+    "carrier": "3C BELEM",
+    "createdAt": "2026-08-16T02:25:39.456Z"
+  },
+  "1ac43342-3d8c-47cc-8259-2964821da53d": {
+    "id": "1ac43342-3d8c-47cc-8259-2964821da53d",
+    "cavaloPlate": "SBT7A85",
+    "carretaPlates": "",
+    "carrier": "3C BELEM",
+    "createdAt": "2026-08-16T02:25:39.456Z"
+  },
+  "2b08d2a5-a5ac-461e-b418-16613c66bbe6": {
+    "id": "2b08d2a5-a5ac-461e-b418-16613c66bbe6",
+    "cavaloPlate": "SAU7I85",
+    "carretaPlates": "",
+    "carrier": "3C CAXIAS",
+    "createdAt": "2026-08-16T02:25:39.456Z"
+  },
+  "11dde6b4-0abd-42b0-be40-6f8bef57e2b4": {
+    "id": "11dde6b4-0abd-42b0-be40-6f8bef57e2b4",
+    "cavaloPlate": "SAW2H45",
+    "carretaPlates": "",
+    "carrier": "3C CAXIAS",
+    "createdAt": "2026-08-16T02:25:39.456Z"
+  },
+  "60431f79-ffb0-4fe0-9edf-e9399c5e2639": {
+    "id": "60431f79-ffb0-4fe0-9edf-e9399c5e2639",
+    "cavaloPlate": "SAX5I05",
+    "carretaPlates": "",
+    "carrier": "3C CAXIAS",
+    "createdAt": "2026-08-16T02:25:39.456Z"
+  },
+  "d7b2f065-a10a-43c2-9b05-c07742a71f20": {
+    "id": "d7b2f065-a10a-43c2-9b05-c07742a71f20",
+    "cavaloPlate": "SBJ8C85",
+    "carretaPlates": "",
+    "carrier": "3C EUSEBIO",
+    "createdAt": "2026-08-16T02:25:39.456Z"
+  },
+  "0305c6a0-9eda-43d1-9e67-6acf08724e28": {
+    "id": "0305c6a0-9eda-43d1-9e67-6acf08724e28",
+    "cavaloPlate": "POY7J43",
+    "carretaPlates": "",
+    "carrier": "3C EUSEBIO",
+    "createdAt": "2026-08-16T02:25:39.456Z"
+  },
+  "478567a7-6b39-4b0a-b21f-62f60991eaa0": {
+    "id": "478567a7-6b39-4b0a-b21f-62f60991eaa0",
+    "cavaloPlate": "HWU5270",
+    "carretaPlates": "",
+    "carrier": "3C EUSEBIO",
+    "createdAt": "2026-08-16T02:25:39.456Z"
+  },
+  "9b0ce658-1e2b-4470-974d-27372bf7a669": {
+    "id": "9b0ce658-1e2b-4470-974d-27372bf7a669",
+    "cavaloPlate": "SBU1C45",
+    "carretaPlates": "",
+    "carrier": "3C EUSEBIO",
+    "createdAt": "2026-08-16T02:25:39.456Z"
+  },
+  "97380940-c9b8-48c8-821a-3c9d7368a183": {
+    "id": "97380940-c9b8-48c8-821a-3c9d7368a183",
+    "cavaloPlate": "ORU2947",
+    "carretaPlates": "",
+    "carrier": "3C EUSEBIO",
+    "createdAt": "2026-08-16T02:25:39.456Z"
+  },
+  "56b78111-45aa-479e-b363-62302be51d35": {
+    "id": "56b78111-45aa-479e-b363-62302be51d35",
+    "cavaloPlate": "PMV9106",
+    "carretaPlates": "",
+    "carrier": "3C EUSEBIO",
+    "createdAt": "2026-08-16T02:25:39.456Z"
+  },
+  "5dcae5fe-f6f2-4f4a-8550-7b6609af8ebb": {
+    "id": "5dcae5fe-f6f2-4f4a-8550-7b6609af8ebb",
+    "cavaloPlate": "RIG3C62",
+    "carretaPlates": "",
+    "carrier": "3C EUSEBIO",
+    "createdAt": "2026-08-16T02:25:39.456Z"
+  },
+  "632e4da3-aae3-4b12-9779-cc2339a85f1f": {
+    "id": "632e4da3-aae3-4b12-9779-cc2339a85f1f",
+    "cavaloPlate": "POO0H63",
+    "carretaPlates": "",
+    "carrier": "3C EUSEBIO",
+    "createdAt": "2026-08-16T02:25:39.456Z"
+  },
+  "c6535562-a806-44c4-b13b-948a63295a0e": {
+    "id": "c6535562-a806-44c4-b13b-948a63295a0e",
+    "cavaloPlate": "SBD3G93",
+    "carretaPlates": "",
+    "carrier": "3C EUSEBIO",
+    "createdAt": "2026-08-16T02:25:39.456Z"
+  },
+  "645d8810-b58f-4808-b4e2-c28c33804c86": {
+    "id": "645d8810-b58f-4808-b4e2-c28c33804c86",
+    "cavaloPlate": "RIE6C92",
+    "carretaPlates": "",
+    "carrier": "3C EUSEBIO",
+    "createdAt": "2026-08-16T02:25:39.456Z"
+  },
+  "d3daea65-488c-4d55-af87-4f0d266b5d75": {
+    "id": "d3daea65-488c-4d55-af87-4f0d266b5d75",
+    "cavaloPlate": "OSJ1337",
+    "carretaPlates": "",
+    "carrier": "3C EUSEBIO",
+    "createdAt": "2026-08-16T02:25:39.456Z"
+  },
+  "44d27eef-eb2a-437b-9906-4f7031ba99c9": {
+    "id": "44d27eef-eb2a-437b-9906-4f7031ba99c9",
+    "cavaloPlate": "PMV9356",
+    "carretaPlates": "",
+    "carrier": "3C EUSEBIO",
+    "createdAt": "2026-08-16T02:25:39.456Z"
+  },
+  "d2ee5570-0788-44c8-8b33-fe43bd675868": {
+    "id": "d2ee5570-0788-44c8-8b33-fe43bd675868",
+    "cavaloPlate": "OSJ9527",
+    "carretaPlates": "",
+    "carrier": "3C EUSEBIO",
+    "createdAt": "2026-08-16T02:25:39.456Z"
+  },
+  "b92ffcbf-db95-4892-b41b-e39a2671331b": {
+    "id": "b92ffcbf-db95-4892-b41b-e39a2671331b",
+    "cavaloPlate": "SBR0B85",
+    "carretaPlates": "",
+    "carrier": "3C EUSEBIO",
+    "createdAt": "2026-08-16T02:25:39.456Z"
+  },
+  "9a25a63c-e0b3-4d48-81bf-69e9197262ed": {
+    "id": "9a25a63c-e0b3-4d48-81bf-69e9197262ed",
+    "cavaloPlate": "PME1567",
+    "carretaPlates": "",
+    "carrier": "3C EUSEBIO",
+    "createdAt": "2026-08-16T02:25:39.456Z"
+  },
+  "251a4529-d690-4f61-bd81-545d46413178": {
+    "id": "251a4529-d690-4f61-bd81-545d46413178",
+    "cavaloPlate": "SBG4J15",
+    "carretaPlates": "",
+    "carrier": "3C EUSEBIO",
+    "createdAt": "2026-08-16T02:25:39.456Z"
+  },
+  "31f148f5-5680-45ec-a026-45802c16d3f6": {
+    "id": "31f148f5-5680-45ec-a026-45802c16d3f6",
+    "cavaloPlate": "PMV9216",
+    "carretaPlates": "",
+    "carrier": "3C EUSEBIO",
+    "createdAt": "2026-08-16T02:25:39.456Z"
+  },
+  "28aed2f6-5c91-4c5f-8caf-e77e07523367": {
+    "id": "28aed2f6-5c91-4c5f-8caf-e77e07523367",
+    "cavaloPlate": "SBJ7E96",
+    "carretaPlates": "",
+    "carrier": "3C EUSEBIO",
+    "createdAt": "2026-08-16T02:25:39.456Z"
+  },
+  "411664f1-6e56-47bd-ad89-2ee8ac2fc2ed": {
+    "id": "411664f1-6e56-47bd-ad89-2ee8ac2fc2ed",
+    "cavaloPlate": "SBV9J83",
+    "carretaPlates": "",
+    "carrier": "3C EUSEBIO",
+    "createdAt": "2026-08-16T02:25:39.456Z"
+  },
+  "42478036-abef-4d58-af97-61f598dcc1bb": {
+    "id": "42478036-abef-4d58-af97-61f598dcc1bb",
+    "cavaloPlate": "SBA6D85",
+    "carretaPlates": "",
+    "carrier": "3C EUSEBIO",
+    "createdAt": "2026-08-16T02:25:39.456Z"
+  },
+  "85ac17b5-59c7-4062-a64c-cb3960f08a76": {
+    "id": "85ac17b5-59c7-4062-a64c-cb3960f08a76",
+    "cavaloPlate": "SBJ8E46",
+    "carretaPlates": "",
+    "carrier": "3C EUSEBIO",
+    "createdAt": "2026-08-16T02:25:39.456Z"
+  },
+  "953cc4c8-ead5-412e-b072-cd1c6123b579": {
+    "id": "953cc4c8-ead5-412e-b072-cd1c6123b579",
+    "cavaloPlate": "POS0I73",
+    "carretaPlates": "",
+    "carrier": "3C EUSEBIO",
+    "createdAt": "2026-08-16T02:25:39.456Z"
+  },
+  "4648618c-aa2c-4c37-ab81-f3e57cf21397": {
+    "id": "4648618c-aa2c-4c37-ab81-f3e57cf21397",
+    "cavaloPlate": "PNE6833",
+    "carretaPlates": "",
+    "carrier": "3C EUSEBIO",
+    "createdAt": "2026-08-16T02:25:39.456Z"
+  },
+  "a272caf7-8705-4b43-8355-f30800045ac7": {
+    "id": "a272caf7-8705-4b43-8355-f30800045ac7",
+    "cavaloPlate": "SBG4E45",
+    "carretaPlates": "",
+    "carrier": "3C EUSEBIO",
+    "createdAt": "2026-08-16T02:25:39.456Z"
+  },
+  "c1cb12b3-80ee-47a1-8720-a6b639c8d4be": {
+    "id": "c1cb12b3-80ee-47a1-8720-a6b639c8d4be",
+    "cavaloPlate": "SBN4E01",
+    "carretaPlates": "",
+    "carrier": "3C EUSEBIO",
+    "createdAt": "2026-08-16T02:25:39.456Z"
+  },
+  "12db3a7a-9ab9-45a0-8fc9-45955150551c": {
+    "id": "12db3a7a-9ab9-45a0-8fc9-45955150551c",
+    "cavaloPlate": "POT6I03",
+    "carretaPlates": "",
+    "carrier": "3C EUSEBIO",
+    "createdAt": "2026-08-16T02:25:39.456Z"
+  },
+  "76147795-8bed-4b1b-aed7-c53aac0b3dea": {
+    "id": "76147795-8bed-4b1b-aed7-c53aac0b3dea",
+    "cavaloPlate": "RIG2H12",
+    "carretaPlates": "",
+    "carrier": "3C EUSEBIO",
+    "createdAt": "2026-08-16T02:25:39.456Z"
+  },
+  "d383475c-f8db-4c3f-ba2e-fe71f5aa23cc": {
+    "id": "d383475c-f8db-4c3f-ba2e-fe71f5aa23cc",
+    "cavaloPlate": "SBA5A72",
+    "carretaPlates": "",
+    "carrier": "3C EUSEBIO",
+    "createdAt": "2026-08-16T02:25:39.456Z"
+  },
+  "82b39827-78b2-409c-9779-b999867f02aa": {
+    "id": "82b39827-78b2-409c-9779-b999867f02aa",
+    "cavaloPlate": "SAY4G76",
+    "carretaPlates": "",
+    "carrier": "3C EUSEBIO",
+    "createdAt": "2026-08-16T02:25:39.456Z"
+  },
+  "2359ed09-2aad-45c7-87fa-6cf9d8cb8637": {
+    "id": "2359ed09-2aad-45c7-87fa-6cf9d8cb8637",
+    "cavaloPlate": "OSI9877",
+    "carretaPlates": "",
+    "carrier": "3C EUSEBIO",
+    "createdAt": "2026-08-16T02:25:39.456Z"
+  },
+  "0a67216b-cc30-4bfa-834e-16e925453599": {
+    "id": "0a67216b-cc30-4bfa-834e-16e925453599",
+    "cavaloPlate": "SBQ9I95",
+    "carretaPlates": "",
+    "carrier": "3C EUSEBIO",
+    "createdAt": "2026-08-16T02:25:39.457Z"
+  },
+  "aec2abe3-272b-4af0-951d-58f79bab2905": {
+    "id": "aec2abe3-272b-4af0-951d-58f79bab2905",
+    "cavaloPlate": "SBT5B22",
+    "carretaPlates": "",
+    "carrier": "3C EUSEBIO",
+    "createdAt": "2026-08-16T02:25:39.457Z"
+  },
+  "b330e0db-7ab4-48e3-b83d-2a4ce6ea9f55": {
+    "id": "b330e0db-7ab4-48e3-b83d-2a4ce6ea9f55",
+    "cavaloPlate": "SBQ8B55",
+    "carretaPlates": "",
+    "carrier": "3C EUSEBIO",
+    "createdAt": "2026-08-16T02:25:39.457Z"
+  },
+  "c305d555-3337-4457-92a3-fd9ea37cba35": {
+    "id": "c305d555-3337-4457-92a3-fd9ea37cba35",
+    "cavaloPlate": "SAX2A25",
+    "carretaPlates": "",
+    "carrier": "3C EUSEBIO",
+    "createdAt": "2026-08-16T02:25:39.457Z"
+  },
+  "6c33cf61-60c1-44f6-b39a-744cfe6bc695": {
+    "id": "6c33cf61-60c1-44f6-b39a-744cfe6bc695",
+    "cavaloPlate": "MYT0725",
+    "carretaPlates": "",
+    "carrier": "3C EUSEBIO",
+    "createdAt": "2026-08-16T02:25:39.457Z"
+  },
+  "35645f61-30e9-4262-89e5-0498dd69e2bd": {
+    "id": "35645f61-30e9-4262-89e5-0498dd69e2bd",
+    "cavaloPlate": "PNT4754",
+    "carretaPlates": "",
+    "carrier": "3C EUSEBIO",
+    "createdAt": "2026-08-16T02:25:39.457Z"
+  },
+  "c2ebbcc5-59c0-483c-bc7f-9795a82764df": {
+    "id": "c2ebbcc5-59c0-483c-bc7f-9795a82764df",
+    "cavaloPlate": "SBB6G35",
+    "carretaPlates": "",
+    "carrier": "3C EUSEBIO",
+    "createdAt": "2026-08-16T02:25:39.457Z"
+  },
+  "3196d16c-f757-4b96-aaee-918c73d45044": {
+    "id": "3196d16c-f757-4b96-aaee-918c73d45044",
+    "cavaloPlate": "SBO0J95",
+    "carretaPlates": "",
+    "carrier": "3C EUSEBIO",
+    "createdAt": "2026-08-16T02:25:39.457Z"
+  },
+  "51774f64-56e9-4dbf-9ecd-69abada3f0f6": {
+    "id": "51774f64-56e9-4dbf-9ecd-69abada3f0f6",
+    "cavaloPlate": "SBA3H62",
+    "carretaPlates": "",
+    "carrier": "3C EUSEBIO",
+    "createdAt": "2026-08-16T02:25:39.457Z"
+  },
+  "e699ae20-bd9f-474d-88b1-d8dee8faa5a8": {
+    "id": "e699ae20-bd9f-474d-88b1-d8dee8faa5a8",
+    "cavaloPlate": "SBL1E76",
+    "carretaPlates": "",
+    "carrier": "3C EUSEBIO",
+    "createdAt": "2026-08-16T02:25:39.457Z"
+  },
+  "67e6a006-e4d9-49ca-9394-5458291e768e": {
+    "id": "67e6a006-e4d9-49ca-9394-5458291e768e",
+    "cavaloPlate": "PNS4144",
+    "carretaPlates": "",
+    "carrier": "3C EUSEBIO",
+    "createdAt": "2026-08-16T02:25:39.457Z"
+  },
+  "7ea1cbb8-b11b-447e-85fd-1cd1f4fdebf4": {
+    "id": "7ea1cbb8-b11b-447e-85fd-1cd1f4fdebf4",
+    "cavaloPlate": "PMP2647",
+    "carretaPlates": "",
+    "carrier": "3C EUSEBIO",
+    "createdAt": "2026-08-16T02:25:39.457Z"
+  },
+  "92824ccd-5553-47a1-8d2a-816e6db78d41": {
+    "id": "92824ccd-5553-47a1-8d2a-816e6db78d41",
+    "cavaloPlate": "SBN6A13",
+    "carretaPlates": "",
+    "carrier": "3C EUSEBIO",
+    "createdAt": "2026-08-16T02:25:39.457Z"
+  },
+  "869d5615-f8f2-4405-be74-67ee3323d4c2": {
+    "id": "869d5615-f8f2-4405-be74-67ee3323d4c2",
+    "cavaloPlate": "SBC7E21",
+    "carretaPlates": "",
+    "carrier": "3C EUSEBIO",
+    "createdAt": "2026-08-16T02:25:39.457Z"
+  },
+  "1db413d2-ad7c-4b99-b9a1-41b91ff1991f": {
+    "id": "1db413d2-ad7c-4b99-b9a1-41b91ff1991f",
+    "cavaloPlate": "POT5I03",
+    "carretaPlates": "",
+    "carrier": "3C EUSEBIO",
+    "createdAt": "2026-08-16T02:25:39.457Z"
+  },
+  "fa7cfb8f-a47c-4590-a4b5-bb41d8f11f51": {
+    "id": "fa7cfb8f-a47c-4590-a4b5-bb41d8f11f51",
+    "cavaloPlate": "SBU3J13",
+    "carretaPlates": "",
+    "carrier": "3C EUSEBIO",
+    "createdAt": "2026-08-16T02:25:39.457Z"
+  },
+  "8e24a8fa-bef2-43bf-a03b-925ecc288abb": {
+    "id": "8e24a8fa-bef2-43bf-a03b-925ecc288abb",
+    "cavaloPlate": "SAU4I13",
+    "carretaPlates": "",
+    "carrier": "3C EUSEBIO",
+    "createdAt": "2026-08-16T02:25:39.457Z"
+  },
+  "e28e57f6-e8c6-4415-a33d-7456c5328045": {
+    "id": "e28e57f6-e8c6-4415-a33d-7456c5328045",
+    "cavaloPlate": "SBC7E73",
+    "carretaPlates": "",
+    "carrier": "3C EUSEBIO",
+    "createdAt": "2026-08-16T02:25:39.457Z"
+  },
+  "cdc13ace-c392-4d57-8343-e59f58d81aca": {
+    "id": "cdc13ace-c392-4d57-8343-e59f58d81aca",
+    "cavaloPlate": "POT7E43",
+    "carretaPlates": "",
+    "carrier": "3C IMPERATRIZ",
+    "createdAt": "2026-08-16T02:25:39.457Z"
+  },
+  "ba7f1c4b-b3c2-4da5-91d2-3179d2316ef2": {
+    "id": "ba7f1c4b-b3c2-4da5-91d2-3179d2316ef2",
+    "cavaloPlate": "PNH3C73",
+    "carretaPlates": "",
+    "carrier": "3C IMPERATRIZ",
+    "createdAt": "2026-08-16T02:25:39.457Z"
+  },
+  "e1b273c1-b3bf-4ded-ba4b-fb67262289d0": {
+    "id": "e1b273c1-b3bf-4ded-ba4b-fb67262289d0",
+    "cavaloPlate": "SBE6F13",
+    "carretaPlates": "",
+    "carrier": "3C IMPERATRIZ",
+    "createdAt": "2026-08-16T02:25:39.457Z"
+  },
+  "66ac428c-35be-4727-8f96-ffc377f0cd09": {
+    "id": "66ac428c-35be-4727-8f96-ffc377f0cd09",
+    "cavaloPlate": "SAY4B46",
+    "carretaPlates": "",
+    "carrier": "3C IPATINGA",
+    "createdAt": "2026-08-16T02:25:39.457Z"
+  },
+  "df7761dc-b4d7-4ab0-8f9f-564ca52dbefe": {
+    "id": "df7761dc-b4d7-4ab0-8f9f-564ca52dbefe",
+    "cavaloPlate": "SBU5E22",
+    "carretaPlates": "",
+    "carrier": "3C IPATINGA",
+    "createdAt": "2026-08-16T02:25:39.457Z"
+  },
+  "57227266-4953-4834-a2f7-9a6cccbb1859": {
+    "id": "57227266-4953-4834-a2f7-9a6cccbb1859",
+    "cavaloPlate": "POP7J23",
+    "carretaPlates": "",
+    "carrier": "3C IPATINGA",
+    "createdAt": "2026-08-16T02:25:39.457Z"
+  },
+  "49ac9b67-5442-42e0-99aa-01c8d77e2d00": {
+    "id": "49ac9b67-5442-42e0-99aa-01c8d77e2d00",
+    "cavaloPlate": "PMV8926",
+    "carretaPlates": "",
+    "carrier": "3C JPESSOA",
+    "createdAt": "2026-08-16T02:25:39.457Z"
+  },
+  "c3806548-5fc1-42ef-8d96-6863dfddbef2": {
+    "id": "c3806548-5fc1-42ef-8d96-6863dfddbef2",
+    "cavaloPlate": "PMP3897",
+    "carretaPlates": "",
+    "carrier": "3C JPESSOA",
+    "createdAt": "2026-08-16T02:25:39.457Z"
+  },
+  "fccb8c18-bd6f-41e0-a66b-9d272d9e5d19": {
+    "id": "fccb8c18-bd6f-41e0-a66b-9d272d9e5d19",
+    "cavaloPlate": "POS7E54",
+    "carretaPlates": "",
+    "carrier": "3C JPESSOA",
+    "createdAt": "2026-08-16T02:25:39.457Z"
+  },
+  "ab4ed159-7754-4b51-986b-0b2f8025ef41": {
+    "id": "ab4ed159-7754-4b51-986b-0b2f8025ef41",
+    "cavaloPlate": "SBJ1D32",
+    "carretaPlates": "",
+    "carrier": "3C JPESSOA",
+    "createdAt": "2026-08-16T02:25:39.457Z"
+  },
+  "2e39ce78-51ff-4086-afa1-fb3f7172b5e8": {
+    "id": "2e39ce78-51ff-4086-afa1-fb3f7172b5e8",
+    "cavaloPlate": "PMK7317",
+    "carretaPlates": "",
+    "carrier": "3C JPESSOA",
+    "createdAt": "2026-08-16T02:25:39.457Z"
+  },
+  "7bc2d709-cd1d-4799-8c85-d623230f5cfd": {
+    "id": "7bc2d709-cd1d-4799-8c85-d623230f5cfd",
+    "cavaloPlate": "SBP6C53",
+    "carretaPlates": "",
+    "carrier": "3C JPESSOA",
+    "createdAt": "2026-08-16T02:25:39.457Z"
+  },
+  "13ecc902-d419-41dc-87df-63f3ebd81d70": {
+    "id": "13ecc902-d419-41dc-87df-63f3ebd81d70",
+    "cavaloPlate": "SBV9E55",
+    "carretaPlates": "",
+    "carrier": "3C JPESSOA",
+    "createdAt": "2026-08-16T02:25:39.457Z"
+  },
+  "fb70b9ec-b010-4a8b-957b-b6f5e30e8bc1": {
+    "id": "fb70b9ec-b010-4a8b-957b-b6f5e30e8bc1",
+    "cavaloPlate": "PME1497",
+    "carretaPlates": "",
+    "carrier": "3C JPESSOA",
+    "createdAt": "2026-08-16T02:25:39.457Z"
+  },
+  "984e3acc-7864-437e-80c4-543a95e746b2": {
+    "id": "984e3acc-7864-437e-80c4-543a95e746b2",
+    "cavaloPlate": "SBN4G45",
+    "carretaPlates": "",
+    "carrier": "3C JPESSOA",
+    "createdAt": "2026-08-16T02:25:39.457Z"
+  },
+  "13d5dcc2-2cf2-4a58-8bd3-4b06ec79a16c": {
+    "id": "13d5dcc2-2cf2-4a58-8bd3-4b06ec79a16c",
+    "cavaloPlate": "SBV5H25",
+    "carretaPlates": "",
+    "carrier": "3C JPESSOA",
+    "createdAt": "2026-08-16T02:25:39.457Z"
+  },
+  "3e586b31-464b-47c3-9443-99a8aaa8f789": {
+    "id": "3e586b31-464b-47c3-9443-99a8aaa8f789",
+    "cavaloPlate": "PNT0284",
+    "carretaPlates": "",
+    "carrier": "3C JPESSOA",
+    "createdAt": "2026-08-16T02:25:39.457Z"
+  },
+  "a8eadf08-3a32-4a63-9c97-9053658d6b84": {
+    "id": "a8eadf08-3a32-4a63-9c97-9053658d6b84",
+    "cavaloPlate": "PNE6053",
+    "carretaPlates": "",
+    "carrier": "3C JPESSOA",
+    "createdAt": "2026-08-16T02:25:39.457Z"
+  },
+  "2dcce999-637b-40ad-902e-0276b165d71e": {
+    "id": "2dcce999-637b-40ad-902e-0276b165d71e",
+    "cavaloPlate": "PNE2963",
+    "carretaPlates": "",
+    "carrier": "3C JPESSOA",
+    "createdAt": "2026-08-16T02:25:39.457Z"
+  },
+  "ec8d9020-2594-47e3-8a8e-00b218a551d5": {
+    "id": "ec8d9020-2594-47e3-8a8e-00b218a551d5",
+    "cavaloPlate": "PNS8334",
+    "carretaPlates": "",
+    "carrier": "3C JPESSOA",
+    "createdAt": "2026-08-16T02:25:39.457Z"
+  },
+  "76ce193e-a164-4142-8846-e4116b634431": {
+    "id": "76ce193e-a164-4142-8846-e4116b634431",
+    "cavaloPlate": "SBJ6B66",
+    "carretaPlates": "",
+    "carrier": "3C JPESSOA",
+    "createdAt": "2026-08-16T02:25:39.457Z"
+  },
+  "8b3bdd22-c58a-47d7-ab23-109e3bb04d2f": {
+    "id": "8b3bdd22-c58a-47d7-ab23-109e3bb04d2f",
+    "cavaloPlate": "SBV7C95",
+    "carretaPlates": "",
+    "carrier": "3C JPESSOA",
+    "createdAt": "2026-08-16T02:25:39.457Z"
+  },
+  "b37d70b5-9e2a-4581-b80b-ede3806d1843": {
+    "id": "b37d70b5-9e2a-4581-b80b-ede3806d1843",
+    "cavaloPlate": "SBQ8F55",
+    "carretaPlates": "",
+    "carrier": "3C JPESSOA",
+    "createdAt": "2026-08-16T02:25:39.457Z"
+  },
+  "e391a4fb-af8f-44b2-ab21-fd21d3b90b59": {
+    "id": "e391a4fb-af8f-44b2-ab21-fd21d3b90b59",
+    "cavaloPlate": "PMP2897",
+    "carretaPlates": "",
+    "carrier": "3C JPESSOA",
+    "createdAt": "2026-08-16T02:25:39.457Z"
+  },
+  "a14dc830-9521-497e-ad6f-95ba1c9d83ff": {
+    "id": "a14dc830-9521-497e-ad6f-95ba1c9d83ff",
+    "cavaloPlate": "PNE3953",
+    "carretaPlates": "",
+    "carrier": "3C JPESSOA",
+    "createdAt": "2026-08-16T02:25:39.457Z"
+  },
+  "ea622020-7134-4c4d-98a2-f36c26fc1ee4": {
+    "id": "ea622020-7134-4c4d-98a2-f36c26fc1ee4",
+    "cavaloPlate": "SBA5E12",
+    "carretaPlates": "",
+    "carrier": "3C MACEIO",
+    "createdAt": "2026-08-16T02:25:39.457Z"
+  },
+  "12174407-6162-42f6-b0a1-0d64fdb9447b": {
+    "id": "12174407-6162-42f6-b0a1-0d64fdb9447b",
+    "cavaloPlate": "SBP0I76",
+    "carretaPlates": "",
+    "carrier": "3C MACEIO",
+    "createdAt": "2026-08-16T02:25:39.457Z"
+  },
+  "4529b1f7-373a-4f53-aeb3-88fe65cec202": {
+    "id": "4529b1f7-373a-4f53-aeb3-88fe65cec202",
+    "cavaloPlate": "SBA4I22",
+    "carretaPlates": "",
+    "carrier": "3C MACEIO",
+    "createdAt": "2026-08-16T02:25:39.457Z"
+  },
+  "d047de46-7354-43bb-9280-2acf3345e2c8": {
+    "id": "d047de46-7354-43bb-9280-2acf3345e2c8",
+    "cavaloPlate": "SAO7F45",
+    "carretaPlates": "",
+    "carrier": "3C MACEIO",
+    "createdAt": "2026-08-16T02:25:39.457Z"
+  },
+  "18d4b5f7-abb4-4d3d-ad28-491750cea5a0": {
+    "id": "18d4b5f7-abb4-4d3d-ad28-491750cea5a0",
+    "cavaloPlate": "SAZ4C53",
+    "carretaPlates": "",
+    "carrier": "3C MACEIO",
+    "createdAt": "2026-08-16T02:25:39.457Z"
+  },
+  "e126ebfc-99b1-4156-aae1-b6d50f6def24": {
+    "id": "e126ebfc-99b1-4156-aae1-b6d50f6def24",
+    "cavaloPlate": "POY2E43",
+    "carretaPlates": "",
+    "carrier": "3C MACEIO",
+    "createdAt": "2026-08-16T02:25:39.457Z"
+  },
+  "69f87128-4aa0-4675-b8da-04c2a8a1813d": {
+    "id": "69f87128-4aa0-4675-b8da-04c2a8a1813d",
+    "cavaloPlate": "OSI9567",
+    "carretaPlates": "",
+    "carrier": "3C MACEIO",
+    "createdAt": "2026-08-16T02:25:39.457Z"
+  },
+  "6c5b7dad-c9ca-4a25-a47c-3b140160c80b": {
+    "id": "6c5b7dad-c9ca-4a25-a47c-3b140160c80b",
+    "cavaloPlate": "PNT4I54",
+    "carretaPlates": "",
+    "carrier": "3C MACEIO",
+    "createdAt": "2026-08-16T02:25:39.457Z"
+  },
+  "33c5a820-cc94-4755-a8ac-a0c34e772376": {
+    "id": "33c5a820-cc94-4755-a8ac-a0c34e772376",
+    "cavaloPlate": "PNH0953",
+    "carretaPlates": "",
+    "carrier": "3C MACEIO",
+    "createdAt": "2026-08-16T02:25:39.457Z"
+  },
+  "3a6a3485-d689-4060-bbae-bcf18bb4dc84": {
+    "id": "3a6a3485-d689-4060-bbae-bcf18bb4dc84",
+    "cavaloPlate": "RIG3A32",
+    "carretaPlates": "",
+    "carrier": "3C MACEIO",
+    "createdAt": "2026-08-16T02:25:39.457Z"
+  },
+  "0fd54548-9e7b-45e4-b70e-2c2e42fedddd": {
+    "id": "0fd54548-9e7b-45e4-b70e-2c2e42fedddd",
+    "cavaloPlate": "SBP1D46",
+    "carretaPlates": "",
+    "carrier": "3C MACEIO",
+    "createdAt": "2026-08-16T02:25:39.457Z"
+  },
+  "b01ddd15-56f8-43d0-8b0c-c7c4303c6ea9": {
+    "id": "b01ddd15-56f8-43d0-8b0c-c7c4303c6ea9",
+    "cavaloPlate": "SAT2G83",
+    "carretaPlates": "",
+    "carrier": "3C MACEIO",
+    "createdAt": "2026-08-16T02:25:39.457Z"
+  },
+  "78db21b9-c967-40ed-b447-490ac20049ec": {
+    "id": "78db21b9-c967-40ed-b447-490ac20049ec",
+    "cavaloPlate": "PNT0A84",
+    "carretaPlates": "",
+    "carrier": "3C MACEIO",
+    "createdAt": "2026-08-16T02:25:39.457Z"
+  },
+  "e2414aaf-6021-4f6d-8aab-8ecb1e7a87bf": {
+    "id": "e2414aaf-6021-4f6d-8aab-8ecb1e7a87bf",
+    "cavaloPlate": "PNA6J63",
+    "carretaPlates": "",
+    "carrier": "3C MACEIO",
+    "createdAt": "2026-08-16T02:25:39.457Z"
+  },
+  "a4b437ab-ab10-472a-9b08-effb09021d55": {
+    "id": "a4b437ab-ab10-472a-9b08-effb09021d55",
+    "cavaloPlate": "PND6925",
+    "carretaPlates": "",
+    "carrier": "3C MACEIO",
+    "createdAt": "2026-08-16T02:25:39.457Z"
+  },
+  "2d317d46-4069-4923-82f9-572fe59fd5b7": {
+    "id": "2d317d46-4069-4923-82f9-572fe59fd5b7",
+    "cavaloPlate": "SAX3J03",
+    "carretaPlates": "",
+    "carrier": "3C MACEIO",
+    "createdAt": "2026-08-16T02:25:39.457Z"
+  },
+  "0df893df-31b8-450e-827d-59a354972830": {
+    "id": "0df893df-31b8-450e-827d-59a354972830",
+    "cavaloPlate": "POO0A23",
+    "carretaPlates": "",
+    "carrier": "3C MACEIO",
+    "createdAt": "2026-08-16T02:25:39.457Z"
+  },
+  "486e7196-d510-43d3-bd9e-c57d39310af9": {
+    "id": "486e7196-d510-43d3-bd9e-c57d39310af9",
+    "cavaloPlate": "OSE8447",
+    "carretaPlates": "",
+    "carrier": "3C MANAUS",
+    "createdAt": "2026-08-16T02:25:39.457Z"
+  },
+  "019aaa80-46bd-4979-b110-98689f854a82": {
+    "id": "019aaa80-46bd-4979-b110-98689f854a82",
+    "cavaloPlate": "SBR2H05",
+    "carretaPlates": "",
+    "carrier": "3C MANAUS",
+    "createdAt": "2026-08-16T02:25:39.457Z"
+  },
+  "52cdde24-3326-4136-88f7-8d896b0b08c8": {
+    "id": "52cdde24-3326-4136-88f7-8d896b0b08c8",
+    "cavaloPlate": "SAQ6D65",
+    "carretaPlates": "",
+    "carrier": "3C MANAUS",
+    "createdAt": "2026-08-16T02:25:39.457Z"
+  },
+  "7ba01047-de3e-45f6-ac7c-0370c5220cb0": {
+    "id": "7ba01047-de3e-45f6-ac7c-0370c5220cb0",
+    "cavaloPlate": "RIA4C23",
+    "carretaPlates": "",
+    "carrier": "3C MANAUS",
+    "createdAt": "2026-08-16T02:25:39.457Z"
+  },
+  "ac6444ca-9b23-4301-8a5b-c6b8f269406b": {
+    "id": "ac6444ca-9b23-4301-8a5b-c6b8f269406b",
+    "cavaloPlate": "SBK7C15",
+    "carretaPlates": "",
+    "carrier": "3C MANAUS",
+    "createdAt": "2026-08-16T02:25:39.457Z"
+  },
+  "6052d80c-fee4-4265-b29a-8d774ed9c1a8": {
+    "id": "6052d80c-fee4-4265-b29a-8d774ed9c1a8",
+    "cavaloPlate": "PNV3I14",
+    "carretaPlates": "",
+    "carrier": "3C MANAUS",
+    "createdAt": "2026-08-16T02:25:39.457Z"
+  },
+  "d101c07c-9831-4032-9da9-3273e3986be3": {
+    "id": "d101c07c-9831-4032-9da9-3273e3986be3",
+    "cavaloPlate": "SBU1C22",
+    "carretaPlates": "",
+    "carrier": "3C MANAUS",
+    "createdAt": "2026-08-16T02:25:39.457Z"
+  },
+  "535e667c-738a-4fe6-974e-419054b45043": {
+    "id": "535e667c-738a-4fe6-974e-419054b45043",
+    "cavaloPlate": "RIH3A42",
+    "carretaPlates": "",
+    "carrier": "3C MANAUS",
+    "createdAt": "2026-08-16T02:25:39.457Z"
+  },
+  "60b03080-ac67-451c-b896-9e877ef69025": {
+    "id": "60b03080-ac67-451c-b896-9e877ef69025",
+    "cavaloPlate": "SAR9H21",
+    "carretaPlates": "",
+    "carrier": "3C MANAUS",
+    "createdAt": "2026-08-16T02:25:39.457Z"
+  },
+  "75b88dcc-6054-4d81-9bc0-9306fe14a564": {
+    "id": "75b88dcc-6054-4d81-9bc0-9306fe14a564",
+    "cavaloPlate": "SBC6G13",
+    "carretaPlates": "",
+    "carrier": "3C MANAUS",
+    "createdAt": "2026-08-16T02:25:39.457Z"
+  },
+  "8d6baa47-b483-4e0d-979d-24fc8e7f3f7d": {
+    "id": "8d6baa47-b483-4e0d-979d-24fc8e7f3f7d",
+    "cavaloPlate": "SBV5B05",
+    "carretaPlates": "",
+    "carrier": "3C MANAUS",
+    "createdAt": "2026-08-16T02:25:39.457Z"
+  },
+  "858d6292-fea4-4c66-99ea-aabbcfc52426": {
+    "id": "858d6292-fea4-4c66-99ea-aabbcfc52426",
+    "cavaloPlate": "SBV9J86",
+    "carretaPlates": "",
+    "carrier": "3C MANAUS",
+    "createdAt": "2026-08-16T02:25:39.457Z"
+  },
+  "5b553d1b-c82b-4e32-a2ef-055e8e1d7360": {
+    "id": "5b553d1b-c82b-4e32-a2ef-055e8e1d7360",
+    "cavaloPlate": "SBK7D25",
+    "carretaPlates": "",
+    "carrier": "3C MARABA",
+    "createdAt": "2026-08-16T02:25:39.457Z"
+  },
+  "92966951-e44b-42a1-9e5b-feed58fbd5b3": {
+    "id": "92966951-e44b-42a1-9e5b-feed58fbd5b3",
+    "cavaloPlate": "SBS9A12",
+    "carretaPlates": "",
+    "carrier": "3C MARABA",
+    "createdAt": "2026-08-16T02:25:39.457Z"
+  },
+  "b1d60efb-e777-47a0-8f6b-ae8219995c85": {
+    "id": "b1d60efb-e777-47a0-8f6b-ae8219995c85",
+    "cavaloPlate": "SBC6C93",
+    "carretaPlates": "",
+    "carrier": "3C MONTCLAROS",
+    "createdAt": "2026-08-16T02:25:39.457Z"
+  },
+  "e6b9b0a4-9ea4-4d5e-9ba9-1c6f8fabfb0b": {
+    "id": "e6b9b0a4-9ea4-4d5e-9ba9-1c6f8fabfb0b",
+    "cavaloPlate": "PNT9E13",
+    "carretaPlates": "",
+    "carrier": "3C MONTCLAROS",
+    "createdAt": "2026-08-16T02:25:39.457Z"
+  },
+  "db8bcd41-6d08-46fb-9ddf-9ad9054d9bb5": {
+    "id": "db8bcd41-6d08-46fb-9ddf-9ad9054d9bb5",
+    "cavaloPlate": "PNE4123",
+    "carretaPlates": "",
+    "carrier": "3C MOSSORO",
+    "createdAt": "2026-08-16T02:25:39.457Z"
+  },
+  "d0127809-2a4f-4c2f-b9ed-acfd7e77f60c": {
+    "id": "d0127809-2a4f-4c2f-b9ed-acfd7e77f60c",
+    "cavaloPlate": "SAQ6D05",
+    "carretaPlates": "",
+    "carrier": "3C MOSSORO",
+    "createdAt": "2026-08-16T02:25:39.457Z"
+  },
+  "6789f3eb-84ff-4507-aafa-93dd98958ac5": {
+    "id": "6789f3eb-84ff-4507-aafa-93dd98958ac5",
+    "cavaloPlate": "PNP2865",
+    "carretaPlates": "",
+    "carrier": "3C MOSSORO",
+    "createdAt": "2026-08-16T02:25:39.457Z"
+  },
+  "81fbc470-9bdd-48ad-b5f0-a0f7e56642b5": {
+    "id": "81fbc470-9bdd-48ad-b5f0-a0f7e56642b5",
+    "cavaloPlate": "PNA9943",
+    "carretaPlates": "",
+    "carrier": "3C MOSSORO",
+    "createdAt": "2026-08-16T02:25:39.457Z"
+  },
+  "708266c2-6015-45ef-881d-7c2ab331ebfe": {
+    "id": "708266c2-6015-45ef-881d-7c2ab331ebfe",
+    "cavaloPlate": "PMV8546",
+    "carretaPlates": "",
+    "carrier": "3C MOSSORO",
+    "createdAt": "2026-08-16T02:25:39.457Z"
+  },
+  "154bacf1-799e-4a4e-aa56-d5bb290a522e": {
+    "id": "154bacf1-799e-4a4e-aa56-d5bb290a522e",
+    "cavaloPlate": "PND7033",
+    "carretaPlates": "",
+    "carrier": "3C MOSSORO",
+    "createdAt": "2026-08-16T02:25:39.457Z"
+  },
+  "25759b93-8b86-45e0-9209-3040b168d5b3": {
+    "id": "25759b93-8b86-45e0-9209-3040b168d5b3",
+    "cavaloPlate": "SBQ8E05",
+    "carretaPlates": "",
+    "carrier": "3C MOSSORO",
+    "createdAt": "2026-08-16T02:25:39.457Z"
+  },
+  "1da77699-c2a8-449b-b9b5-ca68a0205c0f": {
+    "id": "1da77699-c2a8-449b-b9b5-ca68a0205c0f",
+    "cavaloPlate": "RII1D92",
+    "carretaPlates": "",
+    "carrier": "3C MOSSORO",
+    "createdAt": "2026-08-16T02:25:39.457Z"
+  },
+  "12261287-850f-4419-a03d-e6dccc028550": {
+    "id": "12261287-850f-4419-a03d-e6dccc028550",
+    "cavaloPlate": "PNE3653",
+    "carretaPlates": "",
+    "carrier": "3C MOSSORO",
+    "createdAt": "2026-08-16T02:25:39.457Z"
+  },
+  "75d71a21-6494-4428-9020-2212106fadb2": {
+    "id": "75d71a21-6494-4428-9020-2212106fadb2",
+    "cavaloPlate": "SBQ8D55",
+    "carretaPlates": "",
+    "carrier": "3C MOSSORO",
+    "createdAt": "2026-08-16T02:25:39.457Z"
+  },
+  "1b6cafb5-bd15-40e9-9b56-cbeb47af5ca9": {
+    "id": "1b6cafb5-bd15-40e9-9b56-cbeb47af5ca9",
+    "cavaloPlate": "PNE4573",
+    "carretaPlates": "",
+    "carrier": "3C MOSSORO",
+    "createdAt": "2026-08-16T02:25:39.457Z"
+  },
+  "ea7ec04f-5694-4219-bfe1-2523811a9756": {
+    "id": "ea7ec04f-5694-4219-bfe1-2523811a9756",
+    "cavaloPlate": "PNH5905",
+    "carretaPlates": "",
+    "carrier": "3C NATAL",
+    "createdAt": "2026-08-16T02:25:39.457Z"
+  },
+  "20b63c3b-1b74-4a2e-be02-2339d708299e": {
+    "id": "20b63c3b-1b74-4a2e-be02-2339d708299e",
+    "cavaloPlate": "PNS9904",
+    "carretaPlates": "",
+    "carrier": "3C NATAL",
+    "createdAt": "2026-08-16T02:25:39.457Z"
+  },
+  "6ce498b2-8857-4a10-b36c-07aba3eacf16": {
+    "id": "6ce498b2-8857-4a10-b36c-07aba3eacf16",
+    "cavaloPlate": "SBR9D73",
+    "carretaPlates": "",
+    "carrier": "3C NATAL",
+    "createdAt": "2026-08-16T02:25:39.457Z"
+  },
+  "69b5cb38-666a-4def-92f2-6b4a1ad494f7": {
+    "id": "69b5cb38-666a-4def-92f2-6b4a1ad494f7",
+    "cavaloPlate": "RIH4G51",
+    "carretaPlates": "",
+    "carrier": "3C NATAL",
+    "createdAt": "2026-08-16T02:25:39.457Z"
+  },
+  "4d56cd70-984e-46f2-9aeb-61b1faabd118": {
+    "id": "4d56cd70-984e-46f2-9aeb-61b1faabd118",
+    "cavaloPlate": "ORU0387",
+    "carretaPlates": "",
+    "carrier": "3C NATAL",
+    "createdAt": "2026-08-16T02:25:39.457Z"
+  },
+  "5f61dbc5-abf4-4a24-a6f6-55db50848879": {
+    "id": "5f61dbc5-abf4-4a24-a6f6-55db50848879",
+    "cavaloPlate": "SBV5A55",
+    "carretaPlates": "",
+    "carrier": "3C NATAL",
+    "createdAt": "2026-08-16T02:25:39.457Z"
+  },
+  "367fb7a0-ba39-43f7-b22e-7cf2332105d9": {
+    "id": "367fb7a0-ba39-43f7-b22e-7cf2332105d9",
+    "cavaloPlate": "PNT0C34",
+    "carretaPlates": "",
+    "carrier": "3C NATAL",
+    "createdAt": "2026-08-16T02:25:39.457Z"
+  },
+  "1f6bab00-83a3-405d-9460-752f8ac8f3cd": {
+    "id": "1f6bab00-83a3-405d-9460-752f8ac8f3cd",
+    "cavaloPlate": "SBC8D75",
+    "carretaPlates": "",
+    "carrier": "3C NATAL",
+    "createdAt": "2026-08-16T02:25:39.457Z"
+  },
+  "157e9c15-c4d4-4c9e-9b48-9b350a0fd7a9": {
+    "id": "157e9c15-c4d4-4c9e-9b48-9b350a0fd7a9",
+    "cavaloPlate": "PNS4434",
+    "carretaPlates": "",
+    "carrier": "3C NATAL",
+    "createdAt": "2026-08-16T02:25:39.457Z"
+  },
+  "d173f9c0-c52b-49d0-b08f-1f6043d7020a": {
+    "id": "d173f9c0-c52b-49d0-b08f-1f6043d7020a",
+    "cavaloPlate": "PNH0693",
+    "carretaPlates": "",
+    "carrier": "3C NATAL",
+    "createdAt": "2026-08-16T02:25:39.457Z"
+  },
+  "cafceda2-aad3-4e40-87a7-5fa5a9a4b585": {
+    "id": "cafceda2-aad3-4e40-87a7-5fa5a9a4b585",
+    "cavaloPlate": "SBS0C03",
+    "carretaPlates": "",
+    "carrier": "3C NATAL",
+    "createdAt": "2026-08-16T02:25:39.457Z"
+  },
+  "bd7faa68-948b-4358-987d-9203af4b16f0": {
+    "id": "bd7faa68-948b-4358-987d-9203af4b16f0",
+    "cavaloPlate": "PNT0154",
+    "carretaPlates": "",
+    "carrier": "3C NATAL",
+    "createdAt": "2026-08-16T02:25:39.457Z"
+  },
+  "c1e75f93-5317-41eb-a347-76b0dd856d6a": {
+    "id": "c1e75f93-5317-41eb-a347-76b0dd856d6a",
+    "cavaloPlate": "ORU3007",
+    "carretaPlates": "",
+    "carrier": "3C NATAL",
+    "createdAt": "2026-08-16T02:25:39.457Z"
+  },
+  "0b6f2818-4eb7-44d4-bbba-810b76515837": {
+    "id": "0b6f2818-4eb7-44d4-bbba-810b76515837",
+    "cavaloPlate": "SBS1B15",
+    "carretaPlates": "",
+    "carrier": "3C NATAL",
+    "createdAt": "2026-08-16T02:25:39.457Z"
+  },
+  "47968fc7-d961-47e4-b1cd-659817ca65f6": {
+    "id": "47968fc7-d961-47e4-b1cd-659817ca65f6",
+    "cavaloPlate": "OSI9437",
+    "carretaPlates": "",
+    "carrier": "3C NATAL",
+    "createdAt": "2026-08-16T02:25:39.457Z"
+  },
+  "d43bcb3d-ef5e-4f31-9066-571f7c0dee61": {
+    "id": "d43bcb3d-ef5e-4f31-9066-571f7c0dee61",
+    "cavaloPlate": "SBR2D25",
+    "carretaPlates": "",
+    "carrier": "3C NATAL",
+    "createdAt": "2026-08-16T02:25:39.457Z"
+  },
+  "5e219023-f57c-4541-abb2-59811be613df": {
+    "id": "5e219023-f57c-4541-abb2-59811be613df",
+    "cavaloPlate": "SBG7C23",
+    "carretaPlates": "",
+    "carrier": "3C NATAL",
+    "createdAt": "2026-08-16T02:25:39.457Z"
+  },
+  "1bb7a17d-7527-4c6b-b3f9-ee95f633ccb3": {
+    "id": "1bb7a17d-7527-4c6b-b3f9-ee95f633ccb3",
+    "cavaloPlate": "SAX6A45",
+    "carretaPlates": "",
+    "carrier": "3C PETROLINA",
+    "createdAt": "2026-08-16T02:25:39.457Z"
+  },
+  "343d73a2-ffda-47e1-a712-b6c52095432c": {
+    "id": "343d73a2-ffda-47e1-a712-b6c52095432c",
+    "cavaloPlate": "SBA5D45",
+    "carretaPlates": "",
+    "carrier": "3C PETROLINA",
+    "createdAt": "2026-08-16T02:25:39.457Z"
+  },
+  "8489d083-7dec-48a5-b908-9df46bdd523f": {
+    "id": "8489d083-7dec-48a5-b908-9df46bdd523f",
+    "cavaloPlate": "SBA3J45",
+    "carretaPlates": "",
+    "carrier": "3C PETROLINA",
+    "createdAt": "2026-08-16T02:25:39.457Z"
+  },
+  "06213d90-1f37-43e5-addb-354d53ebf3fb": {
+    "id": "06213d90-1f37-43e5-addb-354d53ebf3fb",
+    "cavaloPlate": "SAX3A65",
+    "carretaPlates": "",
+    "carrier": "3C PICOS",
+    "createdAt": "2026-08-16T02:25:39.457Z"
+  },
+  "ba9806b3-e90c-4e2f-b109-0df4702a0c85": {
+    "id": "ba9806b3-e90c-4e2f-b109-0df4702a0c85",
+    "cavaloPlate": "SBQ8A55",
+    "carretaPlates": "",
+    "carrier": "3C PICOS",
+    "createdAt": "2026-08-16T02:25:39.457Z"
+  },
+  "86bf7706-d60f-4faf-a717-44985783ec4c": {
+    "id": "86bf7706-d60f-4faf-a717-44985783ec4c",
+    "cavaloPlate": "SBI5A95",
+    "carretaPlates": "",
+    "carrier": "3C PICOS",
+    "createdAt": "2026-08-16T02:25:39.457Z"
+  },
+  "b36fc327-f5b5-4ec2-8d88-6e336aff1487": {
+    "id": "b36fc327-f5b5-4ec2-8d88-6e336aff1487",
+    "cavaloPlate": "SAO9E55",
+    "carretaPlates": "",
+    "carrier": "3C R. OSTRAS",
+    "createdAt": "2026-08-16T02:25:39.457Z"
+  },
+  "4c8382a9-afa2-410f-9dfc-d435c5efaf8a": {
+    "id": "4c8382a9-afa2-410f-9dfc-d435c5efaf8a",
+    "cavaloPlate": "SBG0B72",
+    "carretaPlates": "",
+    "carrier": "3C R. OSTRAS",
+    "createdAt": "2026-08-16T02:25:39.457Z"
+  },
+  "9c472b16-14ac-4a13-9979-74706ea56e51": {
+    "id": "9c472b16-14ac-4a13-9979-74706ea56e51",
+    "cavaloPlate": "SAX5E53",
+    "carretaPlates": "",
+    "carrier": "3C RECIFE",
+    "createdAt": "2026-08-16T02:25:39.457Z"
+  },
+  "61b7abe6-a01c-4544-9026-da5e83db75a6": {
+    "id": "61b7abe6-a01c-4544-9026-da5e83db75a6",
+    "cavaloPlate": "SBP0G76",
+    "carretaPlates": "",
+    "carrier": "3C RECIFE",
+    "createdAt": "2026-08-16T02:25:39.457Z"
+  },
+  "ab40f7a5-48ac-4540-ad8c-1ad0aeada71e": {
+    "id": "ab40f7a5-48ac-4540-ad8c-1ad0aeada71e",
+    "cavaloPlate": "SAQ9C95",
+    "carretaPlates": "",
+    "carrier": "3C RECIFE",
+    "createdAt": "2026-08-16T02:25:39.457Z"
+  },
+  "a9808946-5f73-4e51-85f0-723a940b4765": {
+    "id": "a9808946-5f73-4e51-85f0-723a940b4765",
+    "cavaloPlate": "SAO9A55",
+    "carretaPlates": "",
+    "carrier": "3C RECIFE",
+    "createdAt": "2026-08-16T02:25:39.457Z"
+  },
+  "3cf7b2bf-0995-417b-8c7f-004e55abaf2b": {
+    "id": "3cf7b2bf-0995-417b-8c7f-004e55abaf2b",
+    "cavaloPlate": "SBA4C45",
+    "carretaPlates": "",
+    "carrier": "3C RECIFE",
+    "createdAt": "2026-08-16T02:25:39.457Z"
+  },
+  "1f2bde9f-8ad3-41ad-93fe-7f325f95af67": {
+    "id": "1f2bde9f-8ad3-41ad-93fe-7f325f95af67",
+    "cavaloPlate": "SBT5I35",
+    "carretaPlates": "",
+    "carrier": "3C RECIFE",
+    "createdAt": "2026-08-16T02:25:39.457Z"
+  },
+  "8596844c-d9d9-41f2-899e-38197fe6bef0": {
+    "id": "8596844c-d9d9-41f2-899e-38197fe6bef0",
+    "cavaloPlate": "RIH3G72",
+    "carretaPlates": "",
+    "carrier": "3C RECIFE",
+    "createdAt": "2026-08-16T02:25:39.457Z"
+  },
+  "7b059f4c-4554-462d-b7d3-d10082bab802": {
+    "id": "7b059f4c-4554-462d-b7d3-d10082bab802",
+    "cavaloPlate": "SBL1J76",
+    "carretaPlates": "",
+    "carrier": "3C RECIFE",
+    "createdAt": "2026-08-16T02:25:39.457Z"
+  },
+  "4cabdfa0-0c4c-4129-94f7-b1547988bc7b": {
+    "id": "4cabdfa0-0c4c-4129-94f7-b1547988bc7b",
+    "cavaloPlate": "SBJ6J16",
+    "carretaPlates": "",
+    "carrier": "3C RECIFE",
+    "createdAt": "2026-08-16T02:25:39.457Z"
+  },
+  "233452e9-e222-4966-878f-1340ec9e6be8": {
+    "id": "233452e9-e222-4966-878f-1340ec9e6be8",
+    "cavaloPlate": "SBE9A95",
+    "carretaPlates": "",
+    "carrier": "3C RECIFE",
+    "createdAt": "2026-08-16T02:25:39.457Z"
+  },
+  "eb770ba6-5757-4e55-9600-48ad48dc1f27": {
+    "id": "eb770ba6-5757-4e55-9600-48ad48dc1f27",
+    "cavaloPlate": "SAQ6B65",
+    "carretaPlates": "",
+    "carrier": "3C RECIFE",
+    "createdAt": "2026-08-16T02:25:39.457Z"
+  },
+  "22ef883a-ebb2-4a2b-b261-ef1082519221": {
+    "id": "22ef883a-ebb2-4a2b-b261-ef1082519221",
+    "cavaloPlate": "SAZ4C13",
+    "carretaPlates": "",
+    "carrier": "3C RECIFE",
+    "createdAt": "2026-08-16T02:25:39.458Z"
+  },
+  "aa1efdc0-2b24-4729-a6bf-23aa1f1b8df0": {
+    "id": "aa1efdc0-2b24-4729-a6bf-23aa1f1b8df0",
+    "cavaloPlate": "SBU3A92",
+    "carretaPlates": "",
+    "carrier": "3C RECIFE",
+    "createdAt": "2026-08-16T02:25:39.458Z"
+  },
+  "bb5a4445-2a63-4d32-98cd-d5199e9cdb8d": {
+    "id": "bb5a4445-2a63-4d32-98cd-d5199e9cdb8d",
+    "cavaloPlate": "PMX5362",
+    "carretaPlates": "",
+    "carrier": "3C RECIFE",
+    "createdAt": "2026-08-16T02:25:39.458Z"
+  },
+  "c597f0e0-2f83-4334-9658-81a25911332a": {
+    "id": "c597f0e0-2f83-4334-9658-81a25911332a",
+    "cavaloPlate": "SAR1E33",
+    "carretaPlates": "",
+    "carrier": "3C RECIFE",
+    "createdAt": "2026-08-16T02:25:39.458Z"
+  },
+  "17f1f74e-13cb-444f-87ea-ee6e01f1eca2": {
+    "id": "17f1f74e-13cb-444f-87ea-ee6e01f1eca2",
+    "cavaloPlate": "SBA3C35",
+    "carretaPlates": "",
+    "carrier": "3C RECIFE",
+    "createdAt": "2026-08-16T02:25:39.458Z"
+  },
+  "8b478cc3-b3ca-42ea-965e-b63f5a9bf42c": {
+    "id": "8b478cc3-b3ca-42ea-965e-b63f5a9bf42c",
+    "cavaloPlate": "RIH3F22",
+    "carretaPlates": "",
+    "carrier": "3C RECIFE",
+    "createdAt": "2026-08-16T02:25:39.458Z"
+  },
+  "e1677bb1-59e8-422e-8f60-3601f6090a2f": {
+    "id": "e1677bb1-59e8-422e-8f60-3601f6090a2f",
+    "cavaloPlate": "PNE4833",
+    "carretaPlates": "",
+    "carrier": "3C RECIFE",
+    "createdAt": "2026-08-16T02:25:39.458Z"
+  },
+  "16538ae4-ee0a-4d53-bf39-964ba7164848": {
+    "id": "16538ae4-ee0a-4d53-bf39-964ba7164848",
+    "cavaloPlate": "SAY7C03",
+    "carretaPlates": "",
+    "carrier": "3C RECIFE",
+    "createdAt": "2026-08-16T02:25:39.458Z"
+  },
+  "fe872fad-fa84-441f-b0d5-ba708e04373e": {
+    "id": "fe872fad-fa84-441f-b0d5-ba708e04373e",
+    "cavaloPlate": "SAR7B75",
+    "carretaPlates": "",
+    "carrier": "3C RECIFE",
+    "createdAt": "2026-08-16T02:25:39.458Z"
+  },
+  "b98bfba5-1c46-4fdd-8175-307dde193d67": {
+    "id": "b98bfba5-1c46-4fdd-8175-307dde193d67",
+    "cavaloPlate": "SAU1E13",
+    "carretaPlates": "",
+    "carrier": "3C RECIFE",
+    "createdAt": "2026-08-16T02:25:39.458Z"
+  },
+  "93e94392-e45a-4e41-a9be-282395cda0a4": {
+    "id": "93e94392-e45a-4e41-a9be-282395cda0a4",
+    "cavaloPlate": "SBE6H85",
+    "carretaPlates": "",
+    "carrier": "3C RECIFE",
+    "createdAt": "2026-08-16T02:25:39.458Z"
+  },
+  "9d19bf51-03b3-418e-8801-2b18b32840f8": {
+    "id": "9d19bf51-03b3-418e-8801-2b18b32840f8",
+    "cavaloPlate": "PNE2903",
+    "carretaPlates": "",
+    "carrier": "3C RECIFE",
+    "createdAt": "2026-08-16T02:25:39.458Z"
+  },
+  "ab660bad-9777-4aa0-b3e4-bbf3783d38c0": {
+    "id": "ab660bad-9777-4aa0-b3e4-bbf3783d38c0",
+    "cavaloPlate": "PNP5164",
+    "carretaPlates": "",
+    "carrier": "3C RECIFE",
+    "createdAt": "2026-08-16T02:25:39.458Z"
+  },
+  "064a5de1-fce2-4e03-8f4c-09b04319077a": {
+    "id": "064a5de1-fce2-4e03-8f4c-09b04319077a",
+    "cavaloPlate": "SBK2A55",
+    "carretaPlates": "",
+    "carrier": "3C RECIFE",
+    "createdAt": "2026-08-16T02:25:39.458Z"
+  },
+  "5a98e32a-0a60-4f4c-b1fb-43c192291369": {
+    "id": "5a98e32a-0a60-4f4c-b1fb-43c192291369",
+    "cavaloPlate": "SBE5C55",
+    "carretaPlates": "",
+    "carrier": "3C RECIFE",
+    "createdAt": "2026-08-16T02:25:39.458Z"
+  },
+  "48794e88-d3a3-4be6-b0a5-94a197eeeb49": {
+    "id": "48794e88-d3a3-4be6-b0a5-94a197eeeb49",
+    "cavaloPlate": "PMK7647",
+    "carretaPlates": "",
+    "carrier": "3C RECIFE",
+    "createdAt": "2026-08-16T02:25:39.458Z"
+  },
+  "14617ced-5651-43c9-99b9-929bba94a9ae": {
+    "id": "14617ced-5651-43c9-99b9-929bba94a9ae",
+    "cavaloPlate": "SBV5F13",
+    "carretaPlates": "",
+    "carrier": "3C RECIFE",
+    "createdAt": "2026-08-16T02:25:39.458Z"
+  },
+  "cd80d103-59b4-4b96-b4a1-0588b5619051": {
+    "id": "cd80d103-59b4-4b96-b4a1-0588b5619051",
+    "cavaloPlate": "SBA6A65",
+    "carretaPlates": "",
+    "carrier": "3C RECIFE",
+    "createdAt": "2026-08-16T02:25:39.458Z"
+  },
+  "2b76da3b-4085-46b3-8726-2ebe4d16d9ff": {
+    "id": "2b76da3b-4085-46b3-8726-2ebe4d16d9ff",
+    "cavaloPlate": "SBL7B23",
+    "carretaPlates": "",
+    "carrier": "3C RECIFE",
+    "createdAt": "2026-08-16T02:25:39.458Z"
+  },
+  "348ebf7b-e40d-4aa8-a722-b97622467d7c": {
+    "id": "348ebf7b-e40d-4aa8-a722-b97622467d7c",
+    "cavaloPlate": "PNK7094",
+    "carretaPlates": "",
+    "carrier": "3C RECIFE",
+    "createdAt": "2026-08-16T02:25:39.458Z"
+  },
+  "b07788a8-faa7-4e8a-933c-39369485a63b": {
+    "id": "b07788a8-faa7-4e8a-933c-39369485a63b",
+    "cavaloPlate": "PNH2783",
+    "carretaPlates": "",
+    "carrier": "3C RECIFE",
+    "createdAt": "2026-08-16T02:25:39.458Z"
+  },
+  "90231677-e3a4-4a3b-a9b5-d30919f5c4b7": {
+    "id": "90231677-e3a4-4a3b-a9b5-d30919f5c4b7",
+    "cavaloPlate": "PNH0273",
+    "carretaPlates": "",
+    "carrier": "3C RECIFE",
+    "createdAt": "2026-08-16T02:25:39.458Z"
+  },
+  "a4e495dd-57a1-40b8-adf6-c0bfa3c9711d": {
+    "id": "a4e495dd-57a1-40b8-adf6-c0bfa3c9711d",
+    "cavaloPlate": "SBK6E85",
+    "carretaPlates": "",
+    "carrier": "3C RECIFE",
+    "createdAt": "2026-08-16T02:25:39.458Z"
+  },
+  "ce371ebc-171d-4dbf-8a6b-64799d93ca13": {
+    "id": "ce371ebc-171d-4dbf-8a6b-64799d93ca13",
+    "cavaloPlate": "SAR2E53",
+    "carretaPlates": "",
+    "carrier": "3C RECIFE",
+    "createdAt": "2026-08-16T02:25:39.458Z"
+  },
+  "27c60f22-7693-45d9-9a3a-c421588ae46e": {
+    "id": "27c60f22-7693-45d9-9a3a-c421588ae46e",
+    "cavaloPlate": "SBQ9F91",
+    "carretaPlates": "",
+    "carrier": "3C RECIFE",
+    "createdAt": "2026-08-16T02:25:39.458Z"
+  },
+  "497ea22a-1d14-4282-bcf3-2cfc13f14665": {
+    "id": "497ea22a-1d14-4282-bcf3-2cfc13f14665",
+    "cavaloPlate": "SBL0E25",
+    "carretaPlates": "",
+    "carrier": "3C RECIFE",
+    "createdAt": "2026-08-16T02:25:39.458Z"
+  },
+  "b17e8eee-4ba9-4e72-886b-4931cf7b84b0": {
+    "id": "b17e8eee-4ba9-4e72-886b-4931cf7b84b0",
+    "cavaloPlate": "SBJ9I55",
+    "carretaPlates": "",
+    "carrier": "3C RJ",
+    "createdAt": "2026-08-16T02:25:39.458Z"
+  },
+  "8b3e79a1-d237-4e27-84d0-59aa447d55ca": {
+    "id": "8b3e79a1-d237-4e27-84d0-59aa447d55ca",
+    "cavaloPlate": "SBU2I25",
+    "carretaPlates": "",
+    "carrier": "3C RJ",
+    "createdAt": "2026-08-16T02:25:39.458Z"
+  },
+  "4bc88c49-3792-41fe-8012-4a54c63152e7": {
+    "id": "4bc88c49-3792-41fe-8012-4a54c63152e7",
+    "cavaloPlate": "PMZ8193",
+    "carretaPlates": "",
+    "carrier": "3C RJ",
+    "createdAt": "2026-08-16T02:25:39.458Z"
+  },
+  "43a5ac0d-641e-432d-ac53-8738f5fecf2b": {
+    "id": "43a5ac0d-641e-432d-ac53-8738f5fecf2b",
+    "cavaloPlate": "SBG8G85",
+    "carretaPlates": "",
+    "carrier": "3C RJ",
+    "createdAt": "2026-08-16T02:25:39.458Z"
+  },
+  "382688fc-1032-4464-ae1e-76eda6350e6e": {
+    "id": "382688fc-1032-4464-ae1e-76eda6350e6e",
+    "cavaloPlate": "SBG8B65",
+    "carretaPlates": "",
+    "carrier": "3C RJ",
+    "createdAt": "2026-08-16T02:25:39.458Z"
+  },
+  "dc36da9a-07c0-4f10-a48b-9e0a251db2b5": {
+    "id": "dc36da9a-07c0-4f10-a48b-9e0a251db2b5",
+    "cavaloPlate": "SAP0C55",
+    "carretaPlates": "",
+    "carrier": "3C RJ",
+    "createdAt": "2026-08-16T02:25:39.458Z"
+  },
+  "cf97d003-82b3-4e28-87f0-79b9d83325c7": {
+    "id": "cf97d003-82b3-4e28-87f0-79b9d83325c7",
+    "cavaloPlate": "SAO8G85",
+    "carretaPlates": "",
+    "carrier": "3C RJ",
+    "createdAt": "2026-08-16T02:25:39.458Z"
+  },
+  "d2e81c5d-1f25-4081-afd8-dd72cb03fbad": {
+    "id": "d2e81c5d-1f25-4081-afd8-dd72cb03fbad",
+    "cavaloPlate": "SBU5H55",
+    "carretaPlates": "",
+    "carrier": "3C RJ",
+    "createdAt": "2026-08-16T02:25:39.458Z"
+  },
+  "700b9594-7413-4a7b-9eb1-f12d21947023": {
+    "id": "700b9594-7413-4a7b-9eb1-f12d21947023",
+    "cavaloPlate": "SBQ9B15",
+    "carretaPlates": "",
+    "carrier": "3C RJ",
+    "createdAt": "2026-08-16T02:25:39.458Z"
+  },
+  "adba481b-047e-4a81-a603-07039c2bc39b": {
+    "id": "adba481b-047e-4a81-a603-07039c2bc39b",
+    "cavaloPlate": "SAU8I85",
+    "carretaPlates": "",
+    "carrier": "3C RJ",
+    "createdAt": "2026-08-16T02:25:39.458Z"
+  },
+  "a3e3565b-73b6-4bd3-8381-eba77642b7ad": {
+    "id": "a3e3565b-73b6-4bd3-8381-eba77642b7ad",
+    "cavaloPlate": "SBU0C65",
+    "carretaPlates": "",
+    "carrier": "3C RJ",
+    "createdAt": "2026-08-16T02:25:39.458Z"
+  },
+  "8ac46bba-19d6-4bb2-be78-b741b327b2d5": {
+    "id": "8ac46bba-19d6-4bb2-be78-b741b327b2d5",
+    "cavaloPlate": "POS7D44",
+    "carretaPlates": "",
+    "carrier": "3C SALGUEIRO",
+    "createdAt": "2026-08-16T02:25:39.458Z"
+  },
+  "52f78643-75ec-42ee-abfe-902407b335eb": {
+    "id": "52f78643-75ec-42ee-abfe-902407b335eb",
+    "cavaloPlate": "POX6J34",
+    "carretaPlates": "",
+    "carrier": "3C SALGUEIRO",
+    "createdAt": "2026-08-16T02:25:39.458Z"
+  },
+  "4b058e11-f0bc-4a7e-99f3-8e7f7dfaf283": {
+    "id": "4b058e11-f0bc-4a7e-99f3-8e7f7dfaf283",
+    "cavaloPlate": "SBM3J62",
+    "carretaPlates": "",
+    "carrier": "3C SALVADOR",
+    "createdAt": "2026-08-16T02:25:39.458Z"
+  },
+  "d659a561-192a-40d0-a1ef-14415bb35da9": {
+    "id": "d659a561-192a-40d0-a1ef-14415bb35da9",
+    "cavaloPlate": "SBE7B73",
+    "carretaPlates": "",
+    "carrier": "3C SALVADOR",
+    "createdAt": "2026-08-16T02:25:39.458Z"
+  },
+  "25351625-c7fa-47d9-a5a3-28ee5779abd0": {
+    "id": "25351625-c7fa-47d9-a5a3-28ee5779abd0",
+    "cavaloPlate": "SBE7H45",
+    "carretaPlates": "",
+    "carrier": "3C SALVADOR",
+    "createdAt": "2026-08-16T02:25:39.458Z"
+  },
+  "ad3c5e24-6b88-4810-80ef-88f0b4397a37": {
+    "id": "ad3c5e24-6b88-4810-80ef-88f0b4397a37",
+    "cavaloPlate": "SBE6G65",
+    "carretaPlates": "",
+    "carrier": "3C SALVADOR",
+    "createdAt": "2026-08-16T02:25:39.458Z"
+  },
+  "eaeb4960-a197-4445-91f9-23b8df3c2fd1": {
+    "id": "eaeb4960-a197-4445-91f9-23b8df3c2fd1",
+    "cavaloPlate": "SAQ3A01",
+    "carretaPlates": "",
+    "carrier": "3C SALVADOR",
+    "createdAt": "2026-08-16T02:25:39.458Z"
+  },
+  "480cd347-9645-4f13-8bb6-41ad18905073": {
+    "id": "480cd347-9645-4f13-8bb6-41ad18905073",
+    "cavaloPlate": "SAX9F65",
+    "carretaPlates": "",
+    "carrier": "3C SALVADOR",
+    "createdAt": "2026-08-16T02:25:39.458Z"
+  },
+  "823fb9df-8fcc-4dfa-841a-5a1967a7739a": {
+    "id": "823fb9df-8fcc-4dfa-841a-5a1967a7739a",
+    "cavaloPlate": "SBA3E25",
+    "carretaPlates": "",
+    "carrier": "3C SALVADOR",
+    "createdAt": "2026-08-16T02:25:39.458Z"
+  },
+  "876b2738-3866-4646-81d5-c6969a74d61a": {
+    "id": "876b2738-3866-4646-81d5-c6969a74d61a",
+    "cavaloPlate": "SBA4A55",
+    "carretaPlates": "",
+    "carrier": "3C SALVADOR",
+    "createdAt": "2026-08-16T02:25:39.458Z"
+  },
+  "76b9f84e-f91e-4651-bf56-e63d69ad446a": {
+    "id": "76b9f84e-f91e-4651-bf56-e63d69ad446a",
+    "cavaloPlate": "SBV2B25",
+    "carretaPlates": "",
+    "carrier": "3C SALVADOR",
+    "createdAt": "2026-08-16T02:25:39.458Z"
+  },
+  "8cddbb69-3782-4286-acac-cdcc9a80d558": {
+    "id": "8cddbb69-3782-4286-acac-cdcc9a80d558",
+    "cavaloPlate": "PNK7274",
+    "carretaPlates": "",
+    "carrier": "3C SALVADOR",
+    "createdAt": "2026-08-16T02:25:39.458Z"
+  },
+  "fb03b1f5-be4e-49d5-bba4-13a0abe74f11": {
+    "id": "fb03b1f5-be4e-49d5-bba4-13a0abe74f11",
+    "cavaloPlate": "SBT8D62",
+    "carretaPlates": "",
+    "carrier": "3C SALVADOR",
+    "createdAt": "2026-08-16T02:25:39.458Z"
+  },
+  "5f33dd24-30c9-480b-9cf0-af748449fc33": {
+    "id": "5f33dd24-30c9-480b-9cf0-af748449fc33",
+    "cavaloPlate": "SAZ4J31",
+    "carretaPlates": "",
+    "carrier": "3C SALVADOR",
+    "createdAt": "2026-08-16T02:25:39.458Z"
+  },
+  "d797af28-91fd-43ee-80ff-0852f0696a57": {
+    "id": "d797af28-91fd-43ee-80ff-0852f0696a57",
+    "cavaloPlate": "SAO9H55",
+    "carretaPlates": "",
+    "carrier": "3C SALVADOR",
+    "createdAt": "2026-08-16T02:25:39.458Z"
+  },
+  "9e39c7ea-bfad-414a-9376-909c34eec0f1": {
+    "id": "9e39c7ea-bfad-414a-9376-909c34eec0f1",
+    "cavaloPlate": "POP6G73",
+    "carretaPlates": "",
+    "carrier": "3C SALVADOR",
+    "createdAt": "2026-08-16T02:25:39.458Z"
+  },
+  "93c1d327-d384-45d7-93d6-ce10dfbcb7d6": {
+    "id": "93c1d327-d384-45d7-93d6-ce10dfbcb7d6",
+    "cavaloPlate": "SBL6G62",
+    "carretaPlates": "",
+    "carrier": "3C SALVADOR",
+    "createdAt": "2026-08-16T02:25:39.458Z"
+  },
+  "13d99319-080d-495f-9d2f-5e23b16a8352": {
+    "id": "13d99319-080d-495f-9d2f-5e23b16a8352",
+    "cavaloPlate": "SAQ6C65",
+    "carretaPlates": "",
+    "carrier": "3C SALVADOR",
+    "createdAt": "2026-08-16T02:25:39.458Z"
+  },
+  "ba3e62b4-4bc4-4b5e-8fa1-8f6fc250402b": {
+    "id": "ba3e62b4-4bc4-4b5e-8fa1-8f6fc250402b",
+    "cavaloPlate": "PNS4514",
+    "carretaPlates": "",
+    "carrier": "3C SALVADOR",
+    "createdAt": "2026-08-16T02:25:39.458Z"
+  },
+  "fb8a8e83-a608-4f30-a67a-378391916d84": {
+    "id": "fb8a8e83-a608-4f30-a67a-378391916d84",
+    "cavaloPlate": "SBS7I22",
+    "carretaPlates": "",
+    "carrier": "3C SALVADOR",
+    "createdAt": "2026-08-16T02:25:39.458Z"
+  },
+  "93c7235c-e73a-4dde-8bfb-eeb50579fb02": {
+    "id": "93c7235c-e73a-4dde-8bfb-eeb50579fb02",
+    "cavaloPlate": "SAR6E05",
+    "carretaPlates": "",
+    "carrier": "3C SAO LUIS",
+    "createdAt": "2026-08-16T02:25:39.458Z"
+  },
+  "34c9e362-ea40-4851-a720-a72eefc026ce": {
+    "id": "34c9e362-ea40-4851-a720-a72eefc026ce",
+    "cavaloPlate": "SBC5C13",
+    "carretaPlates": "",
+    "carrier": "3C SAO LUIS",
+    "createdAt": "2026-08-16T02:25:39.458Z"
+  },
+  "edad5657-a78a-4694-aa93-902bbdcf3792": {
+    "id": "edad5657-a78a-4694-aa93-902bbdcf3792",
+    "cavaloPlate": "SBT4G95",
+    "carretaPlates": "",
+    "carrier": "3C SAO LUIS",
+    "createdAt": "2026-08-16T02:25:39.458Z"
+  },
+  "c9d5e4bc-c250-481f-ad73-68fcea311f0d": {
+    "id": "c9d5e4bc-c250-481f-ad73-68fcea311f0d",
+    "cavaloPlate": "POO3C94",
+    "carretaPlates": "",
+    "carrier": "3C SAO LUIS",
+    "createdAt": "2026-08-16T02:25:39.458Z"
+  },
+  "7f451b3e-623e-4346-8570-8c75602573d9": {
+    "id": "7f451b3e-623e-4346-8570-8c75602573d9",
+    "cavaloPlate": "SBR2J55",
+    "carretaPlates": "",
+    "carrier": "3C SAO LUIS",
+    "createdAt": "2026-08-16T02:25:39.458Z"
+  },
+  "69ae697f-caac-4a49-96b5-dd170e24d32c": {
+    "id": "69ae697f-caac-4a49-96b5-dd170e24d32c",
+    "cavaloPlate": "PNE3063",
+    "carretaPlates": "",
+    "carrier": "3C SAO LUIS",
+    "createdAt": "2026-08-16T02:25:39.458Z"
+  },
+  "d82508db-f234-4074-a99a-d3660c5c9201": {
+    "id": "d82508db-f234-4074-a99a-d3660c5c9201",
+    "cavaloPlate": "PNS8494",
+    "carretaPlates": "",
+    "carrier": "3C SAO LUIS",
+    "createdAt": "2026-08-16T02:25:39.458Z"
+  },
+  "991c647d-16b4-46e0-922e-386130ef416f": {
+    "id": "991c647d-16b4-46e0-922e-386130ef416f",
+    "cavaloPlate": "SBJ5H13",
+    "carretaPlates": "",
+    "carrier": "3C SAO LUIS",
+    "createdAt": "2026-08-16T02:25:39.458Z"
+  },
+  "0393364a-36eb-493f-9f1f-158335c73643": {
+    "id": "0393364a-36eb-493f-9f1f-158335c73643",
+    "cavaloPlate": "PNE6C83",
+    "carretaPlates": "",
+    "carrier": "3C SAO LUIS",
+    "createdAt": "2026-08-16T02:25:39.458Z"
+  },
+  "a4304d6d-01d4-4f76-b6a8-26e59aed5330": {
+    "id": "a4304d6d-01d4-4f76-b6a8-26e59aed5330",
+    "cavaloPlate": "RIK8E43",
+    "carretaPlates": "",
+    "carrier": "3C SAO LUIS",
+    "createdAt": "2026-08-16T02:25:39.458Z"
+  },
+  "79462495-40d6-4b9b-a36b-5dc3a23c5ea7": {
+    "id": "79462495-40d6-4b9b-a36b-5dc3a23c5ea7",
+    "cavaloPlate": "PNH0583",
+    "carretaPlates": "",
+    "carrier": "3C SAO LUIS",
+    "createdAt": "2026-08-16T02:25:39.458Z"
+  },
+  "cddb11d2-4c9e-4c25-ba0f-2dbf81b29341": {
+    "id": "cddb11d2-4c9e-4c25-ba0f-2dbf81b29341",
+    "cavaloPlate": "SBT3G72",
+    "carretaPlates": "",
+    "carrier": "3C SAO LUIS",
+    "createdAt": "2026-08-16T02:25:39.458Z"
+  },
+  "14ce3b22-c757-48e4-881b-28e1d501dca2": {
+    "id": "14ce3b22-c757-48e4-881b-28e1d501dca2",
+    "cavaloPlate": "SAU8E35",
+    "carretaPlates": "",
+    "carrier": "3C SAO LUIS",
+    "createdAt": "2026-08-16T02:25:39.458Z"
+  },
+  "27a6e4d0-165e-4e81-9e75-5d324eb20baa": {
+    "id": "27a6e4d0-165e-4e81-9e75-5d324eb20baa",
+    "cavaloPlate": "SBR8J35",
+    "carretaPlates": "",
+    "carrier": "3C SAO LUIS",
+    "createdAt": "2026-08-16T02:25:39.458Z"
+  },
+  "b06b2e81-3d53-40ff-a59b-a0b7140db7c3": {
+    "id": "b06b2e81-3d53-40ff-a59b-a0b7140db7c3",
+    "cavaloPlate": "PNE6383",
+    "carretaPlates": "",
+    "carrier": "3C SOBRAL",
+    "createdAt": "2026-08-16T02:25:39.458Z"
+  },
+  "18f749cf-9a5a-485b-ac09-9834053c90d4": {
+    "id": "18f749cf-9a5a-485b-ac09-9834053c90d4",
+    "cavaloPlate": "SBV4J45",
+    "carretaPlates": "",
+    "carrier": "3C SOBRAL",
+    "createdAt": "2026-08-16T02:25:39.458Z"
+  },
+  "67c4d01d-d4a5-417b-bbf3-bfaded21002e": {
+    "id": "67c4d01d-d4a5-417b-bbf3-bfaded21002e",
+    "cavaloPlate": "POO0F74",
+    "carretaPlates": "",
+    "carrier": "3C SOBRAL",
+    "createdAt": "2026-08-16T02:25:39.458Z"
+  },
+  "535110e2-4916-4507-86fa-061886871ae9": {
+    "id": "535110e2-4916-4507-86fa-061886871ae9",
+    "cavaloPlate": "PNE6763",
+    "carretaPlates": "",
+    "carrier": "3C SOBRAL",
+    "createdAt": "2026-08-16T02:25:39.458Z"
+  },
+  "c65d7683-4414-4170-b42b-e44af0c3b414": {
+    "id": "c65d7683-4414-4170-b42b-e44af0c3b414",
+    "cavaloPlate": "SAS7C75",
+    "carretaPlates": "",
+    "carrier": "3C SOBRAL",
+    "createdAt": "2026-08-16T02:25:39.458Z"
+  },
+  "20d232f3-d267-4bb6-9fe7-abbcab62a1fd": {
+    "id": "20d232f3-d267-4bb6-9fe7-abbcab62a1fd",
+    "cavaloPlate": "SBI3A65",
+    "carretaPlates": "",
+    "carrier": "3C TERESINA",
+    "createdAt": "2026-08-16T02:25:39.458Z"
+  },
+  "015db7aa-f335-42d6-9e82-4c7e044f054b": {
+    "id": "015db7aa-f335-42d6-9e82-4c7e044f054b",
+    "cavaloPlate": "ORT9927",
+    "carretaPlates": "",
+    "carrier": "3C TERESINA",
+    "createdAt": "2026-08-16T02:25:39.458Z"
+  },
+  "b64b7ac0-d3ef-4572-82e2-109d38480679": {
+    "id": "b64b7ac0-d3ef-4572-82e2-109d38480679",
+    "cavaloPlate": "PMV9626",
+    "carretaPlates": "",
+    "carrier": "3C TERESINA",
+    "createdAt": "2026-08-16T02:25:39.458Z"
+  },
+  "fa83a5bd-08ad-47d3-8868-932a7091430a": {
+    "id": "fa83a5bd-08ad-47d3-8868-932a7091430a",
+    "cavaloPlate": "SBA4J12",
+    "carretaPlates": "",
+    "carrier": "3C TERESINA",
+    "createdAt": "2026-08-16T02:25:39.458Z"
+  },
+  "d892fe30-b4e9-4715-b8cc-ed6d32d9bbec": {
+    "id": "d892fe30-b4e9-4715-b8cc-ed6d32d9bbec",
+    "cavaloPlate": "POP6D03",
+    "carretaPlates": "",
+    "carrier": "3C TERESINA",
+    "createdAt": "2026-08-16T02:25:39.458Z"
+  },
+  "971889c6-8cde-4eb7-b241-74a00a47414e": {
+    "id": "971889c6-8cde-4eb7-b241-74a00a47414e",
+    "cavaloPlate": "PNS3944",
+    "carretaPlates": "",
+    "carrier": "3C TERESINA",
+    "createdAt": "2026-08-16T02:25:39.458Z"
+  },
+  "4fcb8dce-dcc1-4fdb-9ebc-8a1451e32414": {
+    "id": "4fcb8dce-dcc1-4fdb-9ebc-8a1451e32414",
+    "cavaloPlate": "PNS9614",
+    "carretaPlates": "",
+    "carrier": "3C TERESINA",
+    "createdAt": "2026-08-16T02:25:39.458Z"
+  },
+  "5fb00f82-b94e-429f-b77e-f000401d7322": {
+    "id": "5fb00f82-b94e-429f-b77e-f000401d7322",
+    "cavaloPlate": "POO9F93",
+    "carretaPlates": "",
+    "carrier": "3C TERESINA",
+    "createdAt": "2026-08-16T02:25:39.458Z"
+  },
+  "52c1984b-467f-4476-8c91-7dd4ef8d5d41": {
+    "id": "52c1984b-467f-4476-8c91-7dd4ef8d5d41",
+    "cavaloPlate": "SBR2B35",
+    "carretaPlates": "",
+    "carrier": "3C TERESINA",
+    "createdAt": "2026-08-16T02:25:39.458Z"
+  },
+  "6c68ae9f-998a-42e2-aa02-845d22032929": {
+    "id": "6c68ae9f-998a-42e2-aa02-845d22032929",
+    "cavaloPlate": "SAZ7A31",
+    "carretaPlates": "",
+    "carrier": "3C TERESINA",
+    "createdAt": "2026-08-16T02:25:39.458Z"
+  },
+  "39f712a0-9f13-4670-a6fa-08ecf4454d54": {
+    "id": "39f712a0-9f13-4670-a6fa-08ecf4454d54",
+    "cavaloPlate": "RIL1G13",
+    "carretaPlates": "",
+    "carrier": "3C TERESINA",
+    "createdAt": "2026-08-16T02:25:39.458Z"
+  },
+  "12e23888-1ef7-48c6-ab7d-95ef02d90bd1": {
+    "id": "12e23888-1ef7-48c6-ab7d-95ef02d90bd1",
+    "cavaloPlate": "SAW7B65",
+    "carretaPlates": "",
+    "carrier": "3C TERESINA",
+    "createdAt": "2026-08-16T02:25:39.458Z"
+  },
+  "65b07878-dd82-4c00-8573-9716f46ae2e7": {
+    "id": "65b07878-dd82-4c00-8573-9716f46ae2e7",
+    "cavaloPlate": "PNG9733",
+    "carretaPlates": "",
+    "carrier": "3C TERESINA",
+    "createdAt": "2026-08-16T02:25:39.458Z"
+  },
+  "37255ff1-b44a-4fe4-9bac-6f0d8e4b5b65": {
+    "id": "37255ff1-b44a-4fe4-9bac-6f0d8e4b5b65",
+    "cavaloPlate": "PNT7I03",
+    "carretaPlates": "",
+    "carrier": "3C TERESINA",
+    "createdAt": "2026-08-16T02:25:39.458Z"
+  },
+  "e230c708-119e-4f95-a929-48ffac131382": {
+    "id": "e230c708-119e-4f95-a929-48ffac131382",
+    "cavaloPlate": "RIL5E53",
+    "carretaPlates": "",
+    "carrier": "3C TERESINA",
+    "createdAt": "2026-08-16T02:25:39.458Z"
+  },
+  "0e60e827-cfe6-441a-92c9-cff01bcfb883": {
+    "id": "0e60e827-cfe6-441a-92c9-cff01bcfb883",
+    "cavaloPlate": "PNA6823",
+    "carretaPlates": "",
+    "carrier": "3C TERESINA",
+    "createdAt": "2026-08-16T02:25:39.458Z"
+  },
+  "5da85090-7e5a-4a50-878d-ffd17823bdb4": {
+    "id": "5da85090-7e5a-4a50-878d-ffd17823bdb4",
+    "cavaloPlate": "SAO8C85",
+    "carretaPlates": "",
+    "carrier": "3C TERESINA",
+    "createdAt": "2026-08-16T02:25:39.458Z"
+  },
+  "ff881331-5720-472e-98ec-636a33c6194b": {
+    "id": "ff881331-5720-472e-98ec-636a33c6194b",
+    "cavaloPlate": "RIL8C03",
+    "carretaPlates": "",
+    "carrier": "3C TERESINA",
+    "createdAt": "2026-08-16T02:25:39.458Z"
+  },
+  "043fa47f-6070-4c20-bdcf-d1f093f437b7": {
+    "id": "043fa47f-6070-4c20-bdcf-d1f093f437b7",
+    "cavaloPlate": "SAX6H63",
+    "carretaPlates": "",
+    "carrier": "3C TP SOUZA",
+    "createdAt": "2026-08-16T02:25:39.458Z"
+  },
+  "e508ca06-e022-4a87-b09e-b3dc0b13a05b": {
+    "id": "e508ca06-e022-4a87-b09e-b3dc0b13a05b",
+    "cavaloPlate": "PNG9873",
+    "carretaPlates": "",
+    "carrier": "3C TP SOUZA",
+    "createdAt": "2026-08-16T02:25:39.458Z"
+  },
+  "01845599-8f6a-4c64-89c3-b2351ef3ef17": {
+    "id": "01845599-8f6a-4c64-89c3-b2351ef3ef17",
+    "cavaloPlate": "POP6F43",
+    "carretaPlates": "",
+    "carrier": "3C UBERLANDIA",
+    "createdAt": "2026-08-16T02:25:39.458Z"
+  },
+  "4aa8c4d2-7ea4-4d19-8db9-f9bac4084ca0": {
+    "id": "4aa8c4d2-7ea4-4d19-8db9-f9bac4084ca0",
+    "cavaloPlate": "SBV9H76",
+    "carretaPlates": "",
+    "carrier": "3C UBERLANDIA",
+    "createdAt": "2026-08-16T02:25:39.458Z"
+  },
+  "835710f8-75a6-48a9-9e23-4f68f013da27": {
+    "id": "835710f8-75a6-48a9-9e23-4f68f013da27",
+    "cavaloPlate": "POP8I03",
+    "carretaPlates": "",
+    "carrier": "3C UBERLANDIA",
+    "createdAt": "2026-08-16T02:25:39.458Z"
+  },
+  "3c8ec788-b2fe-4c68-8339-721069b51700": {
+    "id": "3c8ec788-b2fe-4c68-8339-721069b51700",
+    "cavaloPlate": "SBV3A75",
+    "carretaPlates": "",
+    "carrier": "3C UBERLANDIA",
+    "createdAt": "2026-08-16T02:25:39.458Z"
+  },
+  "f82bdaa3-cef6-4ff7-8fb2-4910be0f95a9": {
+    "id": "f82bdaa3-cef6-4ff7-8fb2-4910be0f95a9",
+    "cavaloPlate": "SBA7F05",
+    "carretaPlates": "",
+    "carrier": "3C UBERLANDIA",
+    "createdAt": "2026-08-16T02:25:39.458Z"
+  },
+  "f029d741-e382-4d7e-9192-4482a781dbe2": {
+    "id": "f029d741-e382-4d7e-9192-4482a781dbe2",
+    "cavaloPlate": "SBL3A76",
+    "carretaPlates": "",
+    "carrier": "3C VARGINHA",
+    "createdAt": "2026-08-16T02:25:39.458Z"
+  },
+  "71fecf4a-1633-4825-800c-a267c8ada601": {
+    "id": "71fecf4a-1633-4825-800c-a267c8ada601",
+    "cavaloPlate": "POX7I13",
+    "carretaPlates": "",
+    "carrier": "3C VARGINHA",
+    "createdAt": "2026-08-16T02:25:39.458Z"
+  },
+  "ad4d213b-9bae-4d32-a8f9-0a5773f67985": {
+    "id": "ad4d213b-9bae-4d32-a8f9-0a5773f67985",
+    "cavaloPlate": "POX9E33",
+    "carretaPlates": "",
+    "carrier": "3C VARGINHA",
+    "createdAt": "2026-08-16T02:25:39.458Z"
+  },
+  "32d6ef7d-1d58-4518-bbbc-d3f4a21c7cd9": {
+    "id": "32d6ef7d-1d58-4518-bbbc-d3f4a21c7cd9",
+    "cavaloPlate": "SBL2E26",
+    "carretaPlates": "",
+    "carrier": "3C VARGINHA",
+    "createdAt": "2026-08-16T02:25:39.458Z"
+  },
+  "2a0b85d7-6ded-4739-bfc4-32c62d14ca3a": {
+    "id": "2a0b85d7-6ded-4739-bfc4-32c62d14ca3a",
+    "cavaloPlate": "SBR4E85",
+    "carretaPlates": "",
+    "carrier": "3C VCONQUISTA",
+    "createdAt": "2026-08-16T02:25:39.458Z"
+  },
+  "01533ad3-5c72-4dd7-bb8d-ff28761e6180": {
+    "id": "01533ad3-5c72-4dd7-bb8d-ff28761e6180",
+    "cavaloPlate": "SAZ6D25",
+    "carretaPlates": "",
+    "carrier": "3C VCONQUISTA",
+    "createdAt": "2026-08-16T02:25:39.458Z"
+  },
+  "878cc150-897e-423e-8f93-6e7a30ab27c7": {
+    "id": "878cc150-897e-423e-8f93-6e7a30ab27c7",
+    "cavaloPlate": "SBT0C92",
+    "carretaPlates": "",
+    "carrier": "3C VESPASIANO",
+    "createdAt": "2026-08-16T02:25:39.458Z"
+  },
+  "4c44dd53-894f-4461-8216-8db1c5b84bb4": {
+    "id": "4c44dd53-894f-4461-8216-8db1c5b84bb4",
+    "cavaloPlate": "SBK7A45",
+    "carretaPlates": "",
+    "carrier": "3C VESPASIANO",
+    "createdAt": "2026-08-16T02:25:39.458Z"
+  },
+  "8ed1825a-d563-4801-9167-2f221049a8e8": {
+    "id": "8ed1825a-d563-4801-9167-2f221049a8e8",
+    "cavaloPlate": "SAY5B56",
+    "carretaPlates": "",
+    "carrier": "3C VESPASIANO",
+    "createdAt": "2026-08-16T02:25:39.458Z"
+  },
+  "9274eb8c-1e22-4357-9564-a8b959274bf9": {
+    "id": "9274eb8c-1e22-4357-9564-a8b959274bf9",
+    "cavaloPlate": "PNZ1364",
+    "carretaPlates": "",
+    "carrier": "3C VESPASIANO",
+    "createdAt": "2026-08-16T02:25:39.458Z"
+  },
+  "77fe8fdb-5ea2-474d-8f7e-c3b7c3fac50e": {
+    "id": "77fe8fdb-5ea2-474d-8f7e-c3b7c3fac50e",
+    "cavaloPlate": "SBU0F62",
+    "carretaPlates": "",
+    "carrier": "3C VESPASIANO",
+    "createdAt": "2026-08-16T02:25:39.458Z"
+  },
+  "22defe13-1dae-4099-9f2e-31ccc0d5ed28": {
+    "id": "22defe13-1dae-4099-9f2e-31ccc0d5ed28",
+    "cavaloPlate": "PNZ2074",
+    "carretaPlates": "",
+    "carrier": "3C VESPASIANO",
+    "createdAt": "2026-08-16T02:25:39.458Z"
+  },
+  "5e208fd8-02da-4268-96a2-39e860bb1683": {
+    "id": "5e208fd8-02da-4268-96a2-39e860bb1683",
+    "cavaloPlate": "POU8451",
+    "carretaPlates": "",
+    "carrier": "3C VESPASIANO",
+    "createdAt": "2026-08-16T02:25:39.458Z"
+  },
+  "4bbb7f0b-2a20-4743-8385-aa445d5cb32c": {
+    "id": "4bbb7f0b-2a20-4743-8385-aa445d5cb32c",
+    "cavaloPlate": "QTF6D68",
+    "carretaPlates": "",
+    "carrier": "SM LOGISTICA",
+    "createdAt": "2026-08-16T02:25:39.458Z"
+  },
+  "e63fed93-8140-4896-91fc-5842d7d58df6": {
+    "id": "e63fed93-8140-4896-91fc-5842d7d58df6",
+    "cavaloPlate": "UQO8C90",
+    "carretaPlates": "",
+    "carrier": "TRANSPORTADORA ALMEIDA DE MARILIA LT",
+    "createdAt": "2026-08-16T02:25:39.458Z"
+  },
+  "42eff96d-52e2-41f3-8e9c-c95630fd8dbc": {
+    "id": "42eff96d-52e2-41f3-8e9c-c95630fd8dbc",
+    "cavaloPlate": "SAS2J22",
+    "carretaPlates": "",
+    "carrier": "3C NATAL DEDICADOS",
+    "createdAt": "2026-08-16T02:25:39.458Z"
+  },
+  "f89929f7-cbc4-41d7-bc6a-0b8aba9d4446": {
+    "id": "f89929f7-cbc4-41d7-bc6a-0b8aba9d4446",
+    "cavaloPlate": "POD0165",
+    "carretaPlates": "",
+    "carrier": "3C NATAL DEDICADOS",
+    "createdAt": "2026-08-16T02:25:39.458Z"
+  },
+  "94ccf9d8-6870-4116-83e9-c50a3f77cf19": {
+    "id": "94ccf9d8-6870-4116-83e9-c50a3f77cf19",
+    "cavaloPlate": "SAS2D02",
+    "carretaPlates": "",
+    "carrier": "3C SANTA LUZIA DEDICADOS",
+    "createdAt": "2026-08-16T02:25:39.458Z"
+  },
+  "d2bcb500-19af-4525-9087-4329d813d74f": {
+    "id": "d2bcb500-19af-4525-9087-4329d813d74f",
+    "cavaloPlate": "KQT5I92",
+    "carretaPlates": "",
+    "carrier": "ARGUS LOGISTICA E TRANSPORTES LTDA",
+    "createdAt": "2026-08-16T02:25:39.458Z"
+  },
+  "b4e698f0-f442-4b97-9ddb-93a694758a23": {
+    "id": "b4e698f0-f442-4b97-9ddb-93a694758a23",
+    "cavaloPlate": "CTC6F03",
+    "carretaPlates": "",
+    "carrier": "ARGUS LOGISTICA E TRANSPORTES LTDA",
+    "createdAt": "2026-08-16T02:25:39.458Z"
+  },
+  "d739e955-9501-4197-b796-069bbfa347bb": {
+    "id": "d739e955-9501-4197-b796-069bbfa347bb",
+    "cavaloPlate": "BPG8H46",
+    "carretaPlates": "",
+    "carrier": "MANDALOG OPERACOES LOGISTICAS LTDA",
+    "createdAt": "2026-08-16T02:25:39.458Z"
+  },
+  "8103fd6a-e715-4b93-a6e9-931b866dafc5": {
+    "id": "8103fd6a-e715-4b93-a6e9-931b866dafc5",
+    "cavaloPlate": "RIX2A54",
+    "carretaPlates": "",
+    "carrier": "LMA TRANSPORTES LTDA ME",
+    "createdAt": "2026-08-16T02:25:39.458Z"
+  },
+  "f3e7c9b5-716d-433d-a956-c90c63230d97": {
+    "id": "f3e7c9b5-716d-433d-a956-c90c63230d97",
+    "cavaloPlate": "FKW7E56",
+    "carretaPlates": "",
+    "carrier": "MANDALOG OPERACOES LOGISTICAS LTDA",
+    "createdAt": "2026-08-16T02:25:39.458Z"
+  },
+  "c4b814f2-fa7b-4f69-83e7-b6095d27c7dd": {
+    "id": "c4b814f2-fa7b-4f69-83e7-b6095d27c7dd",
+    "cavaloPlate": "CNI3B47",
+    "carretaPlates": "",
+    "carrier": "VIAX OPERACOES LOGISTICAS LTDA",
+    "createdAt": "2026-08-16T02:25:39.458Z"
+  },
+  "5204c957-750d-427f-97ff-82626f6192d5": {
+    "id": "5204c957-750d-427f-97ff-82626f6192d5",
+    "cavaloPlate": "LNN8F68",
+    "carretaPlates": "",
+    "carrier": "A J 2017 TRANSPORTADORA EIRELI ME",
+    "createdAt": "2026-08-16T02:25:39.458Z"
+  },
+  "21ed596f-6d89-4b37-abcc-bf3d96e8dd27": {
+    "id": "21ed596f-6d89-4b37-abcc-bf3d96e8dd27",
+    "cavaloPlate": "LPE5894",
+    "carretaPlates": "",
+    "carrier": "ARGUS LOGISTICA E TRANSPORTES LTDA",
+    "createdAt": "2026-08-16T02:25:39.458Z"
+  },
+  "23c69e5c-82fe-4f07-9ac8-a8423087f918": {
+    "id": "23c69e5c-82fe-4f07-9ac8-a8423087f918",
+    "cavaloPlate": "LQX2269",
+    "carretaPlates": "",
+    "carrier": "EDLOGISTICA TRANSPORTADORA LTDA",
+    "createdAt": "2026-08-16T02:25:39.458Z"
+  },
+  "871ce41a-1d26-4d2a-8421-9ccd7cbfb1a6": {
+    "id": "871ce41a-1d26-4d2a-8421-9ccd7cbfb1a6",
+    "cavaloPlate": "LRP8B73",
+    "carretaPlates": "",
+    "carrier": "SERRAF TRANSPORTADORA E LOGISTICA E",
+    "createdAt": "2026-08-16T02:25:39.458Z"
+  },
+  "6f5c9659-42f9-4461-bc06-8d436cec70db": {
+    "id": "6f5c9659-42f9-4461-bc06-8d436cec70db",
+    "cavaloPlate": "DVS5J65",
+    "carretaPlates": "",
+    "carrier": "JETTA TRANSPORTES E LOGISTICA LTDA",
+    "createdAt": "2026-08-16T02:25:39.458Z"
+  },
+  "3f9270d6-ebb4-4797-9a8c-7fa7db896db3": {
+    "id": "3f9270d6-ebb4-4797-9a8c-7fa7db896db3",
+    "cavaloPlate": "KZS9244",
+    "carretaPlates": "",
+    "carrier": "SERRAF TRANSPORTADORA E LOGISTICA E",
+    "createdAt": "2026-08-16T02:25:39.458Z"
+  },
+  "05dfe0ac-8fa0-411c-90ae-a0f614b08efd": {
+    "id": "05dfe0ac-8fa0-411c-90ae-a0f614b08efd",
+    "cavaloPlate": "SWU2D97",
+    "carretaPlates": "",
+    "carrier": "MANDALOG OPERACOES LOGISTICAS LTDA",
+    "createdAt": "2026-08-16T02:25:39.458Z"
+  },
+  "f71bc1fd-8009-4073-ae46-8bd9ed2af18a": {
+    "id": "f71bc1fd-8009-4073-ae46-8bd9ed2af18a",
+    "cavaloPlate": "PCI2E32",
+    "carretaPlates": "",
+    "carrier": "JETTA TRANSPORTES E LOGISTICA LTDA",
+    "createdAt": "2026-08-16T02:25:39.458Z"
+  },
+  "e7861b05-fc89-40d3-b5e9-4af9ec78be6b": {
+    "id": "e7861b05-fc89-40d3-b5e9-4af9ec78be6b",
+    "cavaloPlate": "MEU0521",
+    "carretaPlates": "",
+    "carrier": "JETTA TRANSPORTES E LOGISTICA LTDA",
+    "createdAt": "2026-08-16T02:25:39.458Z"
+  },
+  "08677f71-6053-4ba7-bdd5-879818ba8ae3": {
+    "id": "08677f71-6053-4ba7-bdd5-879818ba8ae3",
+    "cavaloPlate": "LLA5I48",
+    "carretaPlates": "",
+    "carrier": "SERRAF TRANSPORTADORA E LOGISTICA E",
+    "createdAt": "2026-08-16T02:25:39.458Z"
+  },
+  "7eb79383-1c73-4a5d-a420-7d0517cebef0": {
+    "id": "7eb79383-1c73-4a5d-a420-7d0517cebef0",
+    "cavaloPlate": "QMX6I61",
+    "carretaPlates": "",
+    "carrier": "A J 2017 TRANSPORTADORA EIRELI ME",
+    "createdAt": "2026-08-16T02:25:39.458Z"
+  },
+  "a6c8180a-4462-45ed-8d5f-a85ceb2825f3": {
+    "id": "a6c8180a-4462-45ed-8d5f-a85ceb2825f3",
+    "cavaloPlate": "TYQ6F08",
+    "carretaPlates": "",
+    "carrier": "EXPRESSO MOEDENSE LTDA",
+    "createdAt": "2026-08-16T02:25:39.458Z"
+  },
+  "37860d87-54fe-416e-9728-7ceeee90917a": {
+    "id": "37860d87-54fe-416e-9728-7ceeee90917a",
+    "cavaloPlate": "UOM3H63",
+    "carretaPlates": "",
+    "carrier": "TRANSPORTADORA ALMEIDA DE MARILIA LT",
+    "createdAt": "2026-08-16T02:25:39.458Z"
+  },
+  "d4482068-0f01-4e67-90eb-cea3df329886": {
+    "id": "d4482068-0f01-4e67-90eb-cea3df329886",
+    "cavaloPlate": "LMC0J85",
+    "carretaPlates": "",
+    "carrier": "ARGUS LOGISTICA E TRANSPORTES LTDA",
+    "createdAt": "2026-08-16T02:25:39.458Z"
+  },
+  "d0b41854-c22e-481a-a588-59bc35707b05": {
+    "id": "d0b41854-c22e-481a-a588-59bc35707b05",
+    "cavaloPlate": "RUF9H94",
+    "carretaPlates": "",
+    "carrier": "FASI TRANSPORTES LTDA",
+    "createdAt": "2026-08-16T02:25:39.458Z"
+  },
+  "8c755249-7030-4985-93f4-8322bff5865a": {
+    "id": "8c755249-7030-4985-93f4-8322bff5865a",
+    "cavaloPlate": "BUP9A68",
+    "carretaPlates": "",
+    "carrier": "JETTA TRANSPORTES E LOGISTICA LTDA",
+    "createdAt": "2026-08-16T02:25:39.458Z"
+  },
+  "0514c810-01a8-461e-9f55-55aaa9def8c7": {
+    "id": "0514c810-01a8-461e-9f55-55aaa9def8c7",
+    "cavaloPlate": "TZC7E67",
+    "carretaPlates": "",
+    "carrier": "LEDIFRAN LOGISTICA LTDA",
+    "createdAt": "2026-08-16T02:25:39.458Z"
+  },
+  "b51a378f-36c3-4edf-a173-99e399998bd3": {
+    "id": "b51a378f-36c3-4edf-a173-99e399998bd3",
+    "cavaloPlate": "EOJ8E91",
+    "carretaPlates": "",
+    "carrier": "LEDIFRAN LOGISTICA LTDA",
+    "createdAt": "2026-08-16T02:25:39.458Z"
+  },
+  "11f1ae8d-d23a-47f6-b002-c6b79ef1040e": {
+    "id": "11f1ae8d-d23a-47f6-b002-c6b79ef1040e",
+    "cavaloPlate": "TYZ9J97",
+    "carretaPlates": "",
+    "carrier": "LEDIFRAN LOGISTICA LTDA",
+    "createdAt": "2026-08-16T02:25:39.458Z"
+  },
+  "c811e113-1157-49ca-b450-48ff259fec10": {
+    "id": "c811e113-1157-49ca-b450-48ff259fec10",
+    "cavaloPlate": "RKO7F24",
+    "carretaPlates": "",
+    "carrier": "LMA TRANSPORTES LTDA ME",
+    "createdAt": "2026-08-16T02:25:39.458Z"
+  },
+  "fdc9168d-8b53-4fd0-aa2d-bb1370969df4": {
+    "id": "fdc9168d-8b53-4fd0-aa2d-bb1370969df4",
+    "cavaloPlate": "CBR6C42",
+    "carretaPlates": "",
+    "carrier": "MANDALOG OPERACOES LOGISTICAS LTDA",
+    "createdAt": "2026-08-16T02:25:39.458Z"
+  },
+  "44b9bced-982b-41a7-a8c3-8ebd0f370060": {
+    "id": "44b9bced-982b-41a7-a8c3-8ebd0f370060",
+    "cavaloPlate": "KNB8636",
+    "carretaPlates": "",
+    "carrier": "SERRAF TRANSPORTADORA E LOGISTICA E",
+    "createdAt": "2026-08-16T02:25:39.458Z"
+  },
+  "45a0bcc9-ddaa-42bb-87e5-43a76e9e4172": {
+    "id": "45a0bcc9-ddaa-42bb-87e5-43a76e9e4172",
+    "cavaloPlate": "OXC4F75",
+    "carretaPlates": "",
+    "carrier": "ARGUS LOGISTICA E TRANSPORTES LTDA",
+    "createdAt": "2026-08-16T02:25:39.458Z"
+  },
+  "8e5fcdbc-021a-48ea-bc80-deac699e2423": {
+    "id": "8e5fcdbc-021a-48ea-bc80-deac699e2423",
+    "cavaloPlate": "LLN8A40",
+    "carretaPlates": "",
+    "carrier": "ARGUS LOGISTICA E TRANSPORTES LTDA",
+    "createdAt": "2026-08-16T02:25:39.458Z"
+  },
+  "3d4f2636-58b5-49fb-a9e5-3216f3b7fe85": {
+    "id": "3d4f2636-58b5-49fb-a9e5-3216f3b7fe85",
+    "cavaloPlate": "EPP3585",
+    "carretaPlates": "",
+    "carrier": "VIAX OPERACOES LOGISTICAS LTDA",
+    "createdAt": "2026-08-16T02:25:39.458Z"
+  },
+  "4ceb2bb7-cc8a-4cb0-b19f-1d4e8e86689c": {
+    "id": "4ceb2bb7-cc8a-4cb0-b19f-1d4e8e86689c",
+    "cavaloPlate": "RIX5G67",
+    "carretaPlates": "",
+    "carrier": "LMA TRANSPORTES LTDA ME",
+    "createdAt": "2026-08-16T02:25:39.458Z"
+  },
+  "ecf7a7a7-998f-49e9-92c2-27b4df49e1d1": {
+    "id": "ecf7a7a7-998f-49e9-92c2-27b4df49e1d1",
+    "cavaloPlate": "UOO6E59",
+    "carretaPlates": "",
+    "carrier": "JETTA TRANSPORTES E LOGISTICA LTDA",
+    "createdAt": "2026-08-16T02:25:39.458Z"
+  },
+  "6d82d5eb-622a-461a-8837-284f6880937a": {
+    "id": "6d82d5eb-622a-461a-8837-284f6880937a",
+    "cavaloPlate": "LHX1468",
+    "carretaPlates": "",
+    "carrier": "ARGUS LOGISTICA E TRANSPORTES LTDA",
+    "createdAt": "2026-08-16T02:25:39.458Z"
+  },
+  "06ba330f-a343-43b1-836b-fdcda45b3d77": {
+    "id": "06ba330f-a343-43b1-836b-fdcda45b3d77",
+    "cavaloPlate": "GXM0G26",
+    "carretaPlates": "",
+    "carrier": "A J 2017 TRANSPORTADORA EIRELI ME",
+    "createdAt": "2026-08-16T02:25:39.458Z"
+  },
+  "5d4e43be-7ce8-4136-b43c-1630286f14f6": {
+    "id": "5d4e43be-7ce8-4136-b43c-1630286f14f6",
+    "cavaloPlate": "GGS9F24",
+    "carretaPlates": "",
+    "carrier": "LMA TRANSPORTES LTDA ME",
+    "createdAt": "2026-08-16T02:25:39.458Z"
+  },
+  "8cfb46ac-ed77-4e6f-b4ba-7afce6ba21df": {
+    "id": "8cfb46ac-ed77-4e6f-b4ba-7afce6ba21df",
+    "cavaloPlate": "RKB5G83",
+    "carretaPlates": "",
+    "carrier": "LMA TRANSPORTES LTDA ME",
+    "createdAt": "2026-08-16T02:25:39.458Z"
+  },
+  "2d362155-757d-4a6b-abc2-6f9642752931": {
+    "id": "2d362155-757d-4a6b-abc2-6f9642752931",
+    "cavaloPlate": "DAO2951",
+    "carretaPlates": "",
+    "carrier": "JETTA TRANSPORTES E LOGISTICA LTDA",
+    "createdAt": "2026-08-16T02:25:39.458Z"
+  },
+  "2bddfd1c-6acc-476c-9ab4-51e4b8e7d29e": {
+    "id": "2bddfd1c-6acc-476c-9ab4-51e4b8e7d29e",
+    "cavaloPlate": "GGZ8832",
+    "carretaPlates": "",
+    "carrier": "JETTA TRANSPORTES E LOGISTICA LTDA",
+    "createdAt": "2026-08-16T02:25:39.458Z"
+  },
+  "9ed844a4-9975-4641-a02c-19251b46f4b5": {
+    "id": "9ed844a4-9975-4641-a02c-19251b46f4b5",
+    "cavaloPlate": "FSK9029",
+    "carretaPlates": "",
+    "carrier": "ARGUS LOGISTICA E TRANSPORTES LTDA",
+    "createdAt": "2026-08-16T02:25:39.458Z"
+  },
+  "a33cd9b6-119b-421c-ad45-bb7435a4a8a3": {
+    "id": "a33cd9b6-119b-421c-ad45-bb7435a4a8a3",
+    "cavaloPlate": "EZC5B87",
+    "carretaPlates": "",
+    "carrier": "MANDALOG OPERACOES LOGISTICAS LTDA",
+    "createdAt": "2026-08-16T02:25:39.458Z"
+  },
+  "ae9ca933-4a9f-4a1f-851d-c865f55ab447": {
+    "id": "ae9ca933-4a9f-4a1f-851d-c865f55ab447",
+    "cavaloPlate": "SSX7A52",
+    "carretaPlates": "",
+    "carrier": "MANDALOG OPERACOES LOGISTICAS LTDA",
+    "createdAt": "2026-08-16T02:25:39.459Z"
+  },
+  "8b858cfe-4052-4165-bff4-f0036cb22242": {
+    "id": "8b858cfe-4052-4165-bff4-f0036cb22242",
+    "cavaloPlate": "RTX1E51",
+    "carretaPlates": "",
+    "carrier": "LMA TRANSPORTES LTDA ME",
+    "createdAt": "2026-08-16T02:25:39.459Z"
+  },
+  "e9b70f3e-8d54-4b65-89b9-dc0dbef9aae7": {
+    "id": "e9b70f3e-8d54-4b65-89b9-dc0dbef9aae7",
+    "cavaloPlate": "EVU9D94",
+    "carretaPlates": "",
+    "carrier": "JETTA TRANSPORTES E LOGISTICA LTDA",
+    "createdAt": "2026-08-16T02:25:39.459Z"
+  },
+  "5ddcb3bd-fb92-4cef-b69c-4c1a922b5dc5": {
+    "id": "5ddcb3bd-fb92-4cef-b69c-4c1a922b5dc5",
+    "cavaloPlate": "LOD2962",
+    "carretaPlates": "",
+    "carrier": "ARGUS LOGISTICA E TRANSPORTES LTDA",
+    "createdAt": "2026-08-16T02:25:39.459Z"
+  },
+  "abe440c4-d10e-47b0-ad34-d84393bb66f5": {
+    "id": "abe440c4-d10e-47b0-ad34-d84393bb66f5",
+    "cavaloPlate": "EQK6B73",
+    "carretaPlates": "",
+    "carrier": "JETTA TRANSPORTES E LOGISTICA LTDA",
+    "createdAt": "2026-08-16T02:25:39.459Z"
+  },
+  "98428d2f-5400-4df3-8e06-e19234cc91d7": {
+    "id": "98428d2f-5400-4df3-8e06-e19234cc91d7",
+    "cavaloPlate": "SVL4J89",
+    "carretaPlates": "",
+    "carrier": "MANDALOG OPERACOES LOGISTICAS LTDA",
+    "createdAt": "2026-08-16T02:25:39.459Z"
+  },
+  "c6bca670-c4a9-4f46-9de0-4557f59637ca": {
+    "id": "c6bca670-c4a9-4f46-9de0-4557f59637ca",
+    "cavaloPlate": "ETA3E32",
+    "carretaPlates": "",
+    "carrier": "MANDALOG OPERACOES LOGISTICAS LTDA",
+    "createdAt": "2026-08-16T02:25:39.459Z"
+  },
+  "233f9d7c-e377-4d63-92e3-8d3412f3a14c": {
+    "id": "233f9d7c-e377-4d63-92e3-8d3412f3a14c",
+    "cavaloPlate": "LQP9H40",
+    "carretaPlates": "",
+    "carrier": "ARGUS LOGISTICA E TRANSPORTES LTDA",
+    "createdAt": "2026-08-16T02:25:39.459Z"
+  },
+  "f47c9007-4b7a-460e-bf6b-dd1bb82dff66": {
+    "id": "f47c9007-4b7a-460e-bf6b-dd1bb82dff66",
+    "cavaloPlate": "KOR5F27",
+    "carretaPlates": "",
+    "carrier": "ARGUS LOGISTICA E TRANSPORTES LTDA",
+    "createdAt": "2026-08-16T02:25:39.459Z"
+  },
+  "43a44a7d-e281-4f3f-8dce-3252e530fcc2": {
+    "id": "43a44a7d-e281-4f3f-8dce-3252e530fcc2",
+    "cavaloPlate": "SRM1E75",
+    "carretaPlates": "",
+    "carrier": "LMA TRANSPORTES LTDA ME",
+    "createdAt": "2026-08-16T02:25:39.459Z"
+  },
+  "726c77bc-9498-4f31-a957-0cc142201cbf": {
+    "id": "726c77bc-9498-4f31-a957-0cc142201cbf",
+    "cavaloPlate": "AZY7I95",
+    "carretaPlates": "",
+    "carrier": "ARGUS LOGISTICA E TRANSPORTES LTDA",
+    "createdAt": "2026-08-16T02:25:39.459Z"
+  },
+  "2b5bfd3e-f87e-4303-a408-0ded0c75b142": {
+    "id": "2b5bfd3e-f87e-4303-a408-0ded0c75b142",
+    "cavaloPlate": "HFS1C21",
+    "carretaPlates": "",
+    "carrier": "A J 2017 TRANSPORTADORA EIRELI ME",
+    "createdAt": "2026-08-16T02:25:39.459Z"
+  },
+  "eb52a882-32a0-43e8-bbbb-d2446b35a2d1": {
+    "id": "eb52a882-32a0-43e8-bbbb-d2446b35a2d1",
+    "cavaloPlate": "GFC3E44",
+    "carretaPlates": "",
+    "carrier": "ARGUS LOGISTICA E TRANSPORTES LTDA",
+    "createdAt": "2026-08-16T02:25:39.459Z"
+  },
+  "abeee3e2-9f06-4e37-8420-d73240e770d8": {
+    "id": "abeee3e2-9f06-4e37-8420-d73240e770d8",
+    "cavaloPlate": "RRW1F29",
+    "carretaPlates": "",
+    "carrier": "EXPRESSO MOEDENSE LTDA",
+    "createdAt": "2026-08-16T02:25:39.459Z"
+  },
+  "f1d4d7e3-22c3-4119-82f9-7c67b5391fc1": {
+    "id": "f1d4d7e3-22c3-4119-82f9-7c67b5391fc1",
+    "cavaloPlate": "POZ4431",
+    "carretaPlates": "",
+    "carrier": "3C SANTA LUZIA DEDICADOS",
+    "createdAt": "2026-08-16T02:25:39.459Z"
+  },
+  "16a47248-6eee-401f-9f0c-ab7cc67a04dd": {
+    "id": "16a47248-6eee-401f-9f0c-ab7cc67a04dd",
+    "cavaloPlate": "QWK6C32",
+    "carretaPlates": "",
+    "carrier": "EXPRESSO MOEDENSE LTDA",
+    "createdAt": "2026-08-16T02:25:39.459Z"
+  },
+  "6d1dd09e-8527-409a-a28a-9b498adb1564": {
+    "id": "6d1dd09e-8527-409a-a28a-9b498adb1564",
+    "cavaloPlate": "PNQ0I53",
+    "carretaPlates": "",
+    "carrier": "UTISEG TRANSPORTES E LOCACOES LTDA",
+    "createdAt": "2026-08-16T02:25:39.459Z"
+  },
+  "a7bf63b0-2785-417c-9e06-f1760b79ae70": {
+    "id": "a7bf63b0-2785-417c-9e06-f1760b79ae70",
+    "cavaloPlate": "NLL3044",
+    "carretaPlates": "",
+    "carrier": "SABA TRANSPORTES LTDA",
+    "createdAt": "2026-08-16T02:25:39.459Z"
+  },
+  "7323e24c-e949-455d-928a-387b6b5cacfb": {
+    "id": "7323e24c-e949-455d-928a-387b6b5cacfb",
+    "cavaloPlate": "ECJ1I41",
+    "carretaPlates": "",
+    "carrier": "JCE TRANSPORTES LTDA",
+    "createdAt": "2026-08-16T02:25:39.459Z"
+  },
+  "0b34ce29-bbee-4ee0-9fad-fa1ef6ddd139": {
+    "id": "0b34ce29-bbee-4ee0-9fad-fa1ef6ddd139",
+    "cavaloPlate": "TFH9E17",
+    "carretaPlates": "",
+    "carrier": "CIEM TRANSPORTE E LOGISTICA LTDA ME",
+    "createdAt": "2026-08-16T02:25:39.459Z"
+  },
+  "5120ad0a-bba6-40b3-99ba-0c92c34178c0": {
+    "id": "5120ad0a-bba6-40b3-99ba-0c92c34178c0",
+    "cavaloPlate": "RCM2E46",
+    "carretaPlates": "",
+    "carrier": "CIEM TRANSPORTE E LOGISTICA LTDA ME",
+    "createdAt": "2026-08-16T02:25:39.459Z"
+  },
+  "cd8f5d63-050a-4abc-8b41-9503fe236d1b": {
+    "id": "cd8f5d63-050a-4abc-8b41-9503fe236d1b",
+    "cavaloPlate": "HEH6J14",
+    "carretaPlates": "",
+    "carrier": "TRANSPORTADORA COMBOIO BR LTDA",
+    "createdAt": "2026-08-16T02:25:39.459Z"
+  },
+  "2db30d88-dc32-4aa6-8cb2-299722fa8c8f": {
+    "id": "2db30d88-dc32-4aa6-8cb2-299722fa8c8f",
+    "cavaloPlate": "UPO6A58",
+    "carretaPlates": "",
+    "carrier": "TRANSPORTADORA ALMEIDA DE MARILIA LT",
+    "createdAt": "2026-08-16T02:25:39.459Z"
+  },
+  "999cc524-e545-466b-9504-9ece49a4a8d2": {
+    "id": "999cc524-e545-466b-9504-9ece49a4a8d2",
+    "cavaloPlate": "RQK0I85",
+    "carretaPlates": "",
+    "carrier": "S R H SARAIVA DE ALENCAR COMERCIO E FABRICACAO UNIPESSOAL LTDA",
+    "createdAt": "2026-08-16T02:25:39.459Z"
+  },
+  "fd3c8c7a-ca91-4f58-a92a-29956845e96e": {
+    "id": "fd3c8c7a-ca91-4f58-a92a-29956845e96e",
+    "cavaloPlate": "RQS9D06",
+    "carretaPlates": "",
+    "carrier": "MILA TRANSPORTES LTDA",
+    "createdAt": "2026-08-16T02:25:39.459Z"
+  },
+  "397b717e-dfb2-406c-85de-bb7a4f946ed2": {
+    "id": "397b717e-dfb2-406c-85de-bb7a4f946ed2",
+    "cavaloPlate": "RUA4C93",
+    "carretaPlates": "",
+    "carrier": "FASI TRANSPORTES LTDA",
+    "createdAt": "2026-08-16T02:25:39.459Z"
+  },
+  "dd37fdcd-1196-4d56-be78-562d504dc0c4": {
+    "id": "dd37fdcd-1196-4d56-be78-562d504dc0c4",
+    "cavaloPlate": "RXN7A76",
+    "carretaPlates": "",
+    "carrier": "TORNADO OPERADOR LOGISTICO LTDA",
+    "createdAt": "2026-08-16T02:25:39.459Z"
+  },
+  "2a7bb9e3-f228-468c-9ec5-4dd05faf6fd7": {
+    "id": "2a7bb9e3-f228-468c-9ec5-4dd05faf6fd7",
+    "cavaloPlate": "RCH3F52",
+    "carretaPlates": "",
+    "carrier": "CIEM TRANSPORTE E LOGISTICA LTDA ME",
+    "createdAt": "2026-08-16T02:25:39.459Z"
+  },
+  "0a82af6b-f74d-4900-9af4-0b6521d0a7c5": {
+    "id": "0a82af6b-f74d-4900-9af4-0b6521d0a7c5",
+    "cavaloPlate": "SOB5C63",
+    "carretaPlates": "",
+    "carrier": "S R H SARAIVA DE ALENCAR COMERCIO E FABRICACAO UNIPESSOAL LTDA",
+    "createdAt": "2026-08-16T02:25:39.459Z"
+  },
+  "6a41285d-5a7c-451f-9c9a-1fcf7e688b95": {
+    "id": "6a41285d-5a7c-451f-9c9a-1fcf7e688b95",
+    "cavaloPlate": "TYH0I53",
+    "carretaPlates": "",
+    "carrier": "S R H SARAIVA DE ALENCAR COMERCIO E FABRICACAO UNIPESSOAL LTDA",
+    "createdAt": "2026-08-16T02:25:39.459Z"
+  },
+  "5e0c6923-edec-422f-b8dc-ba787177d05b": {
+    "id": "5e0c6923-edec-422f-b8dc-ba787177d05b",
+    "cavaloPlate": "JAZ2I19",
+    "carretaPlates": "",
+    "carrier": "EXPRESSO MOEDENSE LTDA",
+    "createdAt": "2026-08-16T02:25:39.459Z"
+  },
+  "5d64ea33-9d48-4559-9463-e716ca9ed160": {
+    "id": "5d64ea33-9d48-4559-9463-e716ca9ed160",
+    "cavaloPlate": "TFH7E77",
+    "carretaPlates": "",
+    "carrier": "CIEM TRANSPORTE E LOGISTICA LTDA ME",
+    "createdAt": "2026-08-16T02:25:39.459Z"
+  },
+  "28ea2708-fb0a-468f-b167-a431383b63a6": {
+    "id": "28ea2708-fb0a-468f-b167-a431383b63a6",
+    "cavaloPlate": "QRJ7A18",
+    "carretaPlates": "",
+    "carrier": "MILA TRANSPORTES LTDA",
+    "createdAt": "2026-08-16T02:25:39.459Z"
+  },
+  "a68104ec-8ab2-474d-a49b-65cf0829c72e": {
+    "id": "a68104ec-8ab2-474d-a49b-65cf0829c72e",
+    "cavaloPlate": "SYJ3A42",
+    "carretaPlates": "",
+    "carrier": "FASI TRANSPORTES LTDA",
+    "createdAt": "2026-08-16T02:25:39.459Z"
+  },
+  "37a84ef5-db56-4fa0-b0b8-8d6fe61c5955": {
+    "id": "37a84ef5-db56-4fa0-b0b8-8d6fe61c5955",
+    "cavaloPlate": "OSD7307",
+    "carretaPlates": "",
+    "carrier": "UTISEG TRANSPORTES E LOCACOES LTDA",
+    "createdAt": "2026-08-16T02:25:39.459Z"
+  },
+  "d86e0fa9-4fef-4029-8412-3d4f8dd582e0": {
+    "id": "d86e0fa9-4fef-4029-8412-3d4f8dd582e0",
+    "cavaloPlate": "HWM6829",
+    "carretaPlates": "",
+    "carrier": "UTISEG TRANSPORTES E LOCACOES LTDA",
+    "createdAt": "2026-08-16T02:25:39.459Z"
+  },
+  "bac4052e-4086-424d-962b-4185443b53af": {
+    "id": "bac4052e-4086-424d-962b-4185443b53af",
+    "cavaloPlate": "RHJ6I02",
+    "carretaPlates": "",
+    "carrier": "EXPRESSO MOEDENSE LTDA",
+    "createdAt": "2026-08-16T02:25:39.459Z"
+  },
+  "c1d33c71-ea53-48cd-9def-0bbebd93ddf5": {
+    "id": "c1d33c71-ea53-48cd-9def-0bbebd93ddf5",
+    "cavaloPlate": "STU4F00",
+    "carretaPlates": "",
+    "carrier": "IRMAOS FRANCO TRANSPORTES E LOGISTICA LT DA",
+    "createdAt": "2026-08-16T02:25:39.459Z"
+  },
+  "bacc02a9-a5c8-4e98-ad9b-f99016bff821": {
+    "id": "bacc02a9-a5c8-4e98-ad9b-f99016bff821",
+    "cavaloPlate": "TYQ6F18",
+    "carretaPlates": "",
+    "carrier": "EXPRESSO MOEDENSE LTDA",
+    "createdAt": "2026-08-16T02:25:39.459Z"
+  },
+  "49a99ffa-1632-4c3f-9ee4-3e38e1ce5a71": {
+    "id": "49a99ffa-1632-4c3f-9ee4-3e38e1ce5a71",
+    "cavaloPlate": "GDN8A62",
+    "carretaPlates": "",
+    "carrier": "UTISEG TRANSPORTES E LOCACOES LTDA",
+    "createdAt": "2026-08-16T02:25:39.459Z"
+  },
+  "838d92d8-72a0-46e2-9ce0-18cabb4fb94a": {
+    "id": "838d92d8-72a0-46e2-9ce0-18cabb4fb94a",
+    "cavaloPlate": "SCI7I06",
+    "carretaPlates": "",
+    "carrier": "CIEM TRANSPORTE E LOGISTICA LTDA ME",
+    "createdAt": "2026-08-16T02:25:39.459Z"
+  },
+  "fdbd6eee-790c-4602-b481-86c0092a0591": {
+    "id": "fdbd6eee-790c-4602-b481-86c0092a0591",
+    "cavaloPlate": "SCI8A16",
+    "carretaPlates": "",
+    "carrier": "CIEM TRANSPORTE E LOGISTICA LTDA ME",
+    "createdAt": "2026-08-16T02:25:39.459Z"
+  },
+  "380f240a-7832-4c78-902f-4dce8cff0cdf": {
+    "id": "380f240a-7832-4c78-902f-4dce8cff0cdf",
+    "cavaloPlate": "RBY7A56",
+    "carretaPlates": "",
+    "carrier": "CIEM TRANSPORTE E LOGISTICA LTDA ME",
+    "createdAt": "2026-08-16T02:25:39.459Z"
+  },
+  "fe2d4f08-69c1-41f1-a291-e385e6178caf": {
+    "id": "fe2d4f08-69c1-41f1-a291-e385e6178caf",
+    "cavaloPlate": "RXM7G20",
+    "carretaPlates": "",
+    "carrier": "TORNADO OPERADOR LOGISTICO LTDA",
+    "createdAt": "2026-08-16T02:25:39.459Z"
+  },
+  "2705faa2-3d1b-40e9-bdb8-f101ee9693b5": {
+    "id": "2705faa2-3d1b-40e9-bdb8-f101ee9693b5",
+    "cavaloPlate": "RCL6D98",
+    "carretaPlates": "",
+    "carrier": "CIEM TRANSPORTE E LOGISTICA LTDA ME",
+    "createdAt": "2026-08-16T02:25:39.459Z"
+  },
+  "b6b902a4-4f10-46a1-9b25-912d8ed2dab0": {
+    "id": "b6b902a4-4f10-46a1-9b25-912d8ed2dab0",
+    "cavaloPlate": "CUI0G44",
+    "carretaPlates": "",
+    "carrier": "LEDIFRAN LOGISTICA LTDA",
+    "createdAt": "2026-08-16T02:25:39.459Z"
+  },
+  "51639f14-60d2-434a-9606-030fdd67eee5": {
+    "id": "51639f14-60d2-434a-9606-030fdd67eee5",
+    "cavaloPlate": "JAC4F94",
+    "carretaPlates": "",
+    "carrier": "EXPRESSO MOEDENSE LTDA",
+    "createdAt": "2026-08-16T02:25:39.459Z"
+  },
+  "f5dbdfde-d279-4a65-8f46-5c99a2d89c16": {
+    "id": "f5dbdfde-d279-4a65-8f46-5c99a2d89c16",
+    "cavaloPlate": "JAZ3B87",
+    "carretaPlates": "",
+    "carrier": "EXPRESSO MOEDENSE LTDA",
+    "createdAt": "2026-08-16T02:25:39.459Z"
+  },
+  "6fcf17f2-9a87-47e5-8743-93bd3dbbb101": {
+    "id": "6fcf17f2-9a87-47e5-8743-93bd3dbbb101",
+    "cavaloPlate": "RQS9A78",
+    "carretaPlates": "",
+    "carrier": "MILA TRANSPORTES LTDA",
+    "createdAt": "2026-08-16T02:25:39.459Z"
+  },
+  "e0a20ebe-812e-4a54-9b49-8aa7b99a9369": {
+    "id": "e0a20ebe-812e-4a54-9b49-8aa7b99a9369",
+    "cavaloPlate": "FWO0J85",
+    "carretaPlates": "",
+    "carrier": "EXPRESSO MOEDENSE LTDA",
+    "createdAt": "2026-08-16T02:25:39.459Z"
+  },
+  "ba38970e-1b5e-4377-b6c0-b33b2df25e17": {
+    "id": "ba38970e-1b5e-4377-b6c0-b33b2df25e17",
+    "cavaloPlate": "PNJ2493",
+    "carretaPlates": "",
+    "carrier": "3C EUSEBIO DEDICADOS",
+    "createdAt": "2026-08-16T02:25:39.459Z"
+  },
+  "ce03c054-41bc-4fa6-a276-0b257c76ff38": {
+    "id": "ce03c054-41bc-4fa6-a276-0b257c76ff38",
+    "cavaloPlate": "EJZ8D85",
+    "carretaPlates": "",
+    "carrier": "JETTA TRANSPORTES E LOGISTICA LTDA",
+    "createdAt": "2026-08-16T02:25:39.459Z"
+  },
+  "ea752a98-d6a8-43cb-9d23-246d3938952d": {
+    "id": "ea752a98-d6a8-43cb-9d23-246d3938952d",
+    "cavaloPlate": "MQM9F52",
+    "carretaPlates": "",
+    "carrier": "JETTA TRANSPORTES E LOGISTICA LTDA",
+    "createdAt": "2026-08-16T02:25:39.459Z"
+  },
+  "ed01ca5c-c01a-4cc7-a289-235472f71aa1": {
+    "id": "ed01ca5c-c01a-4cc7-a289-235472f71aa1",
+    "cavaloPlate": "PRR5862",
+    "carretaPlates": "",
+    "carrier": "CIEM TRANSPORTE E LOGISTICA LTDA ME",
+    "createdAt": "2026-08-16T02:25:39.459Z"
+  },
+  "833e493f-0a8b-455d-a471-a698488268a2": {
+    "id": "833e493f-0a8b-455d-a471-a698488268a2",
+    "cavaloPlate": "EWU2B42",
+    "carretaPlates": "",
+    "carrier": "JETTA TRANSPORTES E LOGISTICA LTDA",
+    "createdAt": "2026-08-16T02:25:39.459Z"
+  },
+  "98e50a78-18c2-4cba-9e38-6db4ead98484": {
+    "id": "98e50a78-18c2-4cba-9e38-6db4ead98484",
+    "cavaloPlate": "RYU1A68",
+    "carretaPlates": "",
+    "carrier": "TORNADO OPERADOR LOGISTICO LTDA",
+    "createdAt": "2026-08-16T02:25:39.459Z"
+  },
+  "3a3638fa-978c-4e7f-bfa5-96dcb2f76489": {
+    "id": "3a3638fa-978c-4e7f-bfa5-96dcb2f76489",
+    "cavaloPlate": "RIJ9H96",
+    "carretaPlates": "",
+    "carrier": "3C NATAL DEDICADOS",
+    "createdAt": "2026-08-16T02:25:39.459Z"
+  },
+  "4640854b-facd-47c2-8344-972badd4e271": {
+    "id": "4640854b-facd-47c2-8344-972badd4e271",
+    "cavaloPlate": "RQL7C69",
+    "carretaPlates": "",
+    "carrier": "S R H SARAIVA DE ALENCAR COMERCIO E FABRICACAO UNIPESSOAL LTDA",
+    "createdAt": "2026-08-16T02:25:39.459Z"
+  },
+  "dc65a5c8-d051-4019-a94c-3ddacba36a0b": {
+    "id": "dc65a5c8-d051-4019-a94c-3ddacba36a0b",
+    "cavaloPlate": "RUV8H82",
+    "carretaPlates": "",
+    "carrier": "EXPRESSO MOEDENSE LTDA",
+    "createdAt": "2026-08-16T02:25:39.459Z"
+  },
+  "5f9725af-a1f9-4659-8c56-5ab776537f04": {
+    "id": "5f9725af-a1f9-4659-8c56-5ab776537f04",
+    "cavaloPlate": "ECJ1J02",
+    "carretaPlates": "",
+    "carrier": "JCE TRANSPORTES LTDA",
+    "createdAt": "2026-08-16T02:25:39.459Z"
+  },
+  "656a4a83-bedc-418c-ae1b-5417673d4ad5": {
+    "id": "656a4a83-bedc-418c-ae1b-5417673d4ad5",
+    "cavaloPlate": "TFX5J23",
+    "carretaPlates": "",
+    "carrier": "CIEM TRANSPORTE E LOGISTICA LTDA ME",
+    "createdAt": "2026-08-16T02:25:39.459Z"
+  },
+  "a97ed44b-5fca-4cbb-8f69-107898c7580d": {
+    "id": "a97ed44b-5fca-4cbb-8f69-107898c7580d",
+    "cavaloPlate": "RQS9C85",
+    "carretaPlates": "",
+    "carrier": "MILA TRANSPORTES LTDA",
+    "createdAt": "2026-08-16T02:25:39.459Z"
+  },
+  "d2dcb3b0-2505-4fc6-a27b-df88b8e5ea5f": {
+    "id": "d2dcb3b0-2505-4fc6-a27b-df88b8e5ea5f",
+    "cavaloPlate": "THX8C51",
+    "carretaPlates": "",
+    "carrier": "3C SANTA LUZIA DEDICADOS",
+    "createdAt": "2026-08-16T02:25:39.459Z"
+  },
+  "068e3c80-7a06-49dc-9ff0-f17bb1e418bc": {
+    "id": "068e3c80-7a06-49dc-9ff0-f17bb1e418bc",
+    "cavaloPlate": "UDG6H65",
+    "carretaPlates": "",
+    "carrier": "TRANSPORTADORA ALMEIDA DE MARILIA LT",
+    "createdAt": "2026-08-16T02:25:39.459Z"
+  },
+  "72111c2e-b6a0-455c-820a-cc3cd758b6cd": {
+    "id": "72111c2e-b6a0-455c-820a-cc3cd758b6cd",
+    "cavaloPlate": "POD0345",
+    "carretaPlates": "",
+    "carrier": "3C SANTA LUZIA DEDICADOS",
+    "createdAt": "2026-08-16T02:25:39.459Z"
+  },
+  "89ded804-dbf0-49a5-b879-c5913ff1a35c": {
+    "id": "89ded804-dbf0-49a5-b879-c5913ff1a35c",
+    "cavaloPlate": "BQU1H76",
+    "carretaPlates": "",
+    "carrier": "JCE TRANSPORTES LTDA",
+    "createdAt": "2026-08-16T02:25:39.459Z"
+  },
+  "caa9e999-7ab8-45ff-bc77-448fc1488e33": {
+    "id": "caa9e999-7ab8-45ff-bc77-448fc1488e33",
+    "cavaloPlate": "TJI4H54",
+    "carretaPlates": "",
+    "carrier": "TORNADO OPERADOR LOGISTICO LTDA",
+    "createdAt": "2026-08-16T02:25:39.459Z"
+  },
+  "ea649b0a-d692-4b82-bf5f-c990b1986da3": {
+    "id": "ea649b0a-d692-4b82-bf5f-c990b1986da3",
+    "cavaloPlate": "FXC0H26",
+    "carretaPlates": "",
+    "carrier": "EXPRESSO MOEDENSE LTDA",
+    "createdAt": "2026-08-16T02:25:39.460Z"
+  },
+  "5530cddf-fc68-4f58-afb3-6d117f2a5d7a": {
+    "id": "5530cddf-fc68-4f58-afb3-6d117f2a5d7a",
+    "cavaloPlate": "TYZ7I60",
+    "carretaPlates": "",
+    "carrier": "LEDIFRAN LOGISTICA LTDA",
+    "createdAt": "2026-08-16T02:25:39.460Z"
+  },
+  "12f5087d-2bdd-42d4-a970-9d6b65346d02": {
+    "id": "12f5087d-2bdd-42d4-a970-9d6b65346d02",
+    "cavaloPlate": "CLU0415",
+    "carretaPlates": "",
+    "carrier": "MANDALOG OPERACOES LOGISTICAS LTDA",
+    "createdAt": "2026-08-16T02:25:39.460Z"
+  },
+  "cded3d84-7110-4838-9863-88a6c7c72a3b": {
+    "id": "cded3d84-7110-4838-9863-88a6c7c72a3b",
+    "cavaloPlate": "FZR8G73",
+    "carretaPlates": "",
+    "carrier": "EXPRESSO MOEDENSE LTDA",
+    "createdAt": "2026-08-16T02:25:39.460Z"
+  },
+  "917e37a1-9c52-46cd-a45b-3f6f3c453130": {
+    "id": "917e37a1-9c52-46cd-a45b-3f6f3c453130",
+    "cavaloPlate": "BQU1H72",
+    "carretaPlates": "",
+    "carrier": "JCE TRANSPORTES LTDA",
+    "createdAt": "2026-08-16T02:25:39.460Z"
+  },
+  "96792ec2-a134-4a1e-ace4-79906e7d873f": {
+    "id": "96792ec2-a134-4a1e-ace4-79906e7d873f",
+    "cavaloPlate": "LPS5F62",
+    "carretaPlates": "",
+    "carrier": "ARGUS LOGISTICA E TRANSPORTES LTDA",
+    "createdAt": "2026-08-16T02:25:39.460Z"
+  },
+  "22a74dd0-c098-4197-9704-5689a088c1d1": {
+    "id": "22a74dd0-c098-4197-9704-5689a088c1d1",
+    "cavaloPlate": "PXP6G95",
+    "carretaPlates": "",
+    "carrier": "ARGUS LOGISTICA E TRANSPORTES LTDA",
+    "createdAt": "2026-08-16T02:25:39.460Z"
+  },
+  "1263c1dd-e2a1-4e70-aa0c-86b6d41c2a45": {
+    "id": "1263c1dd-e2a1-4e70-aa0c-86b6d41c2a45",
+    "cavaloPlate": "SBK5B52",
+    "carretaPlates": "",
+    "carrier": "3C SANTA LUZIA DEDICADOS",
+    "createdAt": "2026-08-16T02:25:39.460Z"
+  },
+  "7d05899f-be95-437e-be2c-a505c2eac880": {
+    "id": "7d05899f-be95-437e-be2c-a505c2eac880",
+    "cavaloPlate": "RFW1D32",
+    "carretaPlates": "",
+    "carrier": "A J 2017 TRANSPORTADORA EIRELI ME",
+    "createdAt": "2026-08-16T02:25:39.460Z"
+  },
+  "f2a0f61f-2a7a-4639-b881-5c053b7776a5": {
+    "id": "f2a0f61f-2a7a-4639-b881-5c053b7776a5",
+    "cavaloPlate": "IOE7C04",
+    "carretaPlates": "",
+    "carrier": "VIAX OPERACOES LOGISTICAS LTDA",
+    "createdAt": "2026-08-16T02:25:39.460Z"
+  },
+  "c87f8e90-3022-4263-8df7-0f9f76373633": {
+    "id": "c87f8e90-3022-4263-8df7-0f9f76373633",
+    "cavaloPlate": "TYE6D38",
+    "carretaPlates": "",
+    "carrier": "S R H SARAIVA DE ALENCAR COMERCIO E FABRICACAO UNIPESSOAL LTDA",
+    "createdAt": "2026-08-16T02:25:39.460Z"
+  },
+  "72bffb99-de38-4e00-b35f-b256937a58dd": {
+    "id": "72bffb99-de38-4e00-b35f-b256937a58dd",
+    "cavaloPlate": "RYN4I74",
+    "carretaPlates": "",
+    "carrier": "TORNADO OPERADOR LOGISTICO LTDA",
+    "createdAt": "2026-08-16T02:25:39.460Z"
+  },
+  "9eec0467-64dd-4ead-852b-7e0883c75eb7": {
+    "id": "9eec0467-64dd-4ead-852b-7e0883c75eb7",
+    "cavaloPlate": "DPB6D27",
+    "carretaPlates": "",
+    "carrier": "TECPET TRANSPORTES E SERVICOS LTDA",
+    "createdAt": "2026-08-16T02:25:39.460Z"
+  },
+  "ee1cac6b-c645-40da-ba23-38c5188f6c4d": {
+    "id": "ee1cac6b-c645-40da-ba23-38c5188f6c4d",
+    "cavaloPlate": "HWD6886",
+    "carretaPlates": "",
+    "carrier": "MANDALOG OPERACOES LOGISTICAS LTDA",
+    "createdAt": "2026-08-16T02:25:39.460Z"
+  },
+  "12757d06-f317-4fb5-b747-980dd7ddf239": {
+    "id": "12757d06-f317-4fb5-b747-980dd7ddf239",
+    "cavaloPlate": "BZC2490",
+    "carretaPlates": "",
+    "carrier": "MANDALOG OPERACOES LOGISTICAS LTDA",
+    "createdAt": "2026-08-16T02:25:39.460Z"
+  },
+  "44e245ac-1646-4a22-9df5-f9f836e053a0": {
+    "id": "44e245ac-1646-4a22-9df5-f9f836e053a0",
+    "cavaloPlate": "SAS0D22",
+    "carretaPlates": "",
+    "carrier": "3C MOSSORO DEDICADOS",
+    "createdAt": "2026-08-16T02:25:39.460Z"
+  },
+  "147f2966-2253-4832-9427-eeda26ef6881": {
+    "id": "147f2966-2253-4832-9427-eeda26ef6881",
+    "cavaloPlate": "RCC7H40",
+    "carretaPlates": "",
+    "carrier": "CIEM TRANSPORTE E LOGISTICA LTDA ME",
+    "createdAt": "2026-08-16T02:25:39.460Z"
+  },
+  "f8d8e72f-ab93-4910-bff9-0382decf14f3": {
+    "id": "f8d8e72f-ab93-4910-bff9-0382decf14f3",
+    "cavaloPlate": "HJH0440",
+    "carretaPlates": "",
+    "carrier": "TRANSPORTADORA COMBOIO BR LTDA",
+    "createdAt": "2026-08-16T02:25:39.460Z"
+  },
+  "2893dffb-5aec-472d-975f-75fdb2ddf52f": {
+    "id": "2893dffb-5aec-472d-975f-75fdb2ddf52f",
+    "cavaloPlate": "LLA2H09",
+    "carretaPlates": "",
+    "carrier": "A J 2017 TRANSPORTADORA EIRELI ME",
+    "createdAt": "2026-08-16T02:25:39.460Z"
+  },
+  "b7dbfae8-3997-4313-a2bb-2106a94878eb": {
+    "id": "b7dbfae8-3997-4313-a2bb-2106a94878eb",
+    "cavaloPlate": "LRQ5B41",
+    "carretaPlates": "",
+    "carrier": "ARGUS LOGISTICA E TRANSPORTES LTDA",
+    "createdAt": "2026-08-16T02:25:39.460Z"
+  },
+  "f843f905-fe56-4be1-b34d-ea80f2490962": {
+    "id": "f843f905-fe56-4be1-b34d-ea80f2490962",
+    "cavaloPlate": "SBQ1I22",
+    "carretaPlates": "",
+    "carrier": "3C NATAL DEDICADOS",
+    "createdAt": "2026-08-16T02:25:39.460Z"
+  },
+  "f137c89b-3767-43ac-a60f-881dee9616e6": {
+    "id": "f137c89b-3767-43ac-a60f-881dee9616e6",
+    "cavaloPlate": "SBK5A52",
+    "carretaPlates": "",
+    "carrier": "3C SANTA LUZIA DEDICADOS",
+    "createdAt": "2026-08-16T02:25:39.460Z"
+  },
+  "028ff5bd-3db1-46d8-8b0f-b90a95ccdb62": {
+    "id": "028ff5bd-3db1-46d8-8b0f-b90a95ccdb62",
+    "cavaloPlate": "SAR8D82",
+    "carretaPlates": "",
+    "carrier": "3C SANTA LUZIA DEDICADOS",
+    "createdAt": "2026-08-16T02:25:39.460Z"
+  },
+  "a4cca3eb-e56a-4135-a792-61d912da315d": {
+    "id": "a4cca3eb-e56a-4135-a792-61d912da315d",
+    "cavaloPlate": "SBK4J52",
+    "carretaPlates": "",
+    "carrier": "3C SANTA LUZIA DEDICADOS",
+    "createdAt": "2026-08-16T02:25:39.460Z"
+  },
+  "332fed43-852d-449d-85f5-38132aa62ee3": {
+    "id": "332fed43-852d-449d-85f5-38132aa62ee3",
+    "cavaloPlate": "SBN4J62",
+    "carretaPlates": "",
+    "carrier": "3C SANTA LUZIA DEDICADOS",
+    "createdAt": "2026-08-16T02:25:39.460Z"
+  },
+  "1afd152a-4ee3-4abb-b4f3-5f81b389df7f": {
+    "id": "1afd152a-4ee3-4abb-b4f3-5f81b389df7f",
+    "cavaloPlate": "SBK5C22",
+    "carretaPlates": "",
+    "carrier": "3C SANTA LUZIA DEDICADOS",
+    "createdAt": "2026-08-16T02:25:39.460Z"
+  },
+  "1e005f14-f89e-4e50-b71e-c7f2d1f47d8f": {
+    "id": "1e005f14-f89e-4e50-b71e-c7f2d1f47d8f",
+    "cavaloPlate": "POZ3241",
+    "carretaPlates": "",
+    "carrier": "3C SANTA LUZIA DEDICADOS",
+    "createdAt": "2026-08-16T02:25:39.460Z"
+  },
+  "53741650-7885-4dc3-8740-28e5364a0f80": {
+    "id": "53741650-7885-4dc3-8740-28e5364a0f80",
+    "cavaloPlate": "RIJ7B86",
+    "carretaPlates": "",
+    "carrier": "3C MOSSORO DEDICADOS",
+    "createdAt": "2026-08-16T02:25:39.460Z"
+  },
+  "fea1338d-95b6-44c1-989f-0bcf6eeb5a57": {
+    "id": "fea1338d-95b6-44c1-989f-0bcf6eeb5a57",
+    "cavaloPlate": "SAU7G71",
+    "carretaPlates": "",
+    "carrier": "3C MOSSORO DEDICADOS",
+    "createdAt": "2026-08-16T02:25:39.460Z"
+  },
+  "69e2609d-1185-4025-bff5-d8ebbd20fe21": {
+    "id": "69e2609d-1185-4025-bff5-d8ebbd20fe21",
+    "cavaloPlate": "POD0735",
+    "carretaPlates": "",
+    "carrier": "3C MOSSORO DEDICADOS",
+    "createdAt": "2026-08-16T02:25:39.460Z"
+  },
+  "a78c7f9e-2976-4144-bd69-ffa655681eca": {
+    "id": "a78c7f9e-2976-4144-bd69-ffa655681eca",
+    "cavaloPlate": "SAS1G22",
+    "carretaPlates": "",
+    "carrier": "3C MOSSORO DEDICADOS",
+    "createdAt": "2026-08-16T02:25:39.460Z"
+  },
+  "0560406a-a3fa-4e64-9e8b-7aabaa984d74": {
+    "id": "0560406a-a3fa-4e64-9e8b-7aabaa984d74",
+    "cavaloPlate": "THX8J51",
+    "carretaPlates": "",
+    "carrier": "3C NATAL DEDICADOS",
+    "createdAt": "2026-08-16T02:25:39.460Z"
+  },
+  "9b2930da-c0cc-4671-84de-4cfb1aea6cc7": {
+    "id": "9b2930da-c0cc-4671-84de-4cfb1aea6cc7",
+    "cavaloPlate": "SAO4G22",
+    "carretaPlates": "",
+    "carrier": "3C NATAL DEDICADOS",
+    "createdAt": "2026-08-16T02:25:39.460Z"
+  },
+  "145c7427-f2d1-4ca0-b139-8827e73dd16c": {
+    "id": "145c7427-f2d1-4ca0-b139-8827e73dd16c",
+    "cavaloPlate": "SBA8C12",
+    "carretaPlates": "",
+    "carrier": "3C NATAL DEDICADOS",
+    "createdAt": "2026-08-16T02:25:39.460Z"
+  },
+  "2c6079c6-b172-480e-83cd-c700fbc0dc4e": {
+    "id": "2c6079c6-b172-480e-83cd-c700fbc0dc4e",
+    "cavaloPlate": "SAW0C51",
+    "carretaPlates": "",
+    "carrier": "3C NATAL DEDICADOS",
+    "createdAt": "2026-08-16T02:25:39.460Z"
+  },
+  "31fd35bb-32d4-44aa-8626-ef3cf19bbf3d": {
+    "id": "31fd35bb-32d4-44aa-8626-ef3cf19bbf3d",
+    "cavaloPlate": "SAS1D22",
+    "carretaPlates": "",
+    "carrier": "3C MOSSORO DEDICADOS",
+    "createdAt": "2026-08-16T02:25:39.460Z"
+  },
+  "9da02756-970c-4653-b707-e91a0568de07": {
+    "id": "9da02756-970c-4653-b707-e91a0568de07",
+    "cavaloPlate": "SBA7H42",
+    "carretaPlates": "",
+    "carrier": "3C EUSEBIO DEDICADOS",
+    "createdAt": "2026-08-16T02:25:39.460Z"
+  },
+  "d47f44af-17e5-4fe2-a0a0-bb70c33f7e44": {
+    "id": "d47f44af-17e5-4fe2-a0a0-bb70c33f7e44",
+    "cavaloPlate": "PNJ2253",
+    "carretaPlates": "",
+    "carrier": "3C J.PESSOA DEDICADO",
+    "createdAt": "2026-08-16T02:25:39.460Z"
+  },
+  "6f54bbda-7ae7-47dc-89b0-67c9ada80a99": {
+    "id": "6f54bbda-7ae7-47dc-89b0-67c9ada80a99",
+    "cavaloPlate": "PMZ8D03",
+    "carretaPlates": "",
+    "carrier": "3C SANTA LUZIA DEDICADOS",
+    "createdAt": "2026-08-16T02:25:39.460Z"
+  },
+  "489174a5-40ea-42d1-98ac-0349bfc12888": {
+    "id": "489174a5-40ea-42d1-98ac-0349bfc12888",
+    "cavaloPlate": "TYQ6F51",
+    "carretaPlates": "",
+    "carrier": "3C SANTA LUZIA DEDICADOS",
+    "createdAt": "2026-08-16T02:25:39.460Z"
+  },
+  "536156ee-6271-4582-8c24-f514e90f460c": {
+    "id": "536156ee-6271-4582-8c24-f514e90f460c",
+    "cavaloPlate": "JBH7I92",
+    "carretaPlates": "",
+    "carrier": "EXPRESSO MOEDENSE LTDA",
+    "createdAt": "2026-08-16T02:25:39.460Z"
+  },
+  "6ba758e5-badf-4c62-9272-2beb3a91f920": {
+    "id": "6ba758e5-badf-4c62-9272-2beb3a91f920",
+    "cavaloPlate": "RBY9F24",
+    "carretaPlates": "",
+    "carrier": "CIEM TRANSPORTE E LOGISTICA LTDA ME",
+    "createdAt": "2026-08-16T02:25:39.460Z"
+  },
+  "cd0f908f-02fc-4e93-976c-93efcec238ee": {
+    "id": "cd0f908f-02fc-4e93-976c-93efcec238ee",
+    "cavaloPlate": "ECJ1G82",
+    "carretaPlates": "",
+    "carrier": "JCE TRANSPORTES LTDA",
+    "createdAt": "2026-08-16T02:25:39.460Z"
+  },
+  "c9793f0b-7af0-4487-af68-fa7e185257b9": {
+    "id": "c9793f0b-7af0-4487-af68-fa7e185257b9",
+    "cavaloPlate": "SDE0A07",
+    "carretaPlates": "",
+    "carrier": "CIEM TRANSPORTE E LOGISTICA LTDA ME",
+    "createdAt": "2026-08-16T02:25:39.460Z"
+  },
+  "75472b68-e793-41b7-b7eb-e6c2f502c49e": {
+    "id": "75472b68-e793-41b7-b7eb-e6c2f502c49e",
+    "cavaloPlate": "TGF7H77",
+    "carretaPlates": "",
+    "carrier": "CIEM TRANSPORTE E LOGISTICA LTDA ME",
+    "createdAt": "2026-08-16T02:25:39.460Z"
+  },
+  "a5eb4287-b3e2-4544-887a-175fc119e624": {
+    "id": "a5eb4287-b3e2-4544-887a-175fc119e624",
+    "cavaloPlate": "QIR0J28",
+    "carretaPlates": "",
+    "carrier": "LEDIFRAN LOGISTICA LTDA",
+    "createdAt": "2026-08-16T02:25:39.460Z"
+  },
+  "d4865bf9-a8f6-4359-b64b-e401e3f12ab8": {
+    "id": "d4865bf9-a8f6-4359-b64b-e401e3f12ab8",
+    "cavaloPlate": "FKD9D22",
+    "carretaPlates": "",
+    "carrier": "IRMAOS FRANCO TRANSPORTES E LOGISTICA LT DA",
+    "createdAt": "2026-08-16T02:25:39.460Z"
+  },
+  "ac460add-32d0-4195-b7b5-fadb8abc45eb": {
+    "id": "ac460add-32d0-4195-b7b5-fadb8abc45eb",
+    "cavaloPlate": "RLC8C09",
+    "carretaPlates": "",
+    "carrier": "TORNADO OPERADOR LOGISTICO LTDA",
+    "createdAt": "2026-08-16T02:25:39.460Z"
+  },
+  "48244801-49d6-4e44-8e05-50cf05a0bd7b": {
+    "id": "48244801-49d6-4e44-8e05-50cf05a0bd7b",
+    "cavaloPlate": "NLN4233",
+    "carretaPlates": "",
+    "carrier": "SABA TRANSPORTES LTDA",
+    "createdAt": "2026-08-16T02:25:39.460Z"
+  },
+  "0a8e8083-5528-44da-bcf1-2501e97090a7": {
+    "id": "0a8e8083-5528-44da-bcf1-2501e97090a7",
+    "cavaloPlate": "SNV3G87",
+    "carretaPlates": "",
+    "carrier": "S R H SARAIVA DE ALENCAR COMERCIO E FABRICACAO UNIPESSOAL LTDA",
+    "createdAt": "2026-08-16T02:25:39.460Z"
+  },
+  "b1ba5d2e-8ac9-422e-b6de-d1327820eb5d": {
+    "id": "b1ba5d2e-8ac9-422e-b6de-d1327820eb5d",
+    "cavaloPlate": "PON85543",
+    "carretaPlates": "",
+    "carrier": "UTISEG TRANSPORTES E LOCACOES LTDA",
+    "createdAt": "2026-08-16T02:25:39.460Z"
+  },
+  "03a65504-347a-480b-bb41-3c6d68ab9ff1": {
+    "id": "03a65504-347a-480b-bb41-3c6d68ab9ff1",
+    "cavaloPlate": "RQG2I59",
+    "carretaPlates": "",
+    "carrier": "UTISEG TRANSPORTES E LOCACOES LTDA",
+    "createdAt": "2026-08-16T02:25:39.460Z"
+  },
+  "37f5748f-f9ef-4cff-83ad-0ec985fe274b": {
+    "id": "37f5748f-f9ef-4cff-83ad-0ec985fe274b",
+    "cavaloPlate": "RQJ2E93",
+    "carretaPlates": "",
+    "carrier": "S R H SARAIVA DE ALENCAR COMERCIO E FABRICACAO UNIPESSOAL LTDA",
+    "createdAt": "2026-08-16T02:25:39.460Z"
+  },
+  "af2a39d2-416c-4474-b5ae-37fd8cceb3fd": {
+    "id": "af2a39d2-416c-4474-b5ae-37fd8cceb3fd",
+    "cavaloPlate": "QQN3D91",
+    "carretaPlates": "",
+    "carrier": "EXPRESSO MOEDENSE LTDA",
+    "createdAt": "2026-08-16T02:25:39.460Z"
+  },
+  "1b5f2e3f-fc22-4b16-8a53-de4571946d91": {
+    "id": "1b5f2e3f-fc22-4b16-8a53-de4571946d91",
+    "cavaloPlate": "LRE8C29",
+    "carretaPlates": "",
+    "carrier": "ARGUS LOGISTICA E TRANSPORTES LTDA",
+    "createdAt": "2026-08-16T02:25:39.460Z"
+  },
+  "b3a1fcc5-8a4e-449b-adc0-325cbb22ce4e": {
+    "id": "b3a1fcc5-8a4e-449b-adc0-325cbb22ce4e",
+    "cavaloPlate": "ORF6F39",
+    "carretaPlates": "",
+    "carrier": "MANDALOG OPERACOES LOGISTICAS LTDA",
+    "createdAt": "2026-08-16T02:25:39.460Z"
+  },
+  "049c2120-dc17-4a83-938a-5c90517b3f06": {
+    "id": "049c2120-dc17-4a83-938a-5c90517b3f06",
+    "cavaloPlate": "TSX6F21",
+    "carretaPlates": "",
+    "carrier": "S R H SARAIVA DE ALENCAR COMERCIO E FABRICACAO UNIPESSOAL LTDA",
+    "createdAt": "2026-08-16T02:25:39.460Z"
+  },
+  "31fb3303-4fd1-4d60-81fe-69ebdaea5474": {
+    "id": "31fb3303-4fd1-4d60-81fe-69ebdaea5474",
+    "cavaloPlate": "RTK4C66",
+    "carretaPlates": "",
+    "carrier": "EXPRESSO MOEDENSE LTDA",
+    "createdAt": "2026-08-16T02:25:39.460Z"
+  },
+  "cedb15cf-da7e-4f39-abec-2ee293f710ca": {
+    "id": "cedb15cf-da7e-4f39-abec-2ee293f710ca",
+    "cavaloPlate": "RTW7E57",
+    "carretaPlates": "",
+    "carrier": "LEDIFRAN LOGISTICA LTDA",
+    "createdAt": "2026-08-16T02:25:39.460Z"
+  },
+  "0c255685-875e-42f2-a850-5b35b162f403": {
+    "id": "0c255685-875e-42f2-a850-5b35b162f403",
+    "cavaloPlate": "RYE9B69",
+    "carretaPlates": "",
+    "carrier": "TORNADO OPERADOR LOGISTICO LTDA",
+    "createdAt": "2026-08-16T02:25:39.460Z"
+  },
+  "6614d428-c8d1-4013-a94d-b8eaed758431": {
+    "id": "6614d428-c8d1-4013-a94d-b8eaed758431",
+    "cavaloPlate": "OYM7525",
+    "carretaPlates": "",
+    "carrier": "SABA TRANSPORTES LTDA",
+    "createdAt": "2026-08-16T02:25:39.460Z"
+  },
+  "7a624b65-b035-4b36-a1ae-d78fa435368c": {
+    "id": "7a624b65-b035-4b36-a1ae-d78fa435368c",
+    "cavaloPlate": "RYQ2H24",
+    "carretaPlates": "",
+    "carrier": "TORNADO OPERADOR LOGISTICO LTDA",
+    "createdAt": "2026-08-16T02:25:39.460Z"
+  },
+  "040f9009-b0ee-4f95-8efe-7d071c4e88ed": {
+    "id": "040f9009-b0ee-4f95-8efe-7d071c4e88ed",
+    "cavaloPlate": "RZH8H85",
+    "carretaPlates": "",
+    "carrier": "S R H SARAIVA DE ALENCAR COMERCIO E FABRICACAO UNIPESSOAL LTDA",
+    "createdAt": "2026-08-16T02:25:39.460Z"
+  }
+}

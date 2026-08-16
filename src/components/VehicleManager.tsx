@@ -186,7 +186,7 @@ export default function VehicleManager({
           />
         </div>
 
-        <div className="flex items-center gap-2 w-full md:w-auto overflow-x-auto pb-1 md:pb-0">
+        <div className="hidden items-center gap-2 w-full md:w-auto overflow-x-auto pb-1 md:pb-0">
           <span className="text-xs font-semibold uppercase tracking-wider text-slate-400 mr-1">Filtrar por:</span>
           <button
             onClick={() => setFilterType('all')}

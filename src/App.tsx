@@ -63,11 +63,12 @@ import CalendarComponent from './components/CalendarComponent';
 import ChatComponent from './components/ChatComponent';
 import VehicleManager from './components/VehicleManager';
 import AttendanceList from './components/AttendanceList';
+import { runVehicleMigration } from './runMigration';
 
 export default function App() {
   
   // Tab/Navigation State
-  const [activeTab, setActiveTab] = useState<string>('registrar');
+  const [activeTab, setActiveTab] = useState<string>('pastas');
   const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false);
   const [isFirebaseConnected, setIsFirebaseConnected] = useState<boolean>(true);
 
@@ -111,6 +112,10 @@ export default function App() {
     const local = localStorage.getItem('3c_vehicles');
     return local ? JSON.parse(local) : [];
   });
+
+  useEffect(() => {
+    runVehicleMigration(vehicles.length);
+  }, [vehicles.length]);
 
   const [notifications, setNotifications] = useState<Notification[]>(() => {
     const local = localStorage.getItem('3c_notifications');
@@ -743,13 +748,13 @@ export default function App() {
         return <AttendanceList isAdmin={isAdmin} />;
       default:
         return (
-          <OccurrenceForm
+          <LeaderFolders
             leaders={leaders}
-            selectedLeaderId={selectedLeaderId}
-            onAddOccurrence={handleAddOccurrence}
-            onAddNotification={handleAddNotification}
-            onSelectTab={setActiveTab}
-            vehicles={vehicles}
+            occurrences={occurrences}
+            employeeLogs={employeeLogs}
+            isAdmin={isAdmin}
+            onDeleteLeader={handleDeleteLeader}
+            onUpdateOccurrenceStatus={handleUpdateOccurrenceStatus}
           />
         );
     }
@@ -757,11 +762,11 @@ export default function App() {
 
   // Sidebar link items
   const sidebarItems = [
+    { id: 'pastas', label: 'Pastas dos Líderes', icon: Folder },
     { id: 'registrar', label: 'Novo Registro', icon: PlusCircle },
     { id: 'historico', label: 'Histórico Operacional', icon: History },
     { id: 'presenca', label: 'Lista de Presença', icon: ClipboardCheck },
     { id: 'veiculos', label: 'Placas de Veículos', icon: Truck },
-    { id: 'pastas', label: 'Pastas dos Líderes', icon: Folder },
     { id: 'calendario', label: 'Agenda & Lembretes', icon: Calendar },
     { id: 'chat', label: 'Chat Equipe', icon: MessageSquare }
   ];
