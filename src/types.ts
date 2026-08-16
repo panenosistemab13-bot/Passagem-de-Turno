@@ -76,13 +76,10 @@ export interface EmployeeLog {
 export interface Reminder {
   id: string;
   date: string; // YYYY-MM-DD
-  time?: string;
   title: string;
   description: string;
-  type: 'reuniao' | 'manutencao' | 'auditoria' | 'lembrete' | 'checklist' | 'outro';
-  leaderId?: string;
+  type: 'reuniao' | 'manutencao' | 'auditoria' | 'lembrete';
   leaderName: string;
-  status?: 'pendente' | 'concluido';
 }
 
 export interface ChatMessage {

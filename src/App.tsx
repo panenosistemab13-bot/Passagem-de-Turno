@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { 
   LayoutDashboard, PlusCircle, History, Folder, Calendar, MessageSquare,
-  Menu, X, Truck, ClipboardCheck
+  Menu, X, ShieldAlert, Map, Settings, HelpCircle, Truck, ClipboardCheck
 } from 'lucide-react';
 
 import { Leader, Occurrence, Employee, EmployeeLog, Reminder, ChatMessage, Notification, VehicleRecord } from './types';
@@ -18,7 +18,6 @@ import { onAuthStateChanged } from 'firebase/auth';
 import { onValue } from 'firebase/database';
 
 import Header from './components/Header';
-import Sidebar from './components/Sidebar';
 import Dashboard from './components/Dashboard';
 import OccurrenceForm from './components/OccurrenceForm';
 import HistoryList from './components/HistoryList';
@@ -27,26 +26,13 @@ import CalendarComponent from './components/CalendarComponent';
 import ChatComponent from './components/ChatComponent';
 import VehicleManager from './components/VehicleManager';
 import AttendanceList from './components/AttendanceList';
-import CameraMonitoring from './components/CameraMonitoring';
-import PatrolChecklist from './components/PatrolChecklist';
-import RiskManagement from './components/RiskManagement';
-import AnalyticsReports from './components/AnalyticsReports';
-import ShiftHandover from './components/ShiftHandover';
-import SettingsView from './components/SettingsView';
-import BrandStoryModal from './components/BrandStoryModal';
-import BootSequenceModal from './components/BootSequenceModal';
-import SciFiBackground from './components/SciFiBackground';
-import Footer from './components/Footer';
 import { runVehicleMigration } from './runMigration';
 
 export default function App() {
   
   const [activeTab, setActiveTab] = useState<string>('dashboard');
   const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false);
-  const [isBrandStoryOpen, setIsBrandStoryOpen] = useState<boolean>(false);
   const [isFirebaseConnected, setIsFirebaseConnected] = useState<boolean>(true);
-  const [performanceMode, setPerformanceMode] = useState<boolean>(false);
-  const [showBootSequence, setShowBootSequence] = useState<boolean>(false);
 
   // States
   const [leaders, setLeaders] = useState<Leader[]>(() => {
@@ -102,6 +88,7 @@ export default function App() {
   useEffect(() => {
     if (isRemoteUpdate.current) { isRemoteUpdate.current = false; return; }
     localStorage.setItem('3c_leaders', JSON.stringify(leaders));
+    syncLeadersToFirebase(leaders);
   }, [leaders]);
 
   useEffect(() => {
@@ -111,23 +98,14 @@ export default function App() {
 
   useEffect(() => {
     if (isRemoteUpdate.current) { isRemoteUpdate.current = false; return; }
-    localStorage.setItem('3c_employees', JSON.stringify(employees));
-  }, [employees]);
-
-  useEffect(() => {
-    if (isRemoteUpdate.current) { isRemoteUpdate.current = false; return; }
-    localStorage.setItem('3c_employee_logs', JSON.stringify(employeeLogs));
-  }, [employeeLogs]);
+    localStorage.setItem('3c_chat_messages', JSON.stringify(chatMessages));
+  }, [chatMessages]);
 
   useEffect(() => {
     if (isRemoteUpdate.current) { isRemoteUpdate.current = false; return; }
     localStorage.setItem('3c_reminders', JSON.stringify(reminders));
+    syncRemindersToFirebase(reminders);
   }, [reminders]);
-
-  useEffect(() => {
-    if (isRemoteUpdate.current) { isRemoteUpdate.current = false; return; }
-    localStorage.setItem('3c_chat_messages', JSON.stringify(chatMessages));
-  }, [chatMessages]);
 
   useEffect(() => {
     if (isRemoteUpdate.current) { isRemoteUpdate.current = false; return; }
@@ -312,125 +290,198 @@ export default function App() {
     switch (activeTab) {
       case 'dashboard':
         return <Dashboard leaders={leaders} occurrences={occurrences} vehicles={vehicles} setActiveTab={setActiveTab} />;
-      case 'ocorrencias':
       case 'registrar':
         return <OccurrenceForm leaders={leaders} selectedLeaderId={selectedLeaderId} onAddOccurrence={handleAddOccurrence} onAddNotification={handleAddNotification} onSelectTab={setActiveTab} vehicles={vehicles} />;
-      case 'plantao':
-        return <ShiftHandover />;
-      case 'lideres':
+      case 'historico':
+        return <HistoryList occurrences={occurrences} leaders={leaders} isAdmin={isAdmin} onUpdateStatus={handleUpdateOccurrenceStatus} onDeleteOccurrence={handleDeleteOccurrence} onEditOccurrence={handleEditOccurrence} />;
       case 'pastas':
         return <LeaderFolders leaders={leaders} occurrences={occurrences} employeeLogs={employeeLogs} isAdmin={isAdmin} onDeleteLeader={handleDeleteLeader} onUpdateOccurrenceStatus={handleUpdateOccurrenceStatus} />;
-      case 'rondas':
-        return <PatrolChecklist />;
-      case 'riscos':
-        return <RiskManagement />;
-      case 'cameras':
-        return <CameraMonitoring />;
-      case 'comunicacoes':
-      case 'chat':
-        return <ChatComponent messages={chatMessages} leaders={leaders} selectedLeaderId={selectedLeaderId} isAdmin={isAdmin} onSendMessage={handleSendMessage} onClearChat={handleClearChat} onSimulateReply={handleSimulateReply} />;
-      case 'relatorios':
-        return <AnalyticsReports />;
-      case 'agenda':
       case 'calendario':
         return <CalendarComponent reminders={reminders} leaders={leaders} selectedLeaderId={selectedLeaderId} isAdmin={isAdmin} onAddReminder={handleAddReminder} onDeleteReminder={handleDeleteReminder} />;
-      case 'configuracoes':
-        return <SettingsView />;
+      case 'chat':
+        return <ChatComponent messages={chatMessages} leaders={leaders} selectedLeaderId={selectedLeaderId} isAdmin={isAdmin} onSendMessage={handleSendMessage} onClearChat={handleClearChat} onSimulateReply={handleSimulateReply} />;
       case 'veiculos':
         return <VehicleManager />;
       case 'presenca':
         return <AttendanceList isAdmin={isAdmin} />;
-      case 'historico':
-        return <HistoryList occurrences={occurrences} leaders={leaders} isAdmin={isAdmin} onUpdateStatus={handleUpdateOccurrenceStatus} onDeleteOccurrence={handleDeleteOccurrence} onEditOccurrence={handleEditOccurrence} />;
-
+      case 'mapa':
+      case 'riscos':
+      case 'configuracoes':
+      case 'ajuda':
+        return (
+          <div className="flex flex-col items-center justify-center h-full min-h-[400px] text-center">
+            <ShieldAlert className="w-16 h-16 text-slate-300 mb-4" />
+            <h2 className="text-xl font-black text-[#0F172A] mb-2">Módulo em Desenvolvimento</h2>
+            <p className="text-sm text-slate-500 max-w-md">
+              Esta seção está sendo preparada para a próxima atualização do sistema. 
+              Ela incluirá dashboards avançados e relatórios detalhados.
+            </p>
+          </div>
+        );
       default:
         return <Dashboard leaders={leaders} occurrences={occurrences} vehicles={vehicles} setActiveTab={setActiveTab} />;
     }
   };
 
+  const sidebarGroups = [
+    {
+      title: 'PRINCIPAL',
+      items: [
+        { id: 'dashboard', label: 'Painel Principal', icon: LayoutDashboard },
+        { id: 'pastas', label: 'Pastas dos Líderes', icon: Folder },
+        { id: 'registrar', label: 'Novo Registro', icon: PlusCircle },
+        { id: 'historico', label: 'Histórico Operacional', icon: History }
+      ]
+    },
+    {
+      title: 'OPERAÇÃO',
+      items: [
+        { id: 'presenca', label: 'Lista de Presença', icon: ClipboardCheck },
+        { id: 'veiculos', label: 'Placas de Veículos', icon: Truck },
+        { id: 'calendario', label: 'Agenda & Lembretes', icon: Calendar },
+        { id: 'chat', label: 'Chat Equipe', icon: MessageSquare }
+      ]
+    },
+    {
+      title: 'MAPAS & RISCOS',
+      items: [
+        { id: 'mapa', label: 'Mapa do Brasil', icon: Map },
+        { id: 'riscos', label: 'Gestão de Riscos', icon: ShieldAlert }
+      ]
+    },
+    {
+      title: 'CONFIGURAÇÕES',
+      items: [
+        { id: 'configuracoes', label: 'Configurações', icon: Settings },
+        { id: 'ajuda', label: 'Ajuda e Suporte', icon: HelpCircle }
+      ]
+    }
+  ];
+
   return (
-    <div className="min-h-screen bg-[#05070B] text-[#E2E8F0] flex font-sans selection:bg-[#D4A373] selection:text-black relative overflow-x-hidden">
+    <div className="min-h-screen bg-[#F8FAFC] flex font-sans text-[#0F172A] selection:bg-[#1E40AF] selection:text-white">
       
-      {/* 3D Dynamic Holographic Background Canvas */}
-      <SciFiBackground performanceMode={performanceMode} />
-
-      {/* Floating 3D Sidebar */}
-      <Sidebar 
-        activeTab={activeTab} 
-        setActiveTab={setActiveTab}
-        isOpenMobile={mobileMenuOpen}
-        onCloseMobile={() => setMobileMenuOpen(false)}
-        onOpenBrandStory={() => setIsBrandStoryOpen(true)}
-      />
-
-      {/* Main Content Area - 1920x1080 Native Widescreen Support */}
-      <div className="flex-1 flex flex-col min-w-0 min-h-screen relative z-10">
-        
-        {/* Mobile Header Trigger */}
-        <div className="lg:hidden bg-[#070A0F]/90 backdrop-blur-md px-4 py-3 border-b border-[#1A2536] flex items-center justify-between sticky top-0 z-30">
-          <div className="flex items-center gap-2.5 cursor-pointer" onClick={() => setActiveTab('dashboard')}>
-            <div className="w-8 h-8 rounded-xl p-0.5 bg-gradient-to-br from-[#E2B170] via-[#C68A4C] to-[#533621] flex items-center justify-center shadow-md">
-              <div className="w-full h-full bg-[#0A0D12] rounded-[10px] flex items-center justify-center">
-                <span className="font-serif font-black text-xs text-[#E2B170]">3C</span>
-              </div>
-            </div>
-            <div className="flex flex-col">
-              <span className="text-xs font-black tracking-wider text-[#D4A373] uppercase">CAFÉ 3C</span>
-              <span className="text-[9px] font-mono text-slate-400 -mt-1">COMANDO TÁTICO</span>
-            </div>
+      {/* Sidebar - Desktop */}
+      <aside className="hidden md:flex flex-col w-[260px] bg-[#0A192F] text-slate-300 shrink-0 sticky top-0 h-screen overflow-y-auto">
+        <div className="p-6 bg-[#051124] border-b border-white/5 flex items-center gap-3">
+          {/* Logo Placeholder */}
+          <div className="w-10 h-10 rounded bg-gradient-to-br from-[#D4AF37] to-[#B8860B] flex items-center justify-center shrink-0 shadow-lg relative overflow-hidden">
+            <span className="font-serif font-bold text-white text-lg relative z-10">3C</span>
           </div>
-          
-          <button 
-            onClick={() => setMobileMenuOpen(true)}
-            className="p-2 rounded-xl bg-[#101724] text-[#D4A373] border border-[#22334A] hover:bg-[#162233] cursor-pointer"
-          >
-            <Menu className="w-5 h-5" />
+          <div className="flex flex-col">
+            <span className="font-serif text-[11px] uppercase tracking-widest text-[#D4AF37] leading-tight">Café</span>
+            <span className="font-serif text-[15px] font-bold text-white leading-none">três corações</span>
+          </div>
+        </div>
+
+        <nav className="flex-1 p-4 space-y-6">
+          {sidebarGroups.map((group, idx) => (
+            <div key={idx} className="space-y-1">
+              <span className="text-[10px] font-black uppercase text-slate-500 tracking-[0.15em] block px-3 mb-2">{group.title}</span>
+              {group.items.map(item => {
+                const Icon = item.icon;
+                const isSelected = activeTab === item.id;
+                return (
+                  <button
+                    key={item.id}
+                    onClick={() => setActiveTab(item.id)}
+                    className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-[13px] font-medium transition-all duration-200 cursor-pointer text-left ${
+                      isSelected 
+                        ? 'bg-gradient-to-r from-[#1E40AF] to-[#2563EB] text-white shadow-md shadow-blue-900/40' 
+                        : 'text-slate-400 hover:bg-white/5 hover:text-white'
+                    }`}
+                  >
+                    <Icon className={`w-4 h-4 shrink-0 ${isSelected ? 'text-white' : 'text-slate-500'}`} />
+                    <span>{item.label}</span>
+                  </button>
+                );
+              })}
+            </div>
+          ))}
+        </nav>
+
+        <div className="p-4 border-t border-white/5 bg-[#051124]">
+          <div className="flex items-center gap-2">
+            <div className="w-2 h-2 rounded-full bg-emerald-500"></div>
+            <span className="text-[10px] text-slate-400">Ceará, Brasil</span>
+          </div>
+          <p className="text-[10px] text-slate-600 mt-1">Versão 3.0.0</p>
+        </div>
+      </aside>
+
+      {/* Main Content */}
+      <div className="flex-1 flex flex-col min-w-0 h-screen overflow-hidden">
+        
+        {/* Mobile menu trigger */}
+        <div className="md:hidden bg-[#0A192F] p-4 flex items-center justify-between text-white shrink-0 sticky top-0 z-50">
+          <div className="flex items-center gap-2">
+            <div className="w-8 h-8 rounded bg-gradient-to-br from-[#D4AF37] to-[#B8860B] flex items-center justify-center">
+              <span className="font-serif font-bold text-white text-xs">3C</span>
+            </div>
+            <span className="font-serif text-sm font-bold">três corações</span>
+          </div>
+          <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className="p-2 bg-white/10 rounded-lg">
+            {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>
         </div>
 
-        {/* Global 3D Tactical Header */}
+        {/* Mobile menu dropdown */}
+        <AnimatePresence>
+          {mobileMenuOpen && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: 'auto' }}
+              exit={{ opacity: 0, height: 0 }}
+              className="md:hidden bg-[#0A192F] border-b border-white/10 overflow-hidden shrink-0"
+            >
+              <nav className="p-4 space-y-4">
+                {sidebarGroups.map((group, idx) => (
+                  <div key={idx} className="space-y-1">
+                    <span className="text-[10px] font-black uppercase text-slate-500 tracking-wider block px-2 mb-1">{group.title}</span>
+                    {group.items.map(item => {
+                      const Icon = item.icon;
+                      const isSelected = activeTab === item.id;
+                      return (
+                        <button
+                          key={item.id}
+                          onClick={() => { setActiveTab(item.id); setMobileMenuOpen(false); }}
+                          className={`w-full flex items-center gap-3 px-3 py-2 rounded-lg text-xs font-medium text-left ${
+                            isSelected ? 'bg-[#1E40AF] text-white' : 'text-slate-400 hover:bg-white/5'
+                          }`}
+                        >
+                          <Icon className="w-4 h-4" />
+                          <span>{item.label}</span>
+                        </button>
+                      );
+                    })}
+                  </div>
+                ))}
+              </nav>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
         <Header 
           notifications={notifications} 
           onMarkNotificationsAsRead={handleMarkNotificationsAsRead} 
-          isFirebaseConnected={isFirebaseConnected}
-          isAdmin={isAdmin}
-          onToggleAdminRole={() => setIsAdmin(!isAdmin)}
-          performanceMode={performanceMode}
-          onTogglePerformanceMode={() => setPerformanceMode(!performanceMode)}
-          onTriggerBootSequence={() => setShowBootSequence(true)}
+          isFirebaseConnected={isFirebaseConnected} 
         />
 
-        {/* Dynamic Route View - 1920x1080 Fluid Layout */}
-        <main className="flex-1 p-4 sm:p-6 lg:p-8 w-full max-w-[1920px] mx-auto">
+        <main className="flex-1 p-4 md:p-8 overflow-y-auto bg-[#F8FAFC]">
           <AnimatePresence mode="wait">
             <motion.div
               key={activeTab}
-              initial={{ opacity: 0, y: 12, scale: 0.99 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, y: -12, scale: 0.99 }}
-              transition={{ duration: 0.25, ease: 'easeOut' }}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.2 }}
+              className="h-full"
             >
               {renderActiveView()}
             </motion.div>
           </AnimatePresence>
         </main>
-
-        {/* Global Luxury Footer */}
-        <Footer onOpenBrandStory={() => setIsBrandStoryOpen(true)} />
-
       </div>
-
-      {/* Brand Heritage Story Modal */}
-      <BrandStoryModal 
-        isOpen={isBrandStoryOpen} 
-        onClose={() => setIsBrandStoryOpen(false)} 
-      />
-
-      {/* 3D Boot / Self-Diagnostic Sequence Modal */}
-      <BootSequenceModal
-        isOpen={showBootSequence}
-        onComplete={() => setShowBootSequence(false)}
-      />
 
     </div>
   );

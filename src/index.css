@@ -1,69 +1,31 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap');
 @import "tailwindcss";
 
 @layer base {
   :root {
-    --font-sans: 'Plus Jakarta Sans', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    --font-serif: 'Playfair Display', Georgia, serif;
-    --font-cinzel: 'Cinzel', serif;
-    --font-script: 'Alex Brush', 'Great Vibes', cursive;
+    --font-sans: 'Inter', sans-serif;
+    --font-serif: 'Playfair Display', serif;
   }
   
   html {
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    background-color: #0A0D12;
-    color: #F3F4F6;
   }
 }
 
-.font-script {
-  font-family: var(--font-script);
-}
-
-.font-cinzel {
-  font-family: var(--font-cinzel);
-}
-
-.font-serif {
-  font-family: var(--font-serif);
-}
-
-/* Custom dark coffee scrollbar */
+/* Custom scrollbar for webkit */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #0D1117;
+  background: transparent;
 }
 ::-webkit-scrollbar-thumb {
-  background: #2D241E;
+  background: #CBD5E1;
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #84532B;
+  background: #94A3B8;
 }
-
-/* Luxury golden rim effects */
-.gold-glow {
-  box-shadow: 0 0 25px -5px rgba(212, 163, 115, 0.25);
-}
-
-.card-dark-glass {
-  background: rgba(18, 22, 31, 0.85);
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.06);
-}
-
-.card-coffee-gradient {
-  background: linear-gradient(135deg, rgba(38, 26, 17, 0.6) 0%, rgba(18, 22, 31, 0.95) 100%);
-  border: 1px solid rgba(198, 138, 76, 0.2);
-}
-
-.btn-active-menu {
-  background: linear-gradient(90deg, #533621 0%, #2A1C12 100%);
-  border: 1px solid rgba(212, 163, 115, 0.4);
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.1);
-}
-
