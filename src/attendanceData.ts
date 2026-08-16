@@ -1,4 +1,5 @@
 export interface StaffMember {
+  id?: string;
   matricula: string;
   nome: string;
   funcao: string;

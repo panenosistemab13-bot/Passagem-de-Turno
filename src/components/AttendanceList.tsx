@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { STAFF_MEMBERS, StaffMember } from '../attendanceData';
 import { DailyAttendance, AttendanceStatus } from '../types';
-import { onValue, ref, set } from 'firebase/database';
+import { onValue, ref, set, push, remove, update } from 'firebase/database';
 import { rtdb } from '../lib/firebase';
-import { Calendar, Save, CheckCircle, XCircle, Clock, Stethoscope, AlertCircle, Gift } from 'lucide-react';
+import { Calendar, Save, CheckCircle, XCircle, Clock, Stethoscope, AlertCircle, Gift, Users, Edit2, Trash2, X, Plus } from 'lucide-react';
 
 interface AttendanceListProps {
   isAdmin: boolean;
@@ -15,13 +15,41 @@ export default function AttendanceList({ isAdmin }: AttendanceListProps) {
   const [isSaving, setIsSaving] = useState(false);
   const [saveSuccess, setSaveSuccess] = useState(false);
 
-  // Load from Firebase on date change
+  // Staff Management State
+  const [staffList, setStaffList] = useState<StaffMember[]>([]);
+  const [isManageModalOpen, setIsManageModalOpen] = useState(false);
+  const [editingStaffId, setEditingStaffId] = useState<string | null>(null);
+  const [staffForm, setStaffForm] = useState<StaffMember>({
+    matricula: '', nome: '', funcao: '', admissao: '', nascimento: ''
+  });
+
+  // Load Staff from Firebase
+  useEffect(() => {
+    const unsubStaff = onValue(ref(rtdb, 'dados-globais/colaboradores'), (snapshot) => {
+      if (snapshot.exists()) {
+        const data = snapshot.val();
+        const parsedStaff = Object.keys(data).map(key => ({
+          id: key,
+          ...data[key]
+        }));
+        setStaffList(parsedStaff);
+      } else {
+        // Seed initial data if empty
+        STAFF_MEMBERS.forEach(staff => {
+          push(ref(rtdb, 'dados-globais/colaboradores'), staff);
+        });
+      }
+    });
+
+    return () => unsubStaff();
+  }, []);
+
+  // Load Attendance from Firebase
   useEffect(() => {
     const unsub = onValue(ref(rtdb, `dados-globais/presenca/${selectedDate}`), (snapshot) => {
       if (snapshot.exists()) {
         setAttendance(snapshot.val());
       } else {
-        // Initialize empty
         setAttendance({
           date: selectedDate,
           records: {}
@@ -64,19 +92,51 @@ export default function AttendanceList({ isAdmin }: AttendanceListProps) {
     }
   };
 
+  // --- Staff Management Functions ---
+  const handleSaveStaff = async () => {
+    if (!staffForm.nome || !staffForm.matricula) {
+      alert("Nome e matrícula são obrigatórios.");
+      return;
+    }
+
+    if (editingStaffId) {
+      // Edit existing
+      await update(ref(rtdb, `dados-globais/colaboradores/${editingStaffId}`), staffForm);
+    } else {
+      // Add new
+      await push(ref(rtdb, 'dados-globais/colaboradores'), staffForm);
+    }
+
+    // Reset form
+    setEditingStaffId(null);
+    setStaffForm({ matricula: '', nome: '', funcao: '', admissao: '', nascimento: '' });
+  };
+
+  const handleEditStaff = (staff: StaffMember) => {
+    setStaffForm(staff);
+    setEditingStaffId(staff.id || null);
+  };
+
+  const handleDeleteStaff = async (id: string) => {
+    if (confirm("Tem certeza que deseja remover este colaborador?")) {
+      await remove(ref(rtdb, `dados-globais/colaboradores/${id}`));
+    }
+  };
+
+  const handleCancelEdit = () => {
+    setEditingStaffId(null);
+    setStaffForm({ matricula: '', nome: '', funcao: '', admissao: '', nascimento: '' });
+  };
+
+  // --- Utility Functions ---
   const checkBirthday = (dobString: string, checkType: 'month' | 'day') => {
     if (!dobString) return false;
-    
-    // dobString is usually DD/MM/YYYY or D/M/YYYY
     const parts = dobString.split('/');
     if (parts.length < 2) return false;
     
     const birthDay = parseInt(parts[0], 10);
     const birthMonth = parseInt(parts[1], 10);
     
-    const current = new Date(selectedDate);
-    const currentDay = current.getDate() + 1; // getUTCDate logic to avoid timezone shifts, assuming selectedDate is YYYY-MM-DD
-    // Actually selectedDate is a string "YYYY-MM-DD", let's parse it safely
     const [y, m, d] = selectedDate.split('-');
     const currentM = parseInt(m, 10);
     const currentD = parseInt(d, 10);
@@ -96,10 +156,9 @@ export default function AttendanceList({ isAdmin }: AttendanceListProps) {
     }
   };
 
-  // Group by role? Let's just list alphabetically
   const sortedStaff = useMemo(() => {
-    return [...STAFF_MEMBERS].sort((a, b) => a.nome.localeCompare(b.nome));
-  }, []);
+    return [...staffList].sort((a, b) => a.nome.localeCompare(b.nome));
+  }, [staffList]);
 
   const totalStaff = sortedStaff.length;
   const countWorking = sortedStaff.filter(s => attendance?.records[s.matricula]?.status === 'trabalhou').length;
@@ -108,7 +167,7 @@ export default function AttendanceList({ isAdmin }: AttendanceListProps) {
   const countOff = sortedStaff.filter(s => attendance?.records[s.matricula]?.status === 'folga').length;
 
   return (
-    <div className="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden flex flex-col h-full animate-in fade-in duration-300">
+    <div className="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden flex flex-col h-full animate-in fade-in duration-300 relative">
       {/* Header */}
       <div className="bg-gradient-to-r from-blue-900 to-blue-800 p-6 flex flex-col md:flex-row items-center justify-between gap-4 text-white">
         <div>
@@ -119,7 +178,17 @@ export default function AttendanceList({ isAdmin }: AttendanceListProps) {
           <p className="text-blue-200 text-sm mt-1">Acompanhamento diário da equipe operacional</p>
         </div>
         
-        <div className="flex items-center gap-3">
+        <div className="flex flex-wrap items-center gap-3">
+          {isAdmin && (
+            <button
+              onClick={() => setIsManageModalOpen(true)}
+              className="flex items-center gap-2 px-3 py-2 rounded-lg font-bold text-sm bg-blue-800 hover:bg-blue-700 border border-blue-600 transition-all shadow-sm"
+            >
+              <Users className="w-4 h-4" />
+              Gerenciar Equipe
+            </button>
+          )}
+
           <div className="bg-blue-950/40 border border-blue-400/30 rounded-lg p-1.5 flex items-center gap-2">
             <span className="text-xs font-bold text-blue-200 uppercase px-2">Data do Plantão:</span>
             <input 
@@ -257,6 +326,155 @@ export default function AttendanceList({ isAdmin }: AttendanceListProps) {
           </div>
         </div>
       </div>
+
+      {/* Manage Staff Modal */}
+      {isManageModalOpen && isAdmin && (
+        <div className="absolute inset-0 z-50 bg-slate-900/40 backdrop-blur-sm flex items-center justify-center p-4">
+          <div className="bg-white rounded-2xl shadow-2xl w-full max-w-4xl max-h-full flex flex-col overflow-hidden animate-in zoom-in-95 duration-200">
+            <div className="p-5 border-b border-slate-200 flex items-center justify-between bg-slate-50">
+              <h3 className="text-lg font-black text-slate-800 flex items-center gap-2">
+                <Users className="w-5 h-5 text-blue-600" />
+                Gerenciar Equipe
+              </h3>
+              <button 
+                onClick={() => setIsManageModalOpen(false)}
+                className="p-2 text-slate-400 hover:bg-slate-200 hover:text-slate-600 rounded-lg transition-colors"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+
+            <div className="flex-1 overflow-auto p-6 flex flex-col md:flex-row gap-8">
+              {/* Form Column */}
+              <div className="w-full md:w-1/3 flex flex-col gap-4">
+                <div className="bg-blue-50/50 p-4 rounded-xl border border-blue-100">
+                  <h4 className="text-sm font-black uppercase tracking-wider text-blue-800 mb-4 flex items-center gap-2">
+                    {editingStaffId ? <Edit2 className="w-4 h-4" /> : <Plus className="w-4 h-4" />}
+                    {editingStaffId ? 'Editar Colaborador' : 'Novo Colaborador'}
+                  </h4>
+                  
+                  <div className="space-y-3">
+                    <div>
+                      <label className="block text-xs font-bold text-slate-600 mb-1">Matrícula*</label>
+                      <input 
+                        type="text" 
+                        value={staffForm.matricula}
+                        onChange={(e) => setStaffForm({...staffForm, matricula: e.target.value})}
+                        className="w-full px-3 py-2 rounded-lg border border-slate-300 text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none"
+                        placeholder="Ex: 1-12345"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-xs font-bold text-slate-600 mb-1">Nome Completo*</label>
+                      <input 
+                        type="text" 
+                        value={staffForm.nome}
+                        onChange={(e) => setStaffForm({...staffForm, nome: e.target.value})}
+                        className="w-full px-3 py-2 rounded-lg border border-slate-300 text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none"
+                        placeholder="Nome do colaborador"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-xs font-bold text-slate-600 mb-1">Função</label>
+                      <input 
+                        type="text" 
+                        value={staffForm.funcao}
+                        onChange={(e) => setStaffForm({...staffForm, funcao: e.target.value})}
+                        className="w-full px-3 py-2 rounded-lg border border-slate-300 text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none"
+                        placeholder="Ex: OP MONIT ELETRONICO"
+                      />
+                    </div>
+                    <div className="grid grid-cols-2 gap-3">
+                      <div>
+                        <label className="block text-xs font-bold text-slate-600 mb-1">Admissão</label>
+                        <input 
+                          type="text" 
+                          value={staffForm.admissao}
+                          onChange={(e) => setStaffForm({...staffForm, admissao: e.target.value})}
+                          className="w-full px-3 py-2 rounded-lg border border-slate-300 text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none"
+                          placeholder="DD/MM/AAAA"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-xs font-bold text-slate-600 mb-1">Nascimento</label>
+                        <input 
+                          type="text" 
+                          value={staffForm.nascimento}
+                          onChange={(e) => setStaffForm({...staffForm, nascimento: e.target.value})}
+                          className="w-full px-3 py-2 rounded-lg border border-slate-300 text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none"
+                          placeholder="DD/MM/AAAA"
+                        />
+                      </div>
+                    </div>
+                    
+                    <div className="pt-2 flex items-center gap-2">
+                      <button 
+                        onClick={handleSaveStaff}
+                        className="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 rounded-lg text-sm transition-colors"
+                      >
+                        {editingStaffId ? 'Salvar Alterações' : 'Adicionar'}
+                      </button>
+                      {editingStaffId && (
+                        <button 
+                          onClick={handleCancelEdit}
+                          className="bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold py-2 px-4 rounded-lg text-sm transition-colors"
+                        >
+                          Cancelar
+                        </button>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* List Column */}
+              <div className="w-full md:w-2/3 flex flex-col">
+                <div className="bg-white border border-slate-200 rounded-xl shadow-sm flex-1 overflow-hidden flex flex-col">
+                  <div className="bg-slate-100 p-3 border-b border-slate-200 text-xs font-black text-slate-600 uppercase tracking-wider">
+                    Colaboradores Cadastrados ({sortedStaff.length})
+                  </div>
+                  <div className="flex-1 overflow-auto p-2 space-y-1">
+                    {sortedStaff.map((staff) => (
+                      <div key={staff.id} className="flex items-center justify-between p-3 rounded-lg hover:bg-slate-50 border border-transparent hover:border-slate-200 transition-all">
+                        <div className="flex flex-col">
+                          <span className="text-sm font-bold text-slate-800 uppercase">{staff.nome}</span>
+                          <div className="flex items-center gap-3 text-xs text-slate-500 font-medium mt-0.5">
+                            <span className="font-mono text-[10px] bg-slate-100 px-1.5 rounded">{staff.matricula}</span>
+                            {staff.funcao && <span>{staff.funcao}</span>}
+                            {staff.admissao && <span>Admissão: {staff.admissao}</span>}
+                            {staff.nascimento && <span>Nasc: {staff.nascimento}</span>}
+                          </div>
+                        </div>
+                        <div className="flex items-center gap-1">
+                          <button 
+                            onClick={() => handleEditStaff(staff)}
+                            className="p-2 text-blue-600 hover:bg-blue-50 rounded-md transition-colors"
+                            title="Editar"
+                          >
+                            <Edit2 className="w-4 h-4" />
+                          </button>
+                          <button 
+                            onClick={() => handleDeleteStaff(staff.id!)}
+                            className="p-2 text-red-600 hover:bg-red-50 rounded-md transition-colors"
+                            title="Excluir"
+                          >
+                            <Trash2 className="w-4 h-4" />
+                          </button>
+                        </div>
+                      </div>
+                    ))}
+                    {sortedStaff.length === 0 && (
+                      <div className="text-center p-8 text-slate-400 text-sm font-medium">
+                        Nenhum colaborador cadastrado.
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

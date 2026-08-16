@@ -56,7 +56,6 @@ import { onValue } from 'firebase/database';
 
 // Component imports
 import Header from './components/Header';
-import DashboardStatus from './components/DashboardStatus';
 import OccurrenceForm from './components/OccurrenceForm';
 import HistoryList from './components/HistoryList';
 import LeaderFolders from './components/LeaderFolders';
@@ -68,7 +67,7 @@ import AttendanceList from './components/AttendanceList';
 export default function App() {
   
   // Tab/Navigation State
-  const [activeTab, setActiveTab] = useState<string>('dashboard');
+  const [activeTab, setActiveTab] = useState<string>('registrar');
   const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false);
   const [isFirebaseConnected, setIsFirebaseConnected] = useState<boolean>(true);
 
@@ -674,8 +673,6 @@ export default function App() {
   // Render correct Active Tab/View
   const renderActiveView = () => {
     switch (activeTab) {
-      case 'dashboard':
-        return <DashboardStatus occurrences={occurrences} onSelectTab={setActiveTab} />;
       case 'registrar':
         return (
           <OccurrenceForm
@@ -745,13 +742,21 @@ export default function App() {
       case 'presenca':
         return <AttendanceList isAdmin={isAdmin} />;
       default:
-        return <DashboardStatus occurrences={occurrences} onSelectTab={setActiveTab} />;
+        return (
+          <OccurrenceForm
+            leaders={leaders}
+            selectedLeaderId={selectedLeaderId}
+            onAddOccurrence={handleAddOccurrence}
+            onAddNotification={handleAddNotification}
+            onSelectTab={setActiveTab}
+            vehicles={vehicles}
+          />
+        );
     }
   };
 
   // Sidebar link items
   const sidebarItems = [
-    { id: 'dashboard', label: 'Painel de Status', icon: LayoutDashboard },
     { id: 'registrar', label: 'Novo Registro', icon: PlusCircle },
     { id: 'historico', label: 'Histórico Operacional', icon: History },
     { id: 'presenca', label: 'Lista de Presença', icon: ClipboardCheck },
