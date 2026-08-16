@@ -179,6 +179,8 @@ export default function AttendanceList({ isAdmin }: AttendanceListProps) {
                 <tr className="bg-slate-100 border-b border-slate-200">
                   <th className="p-3 text-xs font-black text-slate-600 uppercase w-24">Matrícula</th>
                   <th className="p-3 text-xs font-black text-slate-600 uppercase">Colaborador</th>
+                  <th className="p-3 text-xs font-black text-slate-600 uppercase w-28 text-center">Admissão</th>
+                  <th className="p-3 text-xs font-black text-slate-600 uppercase w-28 text-center">Nascimento</th>
                   <th className="p-3 text-xs font-black text-slate-600 uppercase w-48 text-center">Status</th>
                 </tr>
               </thead>
@@ -213,6 +215,12 @@ export default function AttendanceList({ isAdmin }: AttendanceListProps) {
                         {staff.funcao && (
                           <div className="text-[10px] font-semibold text-slate-400 mt-0.5">{staff.funcao}</div>
                         )}
+                      </td>
+                      <td className="p-3 text-center text-xs font-medium text-slate-600">
+                        {staff.admissao || '-'}
+                      </td>
+                      <td className="p-3 text-center text-xs font-medium text-slate-600">
+                        {staff.nascimento || '-'}
                       </td>
                       <td className="p-3">
                         <div className="flex justify-center">

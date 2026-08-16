@@ -5,7 +5,6 @@ import {
   PlusCircle, 
   History, 
   Folder, 
-  Users, 
   Calendar, 
   MessageSquare,
   Menu,
@@ -61,7 +60,6 @@ import DashboardStatus from './components/DashboardStatus';
 import OccurrenceForm from './components/OccurrenceForm';
 import HistoryList from './components/HistoryList';
 import LeaderFolders from './components/LeaderFolders';
-import EmployeeList from './components/EmployeeList';
 import CalendarComponent from './components/CalendarComponent';
 import ChatComponent from './components/ChatComponent';
 import VehicleManager from './components/VehicleManager';
@@ -711,20 +709,6 @@ export default function App() {
             onUpdateOccurrenceStatus={handleUpdateOccurrenceStatus}
           />
         );
-      case 'funcionarios':
-        return (
-          <EmployeeList
-            employees={employees}
-            employeeLogs={employeeLogs}
-            leaders={leaders}
-            selectedLeaderId={selectedLeaderId}
-            isAdmin={isAdmin}
-            onAddEmployee={handleAddEmployee}
-            onAddEmployeeLog={handleAddEmployeeLog}
-            onDeleteLog={handleDeleteLog}
-            onDeleteEmployee={handleDeleteEmployee}
-          />
-        );
       case 'calendario':
         return (
           <CalendarComponent
@@ -773,7 +757,6 @@ export default function App() {
     { id: 'presenca', label: 'Lista de Presença', icon: ClipboardCheck },
     { id: 'veiculos', label: 'Placas de Veículos', icon: Truck },
     { id: 'pastas', label: 'Pastas dos Líderes', icon: Folder },
-    { id: 'funcionarios', label: 'Acompanhamento de Staff', icon: Users },
     { id: 'calendario', label: 'Agenda & Lembretes', icon: Calendar },
     { id: 'chat', label: 'Chat Equipe', icon: MessageSquare }
   ];
